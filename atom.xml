@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2018-10-10T06:41:46.129Z</updated>
+  <updated>2018-10-10T06:43:23.656Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://dreambo8563.github.io/2018/10/10/%E5%85%B3%E4%BA%8Eopener%E7%9A%84%E5%AE%89%E5%85%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     <id>https://dreambo8563.github.io/2018/10/10/关于opener的安全小技巧/</id>
     <published>2018-10-10T06:05:05.942Z</published>
-    <updated>2018-10-10T06:41:46.129Z</updated>
+    <updated>2018-10-10T06:43:23.656Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="window-open"><a href="#window-open" class="headerlink" title="window.open()"></a>window.open()</h3><blockquote><p>var window = window.open(url, windowName, [windowFeatures]);</p></blockquote><p>本文主要针对 <strong>_blank</strong>的情况,</p><p> 本文主要讲的就是 windowFeature 中的 <strong>noopener</strong></p><p>当我们需要以另一个窗口的形式打开一个地址的时候, 我们常用的</p><blockquote><p>window.open(url,”_blank”)</p></blockquote><p>但由于安全方面的考虑我们需要加上个小参数, 就是 <strong>noopener</strong></p><blockquote><p>修正后: window.open(url,”_blank”,”noopener”)</p></blockquote><h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p>问题就在于这个 opener 对象, 如果不加 <strong>noopener</strong></p><p>当我们用 window.open 打开一个新窗口的时候, 我们在新建的窗口里可以拿到 window.opener, 这样  我们就能获取到原窗口  的对象. <br>如果新窗口打开的  不是自己控制的页面,那人家拿到 window 对象,能做不少事情</p><blockquote><p>lighthouse 的检查里也会检查这一项</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<h3 id="window-open"><a href="#window-open" class="headerlink" title="window.open()"></a>window.open()</h3><blockquote><p>var window = window.open(url, windowName, [windowFeatures]);</p></blockquote><p>本文主要针对 <strong>_blank</strong>的情况,</p><p> 本文主要讲的就是 windowFeature 中的 <strong>noopener</strong></p><p>当我们需要以另一个窗口的形式打开一个地址的时候, 我们常用的</p><blockquote><p>window.open(url,”_blank”)</p></blockquote><p>但由于安全方面的考虑我们需要加上个小参数, 就是 <strong>noopener</strong></p><blockquote><p>修正后: window.open(url,”_blank”,”noopener”)</p></blockquote><h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p>问题就在于这个 opener 对象, 如果不加 <strong>noopener</strong></p><p>当我们用 window.open 打开一个新窗口的时候, 我们在新建的窗口里可以拿到 window.opener, 这样  我们就能获取到原窗口  的对象. <br>如果新窗口打开的  不是自己控制的页面,那人家拿到 window 对象,能做不少事情</p><blockquote><p>Lighthouse 的检查里也会检查这一项</p></blockquote>]]></content>
     
     <summary type="html">
     

@@ -88,7 +88,7 @@
 <meta property="og:url" content="https://dreambo8563.github.io/2018/10/10/关于opener的安全小技巧/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="window.open() var window = window.open(url, windowName, [windowFeatures]);  本文主要针对 _blank的情况,  本文主要讲的就是 windowFeature 中的 noopener 当我们需要以另一个窗口的形式打开一个地址的时候, 我们常用的  window.open(url,”_blank”)  但由于安全方面的考虑">
-<meta property="og:updated_time" content="2018-10-10T06:41:46.129Z">
+<meta property="og:updated_time" content="2018-10-10T06:43:23.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于opener的安全小技巧">
 <meta name="twitter:description" content="window.open() var window = window.open(url, windowName, [windowFeatures]);  本文主要针对 _blank的情况,  本文主要讲的就是 windowFeature 中的 noopener 当我们需要以另一个窗口的形式打开一个地址的时候, 我们常用的  window.open(url,”_blank”)  但由于安全方面的考虑">
@@ -331,7 +331,7 @@
 <h3 id="window-opener"><a href="#window-opener" class="headerlink" title="window.opener"></a>window.opener</h3><p>问题就在于这个 opener 对象, 如果不加 <strong>noopener</strong></p>
 <p>当我们用 window.open 打开一个新窗口的时候, 我们在新建的窗口里可以拿到 window.opener, 这样  我们就能获取到原窗口  的对象. <br>如果新窗口打开的  不是自己控制的页面,那人家拿到 window 对象,能做不少事情</p>
 <blockquote>
-<p>lighthouse 的检查里也会检查这一项</p>
+<p>Lighthouse 的检查里也会检查这一项</p>
 </blockquote>
 
       
