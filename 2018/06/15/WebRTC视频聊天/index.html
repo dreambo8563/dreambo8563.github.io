@@ -1,0 +1,756 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="web," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="WebRTC之前通过修改别的的 demo,试了一下 websocket.看看最大的区别吧. websocket从轮训到 websocke 是技术的进步,体验的提升 多个客户端可以和 server 保持长连接,server 对客户端可以进行广播,进而达到消息实时传递   WebRTC从 websocket 到 WebRTC 是理念上的变革 这让我想起了最近很流行的一个词 “去中心化”  看起来很像">
+<meta name="keywords" content="web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebRTC视频聊天">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/06/15/WebRTC视频聊天/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="WebRTC之前通过修改别的的 demo,试了一下 websocket.看看最大的区别吧. websocket从轮训到 websocke 是技术的进步,体验的提升 多个客户端可以和 server 保持长连接,server 对客户端可以进行广播,进而达到消息实时传递   WebRTC从 websocket 到 WebRTC 是理念上的变革 这让我想起了最近很流行的一个词 “去中心化”  看起来很像">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093818@2x.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093854@2x.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-094432.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/8.png">
+<meta property="og:updated_time" content="2018-09-30T06:35:42.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebRTC视频聊天">
+<meta name="twitter:description" content="WebRTC之前通过修改别的的 demo,试了一下 websocket.看看最大的区别吧. websocket从轮训到 websocke 是技术的进步,体验的提升 多个客户端可以和 server 保持长连接,server 对客户端可以进行广播,进而达到消息实时传递   WebRTC从 websocket 到 WebRTC 是理念上的变革 这让我想起了最近很流行的一个词 “去中心化”  看起来很像">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093818@2x.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> WebRTC视频聊天 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WebRTC视频聊天
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-15T19:33:54+08:00" content="2018-06-15">
+              2018-06-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/web/" itemprop="url" rel="index">
+                    <span itemprop="name">web</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="WebRTC"><a href="#WebRTC" class="headerlink" title="WebRTC"></a>WebRTC</h3><p>之前通过修改别的的 demo,试了一下 websocket.<br>看看最大的区别吧.</p>
+<h3 id="websocket"><a href="#websocket" class="headerlink" title="websocket"></a>websocket</h3><p>从轮训到 websocke 是技术的进步,体验的提升 多个客户端可以和 server 保持长连接,server 对客户端可以进行广播,进而达到消息实时传递</p>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093818@2x.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093854@2x.png" alt=""></p>
+<h4 id="WebRTC-1"><a href="#WebRTC-1" class="headerlink" title="WebRTC"></a>WebRTC</h4><p>从 websocket 到 WebRTC 是理念上的变革 这让我想起了最近很流行的一个词 “去中心化”</p>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-094432.png" alt=""></p>
+<p>看起来很像 websocket 的架构. 但是图中无法表达的是, 客户端 A 只需要将自己的 session 信息通过 server 传递给客户端 B,并从客户端 B 得到回应信息即可完成 Peer to Peer 的连接.</p>
+<p>假设忽略错误处理,和其他的逻辑设计.单单从连接上看,这时候已经不需要 server 存在了. 此时, 两个客户端见的视频流,音频流,数据流完全可以脱离 server 而互相传递. 这样就做到了 “去中心化”.</p>
+<p>如果有一个比较好的产品设计,完全可以把 server 的传递能力取代.</p>
+<p>我们假象一个场景: 用户 A 通过 IM 把自己的 session 信息复制给 用户 B,用户 B 填入信息后, 再把自己的相应信息复制给 A 确认. A 输入相应信息.此时两个客户端已经完成了连接.中间没有任何的 server 再参与.</p>
+<h4 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h4><p><a href="https://webrtc.dreambo8563.tech/" target="_blank" rel="external">https://webrtc.dreambo8563.tech/</a><br>s</p>
+<ol>
+<li>获取登录人姓名</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/1.png" alt=""></p>
+<ol start="2">
+<li>进入聊天界面,此时为没有现有房间的时候,只能自己创建</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2.png" alt=""></p>
+<ol start="3">
+<li>需要输入方面名称,以便两个客户端进行匹配</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/3.png" alt=""></p>
+<ol start="4">
+<li>进入后会申请视频权限</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/4.png" alt=""></p>
+<ol start="5">
+<li>用户 B 这时候 打开界面的时候回看到已经有个 叫”11”的房间了</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/5.png" alt=""></p>
+<ol start="6">
+<li>选中房间,即可出现加入的按钮</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/6.png" alt=""></p>
+<ol start="7">
+<li>连接成功后会出现对方的视频画面, 自己的画面在左上角</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/7.png" alt=""></p>
+<ol start="8">
+<li>双发可以进行字符串的通信</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/8.png" alt=""></p>
+<blockquote>
+<p>这个 demo 为了充分体验 WebRTC 的特点,当双方连通后,websocket 就已经断开了.所以如果有任何的 error,双方需要重新操作以获取连接</p>
+</blockquote>
+<h4 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h4><p>后端代码: <a href="https://github.com/dreambo8563/go-webrtc" target="_blank" rel="external">https://github.com/dreambo8563/go-webrtc</a></p>
+<p>前端代码: <a href="https://github.com/dreambo8563/webrtc-fe" target="_blank" rel="external">https://github.com/dreambo8563/webrtc-fe</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web/" rel="tag">#web</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/29/ElasticSearch-初试Query-DSL/" rel="next" title="ElasticSearch - 初试Query DSL">
+                <i class="fa fa-chevron-left"></i> ElasticSearch - 初试Query DSL
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/15/微信小程序/" rel="prev" title="微信小程序">
+                微信小程序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebRTC"><span class="nav-number">1.</span> <span class="nav-text">WebRTC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#websocket"><span class="nav-number">2.</span> <span class="nav-text">websocket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WebRTC-1"><span class="nav-number">2.1.</span> <span class="nav-text">WebRTC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#体验"><span class="nav-number">2.2.</span> <span class="nav-text">体验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Source-Code"><span class="nav-number">2.3.</span> <span class="nav-text">Source Code</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

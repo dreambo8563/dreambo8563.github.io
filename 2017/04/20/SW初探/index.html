@@ -1,0 +1,723 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="SW - Service Worker下面来简单解析下hello world register// TODO add service worker code here  if (&apos;serviceWorker&apos; in navigator) &amp;#123;    navigator      .serviceWorker      .register(&apos;./service-worker.js&apos;)">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SW初探">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/04/20/SW初探/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="SW - Service Worker下面来简单解析下hello world register// TODO add service worker code here  if (&apos;serviceWorker&apos; in navigator) &amp;#123;    navigator      .serviceWorker      .register(&apos;./service-worker.js&apos;)">
+<meta property="og:updated_time" content="2017-04-20T08:44:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SW初探">
+<meta name="twitter:description" content="SW - Service Worker下面来简单解析下hello world register// TODO add service worker code here  if (&apos;serviceWorker&apos; in navigator) &amp;#123;    navigator      .serviceWorker      .register(&apos;./service-worker.js&apos;)">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> SW初探 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SW初探
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-04-20T16:30:23+08:00" content="2017-04-20">
+              2017-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="SW-Service-Worker"><a href="#SW-Service-Worker" class="headerlink" title="SW - Service Worker"></a>SW - Service Worker</h2><p>下面来简单解析下hello world</p>
+<h3 id="register"><a href="#register" class="headerlink" title="register"></a>register</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// TODO add service worker code here</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="string">'serviceWorker'</span> <span class="keyword">in</span> navigator) &#123;</span><br><span class="line">    navigator</span><br><span class="line">      .serviceWorker</span><br><span class="line">      .register(<span class="string">'./service-worker.js'</span>)</span><br><span class="line">      .then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Service Worker Registered'</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>在程序入口注册serverWorker,当然要判断浏览器是否支持</p>
+<blockquote>
+<p>注意Service worker程序所在目录就是他的作用域,一般放根目录下</p>
+</blockquote>
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a>install</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> cacheName = <span class="string">'weatherPWA-step-6-1'</span>;</span><br><span class="line"><span class="keyword">var</span> dataCacheName = <span class="string">'weatherData-v1'</span>;</span><br><span class="line"><span class="keyword">var</span> filesToCache = [</span><br><span class="line">    <span class="string">'/'</span>,</span><br><span class="line">    <span class="string">'/index.html'</span>,</span><br><span class="line">    <span class="string">'/scripts/app.js'</span>,</span><br><span class="line">    <span class="string">'/styles/inline.css'</span>,</span><br><span class="line">    <span class="string">'/images/clear.png'</span>,</span><br><span class="line">    <span class="string">'/images/cloudy-scattered-showers.png'</span>,</span><br><span class="line">    <span class="string">'/images/cloudy.png'</span>,</span><br><span class="line">    <span class="string">'/images/fog.png'</span>,</span><br><span class="line">    <span class="string">'/images/ic_add_white_24px.svg'</span>,</span><br><span class="line">    <span class="string">'/images/ic_refresh_white_24px.svg'</span>,</span><br><span class="line">    <span class="string">'/images/partly-cloudy.png'</span>,</span><br><span class="line">    <span class="string">'/images/rain.png'</span>,</span><br><span class="line">    <span class="string">'/images/scattered-showers.png'</span>,</span><br><span class="line">    <span class="string">'/images/sleet.png'</span>,</span><br><span class="line">    <span class="string">'/images/snow.png'</span>,</span><br><span class="line">    <span class="string">'/images/thunderstorm.png'</span>,</span><br><span class="line">    <span class="string">'/images/wind.png'</span></span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(self);</span><br><span class="line">self.addEventListener(<span class="string">'install'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Install'</span>, e, caches);</span><br><span class="line">    e.waitUntil(caches.open(cacheName).then(<span class="function"><span class="keyword">function</span> (<span class="params">cache</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Caching app shell'</span>, cache);</span><br><span class="line">        <span class="keyword">return</span> cache.addAll(filesToCache);</span><br><span class="line">    &#125;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>安装的时候开启caches,把自己的cache列表加入caches</p>
+<h3 id="activate"><a href="#activate" class="headerlink" title="activate"></a>activate</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'activate'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Activate'</span>);</span><br><span class="line">    <span class="comment">// cacheName = `$&#123;cacheName&#125;$&#123;Math.random()&#125;`</span></span><br><span class="line">    e.waitUntil(caches.keys().then(<span class="function"><span class="keyword">function</span> (<span class="params">keyList</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(keyList, <span class="string">'keylist'</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.all(keyList.map(<span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (key !== cacheName &amp;&amp; key !== dataCacheName) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'[ServiceWorker] Removing old cache'</span>, key);</span><br><span class="line">                <span class="keyword">return</span> caches.delete(key);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;));</span><br><span class="line">    &#125;));</span><br><span class="line">    <span class="keyword">return</span> self</span><br><span class="line">        .clients</span><br><span class="line">        .claim();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>激活的时候根据cacheName dataCacheName 来把不在列表中的东西从 cache干掉</p>
+<blockquote>
+<p>dataCacheName存放请求的数据的</p>
+</blockquote>
+<blockquote>
+<p>When the app is complete, self.clients.claim() fixes a corner case in which the app wasn’t returning the latest data. You can reproduce the corner case by commenting out the line below and then doing the following steps: 1) load app for first time so that the initial New York City data is shown 2) press the refresh button on the app 3) go offline 4) reload the app. You expect to see the newer NYC data, but you actually see the initial data. This happens because the service worker is not yet activated. self.clients.claim() essentially lets you activate the service worker faster.</p>
+</blockquote>
+<h3 id="fetch拦截"><a href="#fetch拦截" class="headerlink" title="fetch拦截"></a>fetch拦截</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">self.addEventListener(<span class="string">'fetch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[Service Worker] Fetch'</span>, e.request.url);</span><br><span class="line">  <span class="keyword">var</span> dataUrl = <span class="string">'https://query.yahooapis.com/v1/public/yql'</span>;</span><br><span class="line">  <span class="keyword">if</span> (e.request.url.indexOf(dataUrl) &gt; <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * When the request URL contains dataUrl, the app is asking for fresh</span></span><br><span class="line"><span class="comment">     * weather data. In this case, the service worker always goes to the</span></span><br><span class="line"><span class="comment">     * network and then caches the response. This is called the "Cache then</span></span><br><span class="line"><span class="comment">     * network" strategy:</span></span><br><span class="line"><span class="comment">     * https://jakearchibald.com/2014/offline-cookbook/#cache-then-network</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    e.respondWith(</span><br><span class="line">      caches.open(dataCacheName).then(<span class="function"><span class="keyword">function</span>(<span class="params">cache</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fetch(e.request).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(response,<span class="string">"fetch with network"</span>);</span><br><span class="line">          cache.put(e.request.url, response.clone());</span><br><span class="line">          <span class="keyword">return</span> response;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * The app is asking for app shell files. In this scenario the app uses the</span></span><br><span class="line"><span class="comment">     * "Cache, falling back to the network" offline strategy:</span></span><br><span class="line"><span class="comment">     * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    e.respondWith(</span><br><span class="line">      caches.match(e.request).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(response,<span class="string">"fetch in app shell"</span>);</span><br><span class="line">        <span class="keyword">return</span> response || fetch(e.request);</span><br><span class="line">      &#125;)</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>不仅仅cache一些静态的资源,还可以拦截请求,并操作是否预先冲cache中取缓存数据<br>一般有两种策略 </p>
+<ul>
+<li>缓存有限</li>
+<li>网络请求优先</li>
+</ul>
+<h3 id="app中应用"><a href="#app中应用" class="headerlink" title="app中应用"></a>app中应用</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">'https://query.yahooapis.com/v1/public/yql?format=json&amp;q='</span> + statement;</span><br><span class="line">   <span class="comment">// TODO add cache logic here Fetch the latest data.</span></span><br><span class="line">   <span class="keyword">if</span> (<span class="string">'caches'</span> <span class="keyword">in</span> <span class="built_in">window</span>) &#123;</span><br><span class="line">     <span class="comment">/*</span></span><br><span class="line"><span class="comment">      * Check if the service worker has already cached this city's weather</span></span><br><span class="line"><span class="comment">      * data. If the service worker has the data, then display the cached</span></span><br><span class="line"><span class="comment">      * data while the app fetches the latest data.</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     caches.match(url).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (response) &#123;</span><br><span class="line">         response.json().then(<span class="function"><span class="keyword">function</span> <span class="title">updateFromCache</span>(<span class="params">json</span>) </span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(json);</span><br><span class="line">           <span class="keyword">var</span> results = json.query.results;</span><br><span class="line">           results.key = key;</span><br><span class="line">           results.label = label;</span><br><span class="line">           results.created = json.query.created;</span><br><span class="line">           app.updateForecastCard(results);</span><br><span class="line">         &#125;);</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">var</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">   request.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (request.readyState === XMLHttpRequest.DONE) &#123;</span><br><span class="line">       <span class="keyword">if</span> (request.status === <span class="number">200</span>) &#123;</span><br><span class="line">         <span class="keyword">var</span> response = <span class="built_in">JSON</span>.parse(request.response);</span><br><span class="line">         <span class="keyword">var</span> results = response.query.results;</span><br><span class="line">         results.key = key;</span><br><span class="line">         results.label = label;</span><br><span class="line">         results.created = response.query.created;</span><br><span class="line">         app.updateForecastCard(results);</span><br><span class="line">       &#125;</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="comment">// Return the initial weather forecast since no data is available.</span></span><br><span class="line">       app.updateForecastCard(initialWeatherForecast);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   request.open(<span class="string">'GET'</span>, url);</span><br><span class="line">   request.send();</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>程序内应用 要先判断是否浏览器支持caches<br>如果请求的url可以匹配到,就先用cache更新UI<br>后面会请求更新最新数据,更新的时候需要判断网络请求回来的数据和cache里的那个是最新的(SW拿东西不一定就比网络快)</p>
+</blockquote>
+<p>如果要在生产环境应用这个,还需调研 <a href="https://github.com/GoogleChrome/sw-precache" target="_blank" rel="external">https://github.com/GoogleChrome/sw-precache</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag">#JS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/18/RN-router-flux/" rel="next" title="RN - router-flux">
+                <i class="fa fa-chevron-left"></i> RN - router-flux
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/27/Actor-Creating-Actors/" rel="prev" title="Actor - Creating Actors">
+                Actor - Creating Actors <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SW-Service-Worker"><span class="nav-number">1.</span> <span class="nav-text">SW - Service Worker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#register"><span class="nav-number">1.1.</span> <span class="nav-text">register</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">1.2.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#activate"><span class="nav-number">1.3.</span> <span class="nav-text">activate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fetch拦截"><span class="nav-number">1.4.</span> <span class="nav-text">fetch拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#app中应用"><span class="nav-number">1.5.</span> <span class="nav-text">app中应用</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

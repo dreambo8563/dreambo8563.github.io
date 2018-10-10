@@ -1,0 +1,700 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS,SCSS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Some Helper Function/*unit helper*/@function tranformREM($px) &amp;#123;    @return ($px/($rootSize/1px))+rem&amp;#125;@function get-vw($target) &amp;#123;    $vw-context: ($windowWidth*.01) * 1px;    @return ($t">
+<meta name="keywords" content="CSS,SCSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SCSS Helper">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/08/10/SCSS-Helper/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Some Helper Function/*unit helper*/@function tranformREM($px) &amp;#123;    @return ($px/($rootSize/1px))+rem&amp;#125;@function get-vw($target) &amp;#123;    $vw-context: ($windowWidth*.01) * 1px;    @return ($t">
+<meta property="og:updated_time" content="2016-08-10T03:00:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SCSS Helper">
+<meta name="twitter:description" content="Some Helper Function/*unit helper*/@function tranformREM($px) &amp;#123;    @return ($px/($rootSize/1px))+rem&amp;#125;@function get-vw($target) &amp;#123;    $vw-context: ($windowWidth*.01) * 1px;    @return ($t">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> SCSS Helper | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                SCSS Helper
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-10T10:53:19+08:00" content="2016-08-10">
+              2016-08-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Some-Helper-Function"><a href="#Some-Helper-Function" class="headerlink" title="Some Helper Function"></a>Some Helper Function</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*unit helper*/</span></span><br><span class="line">@<span class="keyword">function</span> tranformREM($px) &#123;</span><br><span class="line">    @<span class="keyword">return</span> ($px/($rootSize/<span class="number">1px</span>))+rem</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@function get-vw($target) &#123;</span><br><span class="line">    $vw-context: ($windowWidth*.01) * 1px;</span><br><span class="line">    @<span class="keyword">return</span> ($target/$vw-context) * <span class="number">1vw</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">function</span> get-vh($target) &#123;</span><br><span class="line">    $vw-context: ($windowHeight*.01) * 1px;</span><br><span class="line">    @<span class="keyword">return</span> ($target/$vw-context) * <span class="number">1vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Minin"><a href="#Minin" class="headerlink" title="Minin"></a>Minin</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">$rootSize: 16px;</span><br><span class="line">$windowWidth: 1920;</span><br><span class="line">$windowHeight: 1080;</span><br><span class="line"></span><br><span class="line">$fullWidth: 100vw;</span><br><span class="line">$fullHeight: 100vh;</span><br><span class="line"></span><br><span class="line">$width100: 100%;</span><br><span class="line">$height100: 100%;</span><br><span class="line"></span><br><span class="line">$height100p: 100px;</span><br><span class="line"></span><br><span class="line">$paddingTop60: 60px;</span><br><span class="line">$paddingTop40: 40px;</span><br><span class="line">$paddingBottom50: 50px;</span><br><span class="line">$paddingBottom40: 40px;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*center helper*/</span></span><br><span class="line">@<span class="keyword">mixin</span> center-flex($align, $direction: row) &#123;</span><br><span class="line">    <span class="selector-tag">display</span>: <span class="selector-tag">flex</span>;</span><br><span class="line">    -ms-flex-direction: $direction;</span><br><span class="line">    -webkit-flex-direction: $direction;</span><br><span class="line">    flex-direction: $direction;</span><br><span class="line">    justify-content: $align;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> center-absolute() &#123;</span><br><span class="line">    <span class="selector-tag">position</span>: <span class="selector-tag">absolute</span>;</span><br><span class="line">    <span class="selector-tag">top</span>: 0;</span><br><span class="line">    <span class="selector-tag">bottom</span>: 0;</span><br><span class="line">    <span class="selector-tag">left</span>: 0;</span><br><span class="line">    <span class="selector-tag">right</span>: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*padding helper*/</span></span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> paddingL($paddingLeft) &#123;</span><br><span class="line">    padding-left: get-vw($paddingLeft);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> paddingR($paddingRight) &#123;</span><br><span class="line">    padding-right: get-vw($paddingRight);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> paddingT($paddingTop) &#123;</span><br><span class="line">    padding-top: get-vw($paddingTop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> paddingB($paddingBottom) &#123;</span><br><span class="line">    padding-bottom: get-vw($paddingBottom);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*margin helper*/</span></span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> marginL($marginLeft) &#123;</span><br><span class="line">    margin-left: get-vw($marginLeft);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> marginR($marginRight) &#123;</span><br><span class="line">    margin-right: get-vw($marginRight);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> marginB($marginBottom) &#123;</span><br><span class="line">    margin-bottom: get-vw($marginBottom);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> marginT($marginTop) &#123;</span><br><span class="line">    margin-top: get-vw($marginTop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> collapseAnimation() &#123;</span><br><span class="line">    <span class="selector-tag">margin-top</span>: 0;</span><br><span class="line">    <span class="selector-tag">height</span>: 0;</span><br><span class="line">    <span class="selector-tag">margin-bottom</span>: 0;</span><br><span class="line">    <span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Color-Font"><a href="#Color-Font" class="headerlink" title="Color / Font"></a>Color / Font</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"helper"</span>;</span><br><span class="line">$brandPink: #d81262;</span><br><span class="line">$brandBlue: #10abbb;</span><br><span class="line">$brandWhite: #ebebeb;</span><br><span class="line">$brandBlack: #000000;</span><br><span class="line">$brandGrey1: #4d4d4d;</span><br><span class="line">$brandGrey2: #888888;</span><br><span class="line">$brandGrey3: #272727;</span><br><span class="line"></span><br><span class="line">$whiteOpacity50: rgba(255, 255, 255, 0.5);</span><br><span class="line">$whiteOpacity100: rgba(255, 255, 255, 1);</span><br><span class="line">$whiteOpacity30: rgba(255, 255, 255, 0.3);</span><br><span class="line">$whiteOpacity20: rgba(255, 255, 255, 0.2);</span><br><span class="line">$blackOpacity30: rgba(0, 0, 0, 0.3);</span><br><span class="line">$blackOpacity50: rgba(0, 0, 0, 0.5);</span><br><span class="line">$blackOpacity70: rgba(0, 0, 0, 0.7);</span><br><span class="line">$blackOpacity90: rgba(0, 0, 0, 0.9);</span><br><span class="line"></span><br><span class="line">$fontSize72: 72px;</span><br><span class="line">$fontSize64: 64px;</span><br><span class="line">$fontSize42: 42px;</span><br><span class="line">$fontSize36: 36px;</span><br><span class="line">$fontSize32: 32px;</span><br><span class="line">$fontSize28: 28px;</span><br><span class="line">$fontSize24: 24px;</span><br><span class="line">$fontSize145: 145px;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> latoRegular-font($fontSize) &#123;</span><br><span class="line">    font-family: 'latoregular';</span><br><span class="line">    font-size: get-vw($fontSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> arialRegular-font($fontSize) &#123;</span><br><span class="line">    font-family: 'arialregular';</span><br><span class="line">    font-size: get-vw($fontSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> arialItalic-font($fontSize) &#123;</span><br><span class="line">    font-family: 'arialitalic';</span><br><span class="line">    font-size: get-vw($fontSize);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">mixin</span> arialBold-font($fontSize) &#123;</span><br><span class="line">    font-family: 'arialbold';</span><br><span class="line">    font-size: get-vw($fontSize);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag">#CSS</a>
+          
+            <a href="/tags/SCSS/" rel="tag">#SCSS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/08/Responsive-Embeds/" rel="next" title="Responsive Embeds">
+                <i class="fa fa-chevron-left"></i> Responsive Embeds
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/26/Almost-complete-guide-to-flexbox-without-flexbox/" rel="prev" title="Almost complete guide to flexbox (without flexbox)">
+                Almost complete guide to flexbox (without flexbox) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Helper-Function"><span class="nav-number">1.</span> <span class="nav-text">Some Helper Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Minin"><span class="nav-number">2.</span> <span class="nav-text">Minin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Color-Font"><span class="nav-number">3.</span> <span class="nav-text">Color / Font</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="gin 初探原文地址: https://ryanmccue.ca/creating-an-api-with-golang-gin-framework/ 解析总体结构 代码分解 main.go  package mainimport (	&quot;log&quot;	&quot;github.com/gin-gonic/gin&quot;	&quot;vincent.com/gin/todo/controllers&quot;	&quot;vincent.com/g">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang - gin demo解析">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/12/20/golang-gin-demo解析/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="gin 初探原文地址: https://ryanmccue.ca/creating-an-api-with-golang-gin-framework/ 解析总体结构 代码分解 main.go  package mainimport (	&quot;log&quot;	&quot;github.com/gin-gonic/gin&quot;	&quot;vincent.com/gin/todo/controllers&quot;	&quot;vincent.com/g">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/mermaid-diagram-20171220132237.svg">
+<meta property="og:updated_time" content="2018-09-30T06:31:42.444Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="golang - gin demo解析">
+<meta name="twitter:description" content="gin 初探原文地址: https://ryanmccue.ca/creating-an-api-with-golang-gin-framework/ 解析总体结构 代码分解 main.go  package mainimport (	&quot;log&quot;	&quot;github.com/gin-gonic/gin&quot;	&quot;vincent.com/gin/todo/controllers&quot;	&quot;vincent.com/g">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/mermaid-diagram-20171220132237.svg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> golang - gin demo解析 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                golang - gin demo解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-12-20T12:52:35+08:00" content="2017-12-20">
+              2017-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="gin-初探"><a href="#gin-初探" class="headerlink" title="gin 初探"></a>gin 初探</h2><p>原文地址: <a href="https://ryanmccue.ca/creating-an-api-with-golang-gin-framework/" target="_blank" rel="external">https://ryanmccue.ca/creating-an-api-with-golang-gin-framework/</a></p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><h4 id="总体结构"><a href="#总体结构" class="headerlink" title="总体结构"></a>总体结构</h4><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/mermaid-diagram-20171220132237.svg" alt=""></p>
+<h4 id="代码分解"><a href="#代码分解" class="headerlink" title="代码分解"></a>代码分解</h4><ul>
+<li>main.go</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/gin-gonic/gin"</span></span><br><span class="line">	<span class="string">"vincent.com/gin/todo/controllers"</span></span><br><span class="line">	<span class="string">"vincent.com/gin/todo/routes"</span></span><br><span class="line">	<span class="string">"vincent.com/gin/todo/utils/database"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 链接db 获取实例</span></span><br><span class="line">	db, err := database.Connect(<span class="string">"postgres"</span>, <span class="string">""</span>, <span class="string">"postgres"</span>, <span class="string">"192.168.33.10"</span>, <span class="string">"5432"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"err"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// binding db 和 controller</span></span><br><span class="line">	todoController := controllers.NewTodoController(db)</span><br><span class="line">	<span class="comment">// 默认配置</span></span><br><span class="line">	r := gin.Default()</span><br><span class="line">	<span class="comment">// 路由注册</span></span><br><span class="line">	routes.CreateRoutes(r, todoController)</span><br><span class="line">	<span class="comment">// 默认8080端口</span></span><br><span class="line">	r.Run()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>database.go<br>数据链接函数</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> database</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="comment">// import pg</span></span><br><span class="line">	_ <span class="string">"github.com/lib/pq"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Connect function for pgsql</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Connect</span><span class="params">(user, password, dbname, host, port <span class="keyword">string</span>)</span> <span class="params">(*sql.DB, error)</span></span> &#123;</span><br><span class="line">	connStr := fmt.Sprintf(<span class="string">"user=%s password=%s dbname=%s host=%s port=%s sslmode=disable"</span>,</span><br><span class="line">		user, password, dbname, host, port)</span><br><span class="line">	<span class="keyword">return</span> sql.Open(<span class="string">"postgres"</span>, connStr)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>items.go 数据模型</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment">// Item - todo item model</span></span><br><span class="line"><span class="keyword">type</span> Item <span class="keyword">struct</span> &#123;</span><br><span class="line">	ID          <span class="keyword">int</span>    <span class="string">`json:"id"`</span></span><br><span class="line">	Title       <span class="keyword">string</span> <span class="string">`json:"title"`</span></span><br><span class="line">	Description <span class="keyword">string</span> <span class="string">`json:"description"`</span></span><br><span class="line">	Completed   <span class="keyword">bool</span>   <span class="string">`json:"status"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>todo_controller.go 参数/error/调用 actions</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> controllers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/gin-gonic/gin"</span></span><br><span class="line">	<span class="string">"vincent.com/gin/todo/repositories"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//NewTodoController - create todo controller with mehtod dealing with todo item</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewTodoController</span><span class="params">(db *sql.DB)</span> *<span class="title">TodoController</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;TodoController&#123;DB: db&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//TodoController struct</span></span><br><span class="line"><span class="keyword">type</span> TodoController <span class="keyword">struct</span> &#123;</span><br><span class="line">	DB *sql.DB</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Create - get req and create one todo item into pg</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tc *TodoController)</span> <span class="title">Create</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 解析参数</span></span><br><span class="line">	title := c.PostForm(<span class="string">"title"</span>)</span><br><span class="line">	description := c.PostForm(<span class="string">"description"</span>)</span><br><span class="line">	<span class="comment">// 调用 sql层</span></span><br><span class="line">	_, err := repositories.CreateItem(tc.DB, title, description)</span><br><span class="line">	<span class="comment">// 错误处理</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"err"</span>, err)</span><br><span class="line">		c.String(http.StatusInternalServerError, <span class="string">""</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.String(http.StatusCreated, <span class="string">""</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Items - query todo items from pg</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tc *TodoController)</span> <span class="title">Items</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	allStr := c.Query(<span class="string">"all"</span>)</span><br><span class="line">	all, err := strconv.ParseBool(allStr)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		all = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	items, err := repositories.GetItems(tc.DB, all)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"err"</span>, err)</span><br><span class="line">		c.String(http.StatusInternalServerError, <span class="string">""</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.JSON(http.StatusOK, items)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Get - get one item with id</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tc *TodoController)</span> <span class="title">Get</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	itemIDStr := c.Params.ByName(<span class="string">"itemID"</span>)</span><br><span class="line">	itemID, err := strconv.Atoi(itemIDStr)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.JSON(http.StatusBadRequest, <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">			<span class="string">"error"</span>: <span class="string">"Bad item id"</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	item, err := repositories.GetItem(tc.DB, itemID)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err == sql.ErrNoRows &#123;</span><br><span class="line">			c.String(http.StatusNotFound, <span class="string">""</span>)</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		&#125;</span><br><span class="line">		log.Println(<span class="string">"err"</span>, err)</span><br><span class="line">		c.String(http.StatusInternalServerError, <span class="string">""</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.JSON(http.StatusOK, item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Update - update item with id</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tc *TodoController)</span> <span class="title">Update</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	itemIDStr := c.Params.ByName(<span class="string">"itemID"</span>)</span><br><span class="line">	itemID, err := strconv.Atoi(itemIDStr)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"err"</span>, err)</span><br><span class="line">		c.JSON(http.StatusBadRequest, <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">			<span class="string">"error"</span>: <span class="string">"Bad item id"</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	title := c.PostForm(<span class="string">"title"</span>)</span><br><span class="line">	description := c.PostForm(<span class="string">"description"</span>)</span><br><span class="line">	completedStr := c.PostForm(<span class="string">"completed"</span>)</span><br><span class="line">	completed, err := strconv.ParseBool(completedStr)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.JSON(http.StatusBadRequest, <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">			<span class="string">"error"</span>: <span class="string">"Bad completed input"</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	err = repositories.UpdateItem(tc.DB, itemID, title, description, completed)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"err"</span>, err)</span><br><span class="line">		c.String(http.StatusInternalServerError, <span class="string">""</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.String(http.StatusOK, <span class="string">""</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Delete - del item with id</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tc *TodoController)</span> <span class="title">Delete</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	itemIDStr := c.Param(<span class="string">"itemID"</span>)</span><br><span class="line">	itemID, err := strconv.Atoi(itemIDStr)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.JSON(http.StatusBadRequest, <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">			<span class="string">"error"</span>: <span class="string">"Bad item id"</span>,</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	err = repositories.DeleteItem(tc.DB, itemID)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Println(<span class="string">"err"</span>, err)</span><br><span class="line">		c.String(http.StatusInternalServerError, <span class="string">""</span>)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	c.String(http.StatusOK, <span class="string">""</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>routes.go 关联  路由和 controller<blockquote>
+<p>此  例子没有分组</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> routes</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/gin-gonic/gin"</span></span><br><span class="line">	<span class="string">"vincent.com/gin/todo/controllers"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//CreateRoutes - bind controller with gin</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateRoutes</span><span class="params">(r *gin.Engine, tc *controllers.TodoController)</span></span> &#123;</span><br><span class="line">	r.GET(<span class="string">"/items"</span>, tc.Items)</span><br><span class="line">	r.POST(<span class="string">"/item"</span>, tc.Create)</span><br><span class="line">	r.GET(<span class="string">"/item/:itemID"</span>, tc.Get)</span><br><span class="line">	r.PUT(<span class="string">"/item/:itemID"</span>, tc.Update)</span><br><span class="line">	r.DELETE(<span class="string">"/item/:itemID"</span>, tc.Delete)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>todo_repository.go 操作 db</li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> repositories</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"database/sql"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"vincent.com/gin/todo/models"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//GetItems - get items from pg</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetItems</span><span class="params">(db *sql.DB, all <span class="keyword">bool</span>)</span> <span class="params">([]*models.Item, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> rows *sql.Rows</span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	query := <span class="string">`</span></span><br><span class="line"><span class="string">		select</span></span><br><span class="line"><span class="string">			id,</span></span><br><span class="line"><span class="string">			title,</span></span><br><span class="line"><span class="string">			description,</span></span><br><span class="line"><span class="string">			completed</span></span><br><span class="line"><span class="string">		from</span></span><br><span class="line"><span class="string">			items</span></span><br><span class="line"><span class="string">	`</span></span><br><span class="line">	<span class="keyword">if</span> !all &#123;</span><br><span class="line">		query += <span class="string">"where completed = $1"</span></span><br><span class="line">		rows, err = db.Query(query, all)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		rows, err = db.Query(query)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line">	items := <span class="built_in">make</span>([]*models.Item, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> rows.Next() &#123;</span><br><span class="line">		<span class="keyword">var</span> item models.Item</span><br><span class="line">		err = rows.Scan(&amp;item.ID, &amp;item.Title, &amp;item.Description, &amp;item.Completed)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">		items = <span class="built_in">append</span>(items, &amp;item)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> items, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//CreateItem - add new todo item</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">CreateItem</span><span class="params">(db *sql.DB, title, description <span class="keyword">string</span>)</span> <span class="params">(<span class="keyword">int</span>, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">		insert into items (</span></span><br><span class="line"><span class="string">			title,</span></span><br><span class="line"><span class="string">			description</span></span><br><span class="line"><span class="string">		) values (</span></span><br><span class="line"><span class="string">			$1,</span></span><br><span class="line"><span class="string">			$2</span></span><br><span class="line"><span class="string">		) returning id</span></span><br><span class="line"><span class="string">	`</span></span><br><span class="line">	<span class="keyword">var</span> id <span class="keyword">int</span></span><br><span class="line">	err := db.QueryRow(query, title, description).Scan(&amp;id)</span><br><span class="line">	<span class="keyword">return</span> id, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//UpdateItem - update item base on id</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UpdateItem</span><span class="params">(db *sql.DB, id <span class="keyword">int</span>, title, description <span class="keyword">string</span>, completed <span class="keyword">bool</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">		update items set</span></span><br><span class="line"><span class="string">			title = $1,</span></span><br><span class="line"><span class="string">			description = $2,</span></span><br><span class="line"><span class="string">			completed = $3</span></span><br><span class="line"><span class="string">		where id = $4</span></span><br><span class="line"><span class="string">	`</span></span><br><span class="line">	_, err := db.Exec(query, title, description, completed, id)</span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//GetItem - get item with specific id</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetItem</span><span class="params">(db *sql.DB, id <span class="keyword">int</span>)</span> <span class="params">(*models.Item, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> query = <span class="string">`</span></span><br><span class="line"><span class="string">		select</span></span><br><span class="line"><span class="string">			id,</span></span><br><span class="line"><span class="string">			title,</span></span><br><span class="line"><span class="string">			description,</span></span><br><span class="line"><span class="string">			completed</span></span><br><span class="line"><span class="string">		from</span></span><br><span class="line"><span class="string">			items</span></span><br><span class="line"><span class="string">		where</span></span><br><span class="line"><span class="string">			id = $1</span></span><br><span class="line"><span class="string">	`</span></span><br><span class="line">	<span class="keyword">var</span> item models.Item</span><br><span class="line">	err := db.QueryRow(query, id).Scan(&amp;item.ID, &amp;item.Title, &amp;item.Description, &amp;item.Completed)</span><br><span class="line">	<span class="keyword">return</span> &amp;item, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//DeleteItem - del the todo item with specific id</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DeleteItem</span><span class="params">(db *sql.DB, id <span class="keyword">int</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">const</span> query = <span class="string">`delete from items where id = $1`</span></span><br><span class="line">	_, err := db.Exec(query, id)</span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag">#Golang</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/24/Algorithm-使用深度优先搜索查找图中的路径/" rel="next" title="Algorithm - 使用深度优先搜索查找图中的路径">
+                <i class="fa fa-chevron-left"></i> Algorithm - 使用深度优先搜索查找图中的路径
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/不一样的拥抱变化/" rel="prev" title="不一样的拥抱变化">
+                不一样的拥抱变化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gin-初探"><span class="nav-number">1.</span> <span class="nav-text">gin 初探</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.1.</span> <span class="nav-text">解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#总体结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">总体结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码分解"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码分解</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

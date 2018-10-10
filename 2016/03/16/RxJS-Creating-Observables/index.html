@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RxJS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable = Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&apos;">
+<meta name="keywords" content="RxJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RxJS - Creating Observables">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/03/16/RxJS-Creating-Observables/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable = Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&apos;">
+<meta property="og:updated_time" content="2016-03-16T07:38:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RxJS - Creating Observables">
+<meta name="twitter:description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable = Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&apos;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> RxJS - Creating Observables | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RxJS - Creating Observables
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-03-16T14:16:18+08:00" content="2016-03-16">
+              2016-03-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/RxJS/" itemprop="url" rel="index">
+                    <span itemprop="name">RxJS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="create"><a href="#create" class="headerlink" title="create"></a>create</h2><ul>
+<li><p>Rx.Observable.create</p>
+<blockquote>
+<p>function (subscribe, parent) {<br>  return new AnonymousObservable(subscribe, parent);<br>}</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">var</span> observable = Rx.Observable.create(<span class="function"><span class="keyword">function</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">    observer.onNext(<span class="string">'Simon'</span>);</span><br><span class="line">    observer.onNext(<span class="string">'Jen'</span>);</span><br><span class="line">    observer.onNext(<span class="string">'Sergi'</span>);</span><br><span class="line">    observer.onCompleted(); <span class="comment">// We are done</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>  create 里参数是个 Observer<br>  Observer 定义了如果发出参数. 当subscribe的时候他会发出3个string后结束</p>
+<p>  Observer listen Observable, 当Observable 触发的时候回执行所有Observers相应的方法</p>
+<p>  相当于create 里的observer参数代表的是所有subscribe这个Observable的Observer,<br>  类似于指针template<br>  当触发的时候先走每个Observer的 3次onNext,然后触发每个Observer的onCompleted</p>
+<h2 id="Observers-have-three-methods-onNext-onCompleted-and-onError"><a href="#Observers-have-three-methods-onNext-onCompleted-and-onError" class="headerlink" title="Observers have three methods: onNext, onCompleted, and onError"></a>Observers have three methods: onNext, onCompleted, and onError</h2><p>  单独创建observer,就是实现它的3个方法</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">var</span> observer = Rx.Observer.create(</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onNext</span>(<span class="params">x</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Next: '</span> + x); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">err</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Error: '</span> + err); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onCompleted</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Completed'</span>); &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>  使用observer</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> observable = Rx.Observable.create(<span class="function"><span class="keyword">function</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//定义如何执行发送值</span></span><br><span class="line">    observer.onNext(<span class="string">'Simon'</span>);</span><br><span class="line">    observer.onNext(<span class="string">'Jen'</span>);</span><br><span class="line">    observer.onNext(<span class="string">'Sergi'</span>);</span><br><span class="line">    observer.onCompleted(); <span class="comment">// We are done</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> observer = Rx.Observer.create(</span><br><span class="line">    <span class="comment">//如何处理每一句执行</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onNext</span>(<span class="params">x</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Next: '</span> + x); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">err</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Error: '</span> + err); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onCompleted</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Completed'</span>); &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行</span></span><br><span class="line">observable.subscribe(observer);</span><br></pre></td></tr></table></figure>
+<p>可以不单独定义Observer,简写到subscribe里 </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">test.subscribe(</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onNext</span>(<span class="params">x</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Result: '</span> + x); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onError</span>(<span class="params">err</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Error: '</span> + err); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onCompleted</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Completed'</span>); &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>针对特定需求的Observable用create,但RxJS里有一些现成的</p>
+<hr>
+<p> 针对DOM事件流和 ajax请求的有个单独的lib,帮助创建observable<br> <a href="https://github.com/Reactive-Extensions/RxJS-DOM" target="_blank" rel="external">https://github.com/Reactive-Extensions/RxJS-DOM</a></p>
+<hr>
+<p> observable的主要对象</p>
+<h1 id="arrays"><a href="#arrays" class="headerlink" title="arrays"></a>arrays</h1><h1 id="events"><a href="#events" class="headerlink" title="events"></a>events</h1><h1 id="and"><a href="#and" class="headerlink" title="and"></a>and</h1><h1 id="callbacks"><a href="#callbacks" class="headerlink" title="callbacks"></a>callbacks</h1><h2 id="from"><a href="#from" class="headerlink" title="from"></a>from</h2><p> 任何可以迭代的 类数组的参数都可以用from</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Rx.Observable</span><br><span class="line">   .from([<span class="string">'Adrià'</span>, <span class="string">'Jen'</span>, <span class="string">'Sergi'</span>])</span><br><span class="line">   .subscribe(</span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Next: '</span> + x); &#125;,</span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Error:'</span>, err); &#125;,</span><br><span class="line">   <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Completed'</span>); &#125;</span><br><span class="line">   );</span><br></pre></td></tr></table></figure>
+<h2 id="fromEvent"><a href="#fromEvent" class="headerlink" title="fromEvent"></a>fromEvent</h2><p>transform an event into an Observable</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> allMoves = Rx.Observable.fromEvent(<span class="built_in">document</span>, <span class="string">'mousemove'</span>);</span><br><span class="line">allMoves.subscribe(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e.clientX, e.clientY);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>流之间的转化,创建只是开始,不断转化才是函数编程的特色</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> movesOnTheRight = allMoves.filter(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> e.clientX &gt; <span class="built_in">window</span>.innerWidth / <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> movesOnTheLeft = allMoves.filter(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> e.clientX &lt; <span class="built_in">window</span>.innerWidth / <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line">movesOnTheRight.subscribe(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Mouse is on the right:'</span>, e.clientX);</span><br><span class="line">&#125;);</span><br><span class="line">movesOnTheLeft.subscribe(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Mouse is on the left:'</span>, e.clientX);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="fromCallback-fromNodeCallback"><a href="#fromCallback-fromNodeCallback" class="headerlink" title="fromCallback  fromNodeCallback"></a>fromCallback  fromNodeCallback</h2><p>异步流</p>
+<blockquote>
+<p>Node.js follows<br>the convention of always invoking the callback function with an error argument<br>Chapter 1. The Reactive Way • 14<br>report erratum • discuss<br>first to signal to the callback function that there was a problem. </p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Rx = <span class="built_in">require</span>(<span class="string">'rx'</span>); <span class="comment">// Load RxJS</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>); <span class="comment">// Load Node.js Filesystem module</span></span><br><span class="line"><span class="comment">// Create an Observable from the readdir method</span></span><br><span class="line"><span class="keyword">var</span> readdir = Rx.Observable.fromNodeCallback(fs.readdir);</span><br><span class="line"><span class="comment">// Send a delayed message</span></span><br><span class="line"><span class="keyword">var</span> source = readdir(<span class="string">'/Users/sergi'</span>);</span><br><span class="line"><span class="keyword">var</span> subscription = source.subscribe(</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'List of directories: '</span> + res); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Error: '</span> + err); &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'Done!'</span>); &#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RxJS/" rel="tag">#RxJS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/16/RxJS-基本概念/" rel="next" title="RxJS - 基本概念">
+                <i class="fa fa-chevron-left"></i> RxJS - 基本概念
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/21/RxJS-请求数据更新流实例/" rel="prev" title="RxJS - 请求数据更新流实例">
+                RxJS - 请求数据更新流实例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Observers-have-three-methods-onNext-onCompleted-and-onError"><span class="nav-number">2.</span> <span class="nav-text">Observers have three methods: onNext, onCompleted, and onError</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arrays"><span class="nav-number"></span> <span class="nav-text">arrays</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#events"><span class="nav-number"></span> <span class="nav-text">events</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#and"><span class="nav-number"></span> <span class="nav-text">and</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#callbacks"><span class="nav-number"></span> <span class="nav-text">callbacks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#from"><span class="nav-number">1.</span> <span class="nav-text">from</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromEvent"><span class="nav-number">2.</span> <span class="nav-text">fromEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromCallback-fromNodeCallback"><span class="nav-number">3.</span> <span class="nav-text">fromCallback  fromNodeCallback</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

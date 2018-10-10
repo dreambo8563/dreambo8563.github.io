@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="检查文件是否存在demo 代码package mainimport (	&quot;fmt&quot;	&quot;os&quot;)func fileExists(path string) bool &amp;#123;	fileInfo, err := os.Stat(path)	fmt.Println(fileInfo.IsDir(), fileInfo.Mode(), fileInfo.ModTime(), fileInfo.Name(">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang-fileExists">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/03/23/golang-fileExists/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="检查文件是否存在demo 代码package mainimport (	&quot;fmt&quot;	&quot;os&quot;)func fileExists(path string) bool &amp;#123;	fileInfo, err := os.Stat(path)	fmt.Println(fileInfo.IsDir(), fileInfo.Mode(), fileInfo.ModTime(), fileInfo.Name(">
+<meta property="og:updated_time" content="2018-03-23T14:31:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="golang-fileExists">
+<meta name="twitter:description" content="检查文件是否存在demo 代码package mainimport (	&quot;fmt&quot;	&quot;os&quot;)func fileExists(path string) bool &amp;#123;	fileInfo, err := os.Stat(path)	fmt.Println(fileInfo.IsDir(), fileInfo.Mode(), fileInfo.ModTime(), fileInfo.Name(">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> golang-fileExists | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                golang-fileExists
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-03-23T21:46:53+08:00" content="2018-03-23">
+              2018-03-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="检查文件是否存在"><a href="#检查文件是否存在" class="headerlink" title="检查文件是否存在"></a>检查文件是否存在</h2><h3 id="demo-代码"><a href="#demo-代码" class="headerlink" title="demo 代码"></a>demo 代码</h3><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fileExists</span><span class="params">(path <span class="keyword">string</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	fileInfo, err := os.Stat(path)</span><br><span class="line">	fmt.Println(fileInfo.IsDir(), fileInfo.Mode(), fileInfo.ModTime(), fileInfo.Name(), fileInfo.Size(), fileInfo.Sys())</span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(err.Error())</span><br><span class="line">	<span class="keyword">if</span> os.IsNotExist(err) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fileExists(<span class="string">"a.txt"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>os.Stat(path) 尝试拿到某一具体路径的文件描述</li>
+</ol>
+<p><code>Stat returns a FileInfo describing the named file. If there is an error, it will be of type *PathError.</code></p>
+<ol start="2">
+<li>如果返回了err 用os.IsNotExist(err) 判断是否属于文件或者目录不存在的那种err.<br>如果是,那就是不存在.</li>
+</ol>
+<p><code>sNotExist returns a boolean indicating whether the error is known to report that a file or directory does not exist. It is satisfied by ErrNotExist as well as some syscall errors</code></p>
+<h3 id="粗略源码跟踪"><a href="#粗略源码跟踪" class="headerlink" title="粗略源码跟踪"></a>粗略源码跟踪</h3><ul>
+<li>fileInfo, err := os.Stat(path)</li>
+</ul>
+<p>这看定义先,根据一个路径返回文件描述结构和error,实际上调用了内部的statNolog<br>这里先解释下FileInfo</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Stat returns a FileInfo describing the named file.</span></span><br><span class="line"><span class="comment">// If there is an error, it will be of type *PathError.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Stat</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(FileInfo, error)</span></span> &#123;</span><br><span class="line">	testlog.Stat(name)</span><br><span class="line">	<span class="keyword">return</span> statNolog(name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// A FileInfo describes a file and is returned by Stat and Lstat.</span></span><br><span class="line"><span class="keyword">type</span> FileInfo <span class="keyword">interface</span> &#123;</span><br><span class="line">	Name() <span class="keyword">string</span>       <span class="comment">// base name of the file</span></span><br><span class="line">	Size() <span class="keyword">int64</span>        <span class="comment">// length in bytes for regular files; system-dependent for others 这是里bytes,一个中文不是1</span></span><br><span class="line">	Mode() FileMode     <span class="comment">// file mode bits 例如:-rw-r--r--</span></span><br><span class="line">	ModTime() time.Time <span class="comment">// modification time</span></span><br><span class="line">	IsDir() <span class="keyword">bool</span>        <span class="comment">// abbreviation for Mode().IsDir()</span></span><br><span class="line">	Sys() <span class="keyword">interface</span>&#123;&#125;   <span class="comment">// underlying data source (can return nil)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>内部stat<br><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// statNolog stats a file with no test logging.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">statNolog</span><span class="params">(name <span class="keyword">string</span>)</span> <span class="params">(FileInfo, error)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> fs fileStat</span><br><span class="line">	err := syscall.Stat(name, &amp;fs.sys) <span class="comment">//用系统的stat获取fs信息赋值给&amp;fs.sys</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, &amp;PathError&#123;<span class="string">"stat"</span>, name, err&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fillFileStatFromSys(&amp;fs, name) <span class="comment">// 从&amp;fs.sys里解析出FileInfo的内容</span></span><br><span class="line">	<span class="keyword">return</span> &amp;fs, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在debug过程中发现这个name参数其实走了3次</p>
+<ol>
+<li>“.”当前目录</li>
+<li>当前目录所在的具体目录例如”/Users/vincent/go/src/vincent.com/checkFileDicExist”</li>
+<li>文件”./a.txt”</li>
+</ol>
+<p>也就说不管是这个文件不存在还是这个目录不存在都会err</p>
+<hr>
+<ul>
+<li>os.IsNotExist(err)<br>假如爆出err这个函数用来判断err类型</li>
+</ul>
+<p>调用内部判断<br><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// IsNotExist returns a boolean indicating whether the error is known to</span></span><br><span class="line"><span class="comment">// report that a file or directory does not exist. It is satisfied by</span></span><br><span class="line"><span class="comment">// ErrNotExist as well as some syscall errors.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsNotExist</span><span class="params">(err error)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> isNotExist(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>大意就是检查err的内容是否包含特定的string, 是不是感觉有点简陋?</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isNotExist</span><span class="params">(err error)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> checkErrMessageContent(err, <span class="string">"does not exist"</span>, <span class="string">"not found"</span>,</span><br><span class="line">		<span class="string">"has been removed"</span>, <span class="string">"no parent"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>帮助函数</p>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// checkErrMessageContent checks if err message contains one of msgs.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkErrMessageContent</span><span class="params">(err error, msgs ...<span class="keyword">string</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	err = underlyingError(err) <span class="comment">//这个根据err类型把内部的err替换出来为了得到err.Error()</span></span><br><span class="line">	<span class="keyword">for</span> _, msg := <span class="keyword">range</span> msgs &#123;</span><br><span class="line">        <span class="comment">// 查看err.Error里是否包含msg</span></span><br><span class="line">		<span class="keyword">if</span> contains(err.Error(), msg) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// contains is a local version of strings.Contains. It knows len(sep) &gt; 1.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">contains</span><span class="params">(s, sep <span class="keyword">string</span>)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line">	n := <span class="built_in">len</span>(sep)</span><br><span class="line">    c := sep[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">// 逐个字符段判断是否相等</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i+n &lt;= <span class="built_in">len</span>(s); i++ &#123;</span><br><span class="line">		<span class="keyword">if</span> s[i] == c &amp;&amp; s[i:i+n] == sep &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag">#Golang</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/08/NodeJS-分层思考/" rel="next" title="NodeJS 分层思考">
+                <i class="fa fa-chevron-left"></i> NodeJS 分层思考
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/24/elementUI-组件解读/" rel="prev" title="elementUI 组件解读 button">
+                elementUI 组件解读 button <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#检查文件是否存在"><span class="nav-number">1.</span> <span class="nav-text">检查文件是否存在</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#demo-代码"><span class="nav-number">1.1.</span> <span class="nav-text">demo 代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#粗略源码跟踪"><span class="nav-number">1.3.</span> <span class="nav-text">粗略源码跟踪</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

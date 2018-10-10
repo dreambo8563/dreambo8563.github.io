@@ -1,0 +1,701 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Threejs," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="3D 文字 示例解读从简单的文字开始学习吧 Code&amp;lt;script&amp;gt;    if (!Detector.webgl) Detector.addGetWebGLMessage();    // enable cache for loaders    THREE.Cache.enabled = true;    var container, stats, permalink, hex, c">
+<meta name="keywords" content="Threejs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Three - 3D文字">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/07/10/Three-3D文字/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="3D 文字 示例解读从简单的文字开始学习吧 Code&amp;lt;script&amp;gt;    if (!Detector.webgl) Detector.addGetWebGLMessage();    // enable cache for loaders    THREE.Cache.enabled = true;    var container, stats, permalink, hex, c">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Untitled.gif">
+<meta property="og:updated_time" content="2018-09-30T06:33:29.548Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Three - 3D文字">
+<meta name="twitter:description" content="3D 文字 示例解读从简单的文字开始学习吧 Code&amp;lt;script&amp;gt;    if (!Detector.webgl) Detector.addGetWebGLMessage();    // enable cache for loaders    THREE.Cache.enabled = true;    var container, stats, permalink, hex, c">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Untitled.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Three - 3D文字 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Three - 3D文字
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-10T21:34:52+08:00" content="2018-07-10">
+              2018-07-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Threejs/" itemprop="url" rel="index">
+                    <span itemprop="name">Threejs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="3D-文字-示例解读"><a href="#3D-文字-示例解读" class="headerlink" title="3D 文字 示例解读"></a>3D 文字 示例解读</h3><p>从简单的文字开始学习吧</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!Detector.webgl) Detector.addGetWebGLMessage();</span><br><span class="line">    <span class="comment">// enable cache for loaders</span></span><br><span class="line">    THREE.Cache.enabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> container, stats, permalink, hex, color;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> camera, cameraTarget, scene, renderer;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> group, textMesh1, textMesh2, textGeo, materials, pointLight;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// default func for rotate light</span></span><br><span class="line">    <span class="keyword">var</span> rotateFunc = <span class="function"><span class="params">()</span> =&gt;</span> &#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> firstLetter = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// as the step for the light</span></span><br><span class="line">    <span class="keyword">var</span> seed = <span class="number">10</span></span><br><span class="line">    <span class="comment">// displayed text</span></span><br><span class="line">    <span class="keyword">var</span> text = <span class="string">"TAL"</span>,</span><br><span class="line"></span><br><span class="line">        height = <span class="number">30</span>,</span><br><span class="line">        size = <span class="number">100</span>,</span><br><span class="line">        <span class="comment">// 字距离镜面的高度</span></span><br><span class="line">        hover = <span class="number">30</span>,</span><br><span class="line">        <span class="comment">// 字的分割部分,越多越平滑</span></span><br><span class="line">        curveSegments = <span class="number">4</span>,</span><br><span class="line">        <span class="comment">//bevelEnabled 为true时候, 斜角厚度</span></span><br><span class="line">        bevelThickness = <span class="number">20</span>,</span><br><span class="line">        <span class="comment">// 边缘斜角的大小</span></span><br><span class="line">        bevelSize = <span class="number">1.5</span>,</span><br><span class="line">        <span class="comment">// 边缘斜角的过渡层数</span></span><br><span class="line">        bevelSegments = <span class="number">3</span>,</span><br><span class="line">        <span class="comment">// 是否开启斜角</span></span><br><span class="line">        bevelEnabled = <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// 后面会load font</span></span><br><span class="line">        font = <span class="literal">undefined</span>,</span><br><span class="line"></span><br><span class="line">        fontName = <span class="string">"optimer"</span>, <span class="comment">// helvetiker, optimer, gentilis, droid sans, droid serif</span></span><br><span class="line">        fontWeight = <span class="string">"bold"</span>; <span class="comment">// normal bold</span></span><br><span class="line">    <span class="comment">// 是否要显示镜像文字</span></span><br><span class="line">    <span class="keyword">var</span> mirror = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 字体集合</span></span><br><span class="line">    <span class="keyword">var</span> fontMap = &#123;</span><br><span class="line"></span><br><span class="line">        <span class="string">"helvetiker"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">"optimer"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">"gentilis"</span>: <span class="number">2</span>,</span><br><span class="line">        <span class="string">"droid/droid_sans"</span>: <span class="number">3</span>,</span><br><span class="line">        <span class="string">"droid/droid_serif"</span>: <span class="number">4</span></span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 字重集合</span></span><br><span class="line">    <span class="keyword">var</span> weightMap = &#123;</span><br><span class="line"></span><br><span class="line">        <span class="string">"regular"</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">"bold"</span>: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> reverseFontMap = [];</span><br><span class="line">    <span class="keyword">var</span> reverseWeightMap = [];</span><br><span class="line">    <span class="comment">// 数据整理</span></span><br><span class="line">    <span class="comment">// ["helvetiker","optimer","gentilis","droid/droid_sans","droid/droid_serif"]</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> fontMap) reverseFontMap[fontMap[i]] = i;</span><br><span class="line">    <span class="comment">//["regular","bold"]</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> weightMap) reverseWeightMap[weightMap[i]] = i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> targetRotation = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> targetRotationOnMouseDown = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> mouseX = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">var</span> mouseXOnMouseDown = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> windowHalfX = <span class="built_in">window</span>.innerWidth / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">var</span> windowHalfY = <span class="built_in">window</span>.innerHeight / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fontIndex = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> controls</span><br><span class="line"></span><br><span class="line">    init();</span><br><span class="line">    animate();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">decimalToHex</span>(<span class="params">d</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> hex = <span class="built_in">Number</span>(d).toString(<span class="number">16</span>);</span><br><span class="line">        hex = <span class="string">"000000"</span>.substr(<span class="number">0</span>, <span class="number">6</span> - hex.length) + hex;</span><br><span class="line">        <span class="keyword">return</span> hex.toUpperCase();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        container = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(container);</span><br><span class="line"></span><br><span class="line">        permalink = <span class="built_in">document</span>.getElementById(<span class="string">"permalink"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// CAMERA</span></span><br><span class="line"></span><br><span class="line">        camera = <span class="keyword">new</span> THREE.PerspectiveCamera(<span class="number">30</span>, <span class="built_in">window</span>.innerWidth / <span class="built_in">window</span>.innerHeight, <span class="number">1</span>, <span class="number">1500</span>);</span><br><span class="line">        camera.position.set(<span class="number">0</span>, <span class="number">400</span>, <span class="number">700</span>);</span><br><span class="line"></span><br><span class="line">        cameraTarget = <span class="keyword">new</span> THREE.Vector3(<span class="number">0</span>, <span class="number">150</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        controls = <span class="keyword">new</span> THREE.OrbitControls(camera)</span><br><span class="line"></span><br><span class="line">        <span class="comment">// SCENE</span></span><br><span class="line">        scene = <span class="keyword">new</span> THREE.Scene();</span><br><span class="line">        <span class="comment">// black bg</span></span><br><span class="line">        scene.background = <span class="keyword">new</span> THREE.Color(<span class="number">0x000000</span>);</span><br><span class="line">        scene.fog = <span class="keyword">new</span> THREE.Fog(<span class="number">0x000000</span>, <span class="number">250</span>, <span class="number">1400</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// AxesHelper</span></span><br><span class="line">        <span class="keyword">var</span> axesHelper = <span class="keyword">new</span> THREE.AxesHelper(<span class="number">500</span>);</span><br><span class="line">        <span class="comment">// scene.add(axesHelper);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// LIGHTS</span></span><br><span class="line">        <span class="comment">// var dirLight = new THREE.DirectionalLight(0xffffff, 0.125);</span></span><br><span class="line">        <span class="comment">// dirLight.position.set(0, 0, 0).normalize();</span></span><br><span class="line">        <span class="comment">// scene.add(dirLight);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// var helper = new THREE.DirectionalLightHelper(dirLight, 150);</span></span><br><span class="line">        <span class="comment">// scene.add(helper);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 点光源 强度 颜色</span></span><br><span class="line">        pointLight = <span class="keyword">new</span> THREE.PointLight(<span class="number">0xffffff</span>, <span class="number">1.5</span>);</span><br><span class="line">        pointLight.position.set(<span class="number">0</span>, <span class="number">100</span>, <span class="number">90</span>);</span><br><span class="line">        scene.add(pointLight);</span><br><span class="line">        <span class="keyword">var</span> pointLightHelper = <span class="keyword">new</span> THREE.PointLightHelper(pointLight, <span class="number">10</span>);</span><br><span class="line">        <span class="comment">// scene.add(pointLightHelper);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// Get text from hash</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> hash = <span class="built_in">document</span>.location.hash.substr(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (hash.length !== <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> colorhash = hash.substring(<span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line">            <span class="keyword">var</span> fonthash = hash.substring(<span class="number">6</span>, <span class="number">7</span>);</span><br><span class="line">            <span class="keyword">var</span> weighthash = hash.substring(<span class="number">7</span>, <span class="number">8</span>);</span><br><span class="line">            <span class="keyword">var</span> bevelhash = hash.substring(<span class="number">8</span>, <span class="number">9</span>);</span><br><span class="line">            <span class="keyword">var</span> texthash = hash.substring(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">            hex = colorhash;</span><br><span class="line">            <span class="built_in">console</span>.log(colorhash, fonthash, weighthash, bevelhash, texthash, <span class="built_in">parseInt</span>(colorhash, <span class="number">16</span>))</span><br><span class="line">            pointLight.color.setHex(<span class="built_in">parseInt</span>(colorhash, <span class="number">16</span>));</span><br><span class="line"></span><br><span class="line">            fontName = reverseFontMap[<span class="built_in">parseInt</span>(fonthash)];</span><br><span class="line">            fontWeight = reverseWeightMap[<span class="built_in">parseInt</span>(weighthash)];</span><br><span class="line"></span><br><span class="line">            bevelEnabled = <span class="built_in">parseInt</span>(bevelhash);</span><br><span class="line"></span><br><span class="line">            text = <span class="built_in">decodeURI</span>(texthash);</span><br><span class="line"></span><br><span class="line">            updatePermalink();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            pointLight.color.setHSL(<span class="built_in">Math</span>.random(), <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">            hex = decimalToHex(pointLight.color.getHex());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 字的材料, 金属反光效果</span></span><br><span class="line">        materials = [</span><br><span class="line">            <span class="keyword">new</span> THREE.MeshPhongMaterial(&#123; <span class="attr">color</span>: <span class="number">0xffffff</span>, <span class="attr">flatShading</span>: <span class="literal">true</span> &#125;), <span class="comment">// front</span></span><br><span class="line">            <span class="keyword">new</span> THREE.MeshPhongMaterial(&#123; <span class="attr">color</span>: <span class="number">0xffffff</span> &#125;) <span class="comment">// side</span></span><br><span class="line">        ];</span><br><span class="line"></span><br><span class="line">        group = <span class="keyword">new</span> THREE.Group();</span><br><span class="line">        group.position.y = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">        scene.add(group);</span><br><span class="line"></span><br><span class="line">        loadFont();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> plane = <span class="keyword">new</span> THREE.Mesh(</span><br><span class="line">            <span class="keyword">new</span> THREE.PlaneBufferGeometry(<span class="number">10000</span>, <span class="number">10000</span>),</span><br><span class="line">            <span class="keyword">new</span> THREE.MeshBasicMaterial(&#123; <span class="attr">color</span>: <span class="number">0xffffff</span>, <span class="attr">opacity</span>: <span class="number">0.5</span>, <span class="attr">transparent</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">        );</span><br><span class="line">        plane.position.y = <span class="number">100</span>;</span><br><span class="line">        <span class="comment">// 变成横向的 转半圈, 正面是透明的 朝上面</span></span><br><span class="line">        plane.rotation.x = - <span class="built_in">Math</span>.PI / <span class="number">2</span>;</span><br><span class="line">        scene.add(plane);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// RENDERER</span></span><br><span class="line">        <span class="comment">// 光滑边缘</span></span><br><span class="line">        renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123; <span class="attr">antialias</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">        renderer.setPixelRatio(<span class="built_in">window</span>.devicePixelRatio);</span><br><span class="line">        renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight);</span><br><span class="line">        container.appendChild(renderer.domElement);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// STATS</span></span><br><span class="line"></span><br><span class="line">        stats = <span class="keyword">new</span> Stats();</span><br><span class="line">        container.appendChild(stats.dom);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// EVENTS</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'mousedown'</span>, onDocumentMouseDown, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'touchstart'</span>, onDocumentTouchStart, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'touchmove'</span>, onDocumentTouchMove, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'keypress'</span>, onDocumentKeyPress, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'keydown'</span>, onDocumentKeyDown, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 旋转等过节流函数</span></span><br><span class="line">        rotateFunc = _.throttle(lightRotate, <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"color"</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">            pointLight.color.setHSL(<span class="built_in">Math</span>.random(), <span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">            hex = decimalToHex(pointLight.color.getHex());</span><br><span class="line"></span><br><span class="line">            updatePermalink();</span><br><span class="line"></span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"font"</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">            fontIndex++;</span><br><span class="line"></span><br><span class="line">            fontName = reverseFontMap[fontIndex % reverseFontMap.length];</span><br><span class="line"></span><br><span class="line">            loadFont();</span><br><span class="line"></span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"weight"</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (fontWeight === <span class="string">"bold"</span>) &#123;</span><br><span class="line"></span><br><span class="line">                fontWeight = <span class="string">"regular"</span>;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                fontWeight = <span class="string">"bold"</span>;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            loadFont();</span><br><span class="line"></span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">"bevel"</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">            bevelEnabled = !bevelEnabled;</span><br><span class="line"></span><br><span class="line">            refreshText();</span><br><span class="line"></span><br><span class="line">        &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, onWindowResize, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onWindowResize</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 窗口缩放的时候视角自适应</span></span><br><span class="line">        windowHalfX = <span class="built_in">window</span>.innerWidth / <span class="number">2</span>;</span><br><span class="line">        windowHalfY = <span class="built_in">window</span>.innerHeight / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        camera.aspect = <span class="built_in">window</span>.innerWidth / <span class="built_in">window</span>.innerHeight;</span><br><span class="line">        camera.updateProjectionMatrix();</span><br><span class="line"></span><br><span class="line">        renderer.setSize(<span class="built_in">window</span>.innerWidth, <span class="built_in">window</span>.innerHeight);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">boolToNum</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> b ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">updatePermalink</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> link = hex + fontMap[fontName] + weightMap[fontWeight] + boolToNum(bevelEnabled) + <span class="string">"#"</span> + <span class="built_in">encodeURI</span>(text);</span><br><span class="line"></span><br><span class="line">        permalink.href = <span class="string">"#"</span> + link;</span><br><span class="line">        <span class="built_in">window</span>.location.hash = link;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentKeyDown</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (firstLetter) &#123;</span><br><span class="line"></span><br><span class="line">            firstLetter = <span class="literal">false</span>;</span><br><span class="line">            text = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> keyCode = event.keyCode;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// backspace</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (keyCode == <span class="number">8</span>) &#123;</span><br><span class="line"></span><br><span class="line">            event.preventDefault();</span><br><span class="line"></span><br><span class="line">            text = text.substring(<span class="number">0</span>, text.length - <span class="number">1</span>);</span><br><span class="line">            refreshText();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentKeyPress</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> keyCode = event.which;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// backspace</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (keyCode == <span class="number">8</span>) &#123;</span><br><span class="line"></span><br><span class="line">            event.preventDefault();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> ch = <span class="built_in">String</span>.fromCharCode(keyCode);</span><br><span class="line">            text += ch;</span><br><span class="line"></span><br><span class="line">            refreshText();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">loadFont</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 加载对应字体资源</span></span><br><span class="line">        <span class="keyword">var</span> loader = <span class="keyword">new</span> THREE.FontLoader();</span><br><span class="line">        loader.load(<span class="string">'fonts/'</span> + fontName + <span class="string">'_'</span> + fontWeight + <span class="string">'.typeface.json'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"load font"</span>, response)</span><br><span class="line">            font = response;</span><br><span class="line"></span><br><span class="line">            refreshText();</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createText</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        textGeo = <span class="keyword">new</span> THREE.TextGeometry(text, &#123;</span><br><span class="line"></span><br><span class="line">            font: font,</span><br><span class="line"></span><br><span class="line">            size: size,</span><br><span class="line">            height: height,</span><br><span class="line">            curveSegments: curveSegments,</span><br><span class="line"></span><br><span class="line">            bevelThickness: bevelThickness,</span><br><span class="line">            bevelSize: bevelSize,</span><br><span class="line">            bevelEnabled: bevelEnabled</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">// 根据配置 从新计算</span></span><br><span class="line">        textGeo.computeBoundingBox();</span><br><span class="line">        textGeo.computeVertexNormals();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// "fix" side normals by removing z-component of normals for side faces</span></span><br><span class="line">        <span class="comment">// (this doesn't work well for beveled geometry as then we lose nice curvature around z-axis)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!bevelEnabled) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> triangleAreaHeuristics = <span class="number">0.1</span> * (height * size);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; textGeo.faces.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> face = textGeo.faces[i];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (face.materialIndex == <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; face.vertexNormals.length; j++) &#123;</span><br><span class="line"></span><br><span class="line">                        face.vertexNormals[j].z = <span class="number">0</span>;</span><br><span class="line">                        face.vertexNormals[j].normalize();</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">var</span> va = textGeo.vertices[face.a];</span><br><span class="line">                    <span class="keyword">var</span> vb = textGeo.vertices[face.b];</span><br><span class="line">                    <span class="keyword">var</span> vc = textGeo.vertices[face.c];</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">var</span> s = THREE.GeometryUtils.triangleArea(va, vb, vc);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (s &gt; triangleAreaHeuristics) &#123;</span><br><span class="line"></span><br><span class="line">                        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; face.vertexNormals.length; j++) &#123;</span><br><span class="line"></span><br><span class="line">                            face.vertexNormals[j].copy(face.normal);</span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> centerOffset = <span class="number">-0.5</span> * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);</span><br><span class="line">        <span class="comment">// 创建文字</span></span><br><span class="line">        textMesh1 = <span class="keyword">new</span> THREE.Mesh(textGeo, materials);</span><br><span class="line"></span><br><span class="line">        textMesh1.position.x = centerOffset;</span><br><span class="line">        textMesh1.position.y = hover;</span><br><span class="line">        textMesh1.position.z = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        textMesh1.rotation.x = <span class="number">0</span>;</span><br><span class="line">        textMesh1.rotation.y = <span class="built_in">Math</span>.PI * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        group.add(textMesh1);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (mirror) &#123;</span><br><span class="line"></span><br><span class="line">            textMesh2 = <span class="keyword">new</span> THREE.Mesh(textGeo, materials);</span><br><span class="line"></span><br><span class="line">            textMesh2.position.x = centerOffset;</span><br><span class="line">            textMesh2.position.y = -hover;</span><br><span class="line">            textMesh2.position.z = height;</span><br><span class="line"></span><br><span class="line">            textMesh2.rotation.x = <span class="built_in">Math</span>.PI;</span><br><span class="line">            textMesh2.rotation.y = <span class="built_in">Math</span>.PI * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">            group.add(textMesh2);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">refreshText</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        updatePermalink();</span><br><span class="line"></span><br><span class="line">        group.remove(textMesh1);</span><br><span class="line">        <span class="keyword">if</span> (mirror) group.remove(textMesh2);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!text) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        createText();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentMouseDown</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        event.preventDefault();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'mousemove'</span>, onDocumentMouseMove, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'mouseup'</span>, onDocumentMouseUp, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.addEventListener(<span class="string">'mouseout'</span>, onDocumentMouseOut, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">        mouseXOnMouseDown = event.clientX - windowHalfX;</span><br><span class="line">        targetRotationOnMouseDown = targetRotation;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentMouseMove</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        mouseX = event.clientX - windowHalfX;</span><br><span class="line"></span><br><span class="line">        targetRotation = targetRotationOnMouseDown + (mouseX - mouseXOnMouseDown) * <span class="number">0.02</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentMouseUp</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mousemove'</span>, onDocumentMouseMove, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mouseup'</span>, onDocumentMouseUp, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mouseout'</span>, onDocumentMouseOut, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentMouseOut</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mousemove'</span>, onDocumentMouseMove, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mouseup'</span>, onDocumentMouseUp, <span class="literal">false</span>);</span><br><span class="line">        <span class="built_in">document</span>.removeEventListener(<span class="string">'mouseout'</span>, onDocumentMouseOut, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentTouchStart</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (event.touches.length == <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">            event.preventDefault();</span><br><span class="line"></span><br><span class="line">            mouseXOnMouseDown = event.touches[<span class="number">0</span>].pageX - windowHalfX;</span><br><span class="line">            targetRotationOnMouseDown = targetRotation;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onDocumentTouchMove</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (event.touches.length == <span class="number">1</span>) &#123;</span><br><span class="line"></span><br><span class="line">            event.preventDefault();</span><br><span class="line"></span><br><span class="line">            mouseX = event.touches[<span class="number">0</span>].pageX - windowHalfX;</span><br><span class="line">            targetRotation = targetRotationOnMouseDown + (mouseX - mouseXOnMouseDown) * <span class="number">0.05</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        requestAnimationFrame(animate);</span><br><span class="line"></span><br><span class="line">        render();</span><br><span class="line">        stats.update();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 灯光围绕文字转</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">lightRotate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> x = <span class="built_in">Math</span>.sin(seed + <span class="number">1</span>) * <span class="number">10</span></span><br><span class="line">        <span class="keyword">const</span> y = <span class="built_in">Math</span>.cos(seed + <span class="number">1</span>) * <span class="number">10</span></span><br><span class="line">        <span class="comment">// const z = Math.sin(seed + 1) * 10</span></span><br><span class="line">        seed += <span class="number">0.1</span></span><br><span class="line">        <span class="built_in">console</span>.log(x, y)</span><br><span class="line">        <span class="comment">// debugger</span></span><br><span class="line">        pointLight.position.x += x</span><br><span class="line">        pointLight.position.y += y</span><br><span class="line">        <span class="comment">// pointLight.position.z += z</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// group.rotation.y += (targetRotation - group.rotation.y) * 0.05;</span></span><br><span class="line">        <span class="comment">// group.rotation.y += 0.05;</span></span><br><span class="line">        <span class="comment">// console.log(group)</span></span><br><span class="line">        controls.update()</span><br><span class="line">        <span class="comment">// lightRotate()</span></span><br><span class="line">        rotateFunc()</span><br><span class="line"></span><br><span class="line">        camera.lookAt(cameraTarget);</span><br><span class="line"></span><br><span class="line">        renderer.clear();</span><br><span class="line">        renderer.render(scene, camera);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Untitled.gif" alt=""></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Threejs/" rel="tag">#Threejs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/09/golang-nats/" rel="next" title="golang - nats">
+                <i class="fa fa-chevron-left"></i> golang - nats
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/13/Jenkins-FE-CI-CD/" rel="prev" title="Jenkins-FE">
+                Jenkins-FE <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#3D-文字-示例解读"><span class="nav-number">1.</span> <span class="nav-text">3D 文字 示例解读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">2.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果预览"><span class="nav-number">3.</span> <span class="nav-text">效果预览</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

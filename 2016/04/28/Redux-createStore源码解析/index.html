@@ -1,0 +1,777 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React,Redux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="分部解释源码: ActionTypesexport var ActionTypes = &amp;#123;  INIT: &apos;@@redux/INIT&apos;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
+<meta name="keywords" content="React,Redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux - createStore源码解析">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/04/28/Redux-createStore源码解析/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="分部解释源码: ActionTypesexport var ActionTypes = &amp;#123;  INIT: &apos;@@redux/INIT&apos;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
+<meta property="og:updated_time" content="2016-05-03T10:10:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux - createStore源码解析">
+<meta name="twitter:description" content="分部解释源码: ActionTypesexport var ActionTypes = &amp;#123;  INIT: &apos;@@redux/INIT&apos;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Redux - createStore源码解析 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Redux - createStore源码解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-28T15:44:53+08:00" content="2016-04-28">
+              2016-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/Redux/" itemprop="url" rel="index">
+                    <span itemprop="name">Redux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>分部解释源码:</p>
+<h1 id="ActionTypes"><a href="#ActionTypes" class="headerlink" title="ActionTypes"></a>ActionTypes</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> ActionTypes = &#123;</span><br><span class="line">  INIT: <span class="string">'@@redux/INIT'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.<br>当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.</p>
+<hr>
+<h1 id="createStore分解"><a href="#createStore分解" class="headerlink" title="createStore分解"></a>createStore分解</h1><h2 id="基本的参数检查"><a href="#基本的参数检查" class="headerlink" title="基本的参数检查"></a>基本的参数检查</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> initialState === <span class="string">'function'</span> &amp;&amp; <span class="keyword">typeof</span> enhancer === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">  enhancer = initialState;</span><br><span class="line">  initialState = <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> enhancer !== <span class="string">'undefined'</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> enhancer !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Expected the enhancer to be a function.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> enhancer(createStore)(reducer, initialState);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> reducer !== <span class="string">'function'</span>) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Expected the reducer to be a function.'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里检查有没有initialState</li>
+<li>enhancer 有没有,这个东西后面middleware的时候会说</li>
+<li>reducer的类型</li>
+</ul>
+<h2 id="内部变量初始化"><a href="#内部变量初始化" class="headerlink" title="内部变量初始化"></a>内部变量初始化</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> currentReducer = reducer;</span><br><span class="line"><span class="keyword">var</span> currentState = initialState;</span><br><span class="line"><span class="keyword">var</span> currentListeners = [];</span><br><span class="line"><span class="keyword">var</span> nextListeners = currentListeners;</span><br><span class="line"><span class="keyword">var</span> isDispatching = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ensureCanMutateNextListeners</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (nextListeners === currentListeners) &#123;</span><br><span class="line">    nextListeners = currentListeners.slice();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Reads the state tree managed by the store.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @returns &#123;any&#125; The current state tree of your application.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> currentState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的listener 其实就subscribe的那些function, 后面会dispatch的时候把这个array里的所有listener都执行,以实现通知</p>
+<p><code>ensureCanMutateNextListeners</code> 方法是为了把引用断开,两个数组可以分别操作,以便比较</p>
+<p><code>getState</code> 就是返回当前最新的state了</p>
+<hr>
+<h2 id="subscribe"><a href="#subscribe" class="headerlink" title="subscribe"></a>subscribe</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">listener</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> listener !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Expected listener to be a function.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> isSubscribed = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">  ensureCanMutateNextListeners();</span><br><span class="line">  nextListeners.push(listener);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">unsubscribe</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isSubscribed) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    isSubscribed = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    ensureCanMutateNextListeners();</span><br><span class="line">    <span class="keyword">var</span> index = nextListeners.indexOf(listener);</span><br><span class="line">    nextListeners.splice(index, <span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那些subscribe store的家伙想干嘛,无非就是想当state变化的时候,能得到通知:</p>
+<ul>
+<li>先基本检查类型</li>
+<li>当前listeners 和nextListener分开</li>
+<li>把订阅者加入nextListener数组</li>
+<li>返回一个取消订阅的方法<ul>
+<li>取消的时候 要改变状态</li>
+<li>从订阅者数据去掉这个listener</li>
+</ul>
+</li>
+</ul>
+<p>所以谁能得到通知全靠redux维护 listener数组</p>
+<hr>
+<h2 id="dispatch"><a href="#dispatch" class="headerlink" title="dispatch"></a>dispatch</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dispatch</span>(<span class="params">action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!isPlainObject(action)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Actions must be plain objects. '</span> + <span class="string">'Use custom middleware for async actions.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> action.type === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Actions may not have an undefined "type" property. '</span> + <span class="string">'Have you misspelled a constant?'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isDispatching) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Reducers may not dispatch actions.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    isDispatching = <span class="literal">true</span>;</span><br><span class="line">    currentState = currentReducer(currentState, action);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    isDispatching = <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> listeners = currentListeners = nextListeners;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; listeners.length; i++) &#123;</span><br><span class="line">    listeners[i]();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> action;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>dispatch干了啥?</p>
+<p>他接受你的action 就是 发什么了什么的数据,然后传递给reducer去改变state.<br>更新后,让所有订阅者得到通知消息</p>
+<hr>
+<h2 id="replaceReducer"><a href="#replaceReducer" class="headerlink" title="replaceReducer"></a>replaceReducer</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replaceReducer</span>(<span class="params">nextReducer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nextReducer !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Expected the nextReducer to be a function.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  currentReducer = nextReducer;</span><br><span class="line">  dispatch(&#123; <span class="attr">type</span>: ActionTypes.INIT &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>replaceReducer</code> 这个方法貌似运用的几率不是很高,他目的就是动态的替换掉原先createStore时传入的reducer</p>
+<hr>
+<h2 id="observable"><a href="#observable" class="headerlink" title="observable"></a>observable</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observable</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _ref;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> outerSubscribe = subscribe;</span><br><span class="line">  <span class="keyword">return</span> _ref = &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The minimal observable subscription method.</span></span><br><span class="line"><span class="comment">     * @param &#123;Object&#125; observer Any object that can be used as an observer.</span></span><br><span class="line"><span class="comment">     * The observer object should have a `next` method.</span></span><br><span class="line"><span class="comment">     * @returns &#123;subscription&#125; An object with an `unsubscribe` method that can</span></span><br><span class="line"><span class="comment">     * be used to unsubscribe the observable from the store, and prevent further</span></span><br><span class="line"><span class="comment">     * emission of values from the observable.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    subscribe: <span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> observer !== <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Expected the observer to be an object.'</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">observeState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observer.next) &#123;</span><br><span class="line">          observer.next(getState());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      observeState();</span><br><span class="line">      <span class="keyword">var</span> unsubscribe = outerSubscribe(observeState);</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">unsubscribe</span>: unsubscribe &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, _ref[$$observable] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;, _ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法很特别,因为我在源码里,没有找到任何地方调用它</p>
+<p>首先这个方法的调用是个问题,后面解释这个句话<br>先看看他做了什么:</p>
+<ul>
+<li>执行后返回了一个obj<ul>
+<li>这个obj有个subscribe为key的方法<ul>
+<li>这个方法接受一个observer obj</li>
+<li>他定义订阅者的会收到最新的state - 因为他把订阅者push进了listener的数组里</li>
+<li>返回一个取消订阅的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>给返回的obj加个 $$observable的字段</li>
+</ul>
+<p>伪代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var unsubscribe = store.observable().subscribe(observer)</span><br></pre></td></tr></table></figure>
+<p>好看到这里我们基本可以认为,这是redux 给这个观察者模式封装了一层,搞得像rxjs似的</p>
+<hr>
+<h2 id="收尾"><a href="#收尾" class="headerlink" title="收尾"></a>收尾</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dispatch(&#123; <span class="attr">type</span>: ActionTypes.INIT &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> _ref2 = &#123;</span><br><span class="line">  dispatch: dispatch,</span><br><span class="line">  subscribe: subscribe,</span><br><span class="line">  getState: getState,</span><br><span class="line">  replaceReducer: replaceReducer</span><br><span class="line">&#125;, _ref2[$$observable] = observable, _ref2;</span><br></pre></td></tr></table></figure>
+<p>这里先去获取初始state了</p>
+<p>然后返回这个store</p>
+<ul>
+<li>dispatch</li>
+<li>subscribe</li>
+<li>getState</li>
+<li>replaceReducer</li>
+</ul>
+<p>这个几个内部方法都暴露出去了</p>
+<p>最后他给这个store又加了一个<code>$$observable</code> 字段来只想内部这个observable方法</p>
+<p>也就是想调用observable, 你要<code>store[$$observable]()</code> 才行<br>但这个$$observable 是个Symbol生成的唯一标识,怎么调用还没搞清楚.我得去stackoverflow问问<br><a href="http://stackoverflow.com/questions/36909612/how-to-understand-the-observable-function-under-createstore" target="_blank" rel="external">http://stackoverflow.com/questions/36909612/how-to-understand-the-observable-function-under-createstore</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+            <a href="/tags/Redux/" rel="tag">#Redux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/27/Redux-TodoList/" rel="next" title="Redux - TodoList">
+                <i class="fa fa-chevron-left"></i> Redux - TodoList
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/28/Redux-compose源码解析/" rel="prev" title="Redux - compose源码解析">
+                Redux - compose源码解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ActionTypes"><span class="nav-number">1.</span> <span class="nav-text">ActionTypes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#createStore分解"><span class="nav-number">2.</span> <span class="nav-text">createStore分解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的参数检查"><span class="nav-number">2.1.</span> <span class="nav-text">基本的参数检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部变量初始化"><span class="nav-number">2.2.</span> <span class="nav-text">内部变量初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#subscribe"><span class="nav-number">2.3.</span> <span class="nav-text">subscribe</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dispatch"><span class="nav-number">2.4.</span> <span class="nav-text">dispatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replaceReducer"><span class="nav-number">2.5.</span> <span class="nav-text">replaceReducer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#observable"><span class="nav-number">2.6.</span> <span class="nav-text">observable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#收尾"><span class="nav-number">2.7.</span> <span class="nav-text">收尾</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

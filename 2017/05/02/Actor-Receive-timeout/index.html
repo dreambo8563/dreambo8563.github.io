@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Akka," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="system.scheduler.scheduleOnce(5000 milliseconds) &amp;#123;    demoActor ! 1000  &amp;#125; 5000ms后发送一次消息 context.setReceiveTimeout(1000 milliseconds) actor内部初始设置 1000ms为 receive timeout, 意思是从这句执行开始, 如果1000ms">
+<meta name="keywords" content="Scala,Akka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Actor - Receive timeout">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/05/02/Actor-Receive-timeout/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="system.scheduler.scheduleOnce(5000 milliseconds) &amp;#123;    demoActor ! 1000  &amp;#125; 5000ms后发送一次消息 context.setReceiveTimeout(1000 milliseconds) actor内部初始设置 1000ms为 receive timeout, 意思是从这句执行开始, 如果1000ms">
+<meta property="og:updated_time" content="2017-05-02T01:58:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Actor - Receive timeout">
+<meta name="twitter:description" content="system.scheduler.scheduleOnce(5000 milliseconds) &amp;#123;    demoActor ! 1000  &amp;#125; 5000ms后发送一次消息 context.setReceiveTimeout(1000 milliseconds) actor内部初始设置 1000ms为 receive timeout, 意思是从这句执行开始, 如果1000ms">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Actor - Receive timeout | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Actor - Receive timeout
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-05-02T09:08:22+08:00" content="2017-05-02">
+              2017-05-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">system.scheduler.scheduleOnce(<span class="number">5000</span> milliseconds) &#123;</span><br><span class="line">    demoActor ! <span class="number">1000</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>5000ms后发送一次消息</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">context.setReceiveTimeout(<span class="number">1000</span> milliseconds)</span><br></pre></td></tr></table></figure>
+<p>actor内部初始设置 1000ms为 receive timeout, 意思是从这句执行开始, 如果1000ms内没有收到任何消息则会触发 <code>ReceiveTimeout</code></p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="type">ReceiveTimeout</span> =&gt;</span><br><span class="line">      println(<span class="string">"receiveTimeout"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Outputs"><a href="#Outputs" class="headerlink" title="Outputs"></a>Outputs</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">Hello, world!</span><br><span class="line"><span class="function">magicNumber: 42</span></span><br><span class="line"><span class="function"><span class="title">create</span> <span class="title">myActor</span>: <span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span></span></span><br><span class="line"><span class="function"><span class="title">Actor</span>[<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>#2130213730] <span class="title">preStart</span></span></span><br><span class="line"><span class="function"><span class="title">demoActor</span> <span class="title">created</span> !</span></span><br><span class="line"><span class="function"><span class="title">watching</span> <span class="title">myActor</span></span></span><br><span class="line"><span class="function"><span class="title">get</span> <span class="title">actorRef</span>: <span class="title">Actor</span>[<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>#2130213730]</span></span><br><span class="line"><span class="function"><span class="title">fail</span> <span class="title">ask</span> <span class="title">for</span> <span class="title">exception</span> <span class="title">in</span> <span class="title">callback</span> <span class="title">of</span> <span class="title">future</span></span></span><br><span class="line"><span class="function">[<span class="title">INFO</span>] [05/02/2017 09:06:08.834] [<span class="title">mySystem</span>-<span class="title">akka.actor.default</span>-<span class="title">dispatcher</span>-2] [<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>] <span class="title">I</span> <span class="title">was</span> <span class="title">greeted</span> <span class="title">by</span> <span class="title">Vincent</span> <span class="title">Guo</span> <span class="title">with</span> <span class="title">params</span> 88.</span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function">[<span class="title">INFO</span>] [05/02/2017 09:06:13.852] [<span class="title">mySystem</span>-<span class="title">akka.actor.default</span>-<span class="title">dispatcher</span>-3] [<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>] <span class="title">I</span> <span class="title">was</span> <span class="title">greeted</span> <span class="title">by</span> <span class="title">Vincent</span> <span class="title">Guo</span> <span class="title">with</span> <span class="title">params</span> 1000.</span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br><span class="line"><span class="function"><span class="title">receiveTimeout</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><ol>
+<li>看到这个api第一反应是timeout, 当设置receivetimeout后,一定时间内没有收到消息抛exception.但是ask 本身是可以设置timeout的,所以肯定不是单纯的做timeout来做</li>
+<li>很想web server中的redirect: 可以这么理解, A发生后, B逻辑上预期是紧挨着A发生,所以设置逻辑上的<code>timeout</code>,如果B在xxms内没有发生则,判断B失败.</li>
+<li>继续推理: actor 可以部署在多个机器上,通过网络通信,那么 假设有逻辑需要 A机器上的actor A+发送给 B机器上的 B+ 一个消息M, 但预期在一定时间内收到 B机器上的一个消息X,(或者这个消息是来自别的机器C,都可以). 此时receive timeout合适</li>
+</ol>
+<p>ask timeout vs receive timeout</p>
+<ol>
+<li>ask是 消息在一个通道 内进行 ‘去’ 和 ‘来’</li>
+<li>receive 适合在不同通道的通信时来用 A通道是 ‘发送消息的通道’ B 是’接受通道’ </li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">// To turn it off</span></span><br><span class="line">     context.setReceiveTimeout(<span class="type">Duration</span>.<span class="type">Undefined</span>)</span><br></pre></td></tr></table></figure>
+<p>关闭timeout</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Akka/" rel="tag">#Akka</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/28/Actor-Send-Messages/" rel="next" title="Actor - Send Messages">
+                <i class="fa fa-chevron-left"></i> Actor - Send Messages
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/02/Actor-Stopping-actors/" rel="prev" title="Actor - Stopping actors">
+                Actor - Stopping actors <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Outputs"><span class="nav-number">1.</span> <span class="nav-text">Outputs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">2.</span> <span class="nav-text">场景</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

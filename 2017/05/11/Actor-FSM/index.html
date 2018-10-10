@@ -1,0 +1,723 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Akka," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Source Codepackage sample.redeliveryimport akka.actor._import scala.concurrent.duration._import java.util.concurrent.ThreadLocalRandomimport java.util.UUIDobject SimpleOrderedRedeliverer &amp;#123;   def">
+<meta name="keywords" content="Scala,Akka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Actor - FSM">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/05/11/Actor-FSM/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Source Codepackage sample.redeliveryimport akka.actor._import scala.concurrent.duration._import java.util.concurrent.ThreadLocalRandomimport java.util.UUIDobject SimpleOrderedRedeliverer &amp;#123;   def">
+<meta property="og:updated_time" content="2017-05-11T11:30:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Actor - FSM">
+<meta name="twitter:description" content="Source Codepackage sample.redeliveryimport akka.actor._import scala.concurrent.duration._import java.util.concurrent.ThreadLocalRandomimport java.util.UUIDobject SimpleOrderedRedeliverer &amp;#123;   def">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Actor - FSM | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Actor - FSM
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-05-11T19:14:19+08:00" content="2017-05-11">
+              2017-05-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h3><figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> sample.redelivery</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> akka.actor._</span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.<span class="type">ThreadLocalRandom</span></span><br><span class="line"><span class="keyword">import</span> java.util.<span class="type">UUID</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">SimpleOrderedRedeliverer</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">props</span></span>(retryTimeout: <span class="type">FiniteDuration</span>) = <span class="type">Props</span>(classOf[<span class="type">SimpleOrderedRedeliverer</span>], retryTimeout)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Deliver</span>(<span class="params">to: <span class="type">ActorRef</span>, msg: <span class="type">Any</span>, uuid: <span class="type">UUID</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">class</span> <span class="title">Delivered</span>(<span class="params">uuid: <span class="type">UUID</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">class</span> <span class="title">AcceptedForDelivery</span>(<span class="params">uuid: <span class="type">UUID</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">class</span> <span class="title">Busy</span>(<span class="params">refused: <span class="type">UUID</span>, currentlyProcessing: <span class="type">UUID</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  </span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">class</span> <span class="title">Ackable</span>(<span class="params">from: <span class="type">ActorRef</span>, msg: <span class="type">Any</span>, uuid: <span class="type">UUID</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">class</span> <span class="title">Ack</span>(<span class="params">uuid: <span class="type">UUID</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  </span></span><br><span class="line"><span class="class">  <span class="title">sealed</span> <span class="title">trait</span> <span class="title">State</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">object</span> <span class="title">Idle</span> <span class="keyword">extends</span> <span class="title">State</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">object</span> <span class="title">AwaitingAck</span> <span class="keyword">extends</span> <span class="title">State</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">sealed</span> <span class="title">trait</span> <span class="title">Data</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">object</span> <span class="title">NoData</span> <span class="keyword">extends</span> <span class="title">Data</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  </span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">class</span> <span class="title">LastRequest</span>(<span class="params">last: <span class="type">Deliver</span>, requester: <span class="type">ActorRef</span></span>) <span class="keyword">extends</span> <span class="title">Data</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  </span></span><br><span class="line"><span class="class">  <span class="title">private</span> <span class="title">case</span> <span class="title">object</span> <span class="title">Retry</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#125;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">SimpleOrderedRedeliverer</span>(<span class="params">retryTimeout: <span class="type">FiniteDuration</span></span>) <span class="keyword">extends</span> <span class="title">Actor</span> <span class="keyword">with</span> <span class="title">FSM</span>[<span class="type">SimpleOrderedRedeliverer</span>.<span class="type">State</span>, <span class="type">SimpleOrderedRedeliverer</span>.<span class="type">Data</span>] </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> <span class="type">SimpleOrderedRedeliverer</span>._</span><br><span class="line"></span><br><span class="line">  <span class="comment">// So that we don't make a typo when referencing this timer.</span></span><br><span class="line">  <span class="keyword">val</span> <span class="type">RetryTimer</span> = <span class="string">"retry"</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Start idle with neither last request, nor most recent requester.</span></span><br><span class="line">  startWith(<span class="type">Idle</span>, <span class="type">NoData</span>)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">process</span></span>(request: <span class="type">Deliver</span>, requester: <span class="type">ActorRef</span>): <span class="type">State</span> = &#123;</span><br><span class="line">    request.to ! <span class="type">Ackable</span>(requester, request.msg, request.uuid)</span><br><span class="line">    setTimer(<span class="type">RetryTimer</span>, <span class="type">Retry</span>, retryTimeout, repeat = <span class="literal">false</span>)</span><br><span class="line">    goto(<span class="type">AwaitingAck</span>) using <span class="type">LastRequest</span>(request, requester)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  when(<span class="type">Idle</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Event</span>(request: <span class="type">Deliver</span>, _) =&gt;</span><br><span class="line">      println(<span class="string">"idle now, processing"</span>)</span><br><span class="line">      process(request, sender()) replying <span class="type">AcceptedForDelivery</span>(request.uuid)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  when(<span class="type">AwaitingAck</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Event</span>(<span class="type">Retry</span>, <span class="type">LastRequest</span>(request, requester)) =&gt;</span><br><span class="line">      println(<span class="string">"will retry"</span>)</span><br><span class="line">      process(request, requester)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Event</span>(<span class="type">Ack</span>(uuid), <span class="type">LastRequest</span>(request, requester)) <span class="keyword">if</span> uuid == request.uuid =&gt;</span><br><span class="line">      cancelTimer(<span class="type">RetryTimer</span>)</span><br><span class="line">      requester ! <span class="type">Delivered</span>(uuid)</span><br><span class="line">      println(<span class="string">s"matched - <span class="subst">$uuid</span>"</span>)</span><br><span class="line">      goto(<span class="type">Idle</span>) using <span class="type">NoData</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Event</span>(request: <span class="type">Deliver</span>, <span class="type">LastRequest</span>(current, _)) =&gt;</span><br><span class="line">      println(<span class="string">"reject"</span>)</span><br><span class="line">      stay() replying <span class="type">Busy</span>(request.uuid, current.uuid)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Receiver</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">props</span> </span>= <span class="type">Props</span>(classOf[<span class="type">Receiver</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> <span class="keyword">extends</span> <span class="title">Actor</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">shouldSendAck</span> </span>= <span class="type">ThreadLocalRandom</span>.current.nextDouble() &lt; <span class="number">0.25</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">receive</span> </span>= &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">SimpleOrderedRedeliverer</span>.<span class="type">Ackable</span>(from, msg, uuid) =&gt;</span><br><span class="line">      <span class="keyword">val</span> goingToSendAck = shouldSendAck</span><br><span class="line">      println(<span class="string">s""</span><span class="string">"  [Receiver] got "</span>$<span class="string">msg"; <span class="subst">$&#123;if (goingToSendAck) "" else " ***NOT***"&#125;</span> going to send Ack this time"</span><span class="string">""</span>)</span><br><span class="line">      <span class="comment">// Send a [[SimpleOrderedRedeliverer.Ack]] -- if they're lucky!</span></span><br><span class="line">      <span class="keyword">if</span> (goingToSendAck) sender() ! <span class="type">SimpleOrderedRedeliverer</span>.<span class="type">Ack</span>(uuid)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">Requester</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">props</span> </span>= <span class="type">Props</span>(classOf[<span class="type">Requester</span>])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">case</span> <span class="class"><span class="keyword">object</span> <span class="title">Tick</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#125;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Requester</span> <span class="keyword">extends</span> <span class="title">Actor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> <span class="type">Requester</span>._</span><br><span class="line">  <span class="keyword">import</span> context.dispatcher</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> redeliverer = context.actorOf(<span class="type">SimpleOrderedRedeliverer</span>.props(retryTimeout = <span class="number">3.</span>seconds))</span><br><span class="line">  <span class="keyword">val</span> receiver = context.actorOf(<span class="type">Receiver</span>.props)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">val</span> messages = <span class="type">List</span>(<span class="string">"Hello!"</span>, <span class="string">"Ping!"</span>, <span class="string">"Howdy!"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  self ! <span class="type">Tick</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">nextTickIn</span></span>: <span class="type">FiniteDuration</span> = (<span class="number">1.0</span> + <span class="type">ThreadLocalRandom</span>.current.nextDouble() * <span class="number">9.0</span>).seconds</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">receive</span> </span>= &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Tick</span> =&gt;</span><br><span class="line">      <span class="keyword">val</span> msg = util.<span class="type">Random</span>.shuffle(messages).head</span><br><span class="line">      <span class="keyword">val</span> uuid = <span class="type">UUID</span>.randomUUID()</span><br><span class="line">      println(<span class="string">s""</span><span class="string">"[Requester] requesting ("</span>$<span class="string">msg", <span class="subst">$uuid</span>) to be sent to [Receiver]..."</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">      redeliverer ! <span class="type">SimpleOrderedRedeliverer</span>.<span class="type">Deliver</span>(receiver, msg, uuid)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">      context.system.scheduler.scheduleOnce(nextTickIn, self, <span class="type">Tick</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//    case msg =&gt; println(s"[Requester] got $msg")</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">FsmSimpleRedelivery</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> system = <span class="type">ActorSystem</span>()</span><br><span class="line"></span><br><span class="line">  system.actorOf(<span class="type">Requester</span>.props)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><figure class="highlight scala"><table><tr><td class="code"><pre><span class="line">[<span class="type">Requester</span>] requesting (<span class="string">"Ping!"</span>, <span class="number">5</span>da81190<span class="number">-5089</span><span class="number">-403</span>b<span class="number">-9561</span><span class="number">-7147e3568</span>fc0) to be sent to [<span class="type">Receiver</span>]...</span><br><span class="line">idle now, processing</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Ping!"</span>;  going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">matched - <span class="number">5</span>da81190<span class="number">-5089</span><span class="number">-403</span>b<span class="number">-9561</span><span class="number">-7147e3568</span>fc0</span><br><span class="line">[<span class="type">Requester</span>] requesting (<span class="string">"Howdy!"</span>, <span class="number">4e26</span>f458<span class="number">-5</span>b72<span class="number">-470</span>f<span class="number">-98</span>bf<span class="number">-913</span>cee94dc95) to be sent to [<span class="type">Receiver</span>]...</span><br><span class="line">idle now, processing</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Howdy!"</span>;  ***<span class="type">NOT</span>*** going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">will retry</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Howdy!"</span>;  going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">matched - <span class="number">4e26</span>f458<span class="number">-5</span>b72<span class="number">-470</span>f<span class="number">-98</span>bf<span class="number">-913</span>cee94dc95</span><br><span class="line">[<span class="type">Requester</span>] requesting (<span class="string">"Howdy!"</span>, <span class="number">4</span>f5686bb<span class="number">-5</span>f88<span class="number">-4</span>eca<span class="number">-9983</span>-cddc1364de14) to be sent to [<span class="type">Receiver</span>]...</span><br><span class="line">idle now, processing</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Howdy!"</span>;  ***<span class="type">NOT</span>*** going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">will retry</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Howdy!"</span>;  ***<span class="type">NOT</span>*** going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">will retry</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Howdy!"</span>;  ***<span class="type">NOT</span>*** going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">[<span class="type">Requester</span>] requesting (<span class="string">"Hello!"</span>, <span class="number">730788</span>c3-a1ab<span class="number">-4593</span>-aa54<span class="number">-8</span>ab240592031) to be sent to [<span class="type">Receiver</span>]...</span><br><span class="line">reject</span><br><span class="line">will retry</span><br><span class="line">  [<span class="type">Receiver</span>] got <span class="string">"Howdy!"</span>;  going to send <span class="type">Ack</span> <span class="keyword">this</span> time</span><br><span class="line">matched - <span class="number">4</span>f5686bb<span class="number">-5</span>f88<span class="number">-4</span>eca<span class="number">-9983</span>-cddc1364de14</span><br></pre></td></tr></table></figure>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><ol>
+<li>requester 发送一个新消息Ping</li>
+<li>初始状态Idle 处理 判断这次要ACK 切换状态</li>
+<li>uuid匹配所以match, 切换为Idle</li>
+<li>requester发送 一个新消息 Howdy</li>
+<li>idle下判断是否ack, 这次不去验证, 一定时间内没有收到ack验证消息则retry</li>
+<li>retry判断这次要ack,uuid匹配match 切换回idle</li>
+<li>继续发新消息 Howdy</li>
+<li>idle下处理切换 等待状态,判断不走ack 就一直retry,在retry过程中,收到另一个新消息Hello</li>
+<li>由于uuid不同,直接reject,之前的Howdy 仍然在retry 直到最后match</li>
+</ol>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Akka/" rel="tag">#Akka</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/10/Actor-Routing/" rel="next" title="Actor - Routing">
+                <i class="fa fa-chevron-left"></i> Actor - Routing
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/12/Functor-定义/" rel="prev" title="Functor-定义">
+                Functor-定义 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Code"><span class="nav-number">1.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">2.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释"><span class="nav-number">3.</span> <span class="nav-text">解释</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

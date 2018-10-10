@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RxJS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="这个要写一下,因为被自己坑了.之前写分页的时候,忘记当时想法了,想用这个count的operator.但不管怎么do啊 subscribe 啊 都不输出值,各种郁闷.后来想了半天,找到怀疑对象. Completed 看文档吧,更详细 Rx.Observable.prototype.count([predicate], [thisArg]) Arguments[predicate] (Functio">
+<meta name="keywords" content="RxJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rxjs - Operators - Count">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/05/12/Rxjs-Operators-Count/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="这个要写一下,因为被自己坑了.之前写分页的时候,忘记当时想法了,想用这个count的operator.但不管怎么do啊 subscribe 啊 都不输出值,各种郁闷.后来想了半天,找到怀疑对象. Completed 看文档吧,更详细 Rx.Observable.prototype.count([predicate], [thisArg]) Arguments[predicate] (Functio">
+<meta property="og:image" content="http://reactivex.io/rxjs/img/count.png">
+<meta property="og:updated_time" content="2016-05-17T04:02:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rxjs - Operators - Count">
+<meta name="twitter:description" content="这个要写一下,因为被自己坑了.之前写分页的时候,忘记当时想法了,想用这个count的operator.但不管怎么do啊 subscribe 啊 都不输出值,各种郁闷.后来想了半天,找到怀疑对象. Completed 看文档吧,更详细 Rx.Observable.prototype.count([predicate], [thisArg]) Arguments[predicate] (Functio">
+<meta name="twitter:image" content="http://reactivex.io/rxjs/img/count.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Rxjs - Operators - Count | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Rxjs - Operators - Count
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-05-12T16:39:42+08:00" content="2016-05-12">
+              2016-05-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/RxJS/" itemprop="url" rel="index">
+                    <span itemprop="name">RxJS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这个要写一下,因为被自己坑了.之前写分页的时候,忘记当时想法了,想用这个count的operator.<br>但不管怎么do啊 subscribe 啊 都不输出值,各种郁闷.<br>后来想了半天,找到怀疑对象. <code>Completed</code></p>
+<p>看文档吧,更详细</p>
+<p>Rx.Observable.prototype.count([predicate], [thisArg])</p>
+<h2 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h2><p>[predicate] (Function): A function to test each element for a condition. The callback is called with the following information:</p>
+<ol>
+<li>the value of the element</li>
+<li>the index of the element</li>
+<li>the Observable object being subscribed<br>[thisArg] (Any): Object to use as this when executing predicate.</li>
+</ol>
+<h2 id="Returns"><a href="#Returns" class="headerlink" title="Returns"></a>Returns</h2><p>(Observable): An observable sequence containing a single element with a number that represents how many elements in the input sequence satisfy the condition in the predicate function if provided, else the count of items in the sequence.</p>
+<ul>
+<li>count针对是的结束的流</li>
+<li>count第一个参数是function 用来加count的条件,得出符合条件的总数<ul>
+<li>function 可以放3个参数</li>
+<li>每一个value</li>
+<li>index</li>
+<li>被count的那个Observable</li>
+</ul>
+</li>
+<li>第二个参数是,如果你第一个参数里用了this,这个参数可以代表this</li>
+</ul>
+<p>看例子吧 </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> source = Rx.Observable.range(<span class="number">5</span>, <span class="number">10</span>)</span><br><span class="line">    .count(<span class="function"><span class="keyword">function</span> (<span class="params">x, i, o</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(x, i)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;,<span class="string">"mockThis"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> subscription = source.subscribe(</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Next: '</span> + x.toString());</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Error: '</span> + err);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Completed'</span>);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">5 0</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">6 1</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">7 2</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">8 3</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">9 4</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">10 5</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">11 6</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">12 7</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">13 8</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">14 9</span><br><span class="line">String &#123;0: &quot;m&quot;, 1: &quot;o&quot;, 2: &quot;c&quot;, 3: &quot;k&quot;, 4: &quot;T&quot;, 5: &quot;h&quot;, 6: &quot;i&quot;, 7: &quot;s&quot;, length: 8, [[PrimitiveValue]]: &quot;mockThis&quot;&#125;</span><br><span class="line">Next: 0</span><br><span class="line">tCompleted</span><br></pre></td></tr></table></figure>
+<p>输出了 value index 还有this</p>
+<h2 id="重点-结束才会subscribe出值"><a href="#重点-结束才会subscribe出值" class="headerlink" title="重点, 结束才会subscribe出值"></a>重点, 结束才会subscribe出值</h2><p><img src="http://reactivex.io/rxjs/img/count.png" alt=""></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RxJS/" rel="tag">#RxJS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/12/Rxjs-ngPagination/" rel="next" title="Rxjs - ngPagination">
+                <i class="fa fa-chevron-left"></i> Rxjs - ngPagination
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/16/Rxjs-Operators-First/" rel="prev" title="Rxjs - Operators - First">
+                Rxjs - Operators - First <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arguments"><span class="nav-number">1.</span> <span class="nav-text">Arguments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Returns"><span class="nav-number">2.</span> <span class="nav-text">Returns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重点-结束才会subscribe出值"><span class="nav-number">3.</span> <span class="nav-text">重点, 结束才会subscribe出值</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

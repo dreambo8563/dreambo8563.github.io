@@ -1,0 +1,786 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS3," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Child Combinatordiv &amp;gt; p &amp;#123;    background-color: yellow;&amp;#125; &amp;gt; 符号表示的是 div的child 为p标签的元素，注意是子元素，就表明不是选中那些更深层的孙子一级的  Adjacent Sibling Combinatordiv + p &amp;#123;     background-color: green; &amp;#1">
+<meta name="keywords" content="CSS3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 Pushing  the Limits - Advanced Selectors">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/02/17/CSS3-Pushing-the-Limits-Advanced-Selectors/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Child Combinatordiv &amp;gt; p &amp;#123;    background-color: yellow;&amp;#125; &amp;gt; 符号表示的是 div的child 为p标签的元素，注意是子元素，就表明不是选中那些更深层的孙子一级的  Adjacent Sibling Combinatordiv + p &amp;#123;     background-color: green; &amp;#1">
+<meta property="og:updated_time" content="2016-02-17T09:01:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 Pushing  the Limits - Advanced Selectors">
+<meta name="twitter:description" content="Child Combinatordiv &amp;gt; p &amp;#123;    background-color: yellow;&amp;#125; &amp;gt; 符号表示的是 div的child 为p标签的元素，注意是子元素，就表明不是选中那些更深层的孙子一级的  Adjacent Sibling Combinatordiv + p &amp;#123;     background-color: green; &amp;#1">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> CSS3 Pushing  the Limits - Advanced Selectors | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS3 Pushing  the Limits - Advanced Selectors
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-02-17T10:49:06+08:00" content="2016-02-17">
+              2016-02-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Child-Combinator"><a href="#Child-Combinator" class="headerlink" title="Child Combinator"></a><strong>Child Combinator</strong></h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &gt; <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&gt;</code> 符号表示的是 div的child 为p标签的元素，注意是子元素，就表明不是选中那些更深层的孙子一级的</p>
+<hr>
+<h2 id="Adjacent-Sibling-Combinator"><a href="#Adjacent-Sibling-Combinator" class="headerlink" title="Adjacent Sibling Combinator"></a><strong>Adjacent Sibling Combinator</strong></h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> + <span class="selector-tag">p</span> &#123;</span><br><span class="line">     <span class="attribute">background-color</span>: green;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p><code>+</code> 表示的是紧邻的下一个兄弟元素， 关键词是紧邻的<br>下面的代码只有第一个p标签会匹配</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Matched<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Not Matched<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="General-Sibling-Combinator"><a href="#General-Sibling-Combinator" class="headerlink" title="General Sibling Combinator"></a><strong>General Sibling Combinator</strong></h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> ~ <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>~</code> 代表的是兄弟元素“宽泛的”</p>
+<p>下面代码，两个 p标签都match</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Matched<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Matched<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Attribute-Selectors"><a href="#Attribute-Selectors" class="headerlink" title="Attribute Selectors"></a><strong>Attribute Selectors</strong></h2><p>属性selector主要两个事， 有没有这个属性， 属性值匹配不匹配</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[title]</span> &#123;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>匹配有title属性的 a标签，不过title有没有值</p>
+<hr>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type="submit"]</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个不仅有type属性，值还必须是submit才能匹配</p>
+<hr>
+<p>部分属性内容匹配用<code>*</code></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href*="twitter"]</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只要属性值包含就行，大小写敏感<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://twitter"</span>&gt;</span>Twitter<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>属性值以特定string开头 用 <code>^</code></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href^="http://"]</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>属性值以特定string 结尾 ‘$’</p>
+<p><strong>小心空格</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-attr">[href$=".com"]</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>有些属性允许接受多个已空格分隔的值，如果想匹配多值中是否包含特定string用 <code>~</code></p>
+<p>关键词 ： 空格分隔<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span><span class="selector-attr">[class~="a"]</span> &#123;</span><br><span class="line">    <span class="attribute">text-decoration</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>匹配这个<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"a b c"</span>&gt;</span>Welcome to My Homepage<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Pseudo-Classes"><a href="#Pseudo-Classes" class="headerlink" title="Pseudo-Classes"></a><strong>Pseudo-Classes</strong></h2><p>这个匹配不是简单的最后一个孩子<br>下面的例子<br><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> <span class="selector-class">.a</span><span class="selector-pseudo">:last-child</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">”index.php”</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span>  <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>aaa <span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>About(red)<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span>  <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>aaa <span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>About2(red)<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span> <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>About<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span> <span class="attr">href</span>=<span class="string">”contact.php”</span>&gt;</span>aaa (red)<span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>Contact(red)<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以ul为容器顶节点结构中 每个节点下的最后一个child 是否有 .a</p>
+<blockquote>
+<p>猜测实现原理：</p>
+<ul>
+<li>首先他会根据容器找到所有的节点</li>
+<li>这里是ul下的孩子都是li ，所以找最后一个li是否有 .a</li>
+<li>在去找每个 ul li节点下里面的最后一个a 元素是否有 .a</li>
+<li>再找每个 ul li a节点下 最后一个b 元素 是否有 .a</li>
+</ul>
+</blockquote>
+<h3 id="每个"><a href="#每个" class="headerlink" title="每个"></a><strong>每个</strong></h3><hr>
+<p> 类似的有</p>
+<ul>
+<li>:first-child selects the first child of an element, regardless of the element type. This particular<br>pseudo-class was first defined in CSS 2.1 and has universal major browser support, including IE7!</li>
+<li>:first-of-type looks for the first of a particular type of element in a container. For example,<br>p:first-of-type would select the first p element, regardless of whether or not it is the first child in the<br>parent.</li>
+<li>:last-of-type, as you might expect, does exactly the same as the preceding selector, except it looks<br>for the last of a particular type of element in a container.</li>
+<li>:only-child selects an element if it is the sole child in its container. For example, in the markup for a<br>standard navigation, each a element would generally be the only child of the li element that it inhabits.</li>
+<li>:only-of-type does the same as the preceding selector, except it selects elements if they are the only<br>one of their type in the container. For example, if a div contains only an h1 and a p, each of these children<br>would be the only one of its type.</li>
+</ul>
+<hr>
+<h2 id="Nth-Child-Selectors"><a href="#Nth-Child-Selectors" class="headerlink" title="Nth Child Selectors"></a><strong>Nth Child Selectors</strong></h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> <span class="selector-tag">a</span><span class="selector-pseudo">:nth-child(2)</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">”index.php”</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span> <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>aaa <span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>About<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>aaa <span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>About2<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span> <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>About<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span> <span class="attr">href</span>=<span class="string">”about.php”</span>&gt;</span>About<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"a"</span> <span class="attr">href</span>=<span class="string">”contact.php”</span>&gt;</span>aaa <span class="tag">&lt;<span class="name">b</span> <span class="attr">class</span>=<span class="string">"a"</span>&gt;</span>Contact<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上面的代码用中文要这么理解</p>
+<p>ul 下第二个子元素如果是a 就红<br>ul 下子节点的 第二个子元素如果是a 就红</p>
+<p><code>:nth-last-child()</code> 这个就是倒数的 </p>
+<p>可以接受表达式:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:nth-child(3n+1)</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>中文翻译： 从第一个子节点往下（从第二个子元素开始包括第二个）每隔3个子元素如果是p就红</p>
+<p>+1 表示开始位置 3n是3倍数的元素</p>
+<h2 id="负数的使用"><a href="#负数的使用" class="headerlink" title="负数的使用"></a>负数的使用</h2><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">ol</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(-n+2)</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ol</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child(-n+6)</span><span class="selector-pseudo">:nth-child(n+3)</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">ol</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-last-child(-n+2)</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Liverpool<span class="tag">&lt;/<span class="name">li</span>&gt;</span>  //green</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Manchester City<span class="tag">&lt;/<span class="name">li</span>&gt;</span>  //green</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Arsenal<span class="tag">&lt;/<span class="name">li</span>&gt;</span> //blue</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Chelsea<span class="tag">&lt;/<span class="name">li</span>&gt;</span> //blue</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Manchester United<span class="tag">&lt;/<span class="name">li</span>&gt;</span> //blue</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Everton<span class="tag">&lt;/<span class="name">li</span>&gt;</span> //blue</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Newcastle<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Tottenham<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Fulham<span class="tag">&lt;/<span class="name">li</span>&gt;</span> //red</span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Aston Villa<span class="tag">&lt;/<span class="name">li</span>&gt;</span> //red</span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>li:nth-child(-n+2)</code> 头两个 -n+x  就是 头x个元素</p>
+<p><code>li:nth-child(-n+6):nth-child(n+3)</code> 头6个里的，从第三个开始</p>
+<p><code>li:nth-last-child(-n+2)</code> 最后两个</p>
+<hr>
+<h2 id="The-Best-of-the-Rest"><a href="#The-Best-of-the-Rest" class="headerlink" title="The Best of the Rest"></a><strong>The Best of the Rest</strong></h2><p>:empty selects any elements that have absolutely zero content or children.<br>空标签（空格也算有内容）<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> <span class="comment">&lt;!-- This div is empty --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span> <span class="tag">&lt;/<span class="name">div</span>&gt;</span> <span class="comment">&lt;!-- This div is not empty --&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:empty</span> &#123;</span><br><span class="line"><span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>:not(x) is referred to as the negation pseudo-class. You can use it to select all elements except for x,<br>where x is another selector.</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-pseudo">:not(.important)</span> &#123;</span><br><span class="line"><span class="attribute">color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如果你的url地址栏以 #bio结尾的时候， id 为 bio的元素就会生效</p>
+<p>:target selects an element that is the target of a fragment identifier in the document’s URI. For example,<br>if #bio sits at the end of the URI in your address bar, you can use :target to select the element in your<br>HTML with an id of #bio.</p>
+<blockquote>
+<p>##这提供一个技巧，就是当你用hash url策略的时候。每次变化hash地址，你就可以出发一次style的变化</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">”bio”</span>&gt;</span>This is a bio<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line"><span class="attribute">background</span>: white;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:target</span> &#123;</span><br><span class="line"><span class="attribute">background</span>: yellow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>:disabled selects elements that can’t be focused or selected in any way—for example, t<br>use the disabled HTML5 attribute.</li>
+<li>:enabled selects elements that are in their default state and are ready to be selected. Bas<br>includes anything that cannot be selected using :disabled.</li>
+<li>:checked targets radio buttons or check boxes that have been selected by the user.</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS3/" rel="tag">#CSS3</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/16/Angular2-Components-inputEffects/" rel="next" title="Angular2 - Components - inputEffects">
+                <i class="fa fa-chevron-left"></i> Angular2 - Components - inputEffects
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/17/CSS3-Pushing-the-Limits-New-Tools-for-Text/" rel="prev" title="CSS3 Pushing the Limits - New Tools for Text">
+                CSS3 Pushing the Limits - New Tools for Text <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Child-Combinator"><span class="nav-number">1.</span> <span class="nav-text">Child Combinator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adjacent-Sibling-Combinator"><span class="nav-number">2.</span> <span class="nav-text">Adjacent Sibling Combinator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#General-Sibling-Combinator"><span class="nav-number">3.</span> <span class="nav-text">General Sibling Combinator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attribute-Selectors"><span class="nav-number">4.</span> <span class="nav-text">Attribute Selectors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pseudo-Classes"><span class="nav-number">5.</span> <span class="nav-text">Pseudo-Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#每个"><span class="nav-number">5.1.</span> <span class="nav-text">每个</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nth-Child-Selectors"><span class="nav-number">6.</span> <span class="nav-text">Nth Child Selectors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负数的使用"><span class="nav-number">7.</span> <span class="nav-text">负数的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Best-of-the-Rest"><span class="nav-number">8.</span> <span class="nav-text">The Best of the Rest</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

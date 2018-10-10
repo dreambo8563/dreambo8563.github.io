@@ -1,0 +1,783 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS,CSS3," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Only three of the four transform types can operate in a 3D environment: rotate, translate, andscale. This, of course, means that the skew() function is limited to 2D transformations.  3d 就这样 div &amp;#123">
+<meta name="keywords" content="CSS,CSS3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 Pushing the Limits - A New Dimension with 3D Transforms">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/02/22/CSS3-Pushing-the-Limits-A-New-Dimension-with-3D-Transforms/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Only three of the four transform types can operate in a 3D environment: rotate, translate, andscale. This, of course, means that the skew() function is limited to 2D transformations.  3d 就这样 div &amp;#123">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/3d.png">
+<meta property="og:updated_time" content="2018-09-30T06:30:59.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 Pushing the Limits - A New Dimension with 3D Transforms">
+<meta name="twitter:description" content="Only three of the four transform types can operate in a 3D environment: rotate, translate, andscale. This, of course, means that the skew() function is limited to 2D transformations.  3d 就这样 div &amp;#123">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/3d.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> CSS3 Pushing the Limits - A New Dimension with 3D Transforms | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS3 Pushing the Limits - A New Dimension with 3D Transforms
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-02-22T11:55:09+08:00" content="2016-02-22">
+              2016-02-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Only three of the four transform types can operate in a 3D environment: rotate, translate, and<br>scale. This, of course, means that the skew() function is limited to 2D transformations.</p>
+<p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/3d.png" alt=""></p>
+<p>3d 就这样</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">rotateX</span>(45deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>围绕 x 轴旋转 45 度，但还是 2 维的，所以看起来只是高度小了：</p>
+<div style="background-color:red;width: 300px;
+height: 300px;"><br><div style="width: 300px;
+height: 300px;
+transform: rotateX(45deg);background-color:blue;transform: perspective(500px) rotateX(45deg);"></div><br></div>
+
+<h1 id="想要-3D-效果，都在-perspective-属性"><a href="#想要-3D-效果，都在-perspective-属性" class="headerlink" title="想要 3D 效果，都在 perspective 属性"></a>想要 3D 效果，都在 perspective 属性</h1><p>perspective 是指 离这个变化元素的距离，也就是增加了深度感，视角<br>perspective 越大就是观察者里这个元素越远，效果也就越接近 2D，越平面化</p>
+<p>perspective 要设置在 3D 的容器元素上，不是要放在单个的元素上，这样能保持整个 3D 空间坐标系的一致</p>
+<p>perspective 距离本质上和 z 轴的变化的是一样的 transform: translateZ(100px); / perspective:100px;</p>
+<p>perspective-origin: 是观察者视角的 x y 偏移值</p>
+<p>看上面的 3D 图， x 值越大就是说，人眼位置越靠右，y 越大就是越靠下面</p>
+<p>perspective-origin 只能放在容易上。 所以整体空间视角的变化 perspective-origin 起了很大作用</p>
+<p>perspective 只对 child 起作用，对 grandchild 不继承的</p>
+<p>container 》 child -》 grandchild 想让 child 是 3D 就要在 container 上设置 perspective<br>想要 grandchild 是 3D 就要在 child 上设置 transform-style: preserve-3d;</p>
+<p>transform-style: preserve-3d 就是让子元素是 3D 的</p>
+<p>backface-visibility: hidden; 默认是 visible，hidden 的时候就是旋转 180deg 的时候是否还显示</p>
+<p>##rotate3d 好难。。没理解<br><a href="https://www.w3.org/Talks/2012/0416-CSS-WWW2012/Demos/transforms/demo-rotate3d.html" target="_blank" rel="external">https://www.w3.org/Talks/2012/0416-CSS-WWW2012/Demos/transforms/demo-rotate3d.html</a></p>
+<hr>
+<p>transform: translateX(100px) translateY(50px) translateZ(200px); 只是 x，y，z 左边的移动，还好</p>
+<hr>
+<p>the scaleZ() function is then applied to this element’s container to move the entire 3D space closer to the viewer,<br>transform: scaleX(2) scaleY(1) scaleZ(3);</p>
+<hr>
+<p>3d cube</p>
+<div style="    width: 300px;
+    height: 300px;
+    margin: 100px auto;
+    -webkit-perspective: 1100px;
+    -webkit-perspective-origin: -50% -50%;"><br><figure style="        -webkit-transform-style: preserve-3d;
+        position: relative;
+        margin: 0;
+        -webkit-transition: 1s;"><br><div style="            width: 298px;
+            height: 188px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            border: 1px solid #fff;
+            text-align: center;
+            padding-top: 110px;
+            color: #fff;
+            font: 3em arial;-webkit-transform: translateZ(150px);">Front</div><br><div style="            width: 298px;
+            height: 188px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            border: 1px solid #fff;
+            text-align: center;
+            padding-top: 110px;
+            color: #fff;
+            font: 3em arial;-webkit-transform: rotateY(-90deg) translateZ(150px);">Left</div><br><div style="            width: 298px;
+            height: 188px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            border: 1px solid #fff;
+            text-align: center;
+            padding-top: 110px;
+            color: #fff;
+            font: 3em arial;-webkit-transform: rotateY(90deg) translateZ(150px);">Right</div><br><div style="        width: 298px;
+            height: 188px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            border: 1px solid #fff;
+            text-align: center;
+            padding-top: 110px;
+            color: #fff;
+            font: 3em arial;-webkit-transform: rotateX(90deg) translateZ(150px);">Top</div><br><div style="        width: 298px;
+            height: 188px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            border: 1px solid #fff;
+            text-align: center;
+            padding-top: 110px;
+            color: #fff;
+            font: 3em arial;-webkit-transform: rotateX(-90deg) translateZ(150px);">Bottom</div><br><div style="            width: 298px;
+            height: 188px;
+            background: rgba(0, 0, 0, 0.8);
+            position: absolute;
+            border: 1px solid #fff;
+            text-align: center;
+            padding-top: 110px;
+            color: #fff;
+            font: 3em arial;-webkit-transform: rotateY(180deg) translateZ(150px);">Back</div><br></figure><br></div>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag">#CSS</a>
+          
+            <a href="/tags/CSS3/" rel="tag">#CSS3</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/22/CSS3-Pushing-the-Limits-Bring-2D-Transforms-to-Life-with-Transitions/" rel="next" title="CSS3 Pushing the Limits - Bring 2D Transforms to Life with Transitions">
+                <i class="fa fa-chevron-left"></i> CSS3 Pushing the Limits - Bring 2D Transforms to Life with Transitions
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/22/CSS3-Pushing-the-Limits-Getting-Animated/" rel="prev" title="CSS3 Pushing the Limits - Getting Animated">
+                CSS3 Pushing the Limits - Getting Animated <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#想要-3D-效果，都在-perspective-属性"><span class="nav-number">1.</span> <span class="nav-text">想要 3D 效果，都在 perspective 属性</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

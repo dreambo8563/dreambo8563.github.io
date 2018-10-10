@@ -1,0 +1,728 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React,Redux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="combineReducers 的作用就是把多个reducer 合并成一个，疑问createStore的时候只接受一个reducer参数 combineReducers  export default function combineReducers(reducers) &amp;#123;  var reducerKeys = Object.keys(reducers)  var finalReduce">
+<meta name="keywords" content="React,Redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux - combineReducers源码解析">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/04/29/Redux-combineReducers源码解析/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="combineReducers 的作用就是把多个reducer 合并成一个，疑问createStore的时候只接受一个reducer参数 combineReducers  export default function combineReducers(reducers) &amp;#123;  var reducerKeys = Object.keys(reducers)  var finalReduce">
+<meta property="og:updated_time" content="2016-05-03T10:10:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux - combineReducers源码解析">
+<meta name="twitter:description" content="combineReducers 的作用就是把多个reducer 合并成一个，疑问createStore的时候只接受一个reducer参数 combineReducers  export default function combineReducers(reducers) &amp;#123;  var reducerKeys = Object.keys(reducers)  var finalReduce">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Redux - combineReducers源码解析 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Redux - combineReducers源码解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-29T15:24:25+08:00" content="2016-04-29">
+              2016-04-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/Redux/" itemprop="url" rel="index">
+                    <span itemprop="name">Redux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>combineReducers 的作用就是把多个reducer 合并成一个，疑问createStore的时候只接受一个reducer参数</p>
+<h1 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h1> <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">combineReducers</span>(<span class="params">reducers</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers)</span><br><span class="line">  <span class="keyword">var</span> finalReducers = &#123;&#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; reducerKeys.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> key = reducerKeys[i]</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> reducers[key] === <span class="string">'function'</span>) &#123;</span><br><span class="line">      finalReducers[key] = reducers[key]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> finalReducerKeys = <span class="built_in">Object</span>.keys(finalReducers)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> sanityError</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    assertReducerSanity(finalReducers)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    sanityError = e</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">combination</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sanityError) &#123;</span><br><span class="line">      <span class="keyword">throw</span> sanityError</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action)</span><br><span class="line">      <span class="keyword">if</span> (warningMessage) &#123;</span><br><span class="line">        warning(warningMessage)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> hasChanged = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">var</span> nextState = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; finalReducerKeys.length; i++) &#123;</span><br><span class="line">      <span class="keyword">var</span> key = finalReducerKeys[i]</span><br><span class="line">      <span class="keyword">var</span> reducer = finalReducers[key]</span><br><span class="line">      <span class="keyword">var</span> previousStateForKey = state[key]</span><br><span class="line">      <span class="keyword">var</span> nextStateForKey = reducer(previousStateForKey, action)</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> nextStateForKey === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> errorMessage = getUndefinedStateErrorMessage(key, action)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(errorMessage)</span><br><span class="line">      &#125;</span><br><span class="line">      nextState[key] = nextStateForKey</span><br><span class="line">      hasChanged = hasChanged || nextStateForKey !== previousStateForKey</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> hasChanged ? nextState : state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分解-reducerkey"><a href="#分解-reducerkey" class="headerlink" title="分解 reducerkey"></a>分解 reducerkey</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers)</span><br><span class="line"><span class="keyword">var</span> finalReducers = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; reducerKeys.length; i++) &#123;</span><br><span class="line">  <span class="keyword">var</span> key = reducerKeys[i]</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> reducers[key] === <span class="string">'function'</span>) &#123;</span><br><span class="line">    finalReducers[key] = reducers[key]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> finalReducerKeys = <span class="built_in">Object</span>.keys(finalReducers)</span><br></pre></td></tr></table></figure>
+<p>因为是包含多个reducer的obj,用先把key找出来,并做基本过滤得到finalReducers</p>
+<h2 id="assertReducerSanity"><a href="#assertReducerSanity" class="headerlink" title="assertReducerSanity"></a>assertReducerSanity</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sanityError</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  assertReducerSanity(finalReducers)</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  sanityError = e</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里涉及到分支function assertReducerSanity, 也就是检查每个reducer是不是都相应的处理了初始state<br>和对随机type的处理</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">assertReducerSanity</span>(<span class="params">reducers</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">Object</span>.keys(reducers).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> reducer = reducers[key]</span><br><span class="line">    <span class="keyword">var</span> initialState = reducer(<span class="literal">undefined</span>, &#123; <span class="attr">type</span>: ActionTypes.INIT &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> initialState === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">`Reducer "<span class="subst">$&#123;key&#125;</span>" returned undefined during initialization. `</span> +</span><br><span class="line">        <span class="string">`If the state passed to the reducer is undefined, you must `</span> +</span><br><span class="line">        <span class="string">`explicitly return the initial state. The initial state may `</span> +</span><br><span class="line">        <span class="string">`not be undefined.`</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> type = <span class="string">'@@redux/PROBE_UNKNOWN_ACTION_'</span> + <span class="built_in">Math</span>.random().toString(<span class="number">36</span>).substring(<span class="number">7</span>).split(<span class="string">''</span>).join(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> reducer(<span class="literal">undefined</span>, &#123; type &#125;) === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">`Reducer "<span class="subst">$&#123;key&#125;</span>" returned undefined when probed with a random type. `</span> +</span><br><span class="line">        <span class="string">`Don't try to handle <span class="subst">$&#123;ActionTypes.INIT&#125;</span> or other actions in "redux/*" `</span> +</span><br><span class="line">        <span class="string">`namespace. They are considered private. Instead, you must return the `</span> +</span><br><span class="line">        <span class="string">`current state for any unknown actions, unless it is undefined, `</span> +</span><br><span class="line">        <span class="string">`in which case you must return the initial state, regardless of the `</span> +</span><br><span class="line">        <span class="string">`action type. The initial state may not be undefined.`</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="combination"><a href="#combination" class="headerlink" title="combination"></a>combination</h1><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">combination</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (sanityError) &#123;</span><br><span class="line">     <span class="keyword">throw</span> sanityError</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">     <span class="keyword">var</span> warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action)</span><br><span class="line">     <span class="keyword">if</span> (warningMessage) &#123;</span><br><span class="line">       warning(warningMessage)</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> hasChanged = <span class="literal">false</span></span><br><span class="line">   <span class="keyword">var</span> nextState = &#123;&#125;</span><br><span class="line">   <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; finalReducerKeys.length; i++) &#123;</span><br><span class="line">     <span class="keyword">var</span> key = finalReducerKeys[i]</span><br><span class="line">     <span class="keyword">var</span> reducer = finalReducers[key]</span><br><span class="line">     <span class="keyword">var</span> previousStateForKey = state[key]</span><br><span class="line">     <span class="keyword">var</span> nextStateForKey = reducer(previousStateForKey, action)</span><br><span class="line">     <span class="keyword">if</span> (<span class="keyword">typeof</span> nextStateForKey === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">       <span class="keyword">var</span> errorMessage = getUndefinedStateErrorMessage(key, action)</span><br><span class="line">       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(errorMessage)</span><br><span class="line">     &#125;</span><br><span class="line">     nextState[key] = nextStateForKey</span><br><span class="line">     hasChanged = hasChanged || nextStateForKey !== previousStateForKey</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> hasChanged ? nextState : state</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>返回的function shape和普通reducer保持一致 (state, action) =&gt; state</p>
+<h2 id="getUnexpectedStateShapeWarningMessage"><a href="#getUnexpectedStateShapeWarningMessage" class="headerlink" title="getUnexpectedStateShapeWarningMessage"></a>getUnexpectedStateShapeWarningMessage</h2><p>开发环境下回多做一步检查:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUnexpectedStateShapeWarningMessage</span>(<span class="params">inputState, reducers, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers)</span><br><span class="line">  <span class="keyword">var</span> argumentName = action &amp;&amp; action.type === ActionTypes.INIT ?</span><br><span class="line">    <span class="string">'initialState argument passed to createStore'</span> :</span><br><span class="line">    <span class="string">'previous state received by the reducer'</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (reducerKeys.length === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">'Store does not have a valid reducer. Make sure the argument passed '</span> +</span><br><span class="line">      <span class="string">'to combineReducers is an object whose values are reducers.'</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!isPlainObject(inputState)) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">`The <span class="subst">$&#123;argumentName&#125;</span> has unexpected type of "`</span> +</span><br><span class="line">      (&#123;&#125;).toString.call(inputState).match(<span class="regexp">/\s([a-z|A-Z]+)/</span>)[<span class="number">1</span>] +</span><br><span class="line">      <span class="string">`". Expected argument to be an object with the following `</span> +</span><br><span class="line">      <span class="string">`keys: "<span class="subst">$&#123;reducerKeys.join(<span class="string">'", "'</span>)&#125;</span>"`</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> unexpectedKeys = <span class="built_in">Object</span>.keys(inputState).filter(<span class="function"><span class="params">key</span> =&gt;</span> !reducers.hasOwnProperty(key))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (unexpectedKeys.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="string">`Unexpected <span class="subst">$&#123;unexpectedKeys.length &gt; <span class="number">1</span> ? <span class="string">'keys'</span> : <span class="string">'key'</span>&#125;</span> `</span> +</span><br><span class="line">      <span class="string">`"<span class="subst">$&#123;unexpectedKeys.join(<span class="string">'", "'</span>)&#125;</span>" found in <span class="subst">$&#123;argumentName&#125;</span>. `</span> +</span><br><span class="line">      <span class="string">`Expected to find one of the known reducer keys instead: `</span> +</span><br><span class="line">      <span class="string">`"<span class="subst">$&#123;reducerKeys.join(<span class="string">'", "'</span>)&#125;</span>". Unexpected keys will be ignored.`</span></span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>检查是否包含多个reducer, state的字段是否和reducer的key对应</p>
+<p>这里就说明了 combineReducer的基本形态, key之间的对应关系</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// explain the combineReducers</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// function reducer(state = &#123;&#125;, action) &#123;</span></span><br><span class="line"><span class="comment">//   return &#123;</span></span><br><span class="line"><span class="comment">//     a: doSomethingWithA(state.a, action),</span></span><br><span class="line"><span class="comment">//     b: processB(state.b, action),</span></span><br><span class="line"><span class="comment">//     c: c(state.c, action)</span></span><br><span class="line"><span class="comment">//   &#125;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="state对比"><a href="#state对比" class="headerlink" title="state对比"></a>state对比</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> hasChanged = <span class="literal">false</span></span><br><span class="line"><span class="keyword">var</span> nextState = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; finalReducerKeys.length; i++) &#123;</span><br><span class="line">  <span class="keyword">var</span> key = finalReducerKeys[i]</span><br><span class="line">  <span class="keyword">var</span> reducer = finalReducers[key]</span><br><span class="line">  <span class="keyword">var</span> previousStateForKey = state[key]</span><br><span class="line">  <span class="keyword">var</span> nextStateForKey = reducer(previousStateForKey, action)</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nextStateForKey === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> errorMessage = getUndefinedStateErrorMessage(key, action)</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(errorMessage)</span><br><span class="line">  &#125;</span><br><span class="line">  nextState[key] = nextStateForKey</span><br><span class="line">  hasChanged = hasChanged || nextStateForKey !== previousStateForKey</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里对传入combineReducers的 state 每个字段(<code>var previousStateForKey = state[key]</code>)都和<br>处理后的新state(<code>var nextStateForKey = reducer(previousStateForKey, action)</code>)对比<br>如果state里对应的字段内容相同,hasChanged 为false</p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> hasChanged ? nextState : state</span><br></pre></td></tr></table></figure>
+<p>调用combineReducers 后得到的就是一个state, 可能是新的,可能是传进来的那个旧的</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+            <a href="/tags/Redux/" rel="tag">#Redux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/28/Redux-compose源码解析/" rel="next" title="Redux - compose源码解析">
+                <i class="fa fa-chevron-left"></i> Redux - compose源码解析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/29/Redux-applyMiddleware源码解析/" rel="prev" title="Redux - applyMiddleware源码解析">
+                Redux - applyMiddleware源码解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#combineReducers"><span class="nav-number">1.</span> <span class="nav-text">combineReducers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分解-reducerkey"><span class="nav-number">1.1.</span> <span class="nav-text">分解 reducerkey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assertReducerSanity"><span class="nav-number">1.2.</span> <span class="nav-text">assertReducerSanity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#combination"><span class="nav-number">2.</span> <span class="nav-text">combination</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#getUnexpectedStateShapeWarningMessage"><span class="nav-number">2.1.</span> <span class="nav-text">getUnexpectedStateShapeWarningMessage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#state对比"><span class="nav-number">2.2.</span> <span class="nav-text">state对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#返回值"><span class="nav-number">2.3.</span> <span class="nav-text">返回值</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

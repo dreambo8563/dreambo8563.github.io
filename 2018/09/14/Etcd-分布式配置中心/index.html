@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang,Etcd," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Etcd 简介Etcd 是一种分布式 kv 存储设施, 他具有一定的一致性,高性能,高可用的方案. 类似的 zookeeper, 但没有 zookeeper 那么重型,功能也没有覆盖那么多. 简单直接的应用就是配置中心 架构设计总览 clients 为多个需要  配置的服务, 中间层为 多个 grpc-proxy 做均衡负载, 以免一个 proxy 挂了之后  导致单点问题. grpc-pro">
+<meta name="keywords" content="Golang,Etcd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Etcd - 分布式配置中心">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/09/14/Etcd-分布式配置中心/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Etcd 简介Etcd 是一种分布式 kv 存储设施, 他具有一定的一致性,高性能,高可用的方案. 类似的 zookeeper, 但没有 zookeeper 那么重型,功能也没有覆盖那么多. 简单直接的应用就是配置中心 架构设计总览 clients 为多个需要  配置的服务, 中间层为 多个 grpc-proxy 做均衡负载, 以免一个 proxy 挂了之后  导致单点问题. grpc-pro">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Untitled%20Diagram.png">
+<meta property="og:updated_time" content="2018-09-30T06:31:25.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Etcd - 分布式配置中心">
+<meta name="twitter:description" content="Etcd 简介Etcd 是一种分布式 kv 存储设施, 他具有一定的一致性,高性能,高可用的方案. 类似的 zookeeper, 但没有 zookeeper 那么重型,功能也没有覆盖那么多. 简单直接的应用就是配置中心 架构设计总览 clients 为多个需要  配置的服务, 中间层为 多个 grpc-proxy 做均衡负载, 以免一个 proxy 挂了之后  导致单点问题. grpc-pro">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Untitled%20Diagram.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Etcd - 分布式配置中心 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Etcd - 分布式配置中心
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-09-14T09:48:57+08:00" content="2018-09-14">
+              2018-09-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Golang/分布式/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Etcd-简介"><a href="#Etcd-简介" class="headerlink" title="Etcd 简介"></a>Etcd 简介</h3><p>Etcd 是一种分布式 kv 存储设施, 他具有一定的一致性,高性能,高可用的方案. 类似的 zookeeper, 但没有 zookeeper 那么重型,功能也没有覆盖那么多. 简单直接的应用就是配置中心</p>
+<h3 id="架构设计总览"><a href="#架构设计总览" class="headerlink" title="架构设计总览"></a>架构设计总览</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Untitled%20Diagram.png" alt=""></p>
+<p>clients 为多个需要  配置的服务, 中间层为 多个 grpc-proxy 做均衡负载, 以免一个 proxy 挂了之后  导致单点问题. grpc-proxy 可以  同时访问多个 etcd 服务器,进行 kv 的操作. 如果某一个 server  挂了,会自动访问别的  集群中的其他 server 以保证高可用.</p>
+<p>etcd cluster 至少为 3 台, 如果小于 3 台则无法进行选举,造成集群  不可用. (这里需要用 promethus 进行监控预警)</p>
+<h3 id="etcd-cluster-本地搭建"><a href="#etcd-cluster-本地搭建" class="headerlink" title="etcd cluster 本地搭建"></a>etcd cluster 本地搭建</h3><ol>
+<li>本地安装 etcd,或者直接下载预编译好的执行文件<br><a href="https://github.com/etcd-io/etcd/releases" target="_blank" rel="external">https://github.com/etcd-io/etcd/releases</a></li>
+<li>获取 etcd 源码 (其实只是要一个配置文件 Procfile)</li>
+<li>安装 goreman -&gt; go get github.com/mattn/goreman</li>
+<li>修改源码根目录的 Procfile</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Use goreman to run `go get github.com/mattn/goreman`</span><br><span class="line">etcd1: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd --name infra1 --listen-client-urls http://127.0.0.1:2379 --advertise-client-urls http://127.0.0.1:2379 --listen-peer-urls http://127.0.0.1:12380 --initial-advertise-peer-urls http://127.0.0.1:12380 --initial-cluster-token etcd-cluster-1 --initial-cluster &apos;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380,infra4=http://127.0.0.1:42380,infra5=http://127.0.0.1:52380&apos; --initial-cluster-state new --enable-pprof --log-output=stderr</span><br><span class="line">etcd2: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd --name infra2 --listen-client-urls http://127.0.0.1:22379 --advertise-client-urls http://127.0.0.1:22379 --listen-peer-urls http://127.0.0.1:22380 --initial-advertise-peer-urls http://127.0.0.1:22380 --initial-cluster-token etcd-cluster-1 --initial-cluster &apos;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380,infra4=http://127.0.0.1:42380,infra5=http://127.0.0.1:52380&apos; --initial-cluster-state new --enable-pprof --log-output=stderr</span><br><span class="line">etcd3: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd --name infra3 --listen-client-urls http://127.0.0.1:32379 --advertise-client-urls http://127.0.0.1:32379 --listen-peer-urls http://127.0.0.1:32380 --initial-advertise-peer-urls http://127.0.0.1:32380 --initial-cluster-token etcd-cluster-1 --initial-cluster &apos;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380,infra4=http://127.0.0.1:42380,infra5=http://127.0.0.1:52380&apos; --initial-cluster-state new --enable-pprof --log-output=stderr</span><br><span class="line">etcd4: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd --name infra4 --listen-client-urls http://127.0.0.1:42379 --advertise-client-urls http://127.0.0.1:42379 --listen-peer-urls http://127.0.0.1:42380 --initial-advertise-peer-urls http://127.0.0.1:42380 --initial-cluster-token etcd-cluster-1 --initial-cluster &apos;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380,infra4=http://127.0.0.1:42380,infra5=http://127.0.0.1:52380&apos; --initial-cluster-state new --enable-pprof --log-output=stderr</span><br><span class="line">etcd5: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd --name infra5 --listen-client-urls http://127.0.0.1:52379 --advertise-client-urls http://127.0.0.1:52379 --listen-peer-urls http://127.0.0.1:52380 --initial-advertise-peer-urls http://127.0.0.1:52380 --initial-cluster-token etcd-cluster-1 --initial-cluster &apos;infra1=http://127.0.0.1:12380,infra2=http://127.0.0.1:22380,infra3=http://127.0.0.1:32380,infra4=http://127.0.0.1:42380,infra5=http://127.0.0.1:52380&apos; --initial-cluster-state new --enable-pprof --log-output=stderr</span><br><span class="line">proxy1: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd grpc-proxy start --endpoints=127.0.0.1:2379,127.0.0.1:22379,127.0.0.1:32379,127.0.0.1:42379,127.0.0.1:52379 --listen-addr=127.0.0.1:23790 --advertise-client-url=127.0.0.1:23790 --enable-pprof</span><br><span class="line">proxy2: /Users/vincent/Downloads/etcd-v3.3.9-darwin-amd64/etcd grpc-proxy start --endpoints=127.0.0.1:2379,127.0.0.1:22379,127.0.0.1:32379,127.0.0.1:42379,127.0.0.1:52379 --listen-addr=127.0.0.1:23791 --advertise-client-url=127.0.0.1:23791 --enable-pprof</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>启动集群 goreman -f Procfile start</li>
+</ol>
+<h4 id="配置解读"><a href="#配置解读" class="headerlink" title="配置解读"></a>配置解读</h4><p>配置了 5 个 etcd 服务模拟不同的 server, 配置了 2 个 proxy, 模拟两个 grpc-proxy 当做均衡负载<br>–listen-client-urls etcd 监听的地址<br>–listen-peer-urls 集群内部 member 互相监听的地址<br>–name 集群成员的名字<br>–advertise-client-urls 集群内成员对外发布信息的地址<br>–initial-advertise-peer-urls 对集群内发布信息的地址<br>–initial-cluster-state Set to new for all members present during initial static or DNS bootstrapping. If this option is set to existing, etcd will attempt to join the existing cluster. If the wrong value is set, etcd will attempt to start but fail safely.<br>–initial-cluster-token 集群的标示</p>
+<p>5 个 etcd server 形成 etcd-cluster-1, 2 个 proxy 对这个集群进行代理</p>
+<h3 id="集群检查"><a href="#集群检查" class="headerlink" title="集群检查"></a>集群检查</h3><blockquote>
+<p>ETCDCTL_API=3 ./etcdctl endpoint –endpoints=127.0.0.1:2379,127.0.0.1:22379,127.0.0.1:32379,127.0.0.1:42379,127.0.0.1:52379 status -w table</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">λ ETCDCTL_API=3 ./etcdctl endpoint --endpoints=127.0.0.1:2379,127.0.0.1:22379,127.0.0.1:32379,127.0.0.1:42379,127.0.0.1:52379 status -w table</span><br><span class="line">+-----------------+------------------+---------+---------+-----------+-----------+------------+</span><br><span class="line">|    ENDPOINT     |        ID        | VERSION | DB SIZE | IS LEADER | RAFT TERM | RAFT INDEX |</span><br><span class="line">+-----------------+------------------+---------+---------+-----------+-----------+------------+</span><br><span class="line">|  127.0.0.1:2379 | 8211f1d0f64f3269 |   3.3.9 |   25 kB |     false |         2 |         12 |</span><br><span class="line">| 127.0.0.1:22379 | 91bc3c398fb3c146 |   3.3.9 |   25 kB |     false |         2 |         12 |</span><br><span class="line">| 127.0.0.1:32379 | fd422379fda50e48 |   3.3.9 |   25 kB |     false |         2 |         12 |</span><br><span class="line">| 127.0.0.1:42379 | 45d559f8148de837 |   3.3.9 |   25 kB |     false |         2 |         12 |</span><br><span class="line">| 127.0.0.1:52379 | c91263fe1e1dd3b5 |   3.3.9 |   25 kB |      true |         2 |         12 |</span><br><span class="line">+-----------------+------------------+---------+---------+-----------+-----------+------------+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">λ ./etcdctl cluster-health</span><br><span class="line">member 45d559f8148de837 is healthy: got healthy result from http://127.0.0.1:42379</span><br><span class="line">member 8211f1d0f64f3269 is healthy: got healthy result from http://127.0.0.1:2379</span><br><span class="line">member 91bc3c398fb3c146 is healthy: got healthy result from http://127.0.0.1:22379</span><br><span class="line">member c91263fe1e1dd3b5 is healthy: got healthy result from http://127.0.0.1:52379</span><br><span class="line">member fd422379fda50e48 is healthy: got healthy result from http://127.0.0.1:32379</span><br><span class="line">cluster is healthy</span><br></pre></td></tr></table></figure>
+<h3 id="编写测试客户端进行-kv-操作"><a href="#编写测试客户端进行-kv-操作" class="headerlink" title="编写测试客户端进行 kv 操作"></a>编写测试客户端进行 kv 操作</h3><blockquote>
+<p>go get go.etcd.io/etcd</p>
+</blockquote>
+<figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"go.etcd.io/etcd/clientv3"</span></span><br><span class="line">	<span class="string">"vincent.com/etcd/etcd/etcdserver/api/v3rpc/rpctypes"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	cli, err := clientv3.New(clientv3.Config&#123;</span><br><span class="line">		Endpoints:   []<span class="keyword">string</span>&#123;<span class="string">"http://127.0.0.1:23790"</span>, <span class="string">"http://127.0.0.1:23791"</span>&#125;,</span><br><span class="line">		DialTimeout: <span class="number">5</span> * time.Second,</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">// handle error!</span></span><br><span class="line">		log.Fatalln(err.Error())</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> cli.Close()</span><br><span class="line">	<span class="keyword">defer</span> cli.Delete(context.Background(), <span class="string">"sample_key"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> index := <span class="number">0</span>; index &lt; <span class="number">10000</span>; index++ &#123;</span><br><span class="line">		insertKV(cli, <span class="string">"sample_key"</span>, <span class="string">"sample_value"</span>+strconv.Itoa(index))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	resp, err := cli.Get(context.Background(), <span class="string">"sample_key"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatalln(<span class="string">"get key error"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">"get the sample_key: %v\n"</span>, resp.Kvs)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">insertKV</span><span class="params">(cli *clientv3.Client, key <span class="keyword">string</span>, value <span class="keyword">string</span>)</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">	time.Sleep(<span class="number">2</span> * time.Millisecond)</span><br><span class="line">	_, err = cli.Put(context.Background(), key, value)</span><br><span class="line">	<span class="comment">// cancel()</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">switch</span> err &#123;</span><br><span class="line">		<span class="keyword">case</span> context.Canceled:</span><br><span class="line">			log.Fatalf(<span class="string">"ctx is canceled by another routine: %v"</span>, err)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">case</span> context.DeadlineExceeded:</span><br><span class="line">			log.Fatalf(<span class="string">"ctx is attached with a deadline is exceeded: %v"</span>, err)</span><br><span class="line">		<span class="keyword">case</span> rpctypes.ErrEmptyKey:</span><br><span class="line">			log.Fatalf(<span class="string">"client-side error: %v"</span>, err)</span><br><span class="line">		<span class="keyword">default</span>:</span><br><span class="line">			log.Fatalf(<span class="string">"bad cluster endpoints, which are not etcd servers: %v"</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="客户端解读"><a href="#客户端解读" class="headerlink" title="客户端解读"></a>客户端解读</h4><p>etcd 客户端支持集群, 所以直接可以连接两个 proxy<br>这里进行了 1w 此的写入,每次写入会有 x ms 的延迟(我怕我的 mbp 受不了)</p>
+<h3 id="客户端测试"><a href="#客户端测试" class="headerlink" title=" 客户端测试"></a> 客户端测试</h3><ul>
+<li>运行客户端程序</li>
+<li>模拟 etcd server  挂掉 <strong>goreman run stop etcd2</strong></li>
+<li>当集群内健康机器少于 3 台的时候,客户端报错,集群整体不可用</li>
+</ul>
+<h3 id="集群性能检测"><a href="#集群性能检测" class="headerlink" title="集群性能检测"></a>集群性能检测</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">λ ETCDCTL_API=3 ./etcdctl check perf load=&quot;l&quot; --endpoints=127.0.0.1:2379,127.0.0.1:22379,127.0.0.1:32379,127.0.0.1:42379,127.0.0.1:52379</span><br><span class="line"> 60 / 60 Booooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo! 100.00%1m0s</span><br><span class="line">PASS: Throughput is 150 writes/s</span><br><span class="line">PASS: Slowest request took 0.388842s</span><br><span class="line">PASS: Stddev is 0.029037s</span><br><span class="line">PASS</span><br></pre></td></tr></table></figure>
+<p>注意:</p>
+<blockquote>
+<p>如果用命令行,记得加 ETCDCTL_API=3</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag">#Golang</a>
+          
+            <a href="/tags/Etcd/" rel="tag">#Etcd</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/12/golang-uuidv1/" rel="next" title="golang-uuidv1">
+                <i class="fa fa-chevron-left"></i> golang-uuidv1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/18/Etcd-分布式配置中心2-runtime切换配置/" rel="prev" title="Etcd - 分布式配置中心2 - runtime切换配置">
+                Etcd - 分布式配置中心2 - runtime切换配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Etcd-简介"><span class="nav-number">1.</span> <span class="nav-text">Etcd 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构设计总览"><span class="nav-number">2.</span> <span class="nav-text">架构设计总览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#etcd-cluster-本地搭建"><span class="nav-number">3.</span> <span class="nav-text">etcd cluster 本地搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置解读"><span class="nav-number">3.1.</span> <span class="nav-text">配置解读</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群检查"><span class="nav-number">4.</span> <span class="nav-text">集群检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写测试客户端进行-kv-操作"><span class="nav-number">5.</span> <span class="nav-text">编写测试客户端进行 kv 操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#客户端解读"><span class="nav-number">5.1.</span> <span class="nav-text">客户端解读</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端测试"><span class="nav-number">6.</span> <span class="nav-text"> 客户端测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群性能检测"><span class="nav-number">7.</span> <span class="nav-text">集群性能检测</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

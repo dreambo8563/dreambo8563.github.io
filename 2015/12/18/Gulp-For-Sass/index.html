@@ -1,0 +1,745 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Gulp,Sass," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Unsurprisingly, Sass compilation with LibSass Generating sourcemaps for easier debugging Prefixing CSS with Autoprefixer Generating Sass documentation with SassDoc  Compiling SassThe first thing to d">
+<meta name="keywords" content="Gulp,Sass">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp For Sass">
+<meta property="og:url" content="https://dreambo8563.github.io/2015/12/18/Gulp-For-Sass/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Unsurprisingly, Sass compilation with LibSass Generating sourcemaps for easier debugging Prefixing CSS with Autoprefixer Generating Sass documentation with SassDoc  Compiling SassThe first thing to d">
+<meta property="og:updated_time" content="2016-01-19T02:30:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gulp For Sass">
+<meta name="twitter:description" content="Unsurprisingly, Sass compilation with LibSass Generating sourcemaps for easier debugging Prefixing CSS with Autoprefixer Generating Sass documentation with SassDoc  Compiling SassThe first thing to d">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Gulp For Sass | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Gulp For Sass
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-12-18T16:50:01+08:00" content="2015-12-18">
+              2015-12-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>Unsurprisingly, Sass compilation with LibSass</li>
+<li>Generating sourcemaps for easier debugging</li>
+<li>Prefixing CSS with Autoprefixer</li>
+<li>Generating Sass documentation with SassDoc</li>
+</ul>
+<h1 id="Compiling-Sass"><a href="#Compiling-Sass" class="headerlink" title="Compiling Sass"></a>Compiling Sass</h1><p>The first thing to do is to install the dependencies and to create a Gulpfile.js. We will need Gulp (no shit, Sherlock), but also gulp-sass to compile our stylesheets:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ npm install gulp gulp-sass --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>This line tells npm to install both gulp and gulp-sass packages as development dependencies. You can now find them in the devDependencies object of your package.json. And the Gulpfile.js:<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>Wow, that was short. What we need now is a task to run Sass (actually gulp-sass) on our stylesheets folder.<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> input = <span class="string">'./stylesheets/**/*.scss'</span>;</span><br><span class="line"><span class="keyword">var</span> output = <span class="string">'./public/css'</span>;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    <span class="comment">// Find all `.scss` files from the `stylesheets/` folder</span></span><br><span class="line">    .src(input)</span><br><span class="line">    <span class="comment">// Run Sass on those files</span></span><br><span class="line">    .pipe(sass())</span><br><span class="line">    <span class="comment">// Write the resulting CSS in the output folder</span></span><br><span class="line">    .pipe(gulp.dest(output));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>That’s it! We can now compile our stylesheets using LibSass thanks to a very minimal Gulp task. What about that? We can pass options to gulp-sass to compile stylesheets in expanded mode and to print errors in console:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sassOptions = &#123;</span><br><span class="line">  errLogToConsole: <span class="literal">true</span>,</span><br><span class="line">  outputStyle: <span class="string">'expanded'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sass(sassOptions).on(<span class="string">'error'</span>, sass.logError))</span><br><span class="line">    .pipe(gulp.dest(output));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="Bringing-Autoprefixer-to-the-party"><a href="#Bringing-Autoprefixer-to-the-party" class="headerlink" title="Bringing Autoprefixer to the party"></a>Bringing Autoprefixer to the party</h1><p>I won’t go into much detail about why using Autoprefixer is better than writing vendor by hand (or with a mixin which is basically the same thing), but roughly Autoprefixer is a post-processing step meaning it actually updates already compiled stylesheets to add relevant prefixes based on an up-to-date database and a given configuration. In other words, you tell Autoprefixer which browsers you want to support, and it adds only relevant prefixes to the stylesheets. Zero effort, perfect support (please remind me to patent this catch phrase).</p>
+<p>To include Autoprefixer in our Gulp’y workflow, we only need it to pipe it after Sass has done its thing. Then Autoprefixer updates the stylesheets to add prefixes.</p>
+<p>First, let’s install it (you get the gist by now):</p>
+<p><code>$ npm install gulp-autoprefixer --save-dev</code></p>
+<p>Then we add it to our task:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);</span><br><span class="line"><span class="keyword">var</span> sourcemaps = <span class="built_in">require</span>(<span class="string">'gulp-sourcemaps'</span>);</span><br><span class="line"><span class="keyword">var</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'gulp-autoprefixer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... variables</span></span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sourcemaps.init())</span><br><span class="line">    .pipe(sass(sassOptions).on(<span class="string">'error'</span>, sass.logError))</span><br><span class="line">    .pipe(sourcemaps.write())</span><br><span class="line">    .pipe(autoprefixer())</span><br><span class="line">    .pipe(gulp.dest(output));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Right now, we run with the default configuration from Autoprefixer which is</p>
+<ul>
+<li>Browsers with over 1% market share,</li>
+<li>Last 2 versions of all browsers,</li>
+<li>Firefox ESR,</li>
+<li>Opera 12.1</li>
+</ul>
+<p>We can use our own configuration like so:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);</span><br><span class="line"><span class="keyword">var</span> sourcemaps = <span class="built_in">require</span>(<span class="string">'gulp-sourcemaps'</span>);</span><br><span class="line"><span class="keyword">var</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'gulp-autoprefixer'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... variables</span></span><br><span class="line"><span class="keyword">var</span> autoprefixerOptions = &#123;</span><br><span class="line">  browsers: [<span class="string">'last 2 versions'</span>, <span class="string">'&gt; 5%'</span>, <span class="string">'Firefox ESR'</span>]</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sourcemaps.init())</span><br><span class="line">    .pipe(sass(sassOptions).on(<span class="string">'error'</span>, sass.logError))</span><br><span class="line">    .pipe(sourcemaps.write())</span><br><span class="line">    .pipe(autoprefixer(autoprefixerOptions))</span><br><span class="line">    .pipe(gulp.dest(output));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="Release-the-docs"><a href="#Release-the-docs" class="headerlink" title="Release the docs!"></a>Release the docs!</h1><p>The last, but not least, tool to add to our workflow, Sass documentation generation with SassDoc. SassDoc is to Sass what JSDoc is to JavaScript: a documentation tool. It parses your stylesheets looking for comment blocks documenting variables, mixins, functions and placeholders.</p>
+<p>If your project uses SassDoc (it should!), you can add the automatic documentation generation in your Gulp workflow.</p>
+<p>The cool thing with SassDoc is that it can be piped directly in Gulp because its API is Gulp compatible. So you don’t actually have a gulp-sassdoc plugin.</p>
+<p><code>npm install sassdoc --save-dev</code><br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>);</span><br><span class="line"><span class="keyword">var</span> sass = <span class="built_in">require</span>(<span class="string">'gulp-sass'</span>);</span><br><span class="line"><span class="keyword">var</span> sourcemaps = <span class="built_in">require</span>(<span class="string">'gulp-sourcemaps'</span>);</span><br><span class="line"><span class="keyword">var</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'gulp-autoprefixer'</span>);</span><br><span class="line"><span class="keyword">var</span> sassdoc = <span class="built_in">require</span>(<span class="string">'sassdoc'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... variables</span></span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sass'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sourcemaps.init())</span><br><span class="line">    .pipe(sass(sassOptions).on(<span class="string">'error'</span>, sass.logError))</span><br><span class="line">    .pipe(sourcemaps.write())</span><br><span class="line">    .pipe(autoprefixer(autoprefixerOptions))</span><br><span class="line">    .pipe(gulp.dest(output))</span><br><span class="line">    .pipe(sassdoc())</span><br><span class="line">    <span class="comment">// Release the pressure back and trigger flowing mode (drain)</span></span><br><span class="line">    <span class="comment">// See: http://sassdoc.com/gulp/#drain-event</span></span><br><span class="line">    .resume();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>Note that depending on the size of your project and the number of documented items, SassDoc can take up to a few of seconds to run (rarely above 3 as far as I’ve noticed), so you might want to have a separate task for this.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'sassdoc'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sassdoc())</span><br><span class="line">    .resume();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Again, we use the default configuration but we can use our own if we want to.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sassdocOptions = &#123;</span><br><span class="line">  dest: <span class="string">'./public/sassdoc'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'sassdoc'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sassdoc(sassdocOptions))</span><br><span class="line">    .resume();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="I’m-watching-you"><a href="#I’m-watching-you" class="headerlink" title="I’m watching you"></a>I’m watching you</h1><p>There is still something we can do before leaving: creating a watch task. The point of this task would be to watch for changes in stylesheets to recompile them again. It is very convenient when working on the Sass side of the project so you don’t have to run the sass task by hand every time you save a file.</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'watch'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    <span class="comment">// Watch the input folder for change,</span></span><br><span class="line">    <span class="comment">// and run `sass` task when something happens</span></span><br><span class="line">    .watch(input, [<span class="string">'sass'</span>])</span><br><span class="line">    <span class="comment">// When there is a change,</span></span><br><span class="line">    <span class="comment">// log a message in the console</span></span><br><span class="line">    .on(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'File '</span> + event.path + <span class="string">' was '</span> + event.type + <span class="string">', running tasks...'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Here is another reason why I recommend not including SassDoc in the sass task: you probably don’t want to regenerate the docs every time you touch a stylesheet. This is likely something you want to do on build or push, maybe with a pre-commit hook.</p>
+<h1 id="Adding-the-final-touch"><a href="#Adding-the-final-touch" class="headerlink" title="Adding the final touch"></a>Adding the final touch</h1><p>A last, yet important, thing to think about: running sass in the default task.</p>
+<p><code>gulp.task(&#39;default&#39;, [&#39;sass&#39;, &#39;watch&#39; /*, possible other tasks... */]);</code></p>
+<p>The array passed as second argument of the task(..) function is a list of dependency tasks. Basically, it tells Gulp to run those tasks before running the one specified as a third argument (if any).</p>
+<p>Also, we could probably create a prod task that could be run right before deploying to production (maybe with a git hook). This task should:</p>
+<ul>
+<li>Compile Sass in compressed mode</li>
+<li>Prefix CSS with Autoprefixer</li>
+<li>Regenerate SassDoc documentation</li>
+<li>Avoid any sourcemaps</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">gulp.task(<span class="string">'prod'</span>, [<span class="string">'sassdoc'</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> gulp</span><br><span class="line">    .src(input)</span><br><span class="line">    .pipe(sass(&#123; <span class="attr">outputStyle</span>: <span class="string">'compressed'</span> &#125;))</span><br><span class="line">    .pipe(autoprefixer(autoprefixerOptions))</span><br><span class="line">    .pipe(gulp.dest(output));</span><br><span class="line">&#125;);</span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Gulp/" rel="tag">#Gulp</a>
+          
+            <a href="/tags/Sass/" rel="tag">#Sass</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/18/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/18/How-to-Upgrade-Node-js-via-NPM/" rel="prev" title="How to Upgrade Node.js via NPM">
+                How to Upgrade Node.js via NPM <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Compiling-Sass"><span class="nav-number">1.</span> <span class="nav-text">Compiling Sass</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bringing-Autoprefixer-to-the-party"><span class="nav-number">2.</span> <span class="nav-text">Bringing Autoprefixer to the party</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Release-the-docs"><span class="nav-number">3.</span> <span class="nav-text">Release the docs!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I’m-watching-you"><span class="nav-number">4.</span> <span class="nav-text">I’m watching you</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Adding-the-final-touch"><span class="nav-number">5.</span> <span class="nav-text">Adding the final touch</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

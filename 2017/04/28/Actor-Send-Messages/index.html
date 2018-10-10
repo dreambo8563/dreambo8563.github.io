@@ -1,0 +1,726 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Akka," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Actor 发送消息 tell (!) vs ask (?) vs forwardTellactorRef ! message发送干别的去了,不管后果 Askimport akka.actor.&amp;#123;ActorSystem, DeadLetter&amp;#125;import akka.util.Timeoutimport akka.pattern.&amp;#123;ask, pipe&amp;#125;imp">
+<meta name="keywords" content="Scala,Akka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Actor - Send Messages">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/04/28/Actor-Send-Messages/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="Actor 发送消息 tell (!) vs ask (?) vs forwardTellactorRef ! message发送干别的去了,不管后果 Askimport akka.actor.&amp;#123;ActorSystem, DeadLetter&amp;#125;import akka.util.Timeoutimport akka.pattern.&amp;#123;ask, pipe&amp;#125;imp">
+<meta property="og:updated_time" content="2017-04-27T16:58:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Actor - Send Messages">
+<meta name="twitter:description" content="Actor 发送消息 tell (!) vs ask (?) vs forwardTellactorRef ! message发送干别的去了,不管后果 Askimport akka.actor.&amp;#123;ActorSystem, DeadLetter&amp;#125;import akka.util.Timeoutimport akka.pattern.&amp;#123;ask, pipe&amp;#125;imp">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Actor - Send Messages | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Actor - Send Messages
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-04-28T00:41:57+08:00" content="2017-04-28">
+              2017-04-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Actor-发送消息-tell-vs-ask-vs-forward"><a href="#Actor-发送消息-tell-vs-ask-vs-forward" class="headerlink" title="Actor 发送消息 tell (!) vs ask (?) vs forward"></a>Actor 发送消息 tell (!) vs ask (?) vs forward</h3><h4 id="Tell"><a href="#Tell" class="headerlink" title="Tell"></a>Tell</h4><p><code>actorRef ! message</code><br>发送干别的去了,不管后果</p>
+<h4 id="Ask"><a href="#Ask" class="headerlink" title="Ask"></a>Ask</h4><figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> akka.actor.&#123;<span class="type">ActorSystem</span>, <span class="type">DeadLetter</span>&#125;</span><br><span class="line"><span class="keyword">import</span> akka.util.<span class="type">Timeout</span></span><br><span class="line"><span class="keyword">import</span> akka.pattern.&#123;ask, pipe&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scala.concurrent.<span class="type">Future</span></span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> scala.util.&#123;<span class="type">Failure</span>, <span class="type">Success</span>&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> <span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Result</span>(<span class="params">x: <span class="type">Int</span></span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">case</span> <span class="title">object</span> <span class="title">Request</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">AkkaActor</span> <span class="keyword">extends</span> <span class="title">App</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> <span class="type">DemoActor</span>._</span><br><span class="line"></span><br><span class="line">  println(<span class="string">"Hello, world!"</span>)</span><br><span class="line">  <span class="keyword">val</span> system = <span class="type">ActorSystem</span>(<span class="string">"mySystem"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> system.dispatcher</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> demoActor = system.actorOf(props(<span class="number">42</span>), <span class="string">"demoActor"</span>)</span><br><span class="line">  <span class="keyword">val</span> pipeActor = system.actorOf(<span class="type">PipeActor</span>.props, <span class="string">"pipeActor"</span>)</span><br><span class="line"></span><br><span class="line">  system.eventStream.subscribe(demoActor, classOf[<span class="type">DeadLetter</span>])</span><br><span class="line">  println(<span class="string">s"demoActor created !"</span>)</span><br><span class="line">  demoActor ! <span class="number">88</span></span><br><span class="line">  <span class="comment">//  println(s"ready to kill demoActor's child")</span></span><br><span class="line">  <span class="comment">//  demoActor ! "kill"</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">implicit</span> <span class="keyword">val</span> timeout = <span class="type">Timeout</span>(<span class="number">5</span> seconds) <span class="comment">// needed for `?` below</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> f: <span class="type">Future</span>[<span class="type">Result</span>] =</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">      x &lt;- ask(demoActor, <span class="type">Request</span>).mapTo[<span class="type">Int</span>] <span class="comment">// call pattern directly</span></span><br><span class="line">    &#125; <span class="keyword">yield</span> <span class="type">Result</span>(x)</span><br><span class="line"></span><br><span class="line">  f pipeTo pipeActor</span><br><span class="line"></span><br><span class="line">  f onComplete &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Success</span>(x) =&gt; println(<span class="string">s"success <span class="subst">$x</span>"</span>)</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Failure</span>(e) =&gt; println(<span class="string">s"fail <span class="subst">$&#123;e.getMessage&#125;</span> in callback of future"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>隐式 timeout ask模式下如果超时 会有 <code>AskTimeoutException</code></li>
+<li>隐式 dispatch 后面的异步Future需要</li>
+<li>ask模式要求接受信息方 返回结果, 返回的是Future[T] 类型</li>
+<li>pipe 可以将结果转交给其他actor</li>
+<li>如果接受信息方 出现exception 需额外处理来结束异步Future</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">case</span> <span class="type">Request</span> =&gt;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">Exception</span>(<span class="string">"ask for exception"</span>)</span><br><span class="line">        sender() ! <span class="number">90</span></span><br><span class="line">      &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e: <span class="type">Exception</span> =&gt; sender() ! <span class="type">Status</span>.<span class="type">Failure</span>(e)</span><br><span class="line"><span class="comment">//          throw e</span></span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>case e: Exception =&gt; sender() ! Status.Failure(e)</code> 主动结束Future<br>如果不做的话,Future的不会complete 也就是这句不会执行 <code>case Failure(e) =&gt; println(s&quot;fail ${e.getMessage} in callback of future&quot;)</code></p>
+</blockquote>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">Hello, world!</span><br><span class="line"><span class="function">magicNumber: 42</span></span><br><span class="line"><span class="function"><span class="title">demoActor</span> <span class="title">created</span> !</span></span><br><span class="line"><span class="function"><span class="title">create</span> <span class="title">myActor</span>: <span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span></span></span><br><span class="line"><span class="function"><span class="title">Actor</span>[<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>#983047950] <span class="title">preStart</span></span></span><br><span class="line"><span class="function"><span class="title">watching</span> <span class="title">myActor</span></span></span><br><span class="line"><span class="function"><span class="title">get</span> <span class="title">actorRef</span>: <span class="title">Actor</span>[<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>#983047950]</span></span><br><span class="line"><span class="function"><span class="title">fail</span> <span class="title">ask</span> <span class="title">for</span> <span class="title">exception</span> <span class="title">in</span> <span class="title">callback</span> <span class="title">of</span> <span class="title">future</span></span></span><br><span class="line"><span class="function">[<span class="title">INFO</span>] [04/28/2017 00:40:46.015] [<span class="title">mySystem</span>-<span class="title">akka.actor.default</span>-<span class="title">dispatcher</span>-4] [<span class="title">akka</span>://<span class="title">mySystem</span>/<span class="title">user</span>/<span class="title">demoActor</span>/<span class="title">myActor</span>] <span class="title">I</span> <span class="title">was</span> <span class="title">greeted</span> <span class="title">by</span> <span class="title">Vincent</span> <span class="title">Guo</span> <span class="title">with</span> <span class="title">params</span> 88.</span></span><br></pre></td></tr></table></figure>
+<h4 id="Forward"><a href="#Forward" class="headerlink" title="Forward"></a>Forward</h4><p><code>target forward message</code></p>
+<p>类似二传手的作用,可以做小路由,sender是原来的sender被带入</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Akka/" rel="tag">#Akka</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/27/Actor-Actor-API/" rel="next" title="Actor - Actor API">
+                <i class="fa fa-chevron-left"></i> Actor - Actor API
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/02/Actor-Receive-timeout/" rel="prev" title="Actor - Receive timeout">
+                Actor - Receive timeout <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Actor-发送消息-tell-vs-ask-vs-forward"><span class="nav-number">1.</span> <span class="nav-text">Actor 发送消息 tell (!) vs ask (?) vs forward</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tell"><span class="nav-number">1.1.</span> <span class="nav-text">Tell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ask"><span class="nav-number">1.2.</span> <span class="nav-text">Ask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Output"><span class="nav-number">1.3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Forward"><span class="nav-number">1.4.</span> <span class="nav-text">Forward</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Scala,Akka," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="实例解读 首先创建顶级Actor worker listener demoActor 订阅deadLetter 发给demoActor worker内的sender指向 listener,并向worker发送 Start消息  Worker 设置监管策略  // Stop the CounterService child if it throws ServiceUnavailable  overr">
+<meta name="keywords" content="Scala,Akka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fault Tolerance">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/05/03/Fault-Tolerance/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="实例解读 首先创建顶级Actor worker listener demoActor 订阅deadLetter 发给demoActor worker内的sender指向 listener,并向worker发送 Start消息  Worker 设置监管策略  // Stop the CounterService child if it throws ServiceUnavailable  overr">
+<meta property="og:updated_time" content="2017-05-04T03:02:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fault Tolerance">
+<meta name="twitter:description" content="实例解读 首先创建顶级Actor worker listener demoActor 订阅deadLetter 发给demoActor worker内的sender指向 listener,并向worker发送 Start消息  Worker 设置监管策略  // Stop the CounterService child if it throws ServiceUnavailable  overr">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Fault Tolerance | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Fault Tolerance
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-05-03T18:03:46+08:00" content="2017-05-03">
+              2017-05-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="实例解读"><a href="#实例解读" class="headerlink" title="实例解读"></a>实例解读</h3><ul>
+<li>首先创建顶级Actor <code>worker</code> <code>listener</code> <code>demoActor</code></li>
+<li>订阅deadLetter 发给<code>demoActor</code></li>
+<li><code>worker</code>内的sender指向 <code>listener</code>,并向<code>worker</code>发送 <code>Start</code>消息</li>
+</ul>
+<h3 id="Worker"><a href="#Worker" class="headerlink" title="Worker"></a>Worker</h3><ul>
+<li>设置监管策略</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Stop the CounterService child if it throws ServiceUnavailable</span></span><br><span class="line">  <span class="keyword">override</span> <span class="keyword">val</span> supervisorStrategy = <span class="type">OneForOneStrategy</span>() &#123;</span><br><span class="line">    <span class="keyword">case</span> _: <span class="type">CounterService</span>.<span class="type">ServiceUnavailable</span> =&gt; <span class="type">Stop</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当收到 CounterService.ServiceUnavailable类型的exception时 stop相应的actor 1-1</li>
+<li>创建子Actor <code>counterService</code></li>
+<li>消息处理</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">receive</span> </span>= <span class="type">LoggingReceive</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">Start</span> <span class="keyword">if</span> progressListener.isEmpty =&gt;</span><br><span class="line">      progressListener = <span class="type">Some</span>(sender())</span><br><span class="line">      context.system.scheduler.schedule(<span class="type">Duration</span>.<span class="type">Zero</span>, <span class="number">1</span> second, self, <span class="type">Do</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Do</span> =&gt;</span><br><span class="line">      counterService ! <span class="type">Increment</span>(<span class="number">1</span>)</span><br><span class="line">      counterService ! <span class="type">Increment</span>(<span class="number">1</span>)</span><br><span class="line">      counterService ! <span class="type">Increment</span>(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Send current progress to the initial sender</span></span><br><span class="line">      counterService ? <span class="type">GetCurrentCount</span> map &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="type">CurrentCount</span>(_, count) =&gt; <span class="type">Progress</span>(<span class="number">100.0</span> * count / totalCount)</span><br><span class="line">      &#125; pipeTo progressListener.get</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>Start =&gt; 如果progressListener为None的话就用sender来做progressListener,并且没1秒给自己发一个Do的消息<br>Do =&gt; 给counterService连续发3个Increment消息,然后 给counterService发送GetCurrentCount消息并把结果给listener</p>
+<h3 id="CounterService"><a href="#CounterService" class="headerlink" title="CounterService"></a>CounterService</h3><ul>
+<li>设置监管策略</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">val</span> supervisorStrategy = <span class="type">OneForOneStrategy</span>(</span><br><span class="line">    maxNrOfRetries = <span class="number">1</span>,</span><br><span class="line">    withinTimeRange = <span class="number">5</span> seconds) &#123;</span><br><span class="line">    <span class="keyword">case</span> _: <span class="type">Storage</span>.<span class="type">StorageException</span> =&gt; <span class="type">Restart</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>1-1, 当接受到 Storage.StorageException 类型的exception时,重启对方,重试次数为1,如果在5秒内用尽重试次数,则直接stop对方</p>
+<ul>
+<li>重写preStart</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">preStart</span></span>() &#123;</span><br><span class="line">    println(<span class="string">"preStart, initStorage"</span>)</span><br><span class="line">    initStorage()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>preStart是在这当前Actor重新初始化的时候会被调用,重启也会</p>
+<p>这里直接初始化storage</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initStorage</span></span>() &#123;</span><br><span class="line">    storage = <span class="type">Some</span>(context.watch(context.actorOf(<span class="type">Props</span>[<span class="type">Storage</span>], name = <span class="string">"storage"</span>)))</span><br><span class="line">    <span class="comment">// Tell the counter, if any, to use the new storage</span></span><br><span class="line">    counter foreach &#123;</span><br><span class="line">      _ ! <span class="type">UseStorage</span>(storage)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// We need the initial value to be able to operate</span></span><br><span class="line">    storage.get ! <span class="type">Get</span>(key)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建CounterService的子Actor <code>storage</code></li>
+<li>如果有counter这个actor就发送 <code>UseStorage(storage)</code>,第一次启动的时候没有counter,但是当storage重启的时候counter还是存在的,让他使用新的storage</li>
+<li>发送storage的Get(key)消息来获取初始值</li>
+</ul>
+<blockquote>
+<p>Get(key)做了什么</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">case Get(key) =&gt; sender() ! Entry(key, db.load(key).getOrElse(0L))</span><br><span class="line">...</span><br><span class="line">@throws(classOf[StorageException])</span><br><span class="line">  def load(key: String): Option[Long] = synchronized &#123;</span><br><span class="line">    db.get(key)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>db是个Map<br>Get是给 CounterService 返回一个消息, 内容是db离对应的那个key和value,类型是 <code>Entry(key, db.load(key).getOrElse(0L))</code></li>
+</ul>
+<blockquote>
+<p>CounterService 接到 Entry干了什么</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="type">Entry</span>(k, v) <span class="keyword">if</span> k == key &amp;&amp; counter == <span class="type">None</span> =&gt;</span><br><span class="line">      <span class="comment">// Reply from Storage of the initial value, now we can create the Counter</span></span><br><span class="line">      <span class="keyword">val</span> c = context.actorOf(<span class="type">Props</span>(classOf[<span class="type">Counter</span>], key, v))</span><br><span class="line">      counter = <span class="type">Some</span>(c)</span><br><span class="line">      println(<span class="string">s"--------------- <span class="subst">$&#123;counter.get.path&#125;</span> --------------- "</span>)</span><br><span class="line">      <span class="comment">// Tell the counter to use current storage</span></span><br><span class="line">      c ! <span class="type">UseStorage</span>(storage)</span><br><span class="line">      <span class="comment">// and send the buffered backlog to the counter</span></span><br><span class="line">      <span class="keyword">for</span> ((replyTo, msg) &lt;- backlog) c.tell(msg, sender = replyTo)</span><br><span class="line">      backlog = <span class="type">IndexedSeq</span>.empty</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如果当前没有counter 就创建一个子Actor, 当storage彻底停止后,会重连</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forwardOrPlaceInBacklog</span></span>(msg: <span class="type">Any</span>) &#123;</span><br><span class="line">    <span class="comment">// We need the initial value from storage before we can start delegate to</span></span><br><span class="line">    <span class="comment">// the counter. Before that we place the messages in a backlog, to be sent</span></span><br><span class="line">    <span class="comment">// to the counter when it is initialized.</span></span><br><span class="line">    counter <span class="keyword">match</span> &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="type">Some</span>(c) =&gt;</span><br><span class="line">        c forward msg</span><br><span class="line">      <span class="keyword">case</span> <span class="type">None</span> =&gt;</span><br><span class="line">        println(<span class="string">"&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; NO COUNTER &amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;"</span>)</span><br><span class="line">        <span class="keyword">if</span> (backlog.size &gt;= <span class="type">MaxBacklog</span>)</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">ServiceUnavailable</span>(</span><br><span class="line">            <span class="string">"CounterService not available, lack of initial value"</span>)</span><br><span class="line">        backlog :+= (sender() -&gt; msg)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当CounterService收到消息的时候会检查当前有没有counter,有的话就forward 这个消息,没有的话会暂时存储这个<code>(sender() -&gt; msg)</code></li>
+<li>所以当storage重连的时候,新建counter,会先把存储的消息都发给新counter,并且清空存储容器<code>backlog</code></li>
+</ul>
+<blockquote>
+<p>正常情况下counter也有看看怎么处理消息</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">receive</span> </span>= <span class="type">LoggingReceive</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">UseStorage</span>(s) =&gt;</span><br><span class="line">      storage = s</span><br><span class="line">      storeCount()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Increment</span>(n) =&gt;</span><br><span class="line">      count += n</span><br><span class="line">      storeCount()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="type">GetCurrentCount</span> =&gt;</span><br><span class="line">      sender() ! <span class="type">CurrentCount</span>(key, count)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">storeCount</span></span>() &#123;</span><br><span class="line">    <span class="comment">// Delegate dangerous work, to protect our valuable state.</span></span><br><span class="line">    <span class="comment">// We can continue without storage.</span></span><br><span class="line">    storage foreach &#123;</span><br><span class="line">      _ ! <span class="type">Store</span>(<span class="type">Entry</span>(key, count))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第一次的时候UseStorage, 会发 <code>Store(Entry(key, count))</code> key是actor构造里带进来的</li>
+</ul>
+<blockquote>
+<p>存数据</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="type">Store</span>(<span class="type">Entry</span>(key, count)) =&gt; db.save(key, count)</span><br><span class="line">...</span><br><span class="line"><span class="meta">@throws</span>(classOf[<span class="type">StorageException</span>])</span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">save</span></span>(key: <span class="type">String</span>, value: <span class="type">Long</span>): <span class="type">Unit</span> = synchronized &#123;</span><br><span class="line">   println(<span class="string">s"*******************<span class="subst">$value</span>**********************"</span>)</span><br><span class="line">   <span class="keyword">if</span> (<span class="number">11</span> &lt;= value || value &lt;= <span class="number">240</span>)</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="type">StorageException</span>(<span class="string">"Simulated store failure "</span> + value)</span><br><span class="line">   db += (key -&gt; value)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>就是存在一个Map里,并且为了得到exception,写了个条件</li>
+</ul>
+<h3 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h3><ol>
+<li>几个顶级Actor started</li>
+<li>顺带counterService started 后面是 storage</li>
+<li>storage 获取初始值 <code>Get(counterService)</code></li>
+<li>counterService收到返回的消息 <code>Entry(counterService,0)</code></li>
+<li>这个时候还没有counter所以会创建一个counter</li>
+<li>给新counter 应用storage <code>UseStorage(Some(Actor[akka://FaultToleranceSample/user/worker/counterService/storage#-1172001374]))</code></li>
+<li>应用后给他存初始值 <code>Store(Entry(counterService,0))</code></li>
+<li>这时候 <code>Worker</code>刚收到 <code>Start</code>消息</li>
+<li>刚开始没有<code>progressListener</code>,所以默认给了 <code>listener</code>,每秒钟给worker自己发一个Do消息</li>
+<li>Do会发3个 <code>Increment</code> 和一个 <code>GetCurrentCount</code><br>10-1. <code>Increment</code> 如果创建counter比较慢,这时候消息会暂时存储在 backlog, 等counter有的时候会先执行 backlog里的消息,有counter的话就去storage里存储<br>…<br>遇到条件的时候storage 抛exception</li>
+</ol>
+<ul>
+<li>CounterService 收到 让storage重启,重试次数用尽后,storage就停止了</li>
+<li>因为watch了所以就能去做重连</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="type">Terminated</span>(actorRef) <span class="keyword">if</span> <span class="type">Some</span>(actorRef) == storage =&gt;</span><br><span class="line">      <span class="comment">// After 3 restarts the storage child is stopped.</span></span><br><span class="line">      <span class="comment">// We receive Terminated because we watch the child, see initStorage.</span></span><br><span class="line">      storage = <span class="type">None</span></span><br><span class="line">      <span class="comment">// Tell the counter that there is no storage for the moment</span></span><br><span class="line">      counter foreach &#123;</span><br><span class="line">        _ ! <span class="type">UseStorage</span>(<span class="type">None</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// Try to re-establish storage after while</span></span><br><span class="line">      context.system.scheduler.scheduleOnce(<span class="number">10</span> seconds, self, <span class="type">Reconnect</span>)</span><br></pre></td></tr></table></figure>
+<p>这里清掉了storage,10秒后重连<br>Reconnect就会重新初始化storage,以为这时候没有counter了,所以还会新建一个counter</p>
+<ul>
+<li>在没开始 重连的时间内,会有消息发到deadLetter里,但counter一直存在, 所以虽然没有存储在storage,但Counter里的count一直是累加的</li>
+<li>重连会重新初始化 storage,新建storage 给counter应用新的storage,并且从db里重新拿新的初始值</li>
+<li>当新的消息来的时候,会吧counter里存的count 插入到 db,得到最新的值</li>
+</ul>
+<h3 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> DemoActor._</span><br><span class="line"><span class="keyword">import</span> akka.actor._</span><br><span class="line"><span class="keyword">import</span> akka.actor.SupervisorStrategy._</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> scala.concurrent.duration._</span><br><span class="line"><span class="keyword">import</span> akka.util.Timeout</span><br><span class="line"><span class="keyword">import</span> akka.event.LoggingReceive</span><br><span class="line"><span class="keyword">import</span> akka.pattern.&#123;ask, pipe&#125;</span><br><span class="line"><span class="keyword">import</span> com.typesafe.config.ConfigFactory</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Runs the sample</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">object FaultHandlingDocSample extends App &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> Worker._</span><br><span class="line"></span><br><span class="line">  val config = ConfigFactory.parseString(</span><br><span class="line">    <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">    akka.loglevel = "</span>DEBUG<span class="string">"</span></span><br><span class="line"><span class="string">    akka.actor.debug &#123;</span></span><br><span class="line"><span class="string">      receive = on</span></span><br><span class="line"><span class="string">      lifecycle = on</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span>)</span><br><span class="line"></span><br><span class="line">  val system = ActorSystem(<span class="string">"FaultToleranceSample"</span>, config)</span><br><span class="line">  val worker = system.actorOf(Props[Worker], name = <span class="string">"worker"</span>)</span><br><span class="line">  val listener = system.actorOf(Props[Listener], name = <span class="string">"listener"</span>)</span><br><span class="line">  val demoActor = system.actorOf(props(<span class="number">42</span>), <span class="string">"demoActor"</span>)</span><br><span class="line">  system.eventStream.subscribe(demoActor, classOf[DeadLetter])</span><br><span class="line">  <span class="comment">// start the work and listen on progress</span></span><br><span class="line">  <span class="comment">// note that the listener is used as sender of the tell,</span></span><br><span class="line">  <span class="comment">// i.e. it will receive replies from the worker</span></span><br><span class="line">  worker.tell(Start, sender = listener)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Listens on progress from the worker and shuts down the system when enough</span></span><br><span class="line"><span class="comment">  * work has been done.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Listener</span> <span class="keyword">extends</span> <span class="title">Actor</span> <span class="title">with</span> <span class="title">ActorLogging</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> Worker._</span><br><span class="line"></span><br><span class="line">  <span class="comment">// If we don't get any progress within 15 seconds then the service is unavailable</span></span><br><span class="line">  context.setReceiveTimeout(<span class="number">15</span> seconds)</span><br><span class="line"></span><br><span class="line">  def receive = &#123;</span><br><span class="line">    <span class="keyword">case</span> Progress(percent) =&gt;</span><br><span class="line">      log.info(<span class="string">"Current progress: &#123;&#125; %"</span>, percent)</span><br><span class="line">      <span class="keyword">if</span> (percent &gt;= <span class="number">100.0</span>) &#123;</span><br><span class="line">        log.info(<span class="string">"That's all, shutting down"</span>)</span><br><span class="line">        context.system.terminate()</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="function"><span class="params">ReceiveTimeout</span> =&gt;</span></span><br><span class="line">      <span class="comment">// No progress within 15 seconds, ServiceUnavailable</span></span><br><span class="line">      log.error(<span class="string">"Shutting down due to unavailable service"</span>)</span><br><span class="line">      context.system.terminate()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Worker &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> object Start</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> object Do</span><br><span class="line"></span><br><span class="line">  final case class Progress(percent: Double)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Worker performs some work when it receives the `Start` message.</span></span><br><span class="line"><span class="comment">  * It will continuously notify the sender of the `Start` message</span></span><br><span class="line"><span class="comment">  * of current ``Progress``. The `Worker` supervise the `CounterService`.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Worker</span> <span class="keyword">extends</span> <span class="title">Actor</span> <span class="title">with</span> <span class="title">ActorLogging</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> Worker._</span><br><span class="line">  <span class="keyword">import</span> CounterService._</span><br><span class="line"></span><br><span class="line">  implicit val askTimeout = Timeout(<span class="number">5</span> seconds)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Stop the CounterService child if it throws ServiceUnavailable</span></span><br><span class="line">  override val supervisorStrategy = OneForOneStrategy() &#123;</span><br><span class="line">    <span class="keyword">case</span> _: CounterService.ServiceUnavailable =&gt; Stop</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The sender of the initial Start message will continuously be notified</span></span><br><span class="line">  <span class="comment">// about progress</span></span><br><span class="line">  <span class="keyword">var</span> progressListener: Option[ActorRef] = None</span><br><span class="line">  val counterService = context.actorOf(Props[CounterService], name = <span class="string">"counterService"</span>)</span><br><span class="line">  val totalCount = <span class="number">51</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> context.dispatcher</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Use this Actors' Dispatcher as ExecutionContext</span></span><br><span class="line"></span><br><span class="line">  def receive = LoggingReceive &#123;</span><br><span class="line">    <span class="keyword">case</span> Start <span class="keyword">if</span> progressListener.isEmpty =&gt;</span><br><span class="line">      progressListener = Some(sender())</span><br><span class="line">      context.system.scheduler.schedule(Duration.Zero, <span class="number">1</span> second, self, Do)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="function"><span class="params">Do</span> =&gt;</span></span><br><span class="line">      counterService ! Increment(<span class="number">1</span>)</span><br><span class="line">      counterService ! Increment(<span class="number">1</span>)</span><br><span class="line">      counterService ! Increment(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Send current progress to the initial sender</span></span><br><span class="line">      counterService ? GetCurrentCount map &#123;</span><br><span class="line">        <span class="keyword">case</span> CurrentCount(_, count) =&gt; Progress(<span class="number">100.0</span> * count / totalCount)</span><br><span class="line">      &#125; pipeTo progressListener.get</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object CounterService &#123;</span><br><span class="line"></span><br><span class="line">  final case class Increment(n: Int)</span><br><span class="line"></span><br><span class="line">  sealed abstract <span class="class"><span class="keyword">class</span> <span class="title">GetCurrentCount</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">  <span class="title">case</span> <span class="title">object</span> <span class="title">GetCurrentCount</span> <span class="keyword">extends</span> <span class="title">GetCurrentCount</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line">  final case class CurrentCount(key: String, count: Long)</span><br><span class="line"></span><br><span class="line">  class ServiceUnavailable(msg: String) extends RuntimeException(msg)</span><br><span class="line"></span><br><span class="line">  private <span class="keyword">case</span> object Reconnect</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Adds the value received in `Increment` message to a persistent</span></span><br><span class="line"><span class="comment">  * counter. Replies with `CurrentCount` when it is asked for `CurrentCount`.</span></span><br><span class="line"><span class="comment">  * `CounterService` supervise `Storage` and `Counter`.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CounterService</span> <span class="keyword">extends</span> <span class="title">Actor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> CounterService._</span><br><span class="line">  <span class="keyword">import</span> Counter._</span><br><span class="line">  <span class="keyword">import</span> Storage._</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Restart the storage child when StorageException is thrown.</span></span><br><span class="line">  <span class="comment">// After 3 restarts within 5 seconds it will be stopped.</span></span><br><span class="line">  override val supervisorStrategy = OneForOneStrategy(</span><br><span class="line">    maxNrOfRetries = <span class="number">1</span>,</span><br><span class="line">    withinTimeRange = <span class="number">5</span> seconds) &#123;</span><br><span class="line">    <span class="keyword">case</span> _: Storage.StorageException =&gt; Restart</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  val key = self.path.name</span><br><span class="line">  <span class="keyword">var</span> storage: Option[ActorRef] = None</span><br><span class="line">  <span class="keyword">var</span> counter: Option[ActorRef] = None</span><br><span class="line">  <span class="keyword">var</span> backlog = IndexedSeq.empty[(ActorRef, Any)]</span><br><span class="line">  val MaxBacklog = <span class="number">10000</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> context.dispatcher</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Use this Actors' Dispatcher as ExecutionContext</span></span><br><span class="line"></span><br><span class="line">  override def preStart() &#123;</span><br><span class="line">    println(<span class="string">"preStart, initStorage"</span>)</span><br><span class="line">    initStorage()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * The child storage is restarted in case of failure, but after 3 restarts,</span></span><br><span class="line"><span class="comment">    * and still failing it will be stopped. Better to back-off than continuously</span></span><br><span class="line"><span class="comment">    * failing. When it has been stopped we will schedule a Reconnect after a delay.</span></span><br><span class="line"><span class="comment">    * Watch the child so we receive Terminated message when it has been terminated.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  def initStorage() &#123;</span><br><span class="line">    storage = Some(context.watch(context.actorOf(Props[Storage], name = <span class="string">"storage"</span>)))</span><br><span class="line">    <span class="comment">// Tell the counter, if any, to use the new storage</span></span><br><span class="line">    counter foreach &#123;</span><br><span class="line">      _ ! UseStorage(storage)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// We need the initial value to be able to operate</span></span><br><span class="line">    storage.get ! Get(key)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  def receive = LoggingReceive &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> Entry(k, v) <span class="keyword">if</span> k == key &amp;&amp; counter == <span class="function"><span class="params">None</span> =&gt;</span></span><br><span class="line">      <span class="comment">// Reply from Storage of the initial value, now we can create the Counter</span></span><br><span class="line">      val c = context.actorOf(Props(classOf[Counter], key, v))</span><br><span class="line">      counter = Some(c)</span><br><span class="line">      println(s<span class="string">"--------------- $&#123;counter.get.path&#125; --------------- "</span>)</span><br><span class="line">      <span class="comment">// Tell the counter to use current storage</span></span><br><span class="line">      c ! UseStorage(storage)</span><br><span class="line">      <span class="comment">// and send the buffered backlog to the counter</span></span><br><span class="line">      <span class="keyword">for</span> ((replyTo, msg) &lt;- backlog) c.tell(msg, sender = replyTo)</span><br><span class="line">      backlog = IndexedSeq.empty</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> msg: <span class="function"><span class="params">Increment</span> =&gt;</span></span><br><span class="line">      forwardOrPlaceInBacklog(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> msg: <span class="function"><span class="params">GetCurrentCount</span> =&gt;</span> forwardOrPlaceInBacklog(msg)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> Terminated(actorRef) <span class="keyword">if</span> Some(actorRef) == <span class="function"><span class="params">storage</span> =&gt;</span></span><br><span class="line">      <span class="comment">// After 3 restarts the storage child is stopped.</span></span><br><span class="line">      <span class="comment">// We receive Terminated because we watch the child, see initStorage.</span></span><br><span class="line">      storage = None</span><br><span class="line">      <span class="comment">// Tell the counter that there is no storage for the moment</span></span><br><span class="line">      counter foreach &#123;</span><br><span class="line">        _ ! UseStorage(None)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// Try to re-establish storage after while</span></span><br><span class="line">      context.system.scheduler.scheduleOnce(<span class="number">10</span> seconds, self, Reconnect)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="function"><span class="params">Reconnect</span> =&gt;</span></span><br><span class="line">      <span class="comment">// Re-establish storage after the scheduled delay</span></span><br><span class="line">      initStorage()</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  def forwardOrPlaceInBacklog(msg: Any) &#123;</span><br><span class="line">    <span class="comment">// We need the initial value from storage before we can start delegate to</span></span><br><span class="line">    <span class="comment">// the counter. Before that we place the messages in a backlog, to be sent</span></span><br><span class="line">    <span class="comment">// to the counter when it is initialized.</span></span><br><span class="line">    counter match &#123;</span><br><span class="line">      <span class="keyword">case</span> Some(c) =&gt;</span><br><span class="line">        c forward msg</span><br><span class="line">      <span class="keyword">case</span> <span class="function"><span class="params">None</span> =&gt;</span></span><br><span class="line">        println(<span class="string">"&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; NO COUNTER &amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;"</span>)</span><br><span class="line">        <span class="keyword">if</span> (backlog.size &gt;= MaxBacklog)</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> ServiceUnavailable(</span><br><span class="line">            <span class="string">"CounterService not available, lack of initial value"</span>)</span><br><span class="line">        backlog :+= (sender() -&gt; msg)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Counter &#123;</span><br><span class="line"></span><br><span class="line">  final case class UseStorage(storage: Option[ActorRef])</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * The in memory count variable that will send current</span></span><br><span class="line"><span class="comment">  * value to the `Storage`, if there is any storage</span></span><br><span class="line"><span class="comment">  * available at the moment.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">class Counter(key: String, initialValue: Long) extends Actor &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> Counter._</span><br><span class="line">  <span class="keyword">import</span> CounterService._</span><br><span class="line">  <span class="keyword">import</span> Storage._</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> count = initialValue</span><br><span class="line">  <span class="keyword">var</span> storage: Option[ActorRef] = None</span><br><span class="line"></span><br><span class="line">  def receive = LoggingReceive &#123;</span><br><span class="line">    <span class="keyword">case</span> UseStorage(s) =&gt;</span><br><span class="line">      storage = s</span><br><span class="line">      storeCount()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> Increment(n) =&gt;</span><br><span class="line">      count += n</span><br><span class="line">      storeCount()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="function"><span class="params">GetCurrentCount</span> =&gt;</span></span><br><span class="line">      sender() ! CurrentCount(key, count)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  def storeCount() &#123;</span><br><span class="line">    <span class="comment">// Delegate dangerous work, to protect our valuable state.</span></span><br><span class="line">    <span class="comment">// We can continue without storage.</span></span><br><span class="line">    storage foreach &#123;</span><br><span class="line">      _ ! Store(Entry(key, count))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object Storage &#123;</span><br><span class="line"></span><br><span class="line">  final case class Store(entry: Entry)</span><br><span class="line"></span><br><span class="line">  final case class Get(key: String)</span><br><span class="line"></span><br><span class="line">  final case class Entry(key: String, value: Long)</span><br><span class="line"></span><br><span class="line">  class StorageException(msg: String) extends RuntimeException(msg)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Saves key/value pairs to persistent storage when receiving `Store` message.</span></span><br><span class="line"><span class="comment">  * Replies with current value when receiving `Get` message.</span></span><br><span class="line"><span class="comment">  * Will throw StorageException if the underlying data store is out of order.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Storage</span> <span class="keyword">extends</span> <span class="title">Actor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> Storage._</span><br><span class="line"></span><br><span class="line">  val db = DummyDB</span><br><span class="line"></span><br><span class="line">  def receive = LoggingReceive &#123;</span><br><span class="line">    <span class="keyword">case</span> Store(Entry(key, count)) =&gt; db.save(key, count)</span><br><span class="line">    <span class="keyword">case</span> Get(key) =&gt; sender() ! Entry(key, db.load(key).getOrElse(<span class="number">0</span>L))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">object DummyDB &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> Storage.StorageException</span><br><span class="line"></span><br><span class="line">  private <span class="keyword">var</span> db = <span class="built_in">Map</span>[<span class="built_in">String</span>, Long]()</span><br><span class="line"></span><br><span class="line">  @throws(classOf[StorageException])</span><br><span class="line">  def save(key: <span class="built_in">String</span>, <span class="attr">value</span>: Long): Unit = synchronized &#123;</span><br><span class="line">    println(s<span class="string">"*******************$value**********************"</span>)</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">11</span> &lt;= value || value &lt;= <span class="number">240</span>)</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> StorageException(<span class="string">"Simulated store failure "</span> + value)</span><br><span class="line">    db += (key -&gt; value)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @throws(classOf[StorageException])</span><br><span class="line">  def load(key: <span class="built_in">String</span>): Option[Long] = synchronized &#123;</span><br><span class="line">    db.get(key)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/Akka/" rel="tag">#Akka</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/02/Actor-Become-Unbecome/" rel="next" title="Actor - Become/Unbecome">
+                <i class="fa fa-chevron-left"></i> Actor - Become/Unbecome
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/08/Nginx-部署SPA/" rel="prev" title="Nginx - 部署SPA">
+                Nginx - 部署SPA <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例解读"><span class="nav-number">1.</span> <span class="nav-text">实例解读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Worker"><span class="nav-number">2.</span> <span class="nav-text">Worker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CounterService"><span class="nav-number">3.</span> <span class="nav-text">CounterService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Log"><span class="nav-number">4.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Source-Code"><span class="nav-number">5.</span> <span class="nav-text">Source Code</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Angular2,Directives," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="大段源码 /** * A router outlet is a placeholder that Angular dynamically fills based on the application&apos;s route. * * ## Use * *  * &amp;lt;router-outlet&amp;gt;&amp;lt;/router-outlet&amp;gt; *  */@Directive(&amp;#123;selecto">
+<meta name="keywords" content="Angular2,Directives">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2 - Directive - RouterOutlet">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/01/25/Angular2-Directive-RouterOutlet/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="大段源码 /** * A router outlet is a placeholder that Angular dynamically fills based on the application&apos;s route. * * ## Use * *  * &amp;lt;router-outlet&amp;gt;&amp;lt;/router-outlet&amp;gt; *  */@Directive(&amp;#123;selecto">
+<meta property="og:updated_time" content="2016-01-25T06:54:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2 - Directive - RouterOutlet">
+<meta name="twitter:description" content="大段源码 /** * A router outlet is a placeholder that Angular dynamically fills based on the application&apos;s route. * * ## Use * *  * &amp;lt;router-outlet&amp;gt;&amp;lt;/router-outlet&amp;gt; *  */@Directive(&amp;#123;selecto">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Angular2 - Directive - RouterOutlet | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Angular2 - Directive - RouterOutlet
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-01-25T13:17:47+08:00" content="2016-01-25">
+              2016-01-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Angular2/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular2</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大段源码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A router outlet is a placeholder that Angular dynamically fills based on the application's route.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * ## Use</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * &lt;router-outlet&gt;&lt;/router-outlet&gt;</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">@Directive(&#123;<span class="attr">selector</span>: <span class="string">'router-outlet'</span>&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">RouterOutlet</span> </span>&#123;</span><br><span class="line">  name: string = <span class="literal">null</span>;</span><br><span class="line">  private _componentRef: ComponentRef = <span class="literal">null</span>;</span><br><span class="line">  private _currentInstruction: ComponentInstruction = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(private _elementRef: ElementRef, private _loader: DynamicComponentLoader,</span><br><span class="line">              private _parentRouter: routerMod.Router, @Attribute('name') nameAttr: string) &#123;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(nameAttr)) &#123;</span><br><span class="line">      <span class="keyword">this</span>.name = nameAttr;</span><br><span class="line">      <span class="keyword">this</span>._parentRouter.registerAuxOutlet(<span class="keyword">this</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>._parentRouter.registerPrimaryOutlet(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Called by the Router to instantiate a new component during the commit phase of a navigation.</span></span><br><span class="line"><span class="comment">   * This method in turn is responsible for calling the `routerOnActivate` hook of its child.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  activate(nextInstruction: ComponentInstruction): <span class="built_in">Promise</span>&lt;any&gt; &#123;</span><br><span class="line">    <span class="keyword">var</span> previousInstruction = <span class="keyword">this</span>._currentInstruction;</span><br><span class="line">    <span class="keyword">this</span>._currentInstruction = nextInstruction;</span><br><span class="line">    <span class="keyword">var</span> componentType = nextInstruction.componentType;</span><br><span class="line">    <span class="keyword">var</span> childRouter = <span class="keyword">this</span>._parentRouter.childRouter(componentType);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> providers = Injector.resolve([</span><br><span class="line">      provide(RouteData, &#123;<span class="attr">useValue</span>: nextInstruction.routeData&#125;),</span><br><span class="line">      provide(RouteParams, &#123;<span class="attr">useValue</span>: <span class="keyword">new</span> RouteParams(nextInstruction.params)&#125;),</span><br><span class="line">      provide(routerMod.Router, &#123;<span class="attr">useValue</span>: childRouter&#125;)</span><br><span class="line">    ]);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._loader.loadNextToLocation(componentType, <span class="keyword">this</span>._elementRef, providers)</span><br><span class="line">        .then(<span class="function">(<span class="params">componentRef</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>._componentRef = componentRef;</span><br><span class="line">          <span class="keyword">if</span> (hasLifecycleHook(hookMod.routerOnActivate, componentType)) &#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">OnActivate</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">                .routerOnActivate(nextInstruction, previousInstruction);</span></span><br><span class="line"><span class="xml">          &#125;</span></span><br><span class="line"><span class="xml">        &#125;);</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">  /**</span></span><br><span class="line"><span class="xml">   * Called by the &#123;@link Router&#125; during the commit phase of a navigation when an outlet</span></span><br><span class="line"><span class="xml">   * reuses a component between different routes.</span></span><br><span class="line"><span class="xml">   * This method in turn is responsible for calling the `routerOnReuse` hook of its child.</span></span><br><span class="line"><span class="xml">   */</span></span><br><span class="line">  reuse(nextInstruction: ComponentInstruction): Promise&lt;any&gt; &#123;</span><br><span class="line">    var previousInstruction = this._currentInstruction;</span><br><span class="line">    this._currentInstruction = nextInstruction;</span><br><span class="line"></span><br><span class="line">    if (isBlank(this._componentRef)) &#123;</span><br><span class="line">      throw new BaseException(`Cannot reuse an outlet that does not contain a component.`);</span><br><span class="line">    &#125;</span><br><span class="line">    return PromiseWrapper.resolve(</span><br><span class="line">        hasLifecycleHook(hookMod.routerOnReuse, this._currentInstruction.componentType) ?</span><br><span class="line">            (&lt;OnReuse&gt;this._componentRef.instance)</span><br><span class="line">                .routerOnReuse(nextInstruction, previousInstruction) :</span><br><span class="line">            true);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Called by the &#123;@link Router&#125; when an outlet disposes of a component's contents.</span><br><span class="line">   * This method in turn is responsible for calling the `routerOnDeactivate` hook of its child.</span><br><span class="line">   */</span><br><span class="line">  deactivate(nextInstruction: ComponentInstruction): Promise&lt;any&gt; &#123;</span><br><span class="line">    var next = _resolveToTrue;</span><br><span class="line">    if (isPresent(this._componentRef) &amp;&amp; isPresent(this._currentInstruction) &amp;&amp;</span><br><span class="line">        hasLifecycleHook(hookMod.routerOnDeactivate, this._currentInstruction.componentType)) &#123;</span><br><span class="line">      next = PromiseWrapper.resolve(</span><br><span class="line">          (&lt;OnDeactivate&gt;this._componentRef.instance)</span><br><span class="line">              .routerOnDeactivate(nextInstruction, this._currentInstruction));</span><br><span class="line">    &#125;</span><br><span class="line">    return next.then((_) =&gt; &#123;</span><br><span class="line">      if (isPresent(this._componentRef)) &#123;</span><br><span class="line">        this._componentRef.dispose();</span><br><span class="line">        this._componentRef = null;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Called by the &#123;@link Router&#125; during recognition phase of a navigation.</span><br><span class="line">   *</span><br><span class="line">   * If this resolves to `false`, the given navigation is cancelled.</span><br><span class="line">   *</span><br><span class="line">   * This method delegates to the child component's `routerCanDeactivate` hook if it exists,</span><br><span class="line">   * and otherwise resolves to true.</span><br><span class="line">   */</span><br><span class="line">  routerCanDeactivate(nextInstruction: ComponentInstruction): Promise&lt;boolean&gt; &#123;</span><br><span class="line">    if (isBlank(this._currentInstruction)) &#123;</span><br><span class="line">      return _resolveToTrue;</span><br><span class="line">    &#125;</span><br><span class="line">    if (hasLifecycleHook(hookMod.routerCanDeactivate, this._currentInstruction.componentType)) &#123;</span><br><span class="line">      return PromiseWrapper.resolve(</span><br><span class="line">          (&lt;CanDeactivate&gt;this._componentRef.instance)</span><br><span class="line">              .routerCanDeactivate(nextInstruction, this._currentInstruction));</span><br><span class="line">    &#125;</span><br><span class="line">    return _resolveToTrue;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * Called by the &#123;@link Router&#125; during recognition phase of a navigation.</span><br><span class="line">   *</span><br><span class="line">   * If the new child component has a different Type than the existing child component,</span><br><span class="line">   * this will resolve to `false`. You can't reuse an old component when the new component</span><br><span class="line">   * is of a different Type.</span><br><span class="line">   *</span><br><span class="line">   * Otherwise, this method delegates to the child component's `routerCanReuse` hook if it exists,</span><br><span class="line">   * or resolves to true if the hook is not present.</span><br><span class="line">   */</span><br><span class="line">   </span><br><span class="line">  routerCanReuse(nextInstruction: ComponentInstruction): Promise&lt;boolean&gt; &#123;</span><br><span class="line">    var result;</span><br><span class="line"></span><br><span class="line">    if (isBlank(this._currentInstruction) ||</span><br><span class="line">        this._currentInstruction.componentType != nextInstruction.componentType) &#123;</span><br><span class="line">      result = false;</span><br><span class="line">    &#125; else if (hasLifecycleHook(hookMod.routerCanReuse, this._currentInstruction.componentType)) &#123;</span><br><span class="line">      result = (&lt;CanReuse&gt;this._componentRef.instance)</span><br><span class="line">                   .routerCanReuse(nextInstruction, this._currentInstruction);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      result = nextInstruction == this._currentInstruction ||</span><br><span class="line">               (isPresent(nextInstruction.params) &amp;&amp; isPresent(this._currentInstruction.params) &amp;&amp;</span><br><span class="line">                StringMapWrapper.equals(nextInstruction.params, this._currentInstruction.params));</span><br><span class="line">    &#125;</span><br><span class="line">    return PromiseWrapper.resolve(result);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>画重点：</p>
+<h2 id="A-router-outlet-is-a-placeholder-that-Angular-dynamically-fills-based-on-the-application’s-route"><a href="#A-router-outlet-is-a-placeholder-that-Angular-dynamically-fills-based-on-the-application’s-route" class="headerlink" title="A router outlet is a placeholder that Angular dynamically fills based on the application’s route."></a>A router outlet is a placeholder that Angular dynamically fills based on the application’s route.</h2> <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">constructor</span>(private _elementRef: ElementRef, private _loader: DynamicComponentLoader,</span><br><span class="line">            private _parentRouter: routerMod.Router, @Attribute('name') nameAttr: string) &#123;</span><br><span class="line">  <span class="keyword">if</span> (isPresent(nameAttr)) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = nameAttr;</span><br><span class="line">    <span class="keyword">this</span>._parentRouter.registerAuxOutlet(<span class="keyword">this</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>._parentRouter.registerPrimaryOutlet(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 有上面的注释和构造看，这个基本上指令内是一些 旧 component 向新component跳转过程中要处理的东西</p>
+<p> name属性是针对 <code>AuxOutlet</code>的，以后再说</p>
+<p>registerPrimaryOutlet - 是去更新此路由，可以理解为创建相应的Instruction tree</p>
+<hr>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">activate(nextInstruction: ComponentInstruction): <span class="built_in">Promise</span>&lt;any&gt; &#123;</span><br><span class="line">  <span class="keyword">var</span> previousInstruction = <span class="keyword">this</span>._currentInstruction;</span><br><span class="line">  <span class="keyword">this</span>._currentInstruction = nextInstruction;</span><br><span class="line">  <span class="keyword">var</span> componentType = nextInstruction.componentType;</span><br><span class="line">  <span class="keyword">var</span> childRouter = <span class="keyword">this</span>._parentRouter.childRouter(componentType);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> providers = Injector.resolve([</span><br><span class="line">    provide(RouteData, &#123;<span class="attr">useValue</span>: nextInstruction.routeData&#125;),</span><br><span class="line">    provide(RouteParams, &#123;<span class="attr">useValue</span>: <span class="keyword">new</span> RouteParams(nextInstruction.params)&#125;),</span><br><span class="line">    provide(routerMod.Router, &#123;<span class="attr">useValue</span>: childRouter&#125;)</span><br><span class="line">  ]);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>._loader.loadNextToLocation(componentType, <span class="keyword">this</span>._elementRef, providers)</span><br><span class="line">      .then(<span class="function">(<span class="params">componentRef</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>._componentRef = componentRef;</span><br><span class="line">        <span class="keyword">if</span> (hasLifecycleHook(hookMod.routerOnActivate, componentType)) &#123;</span><br><span class="line">          <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">OnActivate</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">              .routerOnActivate(nextInstruction, previousInstruction);</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">      &#125;);</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这块是新component即将加载的函数</p>
+<ul>
+<li>RouteData（额外带进来的其他参数） RouteParams（url里的参数） Router（router对象）<br>loadNextToLocation - 插在 RouterOutlet 所在元素的下面（同级别）<br><a href="http://dreambo8563.github.io/2016/01/11/Angular2-DynamicComponentLoader-%E7%94%A8%E6%B3%95/">http://dreambo8563.github.io/2016/01/11/Angular2-DynamicComponentLoader-%E7%94%A8%E6%B3%95/</a></li>
+</ul>
+<p><code>hasLifecycleHook(hookMod.routerOnActivate</code> 检测新component里对OnActivate hook 有没有定义， 有的话就要调用<br>OnActivate — 有单独的地方说</p>
+<p><code>&lt;OnActivate&gt;this._componentRef.instance</code>  这个类型转换单独说下，以为上面判断新component里有OnActivate 定义了，所以这个instance 肯定符合这个interface</p>
+<hr>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">reuse(nextInstruction: ComponentInstruction): <span class="built_in">Promise</span>&lt;any&gt; &#123;</span><br><span class="line">   <span class="keyword">var</span> previousInstruction = <span class="keyword">this</span>._currentInstruction;</span><br><span class="line">   <span class="keyword">this</span>._currentInstruction = nextInstruction;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (isBlank(<span class="keyword">this</span>._componentRef)) &#123;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> BaseException(<span class="string">`Cannot reuse an outlet that does not contain a component.`</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> PromiseWrapper.resolve(</span><br><span class="line">       hasLifecycleHook(hookMod.routerOnReuse, <span class="keyword">this</span>._currentInstruction.componentType) ?</span><br><span class="line">           (<span class="xml"><span class="tag">&lt;<span class="name">OnReuse</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">               .routerOnReuse(nextInstruction, previousInstruction) :</span></span><br><span class="line"><span class="xml">           true);</span></span><br><span class="line"><span class="xml"> &#125;</span></span><br></pre></td></tr></table></figure>
+<p>同理这里是对OnReuse hook的检查和调用 <code>isBlank(this._componentRef)</code> 之前一定要经过activate 赋值的，也就是创建过的才可能reuse</p>
+<hr>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">deactivate(nextInstruction: ComponentInstruction): <span class="built_in">Promise</span>&lt;any&gt; &#123;</span><br><span class="line">   <span class="keyword">var</span> next = _resolveToTrue;</span><br><span class="line">   <span class="keyword">if</span> (isPresent(<span class="keyword">this</span>._componentRef) &amp;&amp; isPresent(<span class="keyword">this</span>._currentInstruction) &amp;&amp;</span><br><span class="line">       hasLifecycleHook(hookMod.routerOnDeactivate, <span class="keyword">this</span>._currentInstruction.componentType)) &#123;</span><br><span class="line">     next = PromiseWrapper.resolve(</span><br><span class="line">         (<span class="xml"><span class="tag">&lt;<span class="name">OnDeactivate</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">             .routerOnDeactivate(nextInstruction, this._currentInstruction));</span></span><br><span class="line"><span class="xml">   &#125;</span></span><br><span class="line"><span class="xml">   return next.then((_) =&gt; &#123;</span></span><br><span class="line"><span class="xml">     if (isPresent(this._componentRef)) &#123;</span></span><br><span class="line"><span class="xml">       this._componentRef.dispose();</span></span><br><span class="line"><span class="xml">       this._componentRef = null;</span></span><br><span class="line"><span class="xml">     &#125;</span></span><br><span class="line"><span class="xml">   &#125;);</span></span><br><span class="line"><span class="xml"> &#125;</span></span><br></pre></td></tr></table></figure>
+<p>在当前component销毁前要做的检查 OnDeactivate hook，如果有先执行<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">next = PromiseWrapper.resolve(</span><br><span class="line">      (<span class="xml"><span class="tag">&lt;<span class="name">OnDeactivate</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">          .routerOnDeactivate(nextInstruction, this._currentInstruction));</span></span><br></pre></td></tr></table></figure></p>
+<p>再<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>._componentRef.dispose();</span><br><span class="line"><span class="keyword">this</span>._componentRef = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">routerCanDeactivate(nextInstruction: ComponentInstruction): <span class="built_in">Promise</span>&lt;boolean&gt; &#123;</span><br><span class="line">   <span class="keyword">if</span> (isBlank(<span class="keyword">this</span>._currentInstruction)) &#123;</span><br><span class="line">     <span class="keyword">return</span> _resolveToTrue;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span> (hasLifecycleHook(hookMod.routerCanDeactivate, <span class="keyword">this</span>._currentInstruction.componentType)) &#123;</span><br><span class="line">     <span class="keyword">return</span> PromiseWrapper.resolve(</span><br><span class="line">         (<span class="xml"><span class="tag">&lt;<span class="name">CanDeactivate</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">             .routerCanDeactivate(nextInstruction, this._currentInstruction));</span></span><br><span class="line"><span class="xml">   &#125;</span></span><br><span class="line"><span class="xml">   return _resolveToTrue;</span></span><br><span class="line"><span class="xml"> &#125;</span></span><br></pre></td></tr></table></figure>
+<p>判断CanDeactivate hook</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">return PromiseWrapper.resolve(</span><br><span class="line">    (&lt;CanDeactivate&gt;this._componentRef.instance)</span><br><span class="line">        .routerCanDeactivate(nextInstruction, this._currentInstruction));</span><br></pre></td></tr></table></figure>
+<p>默认返回true 就是跳转， 如果这里return false 就是取消跳转</p>
+<hr>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  routerCanReuse(nextInstruction: ComponentInstruction): <span class="built_in">Promise</span>&lt;boolean&gt; &#123;</span><br><span class="line">    <span class="keyword">var</span> result;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isBlank(<span class="keyword">this</span>._currentInstruction) ||</span><br><span class="line">        <span class="keyword">this</span>._currentInstruction.componentType != nextInstruction.componentType) &#123;</span><br><span class="line">      result = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (hasLifecycleHook(hookMod.routerCanReuse, <span class="keyword">this</span>._currentInstruction.componentType)) &#123;</span><br><span class="line">      result = (<span class="xml"><span class="tag">&lt;<span class="name">CanReuse</span>&gt;</span>this._componentRef.instance)</span></span><br><span class="line"><span class="xml">                   .routerCanReuse(nextInstruction, this._currentInstruction);</span></span><br><span class="line"><span class="xml">    &#125; else &#123;</span></span><br><span class="line"><span class="xml">      result = nextInstruction == this._currentInstruction ||</span></span><br><span class="line"><span class="xml">               (isPresent(nextInstruction.params) &amp;&amp; isPresent(this._currentInstruction.params) &amp;&amp;</span></span><br><span class="line"><span class="xml">                StringMapWrapper.equals(nextInstruction.params, this._currentInstruction.params));</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">    return PromiseWrapper.resolve(result);</span></span><br><span class="line"><span class="xml">  &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>看的新component是否和 当前是一样，如果一样，就能reuse，不能就新建一个。<br>注释：</p>
+<blockquote>
+<p>If the new child component has a different Type than the existing child component,<br>    this will resolve to <code>false</code>. You can’t reuse an old component when the new component<br>    is of a different Type.<br>    Otherwise, this method delegates to the child component’s <code>routerCanReuse</code> hook if it exists,<br>    or resolves to true if the hook is not present.</p>
+</blockquote>
+<p> 这个 RouterOutlet  就是个过渡站，判断中间过程的各种hook。公交车调度，项目协调。。。</p>
+<h2 id="一个问题"><a href="#一个问题" class="headerlink" title="一个问题"></a>一个问题</h2><p> 什么时候 reuse<br> 前提是多个路由里用了相同的组件， 这个时候用的是同一个instance<br> 当然你可以变化一些参数如官网的例子</p>
+<p> 当你在CanReuse return true后， 在再<br> routerOnReuse 中传递新的变化参数。 不同路由间相同组件的通信手段<br> <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">routerOnReuse(next: ComponentInstruction, prev: ComponentInstruction) &#123;</span><br><span class="line">  this.name = next.params[&apos;name&apos;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular2/" rel="tag">#Angular2</a>
+          
+            <a href="/tags/Directives/" rel="tag">#Directives</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/22/Angular2-Directive-RouterLink/" rel="next" title="Angular2 - Directive - RouterLink">
+                <i class="fa fa-chevron-left"></i> Angular2 - Directive - RouterLink
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/25/Angular2-Decorator-Component/" rel="prev" title="Angular2 - Decorator - Component">
+                Angular2 - Decorator - Component <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-router-outlet-is-a-placeholder-that-Angular-dynamically-fills-based-on-the-application’s-route"><span class="nav-number">1.</span> <span class="nav-text">A router outlet is a placeholder that Angular dynamically fills based on the application’s route.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个问题"><span class="nav-number">2.</span> <span class="nav-text">一个问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

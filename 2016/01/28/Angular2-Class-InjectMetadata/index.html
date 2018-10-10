@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Angular2,Class," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="看来要把Injector 和 provide 一起看了才能理解通注入这块 来自官网的提示  Injectable Services Notice that we imported the Angular Injectable function and applied that function as an @Injectable() decorator. Don’t forget the pare">
+<meta name="keywords" content="Angular2,Class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2 - Class - InjectMetadata">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/01/28/Angular2-Class-InjectMetadata/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="看来要把Injector 和 provide 一起看了才能理解通注入这块 来自官网的提示  Injectable Services Notice that we imported the Angular Injectable function and applied that function as an @Injectable() decorator. Don’t forget the pare">
+<meta property="og:updated_time" content="2016-01-28T11:11:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2 - Class - InjectMetadata">
+<meta name="twitter:description" content="看来要把Injector 和 provide 一起看了才能理解通注入这块 来自官网的提示  Injectable Services Notice that we imported the Angular Injectable function and applied that function as an @Injectable() decorator. Don’t forget the pare">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Angular2 - Class - InjectMetadata | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Angular2 - Class - InjectMetadata
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-01-28T11:52:00+08:00" content="2016-01-28">
+              2016-01-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Angular2/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular2</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>看来要把Injector 和 provide 一起看了才能理解通注入这块</p>
+<p>来自官网的提示</p>
+<blockquote>
+<h1 id="Injectable-Services"><a href="#Injectable-Services" class="headerlink" title="Injectable Services"></a>Injectable Services</h1><ul>
+<li>Notice that we imported the Angular Injectable function and applied that function as an @Injectable() decorator.</li>
+<li>Don’t forget the parentheses! Neglecting them leads to an error that’s difficult to diagnose.</li>
+<li>TypeScript sees the @Injectable() decorator and emits metadata about our service, metadata that Angular may need to inject other dependencies into this service.</li>
+<li>The HeroService doesn’t have any dependencies at the moment. Add the decorator anyway. It is a “best practice” to apply the @Injectable() decorator ​from the start​ both for consistency and for future-proofing.</li>
+</ul>
+</blockquote>
+<p>看群主的解释<br><a href="https://github.com/kittencup/angular2-ama-cn/issues/61" target="_blank" rel="external">https://github.com/kittencup/angular2-ama-cn/issues/61</a></p>
+<blockquote>
+<p>@Injectable() — 表示当前Class可以注入，强制产生metadata，把构造里的类型当token 去找provider 并实例化<br>如果构造里还有@Inject(‘xx’), 就根据 ‘xx’ 当token来去找provider 实例化，没有就按类型找<br>等同于 <code>Injector.resolveAndCreate</code>  </p>
+</blockquote>
+<blockquote>
+<p>@Inject(‘token’) — 传入token 找 provider 去实例化</p>
+</blockquote>
+<h2 id="Inject"><a href="#Inject" class="headerlink" title="@Inject()"></a>@Inject()</h2><h3 id="参数是Token"><a href="#参数是Token" class="headerlink" title="参数是Token"></a>参数是Token</h3><p>string可以当token，其他type也行</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// @Inject(token) to inject the dependency</span></span><br><span class="line"><span class="keyword">constructor</span>(@Inject('app.config') private _config: Config)&#123; &#125;</span><br></pre></td></tr></table></figure>
+<p>可以用OpaqueToken 产生不重复的token<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;OpaqueToken&#125; <span class="keyword">from</span> <span class="string">'angular2/core'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> APP_CONFIG = <span class="keyword">new</span> OpaqueToken(<span class="string">'app.config'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="到底什么是Token"><a href="#到底什么是Token" class="headerlink" title="到底什么是Token"></a>到底什么是Token</h3><ul>
+<li>只是一个名字 来代表一个class，当注入这个token的时候会从Injector里找到他并实例化</li>
+<li>一个token可以代表一群Class，当注入token的时候 会去找token对应的class(provider) 去实例化</li>
+</ul>
+<hr>
+<p>先看对Injector的说明</p>
+<blockquote>
+<p>A dependency injection container used for instantiating objects and resolving dependencies.<br>An Injector is a replacement for a new operator, which can automatically resolve the constructor dependencies.<br>In typical use, application code asks for the dependencies in the constructor and they are resolved by the Injector</p>
+</blockquote>
+<p>实例化依赖的容器，一般用构造里的依赖是被Injector处理</p>
+<p>Injector.resolve 返回的是 <code>Map&lt;number, ResolvedProvider&gt;</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> resolve(providers: <span class="built_in">Array</span>&lt;Type | Provider | any[]&gt;): ResolvedProvider[] &#123;</span><br><span class="line">  <span class="keyword">return</span> resolveProviders(providers);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>resolveProviders</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Resolve a list of Providers.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">export function resolveProviders(providers: Array&lt;Type | Provider | any[]&gt;): ResolvedProvider[] &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">var</span> normalized = _normalizeProviders(providers, []);   <span class="comment">//返回一系列provider数组</span></span><br><span class="line">  <span class="keyword">var</span> resolved = normalized.map(resolveProvider);</span><br><span class="line">  <span class="keyword">return</span> MapWrapper.values(mergeResolvedProviders(resolved, <span class="keyword">new</span> <span class="built_in">Map</span>&lt;number, ResolvedProvider&gt;()));  <span class="comment">//处理一些是否multi 是否exist等参数返回一个 Map&lt;number, ResolvedProvider&gt;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="想注入首先要有provider"><a href="#想注入首先要有provider" class="headerlink" title="想注入首先要有provider"></a>想注入首先要有provider</h1><hr>
+<h2 id="The-provide-function"><a href="#The-provide-function" class="headerlink" title="The provide function"></a>The provide function</h2><p>当我们写 <code>provider:[Logger]</code></p>
+<p>This is actually a short-hand expression for a provider registration that creates a new instance of the Provider class.<br><code>provider：[provide(Logger, {useClass: Logger})]</code></p>
+<p>The provide function is the more common and friendlier way to create a Provider:<br><code>provider:[provide(Logger, {useClass: Logger})]</code></p>
+<p>用provide function 创建 provider</p>
+<h3 id="第一个参数是Token"><a href="#第一个参数是Token" class="headerlink" title="第一个参数是Token"></a>第一个参数是Token</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">provide</span>(<span class="params">token, &#123;useClass, useValue, useExisting, useFactory, deps, multi&#125;: &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">  useClass?: Type,</span></span></span><br><span class="line"><span class="function"><span class="params">  useValue?: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  useExisting?: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  useFactory?: Function,</span></span></span><br><span class="line"><span class="function"><span class="params">  deps?: Object[],</span></span></span><br><span class="line"><span class="function"><span class="params">  multi?: boolean</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>): <span class="title">Provider</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Provider(token, &#123;</span><br><span class="line">    useClass: useClass,</span><br><span class="line">    useValue: useValue,</span><br><span class="line">    useExisting: useExisting,</span><br><span class="line">    useFactory: useFactory,</span><br><span class="line">    deps: deps,</span><br><span class="line">    multi: multi</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Provider Class</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(token, &#123;useClass, useValue, useExisting, useFactory, deps, multi&#125;: &#123;</span><br><span class="line">    useClass?: Type,</span><br><span class="line">    useValue?: any,</span><br><span class="line">    useExisting?: any,</span><br><span class="line">    useFactory?: <span class="built_in">Function</span>,</span><br><span class="line">    deps?: <span class="built_in">Object</span>[],</span><br><span class="line">    multi?: boolean</span><br><span class="line">  &#125;) &#123;</span><br><span class="line">    <span class="keyword">this</span>.token = token;</span><br><span class="line">    <span class="keyword">this</span>.useClass = useClass;</span><br><span class="line">    <span class="keyword">this</span>.useValue = useValue;</span><br><span class="line">    <span class="keyword">this</span>.useExisting = useExisting;</span><br><span class="line">    <span class="keyword">this</span>.useFactory = useFactory;</span><br><span class="line">    <span class="keyword">this</span>.dependencies = deps;</span><br><span class="line">    <span class="keyword">this</span>._multi = multi;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>provide() — 生成provider</li>
+<li>Provider — 生成provider</li>
+<li>Injector — 直接使用Injector 创建查找 resolve 来产生provider  //新建的injector</li>
+</ul>
+<p>provide function 和 provider Class 用法差不多， 还是Provider,provide方法也是调用的Provider 类<br>参数神马的等注入继承到时候再看</p>
+<p>使用provider</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">providers:[provide(APP_CONFIG, &#123;<span class="attr">useValue</span>: CONFIG&#125;)]  <span class="comment">//配置provider</span></span><br><span class="line"><span class="keyword">constructor</span>(@Inject(APP_CONFIG) private _config: Config)&#123; &#125;  <span class="comment">//根据token 注入</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>简单说下继承</p>
+<p>组件对对应一个Injector 树</p>
+<p>外层Injector可以被里层的组件使用。而且这时候是单例的<br>而当里层组件也声明了这个provider，这时候两个Injector就是不同的</p>
+<p>父组件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">    selector: <span class="string">'parent-component'</span>,</span><br><span class="line">    template: <span class="string">`Parent (&lt;child id="child"&gt;&lt;/child&gt;)(&lt;child #child&gt;&lt;/child&gt;) &lt;numberList&gt;&lt;/numberList&gt;</span></span><br><span class="line"><span class="string">     &lt;li&gt; &lt;a [routerLink]="['./NumberList']"&gt;NumberList&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">     &lt;li&gt; &lt;a [routerLink]="['./NumberItem']"  target="_blank"&gt;NumberItem&lt;/a&gt;&lt;/li&gt;</span></span><br><span class="line"><span class="string">      &lt;router-outlet&gt;&lt;/router-outlet&gt;</span></span><br><span class="line"><span class="string">      Parent (&lt;some-component&gt;&lt;/some-component&gt;) &lt;zippy&gt;hahah houhou&lt;/zippy&gt;`</span>,</span><br><span class="line">    directives: [numberList, ROUTER_DIRECTIVES, Zippy],</span><br><span class="line">    providers:[InjectClassMore,InjectClass]</span><br><span class="line">&#125;)</span><br><span class="line">@RouteConfig([</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">name</span>: <span class="string">'NumberList'</span>, <span class="attr">component</span>: numberList, <span class="attr">useAsDefault</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/numberItem'</span>, <span class="attr">name</span>: <span class="string">'NumberItem'</span>, <span class="attr">component</span>: numberItem &#125;</span><br><span class="line">])</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">ParentApp</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// constructor(dcl: DynamicComponentLoader, elementRef: ElementRef) &#123;</span></span><br><span class="line">    <span class="comment">//     dcl.loadIntoLocation(ChildComponent, elementRef, 'child');</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// constructor(dcl: DynamicComponentLoader, injector: Injector) &#123;</span></span><br><span class="line">    <span class="comment">//     console.log(dcl.loadAsRoot(ChildComponent, '#child', injector));</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    viewRef: ViewRef;</span><br><span class="line">    <span class="keyword">constructor</span>(public appViewManager: AppViewManager, compiler: Compiler,public ina:InjectClassMore) &#123;</span><br><span class="line">        <span class="keyword">var</span> xx =<span class="number">6</span>;</span><br><span class="line">        compiler.compileInHost(ChildComponent).then(<span class="function"><span class="keyword">function</span>(<span class="params">hostProtoViewRef: HostViewFactoryRef</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> a = hostProtoViewRef;</span><br><span class="line">            <span class="keyword">this</span>.viewRef = appViewManager.createRootHostView(hostProtoViewRef, <span class="string">'some-component'</span>, <span class="literal">null</span>);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.viewRef);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// constructor(dcl: DynamicComponentLoader, elementRef: ElementRef) &#123;</span></span><br><span class="line">    <span class="comment">//     dcl.loadNextToLocation(ChildComponent, elementRef);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>子组件</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">    selector: <span class="string">'numberList'</span>,</span><br><span class="line">    template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div *ngFor = "#number of numbers" &gt;</span></span><br><span class="line"><span class="string">&lt;numberItem [number]="number"&gt;&lt;/numberItem&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;input #input /&gt;</span></span><br><span class="line"><span class="string">    &lt;button (click)="addNumbers(input.value)"&gt;addNumbers&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;div&gt;&#123;&#123;moreNumber&#125;&#125;&lt;/div&gt;&#123;&#123;haha | date:'medium'&#125;&#125;</span></span><br><span class="line"><span class="string">    `</span>,</span><br><span class="line">    directives: [numberItem],</span><br><span class="line">    providers:[InjectClassMore]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">numberList</span> </span>&#123;</span><br><span class="line">    numbers: <span class="built_in">Array</span>&lt;number&gt;;</span><br><span class="line">    haha = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">constructor</span>(public ina:InjectClassMore, _inject:Injector) &#123;</span><br><span class="line">        ina.a=<span class="string">"change a in child com"</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"from NUmberlIst"</span>,ina);</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"from parent"</span>,_inject.parent.get(InjectClassMore));</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">this</span>.numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>打印结果</p>
+<blockquote>
+<p>from NUmberlIst InjectClassMore {a: “change a in child com”, b: “inject var”}<br> from parent InjectClassMore {a: “inject var 2”, b: “inject var”}</p>
+</blockquote>
+<p> 这符合在boostrap里声明 store （redux）造成的全局效果</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular2/" rel="tag">#Angular2</a>
+          
+            <a href="/tags/Class/" rel="tag">#Class</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/28/Angular2-Class-HostBindingMetadata_HostListenerMetadata/" rel="next" title="Angular2 - Class - HostBindingMetadata_HostListenerMetadata">
+                <i class="fa fa-chevron-left"></i> Angular2 - Class - HostBindingMetadata_HostListenerMetadata
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/29/Angular2-Class-NgZone/" rel="prev" title="Angular2 - Class - NgZone">
+                Angular2 - Class - NgZone <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Injectable-Services"><span class="nav-number">1.</span> <span class="nav-text">Injectable Services</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inject"><span class="nav-number">1.1.</span> <span class="nav-text">@Inject()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数是Token"><span class="nav-number">1.1.1.</span> <span class="nav-text">参数是Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#到底什么是Token"><span class="nav-number">1.1.2.</span> <span class="nav-text">到底什么是Token</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#想注入首先要有provider"><span class="nav-number">2.</span> <span class="nav-text">想注入首先要有provider</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-provide-function"><span class="nav-number">2.1.</span> <span class="nav-text">The provide function</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个参数是Token"><span class="nav-number">2.1.1.</span> <span class="nav-text">第一个参数是Token</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

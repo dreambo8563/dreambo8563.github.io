@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React,Redux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="用ts 跟了一遍TodoList.先总结下基本的收获  Action - 必须带个type字段. 是用来表述发生了什么和发生变化的数据{ type: ADD_TODO, id: nextTodoId++, text }; Action Creator - 就是对Action做个封装的functionexport let addTodo = (text: string) =&amp;gt; {  retur">
+<meta name="keywords" content="React,Redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redux - TodoList">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/04/27/Redux-TodoList/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="用ts 跟了一遍TodoList.先总结下基本的收获  Action - 必须带个type字段. 是用来表述发生了什么和发生变化的数据{ type: ADD_TODO, id: nextTodoId++, text }; Action Creator - 就是对Action做个封装的functionexport let addTodo = (text: string) =&amp;gt; {  retur">
+<meta property="og:updated_time" content="2016-05-03T10:10:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redux - TodoList">
+<meta name="twitter:description" content="用ts 跟了一遍TodoList.先总结下基本的收获  Action - 必须带个type字段. 是用来表述发生了什么和发生变化的数据{ type: ADD_TODO, id: nextTodoId++, text }; Action Creator - 就是对Action做个封装的functionexport let addTodo = (text: string) =&amp;gt; {  retur">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Redux - TodoList | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Redux - TodoList
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-04-27T17:00:39+08:00" content="2016-04-27">
+              2016-04-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/Redux/" itemprop="url" rel="index">
+                    <span itemprop="name">Redux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>用ts 跟了一遍TodoList.<br>先总结下基本的收获</p>
+<ol>
+<li>Action - 必须带个type字段. 是用来表述发生了什么和发生变化的数据<br><code>{ type: ADD_TODO, id: nextTodoId++, text };</code></li>
+<li>Action Creator - 就是对Action做个封装的function<br><code>export let addTodo = (text: string) =&gt; {
+ return { type: ADD_TODO, id: nextTodoId++, text };
+}</code></li>
+<li>Reducer - 根据action不同对state的更新</li>
+</ol>
+<figure class="highlight hs"><table><tr><td class="code"><pre><span class="line"><span class="title">const</span> todo = (state, action) =&gt; &#123;</span><br><span class="line">    switch (action.<span class="class"><span class="keyword">type</span>) &#123;</span></span><br><span class="line"><span class="class">        <span class="title">case</span> '<span class="type">ADD_TODO</span>':</span></span><br><span class="line"><span class="class">            <span class="title">return</span> &#123;</span></span><br><span class="line"><span class="class">                <span class="title">id</span>: <span class="title">action</span>.<span class="title">id</span>,</span></span><br><span class="line"><span class="class">                <span class="title">text</span>: <span class="title">action</span>.<span class="title">text</span>,</span></span><br><span class="line"><span class="class">                <span class="title">completed</span>: <span class="title">false</span></span></span><br><span class="line"><span class="class">            &#125;</span></span><br><span class="line">        <span class="keyword">case</span> '<span class="type">TOGGLE_TODO'</span>:</span><br><span class="line">            <span class="keyword">if</span> (state.id !== action.id) &#123;</span><br><span class="line">                return state</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return <span class="type">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">                completed: !state.completed</span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            return state</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>CombineReducer - 对多个reducer的整合,store只接受一个参数</li>
+</ol>
+<p><code>export const todoAppReducer = combineReducers({
+    visibilityFilter,
+    todos
+})</code></p>
+<ol start="5">
+<li>Store<blockquote>
+<ul>
+<li>Holds application state;</li>
+<li>Allows access to state via getState();</li>
+<li>Allows state to be updated via dispatch(action);</li>
+<li>Registers listeners via subscribe(listener);</li>
+<li>Handles unregistering of listeners via the function returned by subscribe(listener).</li>
+<li>It’s important to note that you’ll only have a single store in a Redux application.</li>
+<li>When you want to split your data handling logic, you’ll use reducer composition instead of many stores.</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h1 id="组建分类"><a href="#组建分类" class="headerlink" title="组建分类:"></a>组建分类:</h1><ul>
+<li>Container</li>
+<li>Component</li>
+</ul>
+<h2 id="Component其实就是无状态组建-所有的绑定都是根据props来的"><a href="#Component其实就是无状态组建-所有的绑定都是根据props来的" class="headerlink" title="Component其实就是无状态组建,所有的绑定都是根据props来的"></a>Component其实就是无状态组建,所有的绑定都是根据props来的</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line">interface LinkProp &#123;</span><br><span class="line">    active: boolean;</span><br><span class="line">    children?: React.ReactNode;</span><br><span class="line">    onClick: <span class="function"><span class="params">()</span> =&gt;</span> any;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Link</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span>&lt;<span class="title">LinkProp</span>, <span class="title">any</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.props.active) &#123;</span><br><span class="line">            <span class="keyword">return</span> (</span><br><span class="line">                &lt;span&gt;&#123;<span class="keyword">this</span>.props.children&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">            )</span></span><br><span class="line"><span class="regexp">        &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">        return (</span></span><br><span class="line"><span class="regexp">            &lt;a</span></span><br><span class="line"><span class="regexp">                href="#"</span></span><br><span class="line"><span class="regexp">                onClick=&#123;e =&gt; &#123;</span></span><br><span class="line"><span class="regexp">                    e.preventDefault();</span></span><br><span class="line"><span class="regexp">                    this.props.onClick();</span></span><br><span class="line"><span class="regexp">                &#125; &#125;</span></span><br><span class="line"><span class="regexp">                &gt;</span></span><br><span class="line"><span class="regexp">                &#123;this.props.children&#125;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>a&gt;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Container是会根据state变化做出重新render的容器组建"><a href="#Container是会根据state变化做出重新render的容器组建" class="headerlink" title="Container是会根据state变化做出重新render的容器组建"></a>Container是会根据state变化做出重新render的容器组建</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;connect, IMapStateToProps, IMapDispatchToProps&#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;addTodo&#125; <span class="keyword">from</span> <span class="string">'./../actions'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">interface AddTodoProp &#123;</span><br><span class="line">    addToDoClick?: <span class="function">(<span class="params">string</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps: IMapDispatchToProps = <span class="function">(<span class="params">dispatch</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        addToDoClick: <span class="function">(<span class="params">text</span>) =&gt;</span> &#123;</span><br><span class="line">            dispatch(addTodo(text))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@connect(<span class="literal">undefined</span>, mapDispatchToProps)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">AddTodo</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span>&lt;<span class="title">AddTodoProp</span>, <span class="title">any</span>&gt; </span>&#123;</span><br><span class="line">    input: HTMLInputElement;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;form onSubmit=&#123;e =&gt; &#123;</span><br><span class="line">                    e.preventDefault()</span><br><span class="line">                    <span class="keyword">if</span> (!<span class="keyword">this</span>.input.value.trim()) &#123;</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">this</span>.props.addToDoClick(<span class="keyword">this</span>.input.value);</span><br><span class="line">                    <span class="keyword">this</span>.input.value = <span class="string">''</span></span><br><span class="line">                &#125; &#125;&gt;</span><br><span class="line">                    &lt;input ref=&#123;node =&gt; &#123;</span><br><span class="line">                        <span class="keyword">this</span>.input = node</span><br><span class="line">                    &#125; &#125; /&gt;</span><br><span class="line">                    &lt;button type=<span class="string">"submit"</span>&gt;</span><br><span class="line">                        Add Todo</span><br><span class="line">                    &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">                &lt;/</span>form&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="React-Redux"><a href="#React-Redux" class="headerlink" title="React-Redux"></a>React-Redux</h1><h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p>就一个作用把state里的字段自动赋值给组建的props</p>
+<p>两个主要方法:</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mapStateToProps: IMapStateToProps = <span class="function">(<span class="params">state, ownProps</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        active: ownProps.filter === state.visibilityFilter</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mapDispatchToProps: IMapDispatchToProps = <span class="function">(<span class="params">dispatch, ownProps</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        onClick: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            dispatch(setVisibilityFilter(ownProps.filter))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用来作用在container 组建上</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">@connect(mapStateToProps, mapDispatchToProps)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">FilterLink</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span>&lt;<span class="title">FilterLinkProp</span>, <span class="title">any</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;Link active=&#123;<span class="keyword">this</span>.props.active&#125;</span><br><span class="line">                onClick=&#123;<span class="keyword">this</span>.props.onClick&#125;</span><br><span class="line">                &gt;</span><br><span class="line">                &#123;<span class="keyword">this</span>.props.children&#125;</span><br><span class="line">            &lt;<span class="regexp">/Link&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>目前ts还不支持 object spread 语法,所以写起来郁闷点.<br>还有个坑就是注意,如果props.childer 容易忘</p>
+</blockquote>
+<h2 id="Provider"><a href="#Provider" class="headerlink" title="Provider"></a>Provider</h2><p>就一个作用减少自己每个组建传递store的麻烦.只能包裹一个根组建</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span>&lt;<span class="title">any</span>, <span class="title">any</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;AddTodo /&gt;</span><br><span class="line">                &lt;VisibleTodoList /&gt;</span><br><span class="line">                &lt;Footer /&gt;</span><br><span class="line">            &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">ReactDOM.render(</span></span><br><span class="line"><span class="regexp">    &lt;Provider store=&#123;store&#125;&gt;</span></span><br><span class="line"><span class="regexp">        &lt;App /</span>&gt;</span><br><span class="line">    &lt;<span class="regexp">/Provider&gt;,</span></span><br><span class="line"><span class="regexp">    document.getElementById('targetreact'));</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Source Code: <a href="https://github.com/dreambo8563/react-Tutorial/tree/master/app" target="_blank" rel="external">https://github.com/dreambo8563/react-Tutorial/tree/master/app</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+            <a href="/tags/Redux/" rel="tag">#Redux</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/25/Angular2-DCL-inputs-outputs/" rel="next" title="Angular2 - DCL - inputs/outputs">
+                <i class="fa fa-chevron-left"></i> Angular2 - DCL - inputs/outputs
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/28/Redux-createStore源码解析/" rel="prev" title="Redux - createStore源码解析">
+                Redux - createStore源码解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#组建分类"><span class="nav-number">1.</span> <span class="nav-text">组建分类:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Component其实就是无状态组建-所有的绑定都是根据props来的"><span class="nav-number">1.1.</span> <span class="nav-text">Component其实就是无状态组建,所有的绑定都是根据props来的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Container是会根据state变化做出重新render的容器组建"><span class="nav-number">1.2.</span> <span class="nav-text">Container是会根据state变化做出重新render的容器组建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-Redux"><span class="nav-number">2.</span> <span class="nav-text">React-Redux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#connect"><span class="nav-number">2.1.</span> <span class="nav-text">connect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Provider"><span class="nav-number">2.2.</span> <span class="nav-text">Provider</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

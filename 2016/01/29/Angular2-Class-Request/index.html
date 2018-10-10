@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Angular2,Class," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="class RequestOptions – 创建request的参数class BaseRequestOptions – 具有一些默认值的经典参数 RequestOptionsimport &amp;#123;RequestOptions, Request, RequestMethods&amp;#125; from &apos;angular2/http&apos;;var options = new RequestOption">
+<meta name="keywords" content="Angular2,Class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular2 - Class - Request">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/01/29/Angular2-Class-Request/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="class RequestOptions – 创建request的参数class BaseRequestOptions – 具有一些默认值的经典参数 RequestOptionsimport &amp;#123;RequestOptions, Request, RequestMethods&amp;#125; from &apos;angular2/http&apos;;var options = new RequestOption">
+<meta property="og:updated_time" content="2016-01-29T06:34:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular2 - Class - Request">
+<meta name="twitter:description" content="class RequestOptions – 创建request的参数class BaseRequestOptions – 具有一些默认值的经典参数 RequestOptionsimport &amp;#123;RequestOptions, Request, RequestMethods&amp;#125; from &apos;angular2/http&apos;;var options = new RequestOption">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Angular2 - Class - Request | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Angular2 - Class - Request
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-01-29T11:34:26+08:00" content="2016-01-29">
+              2016-01-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Angular2/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular2</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>class RequestOptions – 创建request的参数<br>class BaseRequestOptions – 具有一些默认值的经典参数</p>
+<p>RequestOptions<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;RequestOptions, Request, RequestMethods&#125; <span class="keyword">from</span> <span class="string">'angular2/http'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = <span class="keyword">new</span> RequestOptions(&#123;</span><br><span class="line">  method: RequestMethods.Post,</span><br><span class="line">  url: <span class="string">'https://google1.com'</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> req = <span class="keyword">new</span> Request(options.merge(&#123;</span><br><span class="line">  url: <span class="string">'https://google.com'</span></span><br><span class="line">&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'req.method:'</span>, RequestMethods[req.method]); <span class="comment">// Post</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'options.url:'</span>, options.url); <span class="comment">// null</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'req.url:'</span>, req.url); <span class="comment">// https://google.com</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ul>
+<li>app.ts:10 req.method: Post</li>
+<li>2016-01-29 11:42:10.601 app.ts:11 options.url: <a href="https://google1.com" target="_blank" rel="external">https://google1.com</a></li>
+<li>2016-01-29 11:42:10.602 app.ts:12 req.url: <a href="https://google.com" target="_blank" rel="external">https://google.com</a></li>
+</ul>
+</blockquote>
+<h2 id="注意merge的说明。不覆盖的"><a href="#注意merge的说明。不覆盖的" class="headerlink" title="注意merge的说明。不覆盖的"></a>注意merge的说明。不覆盖的</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(&#123;method, headers, body, url, search&#125;: RequestOptionsArgs = &#123;&#125;) &#123;</span><br><span class="line">  <span class="keyword">this</span>.method = isPresent(method) ? normalizeMethodName(method) : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.headers = isPresent(headers) ? headers : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.body = isPresent(body) ? body : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.url = isPresent(url) ? url : <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">this</span>.search = isPresent(search) ? (isString(search) ? <span class="keyword">new</span> URLSearchParams(<span class="xml"><span class="tag">&lt;<span class="name">string</span>&gt;</span>(search)) :</span></span><br><span class="line">                                                        &lt;URLSearchParams&gt;(search)) :</span><br><span class="line">                                    null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意着3个的类型</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">headers: Headers;</span><br><span class="line">method: RequestMethod | string;</span><br><span class="line">search: URLSearchParams;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="BaseRequestOptions"><a href="#BaseRequestOptions" class="headerlink" title="BaseRequestOptions"></a>BaseRequestOptions</h2><p>Default values:</p>
+<ul>
+<li>method: RequestMethod.Get</li>
+<li>headers: empty Headers object</li>
+</ul>
+<p>覆盖默认的BaseRequestOptions</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;provide&#125; <span class="keyword">from</span> <span class="string">'angular2/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;bootstrap&#125; <span class="keyword">from</span> <span class="string">'angular2/platform/browser'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;HTTP_PROVIDERS, Http, BaseRequestOptions, RequestOptions&#125; <span class="keyword">from</span> <span class="string">'angular2/http'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;App&#125; <span class="keyword">from</span> <span class="string">'./myapp'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyOptions</span> <span class="keyword">extends</span> <span class="title">BaseRequestOptions</span> </span>&#123;</span><br><span class="line">  search: string = <span class="string">'coreTeam=true'</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">bootstrap(App, [HTTP_PROVIDERS, provide(RequestOptions, &#123;<span class="attr">useClass</span>: MyOptions&#125;)]);</span><br></pre></td></tr></table></figure>
+<h2 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h2><p>看下构造</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">constructor</span>(requestOptions: RequestArgs) &#123;</span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> assert that url is present</span></span><br><span class="line">  <span class="keyword">let</span> url = requestOptions.url;</span><br><span class="line">  <span class="keyword">this</span>.url = requestOptions.url;</span><br><span class="line">  <span class="keyword">if</span> (isPresent(requestOptions.search)) &#123;</span><br><span class="line">    <span class="keyword">let</span> search = requestOptions.search.toString();</span><br><span class="line">    <span class="keyword">if</span> (search.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> prefix = <span class="string">'?'</span>;</span><br><span class="line">      <span class="keyword">if</span> (StringWrapper.contains(<span class="keyword">this</span>.url, <span class="string">'?'</span>)) &#123;</span><br><span class="line">        prefix = (<span class="keyword">this</span>.url[<span class="keyword">this</span>.url.length - <span class="number">1</span>] == <span class="string">'&amp;'</span>) ? <span class="string">''</span> : <span class="string">'&amp;'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> just delete search-query-looking string in url?</span></span><br><span class="line">      <span class="keyword">this</span>.url = url + prefix + search;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>._body = requestOptions.body;</span><br><span class="line">  <span class="keyword">this</span>.method = normalizeMethodName(requestOptions.method);</span><br><span class="line">  <span class="comment">// TODO(jeffbcross): implement behavior</span></span><br><span class="line">  <span class="comment">// Defaults to 'omit', consistent with browser</span></span><br><span class="line">  <span class="comment">// TODO(jeffbcross): implement behavior</span></span><br><span class="line">  <span class="keyword">this</span>.headers = <span class="keyword">new</span> Headers(requestOptions.headers);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发出自己的request</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;Injectable, Injector&#125; <span class="keyword">from</span> <span class="string">'angular2/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;HTTP_PROVIDERS, Http, Request, RequestMethod&#125; <span class="keyword">from</span> <span class="string">'angular2/http'</span>;</span><br><span class="line"> </span><br><span class="line">@Injectable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AutoAuthenticator</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(public http:Http) &#123;&#125;</span><br><span class="line">  request(url:string) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.request(<span class="keyword">new</span> Request(&#123;</span><br><span class="line">      method: RequestMethod.Get,</span><br><span class="line">      url: url,</span><br><span class="line">      search: <span class="string">'password=123'</span></span><br><span class="line">    &#125;));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> injector = Injector.resolveAndCreate([HTTP_PROVIDERS, AutoAuthenticator]);</span><br><span class="line"><span class="keyword">var</span> authenticator = injector.get(AutoAuthenticator);</span><br><span class="line">authenticator.request(<span class="string">'people.json'</span>).subscribe(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//URL should have included '?password=123'</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'people'</span>, res.json());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Options-里的参数"><a href="#Options-里的参数" class="headerlink" title="Options 里的参数"></a>Options 里的参数</h2><ul>
+<li><h2 id="class-Headers"><a href="#class-Headers" class="headerlink" title="class Headers"></a>class Headers</h2><p>就是设置header里面的参数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> <span class="keyword">import</span> &#123;Headers&#125; <span class="keyword">from</span> <span class="string">'angular2/http'</span>;</span><br><span class="line"><span class="keyword">var</span> firstHeaders = <span class="keyword">new</span> Headers();</span><br><span class="line">firstHeaders.append(<span class="string">'Content-Type'</span>, <span class="string">'image/jpeg'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(firstHeaders.get(<span class="string">'Content-Type'</span>)) <span class="comment">//'image/jpeg'</span></span><br><span class="line"><span class="comment">// Create headers from Plain Old JavaScript Object</span></span><br><span class="line"><span class="keyword">var</span> secondHeaders = <span class="keyword">new</span> Headers(&#123;</span><br><span class="line">  <span class="string">'X-My-Custom-Header'</span>: <span class="string">'Angular'</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(secondHeaders.get(<span class="string">'X-My-Custom-Header'</span>)); <span class="comment">//'Angular'</span></span><br><span class="line"><span class="keyword">var</span> thirdHeaders = <span class="keyword">new</span> Headers(secondHeaders);</span><br><span class="line"><span class="built_in">console</span>.log(thirdHeaders.get(<span class="string">'X-My-Custom-Header'</span>)); <span class="comment">//'Angular'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p> 有个静态方法，估计要和response 配合用</p>
+<blockquote>
+<p><code>fromResponseHeaderString(headersString: string) : Headers</code><br>Returns a new Headers instance from the given DOMString of Response Headers</p>
+</blockquote>
+<p>这个方法试验不了，提示 not a function。 我给angular 提了issue<br><a href="https://github.com/angular/angular/issues/6767" target="_blank" rel="external">https://github.com/angular/angular/issues/6767</a></p>
+<hr>
+<h2 id="class-URLSearchParams"><a href="#class-URLSearchParams" class="headerlink" title="class URLSearchParams"></a>class URLSearchParams</h2><p>一些设置 url 上 ?xx=yy 也就是querystring的class</p>
+<hr>
+<p>注：<br>对应的几个class<br>都是对应的，只不过针对的response，一般用不到，可能模拟测试的时候需要</p>
+<ul>
+<li>BaseResponseOptions</li>
+<li>Response</li>
+<li>ResponseOptions</li>
+</ul>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular2/" rel="tag">#Angular2</a>
+          
+            <a href="/tags/Class/" rel="tag">#Class</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/29/Angular2-Class-NgZone/" rel="next" title="Angular2 - Class - NgZone">
+                <i class="fa fa-chevron-left"></i> Angular2 - Class - NgZone
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/01/29/Angular2-Class-AsyncRoute/" rel="prev" title="Angular2 - Class - AsyncRoute">
+                Angular2 - Class - AsyncRoute <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意merge的说明。不覆盖的"><span class="nav-number">1.</span> <span class="nav-text">注意merge的说明。不覆盖的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BaseRequestOptions"><span class="nav-number">2.</span> <span class="nav-text">BaseRequestOptions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Request"><span class="nav-number">3.</span> <span class="nav-text">Request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Options-里的参数"><span class="nav-number">4.</span> <span class="nav-text">Options 里的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class-Headers"><span class="nav-number">5.</span> <span class="nav-text">class Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class-URLSearchParams"><span class="nav-number">6.</span> <span class="nav-text">class URLSearchParams</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Vue,Jest," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="初始化组件const wrapper = shallowMount(Blank, &amp;#123;  propsData: &amp;#123; desc &amp;#125;&amp;#125;)// 对比文字expect(wrapper.text()).toMatch(desc) 属性检查const wrapper = mount(Button, &amp;#123;     propsData: &amp;#123;       ha">
+<meta name="keywords" content="Vue,Jest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jest - VUE - UT">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/07/19/Jest-VUE-UT/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="初始化组件const wrapper = shallowMount(Blank, &amp;#123;  propsData: &amp;#123; desc &amp;#125;&amp;#125;)// 对比文字expect(wrapper.text()).toMatch(desc) 属性检查const wrapper = mount(Button, &amp;#123;     propsData: &amp;#123;       ha">
+<meta property="og:updated_time" content="2018-07-19T05:09:04.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jest - VUE - UT">
+<meta name="twitter:description" content="初始化组件const wrapper = shallowMount(Blank, &amp;#123;  propsData: &amp;#123; desc &amp;#125;&amp;#125;)// 对比文字expect(wrapper.text()).toMatch(desc) 属性检查const wrapper = mount(Button, &amp;#123;     propsData: &amp;#123;       ha">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Jest - VUE - UT | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Jest - VUE - UT
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-07-19T12:55:55+08:00" content="2018-07-19">
+              2018-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="初始化组件"><a href="#初始化组件" class="headerlink" title="初始化组件"></a>初始化组件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper = shallowMount(Blank, &#123;</span><br><span class="line">  propsData: &#123; desc &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 对比文字</span></span><br><span class="line">expect(wrapper.text()).toMatch(desc)</span><br></pre></td></tr></table></figure>
+<h3 id="属性检查"><a href="#属性检查" class="headerlink" title="属性检查"></a>属性检查</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper = mount(Button, &#123;</span><br><span class="line">     propsData: &#123;</span><br><span class="line">       handle: mockCallback</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="keyword">const</span> handlerProps: &#123; [key: string]: any &#125; | <span class="literal">undefined</span> =</span><br><span class="line">     wrapper.vm.$options.props;</span><br><span class="line">   expect(handlerProps!.handle!.required).toBe(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="事件是否触发"><a href="#事件是否触发" class="headerlink" title="事件是否触发"></a>事件是否触发</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> mockCallback = jest.fn()</span><br><span class="line"><span class="keyword">const</span> wrapper = mount(Button, &#123;</span><br><span class="line">  propsData: &#123;</span><br><span class="line">    handle: mockCallback</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">wrapper.find(<span class="string">"button"</span>).trigger(<span class="string">"click"</span>)</span><br><span class="line">expect(mockCallback).toBeCalled()</span><br><span class="line">jest.clearAllMocks()</span><br></pre></td></tr></table></figure>
+<h3 id="computed-验证"><a href="#computed-验证" class="headerlink" title="computed 验证"></a>computed 验证</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper: any = shallowMount(Button, &#123;</span><br><span class="line">  propsData: &#123;</span><br><span class="line">    handle: mockCallback</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">expect(wrapper.vm.colorStyle).toMatchObject(&#123;</span><br><span class="line">  <span class="string">"background-color"</span>: <span class="string">"#51ddab"</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="style-验证"><a href="#style-验证" class="headerlink" title="style 验证"></a>style 验证</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper: any = shallowMount(Button, &#123;</span><br><span class="line">  propsData: &#123;</span><br><span class="line">    handle: mockCallback,</span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">expect(wrapper.element.style[<span class="string">"background-color"</span>]).toBe(<span class="string">"red"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="多个元素的选取"><a href="#多个元素的选取" class="headerlink" title="多个元素的选取"></a>多个元素的选取</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">list.forEach(<span class="function">(<span class="params">v, i</span>) =&gt;</span> &#123;</span><br><span class="line">  expect(</span><br><span class="line">    wrapper</span><br><span class="line">      .findAll(<span class="string">"li"</span>)</span><br><span class="line">      .at(i)</span><br><span class="line">      .text()</span><br><span class="line">  ).toBe(v)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="emit-验证"><a href="#emit-验证" class="headerlink" title="emit 验证"></a>emit 验证</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper = shallowMount(CultureTabbar, &#123;</span><br><span class="line">  propsData: &#123;</span><br><span class="line">    index: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> stub = jest.fn()</span><br><span class="line">wrapper.vm.$on(<span class="string">"update:index"</span>, stub)</span><br><span class="line">wrapper</span><br><span class="line">  .findAll(<span class="string">"li"</span>)</span><br><span class="line">  .at(<span class="number">3</span>)</span><br><span class="line">  .trigger(<span class="string">"click"</span>)</span><br><span class="line"></span><br><span class="line">expect(stub).toBeCalledWith(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="元素的存在性"><a href="#元素的存在性" class="headerlink" title="元素的存在性"></a>元素的存在性</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">expect(</span><br><span class="line">  wrapper</span><br><span class="line">    .find(<span class="string">".f-right"</span>)</span><br><span class="line">    .find(<span class="string">".uncheck"</span>)</span><br><span class="line">    .exists()</span><br><span class="line">).toBeTruthy()</span><br></pre></td></tr></table></figure>
+<h3 id="元素的可见性"><a href="#元素的可见性" class="headerlink" title="元素的可见性"></a>元素的可见性</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">expect(wrapper.find(<span class="string">".grade-wrapper-edit"</span>).isVisible()).toBe(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="主动触发事件"><a href="#主动触发事件" class="headerlink" title="主动触发事件"></a>主动触发事件</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">wrapper.trigger(<span class="string">"click"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="路由触发"><a href="#路由触发" class="headerlink" title="路由触发"></a>路由触发</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">it(<span class="string">"getMyConfirmed"</span>, <span class="keyword">async</span> next =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> stub = jest.fn();</span><br><span class="line">    <span class="keyword">const</span> $router = &#123;</span><br><span class="line">      push: stub</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// mock ajax        </span></span><br><span class="line">    jest.doMock(<span class="string">"@/constants/API"</span>, () =&gt; (&#123;</span><br><span class="line">      getMyConfirmed: jest.fn(<span class="function"><span class="params">()</span> =&gt;</span></span><br><span class="line">        <span class="built_in">Promise</span>.resolve(&#123;</span><br><span class="line">          name: <span class="string">"张三"</span>,</span><br><span class="line">          end_time: <span class="string">"2018"</span>,</span><br><span class="line">          superior: <span class="string">"上级"</span>,</span><br><span class="line">          scores: [&#123; <span class="attr">case</span>: <span class="string">"2"</span>, <span class="attr">score</span>: <span class="number">4</span> &#125;],</span><br><span class="line">          advantage: <span class="string">"advantage"</span>,</span><br><span class="line">          promotion: <span class="string">"promotion"</span>,</span><br><span class="line">          can_submit: <span class="number">0</span></span><br><span class="line">        &#125;)</span><br><span class="line">      )</span><br><span class="line">    &#125;));</span><br><span class="line">    <span class="keyword">const</span> Confirm = <span class="built_in">require</span>(<span class="string">"@/components/modules/My/Confirm/index.vue"</span>)</span><br><span class="line">      .default;</span><br><span class="line">    <span class="keyword">const</span> wrapper = mount(Confirm, &#123;</span><br><span class="line">      mocks: &#123;</span><br><span class="line">        $router</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">await</span> (wrapper <span class="keyword">as</span> any).vm.getConfirmed();</span><br><span class="line"></span><br><span class="line">    wrapper.vm.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      expect((wrapper <span class="keyword">as</span> any).vm.feedback).toEqual([<span class="string">"advantage"</span>, <span class="string">"promotion"</span>]);</span><br><span class="line">      expect((wrapper <span class="keyword">as</span> any).vm.name).toEqual(<span class="string">"张三"</span>);</span><br><span class="line">      expect((wrapper <span class="keyword">as</span> any).vm.superior).toEqual(<span class="string">"上级"</span>);</span><br><span class="line">      expect((wrapper <span class="keyword">as</span> any).vm.end_time).toEqual(<span class="string">"2018"</span>);</span><br><span class="line">      expect((wrapper <span class="keyword">as</span> any).vm.canHandle).toEqual(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">      expect(wrapper.find(<span class="string">".handle button"</span>).text()).toBe(COMPLAINT);</span><br><span class="line">      next();</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="图片引入"><a href="#图片引入" class="headerlink" title="图片引入"></a>图片引入</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要require后对比</span></span><br><span class="line"><span class="keyword">const</span> unchecked = <span class="built_in">require</span>(<span class="string">"@assets/img/icon/unchecked.png"</span>);</span><br><span class="line"><span class="keyword">const</span> checked = <span class="built_in">require</span>(<span class="string">"@assets/img/icon/checked.png"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="主动调用method"><a href="#主动调用method" class="headerlink" title="主动调用method"></a>主动调用method</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">expect((wrapper.vm <span class="keyword">as</span> any).cardType(p)).toBe(<span class="string">"refuse"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="slot-验证"><a href="#slot-验证" class="headerlink" title="slot 验证"></a>slot 验证</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper = shallowMount(Modal, &#123;</span><br><span class="line">   propsData: &#123;</span><br><span class="line">     showModal: <span class="literal">true</span></span><br><span class="line">   &#125;,</span><br><span class="line">   slots: &#123;</span><br><span class="line">     footer: <span class="string">'&lt;div class="fake-footer"&gt;&lt;/div&gt;'</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line"> expect(wrapper.find(<span class="string">".modal-footer button"</span>).exists()).toBeFalsy();</span><br><span class="line"> expect(wrapper.find(<span class="string">".modal-footer .fake-footer"</span>).exists()).toBeTruthy();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag">#Vue</a>
+          
+            <a href="/tags/Jest/" rel="tag">#Jest</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/13/Jenkins-FE-CI-CD/" rel="next" title="Jenkins-FE">
+                <i class="fa fa-chevron-left"></i> Jenkins-FE
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/23/重复代码扫码-JSCPD/" rel="prev" title="重复代码扫描 - JSCPD">
+                重复代码扫描 - JSCPD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化组件"><span class="nav-number">1.</span> <span class="nav-text">初始化组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性检查"><span class="nav-number">2.</span> <span class="nav-text">属性检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件是否触发"><span class="nav-number">3.</span> <span class="nav-text">事件是否触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#computed-验证"><span class="nav-number">4.</span> <span class="nav-text">computed 验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#style-验证"><span class="nav-number">5.</span> <span class="nav-text">style 验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个元素的选取"><span class="nav-number">6.</span> <span class="nav-text">多个元素的选取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#emit-验证"><span class="nav-number">7.</span> <span class="nav-text">emit 验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素的存在性"><span class="nav-number">8.</span> <span class="nav-text">元素的存在性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素的可见性"><span class="nav-number">9.</span> <span class="nav-text">元素的可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主动触发事件"><span class="nav-number">10.</span> <span class="nav-text">主动触发事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由触发"><span class="nav-number">11.</span> <span class="nav-text">路由触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片引入"><span class="nav-number">12.</span> <span class="nav-text">图片引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主动调用method"><span class="nav-number">13.</span> <span class="nav-text">主动调用method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slot-验证"><span class="nav-number">14.</span> <span class="nav-text">slot 验证</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

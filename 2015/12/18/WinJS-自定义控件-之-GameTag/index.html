@@ -1,0 +1,720 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="WinJS," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="单独js文件内写入control  default.html 中引入 基本使用方法 &amp;lt;div data-win-control=&quot;XboxJS.OK.GameTag&quot; data-win-options=&quot;&amp;#123;location:&apos;right&apos;,VUIText:&apos;SignIn&apos;,displayName:false&amp;#125;&quot;&amp;gt;&amp;lt;/div&amp;gt;   options 为可选">
+<meta name="keywords" content="WinJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WinJS 自定义控件 之 GameTag">
+<meta property="og:url" content="https://dreambo8563.github.io/2015/12/18/WinJS-自定义控件-之-GameTag/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="单独js文件内写入control  default.html 中引入 基本使用方法 &amp;lt;div data-win-control=&quot;XboxJS.OK.GameTag&quot; data-win-options=&quot;&amp;#123;location:&apos;right&apos;,VUIText:&apos;SignIn&apos;,displayName:false&amp;#125;&quot;&amp;gt;&amp;lt;/div&amp;gt;   options 为可选">
+<meta property="og:updated_time" content="2016-05-03T10:11:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WinJS 自定义控件 之 GameTag">
+<meta name="twitter:description" content="单独js文件内写入control  default.html 中引入 基本使用方法 &amp;lt;div data-win-control=&quot;XboxJS.OK.GameTag&quot; data-win-options=&quot;&amp;#123;location:&apos;right&apos;,VUIText:&apos;SignIn&apos;,displayName:false&amp;#125;&quot;&amp;gt;&amp;lt;/div&amp;gt;   options 为可选">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> WinJS 自定义控件 之 GameTag | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WinJS 自定义控件 之 GameTag
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2015-12-18T18:02:42+08:00" content="2015-12-18">
+              2015-12-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JS/WinJS/" itemprop="url" rel="index">
+                    <span itemprop="name">WinJS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ol>
+<li><p>单独js文件内写入control</p>
+</li>
+<li><p>default.html 中引入</p>
+<p>基本使用方法</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-win-control</span>=<span class="string">"XboxJS.OK.GameTag"</span> <span class="attr">data-win-options</span>=<span class="string">"&#123;location:'right',VUIText:'SignIn',displayName:false&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>options 为可选参数</p>
+<p>默认行为是 header左侧， VUI是Profile， 并且显示名字</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">      <span class="comment">/// Displays an item that can be invoked.</span></span><br><span class="line">        <span class="comment">/// </span></span><br><span class="line">        <span class="comment">/// </span></span><br><span class="line">        <span class="comment">/// </span></span><br><span class="line">        <span class="comment">/// HTML content</span></span><br><span class="line">        <span class="comment">/// ]]&gt;</span></span><br><span class="line">        <span class="comment">/// Raised when the user taps or clicks the item.</span></span><br><span class="line">        <span class="comment">/// Main container for the selection item control.</span></span><br><span class="line">        <span class="comment">/// Used to display an outline when the main container has keyboard focus.</span></span><br><span class="line">        <span class="comment">/// </span></span><br><span class="line">        <span class="comment">/// </span></span><br><span class="line">        <span class="comment">/// </span></span><br><span class="line">        GameTag: WinJS.Class.define(<span class="function"><span class="keyword">function</span> (<span class="params">element, options</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>._winControl = <span class="keyword">new</span> XboxJS.UI.ItemContainer(element) || <span class="keyword">new</span> XboxJS.UI.ItemContainer();</span><br><span class="line">            <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">this</span>._element = <span class="keyword">this</span>._winControl._element;</span><br><span class="line">            WinJS.Utilities.addClass(<span class="keyword">this</span>._element, <span class="string">"gameTag"</span>);</span><br><span class="line">            WinJS.Utilities.addClass(<span class="keyword">this</span>._element, <span class="string">"layout-hidewhensnapped"</span>);</span><br><span class="line">            <span class="keyword">this</span>._element.setAttribute(<span class="string">"data-win-voice"</span>, <span class="string">"&#123; srcElement: select('.win-text-tiletitle'), targetElement: select('.win-voice-textdisplay')&#125;"</span>);</span><br><span class="line">            <span class="keyword">this</span>._winItem = <span class="keyword">this</span>._element.querySelector(<span class="string">".win-item"</span>);</span><br><span class="line">            <span class="comment">//Items elements</span></span><br><span class="line">            <span class="keyword">this</span>._childContain = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">            <span class="keyword">this</span>._winItem.appendChild(<span class="keyword">this</span>._childContain);</span><br><span class="line">            WinJS.Utilities.addClass(<span class="keyword">this</span>._childContain, <span class="string">"gamerContainer"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">//avatar and gamerName</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>._avatar = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">            <span class="keyword">this</span>._avatar.id = <span class="string">"avatar"</span>;</span><br><span class="line">            <span class="keyword">this</span>._childContain.appendChild(<span class="keyword">this</span>._avatar);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>._gamerName = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">            <span class="keyword">this</span>._gamerName.id = <span class="string">"gamerName"</span>;</span><br><span class="line">            <span class="keyword">this</span>._childContain.appendChild(<span class="keyword">this</span>._gamerName);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//VUI Text </span></span><br><span class="line">            <span class="keyword">this</span>._voiceText = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line">            WinJS.Utilities.addClass(<span class="keyword">this</span>._voiceText, <span class="string">"win-text-tiletitle win-voice-inactivetext"</span>);</span><br><span class="line">            <span class="keyword">this</span>._winItem.appendChild(<span class="keyword">this</span>._voiceText);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//Default value</span></span><br><span class="line">            <span class="keyword">this</span>._location = <span class="string">"left"</span>;</span><br><span class="line">            <span class="keyword">this</span>.locationClass = <span class="string">"gameTagLeft"</span>;</span><br><span class="line">            <span class="keyword">this</span>._VUIText = <span class="string">"Profile"</span>;</span><br><span class="line">            <span class="keyword">this</span>._displayName = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">this</span>._animateWidth = <span class="string">"64px"</span>;</span><br><span class="line">            <span class="comment">//this._animationRunning = false;</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (options) &#123;</span><br><span class="line">                <span class="keyword">this</span>._location = options.location || <span class="keyword">this</span>._location;</span><br><span class="line">                <span class="keyword">this</span>._VUIText = options.VUIText || <span class="keyword">this</span>._VUIText;</span><br><span class="line">                <span class="keyword">this</span>._displayName = options.displayName;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>._location.toLocaleLowerCase() == <span class="string">"right"</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.locationClass = <span class="string">"gameTagRight"</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            WinJS.Utilities.addClass(<span class="keyword">this</span>._element, <span class="keyword">this</span>.locationClass);</span><br><span class="line">            <span class="keyword">this</span>._voiceText.innerText = <span class="keyword">this</span>._VUIText;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">this</span>._displayName) &#123;</span><br><span class="line">                WinJS.Utilities.addClass(<span class="keyword">this</span>._gamerName, <span class="string">"win-hidden"</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//Binding Data</span></span><br><span class="line">            <span class="keyword">if</span> (Windows.Xbox) &#123;</span><br><span class="line">                MyApp.Utilities.User.getGamerPicUrlAsync(Windows.Xbox.System.UserPictureSize.small).then(<span class="function"><span class="keyword">function</span> (<span class="params">url</span>) </span>&#123;</span><br><span class="line">                    <span class="comment">// var interValHandler = setInterval(function () &#123;</span></span><br><span class="line">                    <span class="comment">//if (!XboxJS.Utilities._isTransitioning) &#123;</span></span><br><span class="line">                    that._avatar.style.backgroundImage = <span class="string">"url("</span> + url + <span class="string">")"</span>;</span><br><span class="line">                    that._element.addEventListener(<span class="string">"invoked"</span>, MyApp.Utilities.User.invokeSwitchUser, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">var</span> currentUser = MyApp.Utilities.User.tryGetPrimaryUser();</span><br><span class="line">                    <span class="keyword">if</span> (currentUser) &#123;</span><br><span class="line">                        that._gamerName.innerText = currentUser.displayInfo.gamertag;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="comment">//        clearInterval(interValHandler);</span></span><br><span class="line">                    <span class="comment">//    &#125;</span></span><br><span class="line">                    <span class="comment">//&#125;, 200);</span></span><br><span class="line">                    <span class="comment">//&#125;, function error() &#123;</span></span><br><span class="line"></span><br><span class="line">                &#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                    that._animateWidth = <span class="built_in">window</span>.getComputedStyle(that._gamerName, <span class="literal">null</span>).getPropertyValue(<span class="string">"width"</span>);</span><br><span class="line">                    <span class="keyword">if</span> (that._animateWidth != <span class="number">0</span>) &#123;</span><br><span class="line">                        that._element.addEventListener(<span class="string">"focusin"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">                            <span class="comment">//e.preventDefault();</span></span><br><span class="line">                            <span class="comment">//e.stopPropagation();</span></span><br><span class="line">                            <span class="comment">//that._animationRunning = true;</span></span><br><span class="line">                            that._childContain.style.width = <span class="built_in">parseInt</span>(that._animateWidth) + <span class="number">64</span> + <span class="number">25</span> + <span class="number">5</span> + <span class="string">"px"</span>;</span><br><span class="line">                            <span class="comment">//setTimeout(function () &#123;</span></span><br><span class="line">                            <span class="comment">//    this.focus();</span></span><br><span class="line">                            <span class="comment">//&#125;, 1000)</span></span><br><span class="line">                        &#125;);</span><br><span class="line"></span><br><span class="line">                        that._childContain.addEventListener(<span class="string">"transitionend"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                            <span class="comment">//that._animationRunning = false;</span></span><br><span class="line">                            <span class="comment">//console.log("transitionend:" + that._animationRunning);</span></span><br><span class="line">                        &#125;)</span><br><span class="line">                        that._element.addEventListener(<span class="string">"blur"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">                            <span class="comment">//console.log("blur:" +that._animationRunning);</span></span><br><span class="line">                            <span class="comment">//if (that._animationRunning) &#123;</span></span><br><span class="line">                            <span class="comment">//    e.preventDefault();</span></span><br><span class="line">                            <span class="comment">//&#125; else &#123;</span></span><br><span class="line">                                that._childContain.style.width = <span class="string">"64px"</span>;</span><br><span class="line">                            <span class="comment">//&#125;</span></span><br><span class="line">                        &#125;);</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;),</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)(<span class="keyword">this</span>, WinJS);</span><br></pre></td></tr></table></figure>
+<p>需要添加的相应CSS 再default.css</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.gameTag</span><span class="selector-class">.gameTagLeft</span> &#123;</span><br><span class="line">    <span class="attribute">-ms-grid-column</span>: <span class="number">2</span>;</span><br><span class="line">    <span class="attribute">-ms-grid-row</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.gameTag</span><span class="selector-class">.gameTagRight</span> &#123;</span><br><span class="line">    <span class="attribute">-ms-grid-column</span>: <span class="number">5</span>;</span><br><span class="line">    <span class="attribute">-ms-grid-row</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.gameTag</span> <span class="selector-class">.gamerContainer</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: -ms-flexbox;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">transition-delay</span>: <span class="number">0s</span>;</span><br><span class="line">    <span class="attribute">transition-duration</span>: <span class="number">1s</span>;</span><br><span class="line">    <span class="attribute">transition-property</span>: width;</span><br><span class="line">    <span class="attribute">transition-timing-function</span>: ease;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">64px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.gameTag</span><span class="selector-pseudo">:focus</span> <span class="selector-class">.gamerContainer</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.gameTag</span> <span class="selector-id">#avatar</span> &#123;</span><br><span class="line">    <span class="comment">/*background-image: url('/images/avantar_cat.jpg');*/</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">64px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">64px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*hide the VUI text for gameTag*/</span></span><br><span class="line"><span class="selector-class">.gameTag</span> <span class="selector-class">.win-voice-inactivetext</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.gameTag</span> <span class="selector-class">.win-voice-host</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: visible;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.gameTag</span> <span class="selector-id">#gamerName</span> &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">25px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WinJS/" rel="tag">#WinJS</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/18/console-log/" rel="next" title="console.log()">
+                <i class="fa fa-chevron-left"></i> console.log()
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/18/WinJS自定义控件之-MsgBox/" rel="prev" title=" WinJS自定义控件之 MsgBox">
+                 WinJS自定义控件之 MsgBox <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

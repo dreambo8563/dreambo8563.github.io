@@ -1,0 +1,781 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CSS3," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="##background-clipbackground-clip 对背景区域产生变化 div &amp;#123;    background: rgba(0, 0, 0, 0.95);    color: #ccc;    border: 20px solid rgba(0, 0, 0, 0.7);    background-clip: content-box;    padding: 20px;&amp;#">
+<meta name="keywords" content="CSS3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 - Pushing the Limits - New Tools for Backgrounds and Borders">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/02/18/CSS3-Pushing-the-Limits-New-Tools-for-Backgrounds-and-Borders/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="##background-clipbackground-clip 对背景区域产生变化 div &amp;#123;    background: rgba(0, 0, 0, 0.95);    color: #ccc;    border: 20px solid rgba(0, 0, 0, 0.7);    background-clip: content-box;    padding: 20px;&amp;#">
+<meta property="og:updated_time" content="2016-02-18T10:41:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3 - Pushing the Limits - New Tools for Backgrounds and Borders">
+<meta name="twitter:description" content="##background-clipbackground-clip 对背景区域产生变化 div &amp;#123;    background: rgba(0, 0, 0, 0.95);    color: #ccc;    border: 20px solid rgba(0, 0, 0, 0.7);    background-clip: content-box;    padding: 20px;&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> CSS3 - Pushing the Limits - New Tools for Backgrounds and Borders | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CSS3 - Pushing the Limits - New Tools for Backgrounds and Borders
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-02-18T15:02:15+08:00" content="2016-02-18">
+              2016-02-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index">
+                    <span itemprop="name">CSS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##<strong>background-clip</strong><br>background-clip 对背景区域产生变化</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(0, 0, 0, 0.95);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">20px</span> solid <span class="built_in">rgba</span>(0, 0, 0, 0.7);</span><br><span class="line">    <span class="attribute">background-clip</span>: content-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><span style="background: rgba(0, 0, 0, 0.95);
+            color: #ccc;
+            border: 20px solid rgba(0, 0, 0, 0.7);
+            background-clip: content-box;
+            padding: 20px;"><br>            This is a modal box with semi-transparent borders<br> </span></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">- content-box <span class="comment">//内容区域</span></span><br><span class="line">- padding-box <span class="comment">//包含padding区域</span></span><br><span class="line">- border-box <span class="comment">//默认包含border</span></span><br></pre></td></tr></table></figure>
+<p>但如果你在改变了background-clip的情况下还要使用background-img的时候需要注意。</p>
+<p>如果直接加背景图,可以看到图片的开始位置不对了。</p>
+<hr>
+<hr>
+<p><span style="background: rgba(0, 0, 0, 0.95);
+            color: #ccc;
+            border: 20px solid rgba(0, 0, 0, 0.7);
+            background-clip: content-box;
+            padding: 20px; background: url('http://placehold.it/350x150') no-repeat;"><br>            This is a modal box with semi-transparent borders<br> </span></p>
+<h2 id="–"><a href="#–" class="headerlink" title=" –"></a> –</h2><p> 这时候要引入</p>
+<p>  ##<strong>background-origin</strong></p>
+<p>   background-origin 的作用就是定位背景图片的左上角开始位置<br>   也就相当于  background-position: right bottom, left top; 中的 top left 起始点在是哪个盒子模型的左上角。</p>
+<hr>
+<p> –<br> <span style="background: rgba(0, 0, 0, 0.95);
+            color: #ccc;
+            border: 20px solid rgba(0, 0, 0, 0.7);
+            background-clip: content-box;
+            padding: 20px; background: url('http://placehold.it/350x150') no-repeat;
+            background-origin: border-box;"><br>            This is a modal box with semi-transparent borders<br> </span></p>
+<p> 现在背景图是从包含border的左上角开始的了</p>
+<p> background-origin 值 也是上面那3个<br> <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">- content-box <span class="comment">//内容区域</span></span><br><span class="line">- padding-box <span class="comment">//包含padding区域</span></span><br><span class="line">- border-box <span class="comment">//默认包含border</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>##<strong>Background Size</strong></p>
+<p>background-size 接受两个值 width height 可以 px em % 都行<br>如果只传入一个值，那就是width， height就是auto 这个时候是保持原图比例的<br>但如果两个值都有，而原图尺寸不一样，那就产生拉伸效果</p>
+<div style="background:url('http://dreambo8563.github.io/img/1.jpg');background-size:300px 100px; height: 300px;"></div>
+
+
+<p>除了特定宽高值，还有两个关键词</p>
+<p><code>background-size: contain;</code> 是在保持原图比例的条件下，尽可能大的显示图片</p>
+<p><code>background-size: cover;</code> 效果是 auto 100% or 100% auto，但无论选择哪个肯定会充满容器。选哪里会根据容易的尺寸自行选择</p>
+<p>所以以上的原则就是：</p>
+<ol>
+<li>要不要保持比例</li>
+<li>要不要充满</li>
+<li>能不能重复</li>
+</ol>
+<hr>
+<p>##<strong>Multiple Backgrounds</strong></p>
+<p>语法很简单</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">blockquote</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(quote-open.png) top left no-repeat, <span class="built_in">url</span>(quote-close.png) bottom right no-repeat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以引入多个背景图，并且每一个的background参数都能定制， 很牛逼的说</p>
+<h3 id="要注意顺序-前面的图再上面"><a href="#要注意顺序-前面的图再上面" class="headerlink" title="要注意顺序 前面的图再上面"></a>要注意顺序 前面的图再上面</h3><p>强大</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">62.5%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">295px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">295px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">5px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">url</span>(cover-left.png) <span class="number">0</span> -<span class="number">1px</span> no-repeat, <span class="built_in">url</span>(cover-right.png) right no-repeat, <span class="built_in">url</span>(trees1.jpg) <span class="number">0</span> <span class="number">0</span> / cover;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">160px</span> auto;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">30px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.2), <span class="number">0</span> <span class="number">0</span> <span class="number">150px</span> <span class="built_in">rgba</span>(0, 0, 0, 0.1);</span><br><span class="line">    <span class="attribute">-webkit-transition</span>: all <span class="number">1s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">115px</span>;</span><br><span class="line">    <span class="attribute">font</span>: bold <span class="number">0em</span> Arial;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    <span class="attribute">-webkit-transition</span>: all <span class="number">0.5s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background-position</span>: -<span class="number">295px</span> -<span class="number">100px</span>, <span class="number">295px</span> <span class="number">100px</span>, <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">-webkit-filter</span>: <span class="built_in">sepia</span>(0.8);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span><span class="selector-pseudo">:hover</span> <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">3em</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">rgba</span>(250, 250, 250, 0.5);</span><br><span class="line">    <span class="attribute">-webkit-transition</span>: all <span class="number">1s</span> ease <span class="number">0.2s</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Trees<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>用3个背景图的位置移动产生动画。都只在一个div里完成 ~~ CSS3的力量</p>
+<hr>
+<p>##<strong>New Tools for Borders</strong></p>
+<p><code>border-image: url(border.png) 20 10 40 30 / 15 15 20 20 / 10 5 space;</code><br>这个用法以后再学吧。。一时半会看不懂</p>
+<hr>
+<p>##<strong>Gradients</strong></p>
+<p>Linear Gradients</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">linear-gradient</span>(<span class="selector-tag">black</span>, <span class="selector-tag">white</span>);</span><br><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">linear-gradient</span>(<span class="selector-tag">to</span> <span class="selector-tag">bottom</span> <span class="selector-tag">right</span>, <span class="selector-tag">black</span>, <span class="selector-tag">white</span>);</span><br><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">linear-gradient</span>(0<span class="selector-tag">deg</span>, <span class="selector-id">#000</span> 30%, <span class="selector-id">#ccc</span> 50%, <span class="selector-id">#fff</span> 70%);</span><br></pre></td></tr></table></figure>
+<div style="width:300px;height:200px;    font-size: 62.5%;
+    margin: 0;
+    background: linear-gradient(30deg, #000 30%, #ccc 50%, #fff 70%);"></div>
+
+
+<p> 线性的过渡：</p>
+<p> 3种语法：</p>
+<ol>
+<li>从上到下的 black 到white</li>
+<li>过渡方向是左上到右下， 颜色 是左上黑右下白过渡</li>
+<li><p>过渡方向的角度变化， 从开始点到容器的30%区域都是 #000， 30% -50%过渡到 #ccc， 50% -70% 是过渡到 #fff 70%之后就是 #fff</p>
+<hr>
+</li>
+</ol>
+<p> 简单的radial-gradient</p>
+ <div style=" background: radial-gradient(circle at bottom right, transparent, black 23% ,blue 50%);width:200px;height:200px"></div>
+
+<p> 语法：</p>
+ <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">radial-gradient([size] [shape] at [position], [color-stops]);</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">radial-gradient</span>(<span class="selector-tag">black</span>, <span class="selector-tag">white</span>);</span><br><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">radial-gradient</span>(<span class="selector-tag">circle</span> <span class="selector-tag">at</span> <span class="selector-tag">top</span> <span class="selector-tag">left</span>, <span class="selector-tag">black</span>, <span class="selector-tag">white</span>);</span><br><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">radial-gradient</span>(<span class="selector-tag">closest-side</span> <span class="selector-tag">circle</span> <span class="selector-tag">at</span> 200<span class="selector-tag">px</span> 300<span class="selector-tag">px</span>,</span><br><span class="line"><span class="selector-id">#000</span> 30%, <span class="selector-id">#ccc</span> 50%, <span class="selector-id">#fff</span> 70%);</span><br><span class="line"><span class="selector-tag">background-image</span>: <span class="selector-tag">radial-gradient</span>(30<span class="selector-tag">em</span> <span class="selector-tag">at</span> 200<span class="selector-tag">px</span> 300<span class="selector-tag">px</span>, <span class="selector-tag">black</span>, <span class="selector-tag">white</span>);</span><br></pre></td></tr></table></figure>
+<p> 来个复杂过渡的小例子：</p>
+ <div style="width:200px;height:200px;background: radial-gradient(rgba(250, 250, 250, 0.1) 10%, transparent 10%), radial-gradient(rgba(250, 250, 250, 0.1) 10%, transparent 10%), #124a54;
+    background-size: 80px 80px;"></div>
+
+
+<p>挠头吧！！！！<br>这里各种牛叉  <a href="https://lea.verou.me/css3patterns/" target="_blank" rel="external">https://lea.verou.me/css3patterns/</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS3/" rel="tag">#CSS3</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/02/17/CSS3-Pushing-the-Limits-New-Tools-for-Text/" rel="next" title="CSS3 Pushing the Limits - New Tools for Text">
+                <i class="fa fa-chevron-left"></i> CSS3 Pushing the Limits - New Tools for Text
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/19/CSS3-Pushing-the-Limits-CSS3-Filters/" rel="prev" title="CSS3 - Pushing the Limits - CSS3 Filters">
+                CSS3 - Pushing the Limits - CSS3 Filters <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">248</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#–"><span class="nav-number">1.</span> <span class="nav-text"> –</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#要注意顺序-前面的图再上面"><span class="nav-number">1.1.</span> <span class="nav-text">要注意顺序 前面的图再上面</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
