@@ -1,0 +1,710 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前端容器化, 为了能够独立进行部署, 配备 nginxDockerfile这里利用 docker 的 MultiStage 特性,区分打包和生产镜像的 build.注意顺序,为了利用潜在的 cache 提高打包速度只把生成的 dist 内容放到 nginx 里面, 并且放入自己的 nginx 配置, 毕竟默认配置不能满足 SPA 项目 FROM node:9.11.1-alpine as buil">
+<meta name="keywords" content="Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端独立部署,最小docker化实践">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/10/30/前端独立部署-最小docker化实践/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="前端容器化, 为了能够独立进行部署, 配备 nginxDockerfile这里利用 docker 的 MultiStage 特性,区分打包和生产镜像的 build.注意顺序,为了利用潜在的 cache 提高打包速度只把生成的 dist 内容放到 nginx 里面, 并且放入自己的 nginx 配置, 毕竟默认配置不能满足 SPA 项目 FROM node:9.11.1-alpine as buil">
+<meta property="og:updated_time" content="2018-10-30T04:36:30.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端独立部署,最小docker化实践">
+<meta name="twitter:description" content="前端容器化, 为了能够独立进行部署, 配备 nginxDockerfile这里利用 docker 的 MultiStage 特性,区分打包和生产镜像的 build.注意顺序,为了利用潜在的 cache 提高打包速度只把生成的 dist 内容放到 nginx 里面, 并且放入自己的 nginx 配置, 毕竟默认配置不能满足 SPA 项目 FROM node:9.11.1-alpine as buil">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 前端独立部署,最小docker化实践 | Vincent's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端独立部署,最小docker化实践
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-10-30T12:21:47+08:00" content="2018-10-30">
+              2018-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+              &nbsp; | &nbsp;visitor
+              <span class="page-pv"><i class="fa fa-eye"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前端容器化-为了能够独立进行部署-配备-nginx"><a href="#前端容器化-为了能够独立进行部署-配备-nginx" class="headerlink" title="前端容器化, 为了能够独立进行部署, 配备 nginx"></a>前端容器化, 为了能够独立进行部署, 配备 nginx</h3><h4 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h4><p>这里利用 docker 的 MultiStage 特性,区分打包和生产镜像的 build.<br>注意顺序,为了利用潜在的 cache 提高打包速度<br>只把生成的 dist 内容放到 nginx 里面, 并且放入自己的 nginx 配置, 毕竟默认配置不能满足 SPA 项目</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">9.11</span>.<span class="number">1</span>-alpine as build-stage</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /usr/src/app</span></span><br><span class="line"><span class="bash">WORKDIR /usr/src/app</span></span><br><span class="line"><span class="bash">COPY package*.json /usr/src/app/</span></span><br><span class="line"><span class="bash">RUN npm install</span></span><br><span class="line"><span class="bash">COPY . .</span></span><br><span class="line"><span class="bash">RUN npm run build</span></span><br><span class="line"><span class="bash"><span class="comment"># production stage</span></span></span><br><span class="line"><span class="bash">FROM nginx:1.13.12-alpine as production-stage</span></span><br><span class="line"><span class="bash">COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html</span></span><br><span class="line"><span class="bash">COPY ./nginx/nginx.conf /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="bash">COPY ./nginx/sites-enabled /etc/nginx/sites-enabled</span></span><br><span class="line"><span class="bash">COPY ./nginx/general.conf /etc/nginx/general.conf</span></span><br><span class="line"><span class="bash">EXPOSE 80</span></span><br><span class="line"><span class="bash">CMD [<span class="string">"nginx"</span>, <span class="string">"-g"</span>, <span class="string">"daemon off;"</span>]</span></span><br></pre></td></tr></table></figure>
+<h4 id="nginx-相关配置目录"><a href="#nginx-相关配置目录" class="headerlink" title="nginx 相关配置目录"></a>nginx 相关配置目录</h4><p>在项目根目录下放置 nginx 目录<br>是一些常规配置.<br>特意开放了 gzip_static, 以备后续前端优化使用.</p>
+<p>-nginx<br>|——sites_enabled<br>|——–example.com.conf<br>|–general.conf<br>|–nginx.conf</p>
+<p><strong>nginx.conf</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#user www-data;</span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line">worker_processes auto;</span><br><span class="line">worker_rlimit_nofile 65535;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">	multi_accept on;</span><br><span class="line">	worker_connections 65535;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">	charset utf-8;</span><br><span class="line">	sendfile on;</span><br><span class="line">	tcp_nopush on;</span><br><span class="line">	tcp_nodelay on;</span><br><span class="line">	server_tokens off;</span><br><span class="line">	log_not_found off;</span><br><span class="line">	types_hash_max_size 2048;</span><br><span class="line">	client_max_body_size 16M;</span><br><span class="line"></span><br><span class="line">	# MIME</span><br><span class="line">	include mime.types;</span><br><span class="line">	default_type application/octet-stream;</span><br><span class="line"></span><br><span class="line">	# logging</span><br><span class="line">	access_log /var/log/nginx/access.log;</span><br><span class="line">	error_log /var/log/nginx/error.log warn;</span><br><span class="line"></span><br><span class="line">	# load configs</span><br><span class="line">	# include /etc/nginx/conf.d/*.conf;</span><br><span class="line">	include /etc/nginx/sites-enabled/*;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>general.conf</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># security headers</span><br><span class="line">add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;</span><br><span class="line">add_header X-XSS-Protection &quot;1; mode=block&quot; always;</span><br><span class="line">add_header X-Content-Type-Options &quot;nosniff&quot; always;</span><br><span class="line">add_header Referrer-Policy &quot;no-referrer-when-downgrade&quot; always;</span><br><span class="line">add_header Content-Security-Policy &quot;default-src * data: &apos;unsafe-eval&apos; &apos;unsafe-inline&apos;&quot; always;</span><br><span class="line"></span><br><span class="line"># . files</span><br><span class="line">location ~ /\. &#123;</span><br><span class="line">	deny all;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># assets, media</span><br><span class="line">location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ &#123;</span><br><span class="line">	expires 30d;</span><br><span class="line">	access_log off;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># svg, fonts</span><br><span class="line">location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ &#123;</span><br><span class="line">	add_header Access-Control-Allow-Origin &quot;*&quot;;</span><br><span class="line">	expires 30d;</span><br><span class="line">	access_log off;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># gzip</span><br><span class="line">gzip on;</span><br><span class="line">gzip_vary on;</span><br><span class="line">gzip_static	on;</span><br><span class="line">gzip_proxied any;</span><br><span class="line">gzip_comp_level 6;</span><br><span class="line">gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;</span><br></pre></td></tr></table></figure>
+<p><strong>example.com.conf</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">	root /usr/share/nginx/html;</span><br><span class="line">	index index.html index.htm;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">		try_files $uri $uri/ /index.html;</span><br><span class="line">  &#125;</span><br><span class="line">	include /etc/nginx/general.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="以防不需要的-或者隐秘的文件被打入镜像-需要-dockerignore"><a href="#以防不需要的-或者隐秘的文件被打入镜像-需要-dockerignore" class="headerlink" title="以防不需要的,或者隐秘的文件被打入镜像. 需要 .dockerignore"></a>以防不需要的,或者隐秘的文件被打入镜像. 需要 .dockerignore</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node_modules</span><br><span class="line">npm-debug.log</span><br><span class="line">Dockerfile*</span><br><span class="line">docker-compose*</span><br><span class="line">.dockerignore</span><br><span class="line">.git</span><br><span class="line">.gitignore</span><br><span class="line">.env</span><br><span class="line">*/bin</span><br><span class="line">*/obj</span><br><span class="line">README.md</span><br><span class="line">LICENSE</span><br><span class="line">.vscode</span><br></pre></td></tr></table></figure>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>如果你的项目用了 sass, 注意你打包的网络, 因为我们都是使用的最小基础 alpine 镜像,没有 py 环境.如果不能下载 sass 包会打包失败.</p>
+<blockquote>
+<p>docker build -t vue-docker:v1 .</p>
+</blockquote>
+<h3 id="启动镜像"><a href="#启动镜像" class="headerlink" title="启动镜像"></a>启动镜像</h3><blockquote>
+<p>docker run -p 8080:80 -d vue-docker:v1</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag">#Docker</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/10/关于opener的安全小技巧/" rel="next" title="关于opener的安全小技巧">
+                <i class="fa fa-chevron-left"></i> 关于opener的安全小技巧
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">249</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前端容器化-为了能够独立进行部署-配备-nginx"><span class="nav-number">1.</span> <span class="nav-text">前端容器化, 为了能够独立进行部署, 配备 nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dockerfile"><span class="nav-number">1.1.</span> <span class="nav-text">Dockerfile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nginx-相关配置目录"><span class="nav-number">1.2.</span> <span class="nav-text">nginx 相关配置目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以防不需要的-或者隐秘的文件被打入镜像-需要-dockerignore"><span class="nav-number">1.3.</span> <span class="nav-text">以防不需要的,或者隐秘的文件被打入镜像. 需要 .dockerignore</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打包"><span class="nav-number">2.</span> <span class="nav-text">打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动镜像"><span class="nav-number">3.</span> <span class="nav-text">启动镜像</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
