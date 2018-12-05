@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="web," />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="web,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
 
 
 
@@ -89,6 +89,7 @@
 <meta property="og:url" content="https://dreambo8563.github.io/2018/06/15/WebRTC视频聊天/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="WebRTC之前通过修改别的的 demo,试了一下 websocket.看看最大的区别吧. websocket从轮训到 websocke 是技术的进步,体验的提升 多个客户端可以和 server 保持长连接,server 对客户端可以进行广播,进而达到消息实时传递   WebRTC从 websocket 到 WebRTC 是理念上的变革 这让我想起了最近很流行的一个词 “去中心化”  看起来很像">
+<meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093818@2x.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-093854@2x.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/QQ20180612-094432.png">
@@ -125,7 +126,7 @@
   <title> WebRTC视频聊天 | Vincent's Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -146,12 +147,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -178,7 +179,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             Home
           </a>
@@ -188,7 +189,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
             
             Categories
           </a>
@@ -198,7 +199,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             Archives
           </a>
@@ -208,7 +209,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             Tags
           </a>
@@ -218,7 +219,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             About
           </a>
@@ -251,7 +252,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -280,14 +281,14 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/web/" itemprop="url" rel="index">
                     <span itemprop="name">web</span>
                   </a>
@@ -314,7 +315,7 @@
           
               &nbsp; | &nbsp;visitor
               <span class="page-pv"><i class="fa fa-eye"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
               </span>
           
         </div>
@@ -338,7 +339,7 @@
 <p>假设忽略错误处理,和其他的逻辑设计.单单从连接上看,这时候已经不需要 server 存在了. 此时, 两个客户端见的视频流,音频流,数据流完全可以脱离 server 而互相传递. 这样就做到了 “去中心化”.</p>
 <p>如果有一个比较好的产品设计,完全可以把 server 的传递能力取代.</p>
 <p>我们假象一个场景: 用户 A 通过 IM 把自己的 session 信息复制给 用户 B,用户 B 填入信息后, 再把自己的相应信息复制给 A 确认. A 输入相应信息.此时两个客户端已经完成了连接.中间没有任何的 server 再参与.</p>
-<h4 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h4><p><a href="https://webrtc.dreambo8563.tech/" target="_blank" rel="external">https://webrtc.dreambo8563.tech/</a><br>s</p>
+<h4 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h4><p><a href="https://webrtc.dreambo8563.tech/" target="_blank" rel="noopener">https://webrtc.dreambo8563.tech/</a><br>s</p>
 <ol>
 <li>获取登录人姓名</li>
 </ol>
@@ -374,8 +375,8 @@
 <blockquote>
 <p>这个 demo 为了充分体验 WebRTC 的特点,当双方连通后,websocket 就已经断开了.所以如果有任何的 error,双方需要重新操作以获取连接</p>
 </blockquote>
-<h4 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h4><p>后端代码: <a href="https://github.com/dreambo8563/go-webrtc" target="_blank" rel="external">https://github.com/dreambo8563/go-webrtc</a></p>
-<p>前端代码: <a href="https://github.com/dreambo8563/webrtc-fe" target="_blank" rel="external">https://github.com/dreambo8563/webrtc-fe</a></p>
+<h4 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h4><p>后端代码: <a href="https://github.com/dreambo8563/go-webrtc" target="_blank" rel="noopener">https://github.com/dreambo8563/go-webrtc</a></p>
+<p>前端代码: <a href="https://github.com/dreambo8563/webrtc-fe" target="_blank" rel="noopener">https://github.com/dreambo8563/webrtc-fe</a></p>
 
       
     </div>
@@ -463,7 +464,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -473,17 +474,15 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="Vincent Guo" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">249</span>
+              <span class="site-state-item-count">250</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -621,7 +620,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2018</span>

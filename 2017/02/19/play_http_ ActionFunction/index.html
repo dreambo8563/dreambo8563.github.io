@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -59,23 +59,23 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Scala,Play," />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="Scala,Play,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
 
 
 
@@ -89,6 +89,7 @@
 <meta property="og:url" content="https://dreambo8563.github.io/2017/02/19/play_http_ ActionFunction/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="ActionFunction 其实是对request的处理 自定义请求类型 提取或者处理请求的各种参数  https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition import play.api.mvc._class UserRequest[A](val username: Option[String], r">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-02-19T12:54:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Play - ActionFunction">
@@ -113,7 +114,7 @@
   <title> Play - ActionFunction | Vincent's Blog </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -134,12 +135,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -166,7 +167,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
             
             Home
           </a>
@@ -176,7 +177,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
             
             Categories
           </a>
@@ -186,7 +187,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
             
             Archives
           </a>
@@ -196,7 +197,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
             
             Tags
           </a>
@@ -206,7 +207,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
             
             About
           </a>
@@ -239,7 +240,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -268,14 +269,14 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/Scala/" itemprop="url" rel="index">
                     <span itemprop="name">Scala</span>
                   </a>
@@ -287,7 +288,7 @@
                 
 
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/Scala/Play/" itemprop="url" rel="index">
                     <span itemprop="name">Play</span>
                   </a>
@@ -314,7 +315,7 @@
           
               &nbsp; | &nbsp;visitor
               <span class="page-pv"><i class="fa fa-eye"></i>
-              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
               </span>
           
         </div>
@@ -332,7 +333,7 @@
 <li>自定义请求类型</li>
 <li>提取或者处理请求的各种参数</li>
 </ul>
-<p><a href="https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition" target="_blank" rel="external">https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition</a></p>
+<p><a href="https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition" target="_blank" rel="noopener">https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition</a></p>
 <figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> play.api.mvc._</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserRequest</span>[<span class="type">A</span>](<span class="params">val username: <span class="type">Option</span>[<span class="type">String</span>], request: <span class="type">Request</span>[<span class="type">A</span>]</span>) <span class="keyword">extends</span> <span class="title">WrappedRequest</span>[<span class="type">A</span>](<span class="params">request</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">object</span> <span class="title">UserAction</span> <span class="keyword">extends</span></span></span><br><span class="line"><span class="class">    <span class="title">ActionBuilder</span>[<span class="type">UserRequest</span>] <span class="keyword">with</span> <span class="title">ActionTransformer</span>[<span class="type">Request</span>, <span class="type">UserRequest</span>] </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">transform</span></span>[<span class="type">A</span>](request: <span class="type">Request</span>[<span class="type">A</span>]) = <span class="type">Future</span>.successful &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="type">UserRequest</span>(request.session.get(<span class="string">"username"</span>), request)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ItemRequest</span>[<span class="type">A</span>](<span class="params">val item: <span class="type">Item</span>, request: <span class="type">UserRequest</span>[<span class="type">A</span>]</span>) <span class="keyword">extends</span> <span class="title">WrappedRequest</span>[<span class="type">A</span>](<span class="params">request</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">username</span> </span>= request.username</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ItemAction</span></span>(itemId: <span class="type">String</span>) = <span class="keyword">new</span> <span class="type">ActionRefiner</span>[<span class="type">UserRequest</span>, <span class="type">ItemRequest</span>] &#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">refine</span></span>[<span class="type">A</span>](input: <span class="type">UserRequest</span>[<span class="type">A</span>]) = <span class="type">Future</span>.successful &#123;</span><br><span class="line">    <span class="type">ItemDao</span>.findById(itemId)</span><br><span class="line">      .map(<span class="keyword">new</span> <span class="type">ItemRequest</span>(_, input))</span><br><span class="line">      .toRight(<span class="type">NotFound</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">PermissionCheckAction</span> <span class="keyword">extends</span> <span class="title">ActionFilter</span>[<span class="type">ItemRequest</span>] </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">filter</span></span>[<span class="type">A</span>](input: <span class="type">ItemRequest</span>[<span class="type">A</span>]) = <span class="type">Future</span>.successful &#123;</span><br><span class="line">    <span class="keyword">if</span> (!input.item.accessibleByUser(input.username))</span><br><span class="line">      <span class="type">Some</span>(<span class="type">Forbidden</span>)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="type">None</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="UserAction"><a href="#UserAction" class="headerlink" title="UserAction"></a>UserAction</h3><p>对传入的request 获取session 并且转换为UserRequest 类型</p>
 <h3 id="ItemAction"><a href="#ItemAction" class="headerlink" title="ItemAction"></a>ItemAction</h3><p>传入UserRequest 类型<br>通过id(基本都是路由来的) DB查询后 构成ItemRequest<br>在构成ItemRequest 过程中 会得到username 属性</p>
@@ -370,16 +371,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/19/scala_curry/" rel="next" title="Scala - Currying">
-                <i class="fa fa-chevron-left"></i> Scala - Currying
+              <a href="/2017/02/19/akka_stream_Mat/" rel="next" title="AKKA中的mat">
+                <i class="fa fa-chevron-left"></i> AKKA中的mat
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/19/scala_pattern_match_@/" rel="prev" title="Scala - Pattern Match - @">
-                Scala - Pattern Match - @ <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/19/scala/" rel="prev" title="Scala - 基本语法">
+                Scala - 基本语法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -428,7 +429,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -438,17 +439,15 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="Vincent Guo" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">249</span>
+              <span class="site-state-item-count">250</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -586,7 +585,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2018</span>
