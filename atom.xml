@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2018-12-06T01:49:05.669Z</updated>
+  <updated>2018-12-12T05:41:19.322Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>golang-grpc Client BL</title>
+    <link href="https://dreambo8563.github.io/2018/12/12/golang-grpc-Client-BL/"/>
+    <id>https://dreambo8563.github.io/2018/12/12/golang-grpc-Client-BL/</id>
+    <published>2018-12-12T05:32:21.000Z</published>
+    <updated>2018-12-12T05:41:19.322Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="GRPC-LoadBalance"><a href="#GRPC-LoadBalance" class="headerlink" title="GRPC LoadBalance"></a>GRPC LoadBalance</h3><p>这此主要描述下客户端做 LB</p><ul><li>LB 算法有限 (roundrobin)</li><li>客户端要支持</li><li>service 需要 headless 模式</li></ul><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span>(</span><br><span class="line">    <span class="string">"google.golang.org/grpc/balancer/roundrobin"</span></span><br><span class="line">    <span class="string">"google.golang.org/grpc/resolver"</span></span><br><span class="line">)</span><br><span class="line">resolver.SetDefaultScheme(<span class="string">"dns"</span>)</span><br><span class="line">conn, err = grpc.Dial(authRPCServiceURL, grpc.WithInsecure(), grpc.WithBlock(), grpc.WithTimeout(<span class="number">2</span>*time.Second), grpc.WithBalancerName(roundrobin.Name), grpc.WithUnaryInterceptor(otgrpc.OpenTracingClientInterceptor(tracer)), grpc.WithStreamInterceptor(</span><br><span class="line">otgrpc.OpenTracingStreamClientInterceptor(tracer)))</span><br></pre></td></tr></table></figure><h4 id="k8s-service"><a href="#k8s-service" class="headerlink" title="k8s service"></a>k8s service</h4><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">type:</span> <span class="string">ClusterIP</span></span><br><span class="line"><span class="attr">clusterIP:</span> <span class="string">None</span></span><br></pre></td></tr></table></figure><p>客户端 LB, 这样做法比较简单, 不用引入 service mesh 的方式<br>但就是 LB 的算法太过单一,没有太强大的功能</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;GRPC-LoadBalance&quot;&gt;&lt;a href=&quot;#GRPC-LoadBalance&quot; class=&quot;headerlink&quot; title=&quot;GRPC LoadBalance&quot;&gt;&lt;/a&gt;GRPC LoadBalance&lt;/h3&gt;&lt;p&gt;这此主要描述下客户端做 LB
+      
+    
+    </summary>
+    
+      <category term="Golang" scheme="https://dreambo8563.github.io/categories/Golang/"/>
+    
+      <category term="分布式" scheme="https://dreambo8563.github.io/categories/Golang/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+    
+      <category term="Golang" scheme="https://dreambo8563.github.io/tags/Golang/"/>
+    
+      <category term="分布式" scheme="https://dreambo8563.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>golang-Trace链路跟踪实践</title>
@@ -549,31 +578,6 @@
     
     
       <category term="Algorithm" scheme="https://dreambo8563.github.io/tags/Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>圈复杂度衡量</title>
-    <link href="https://dreambo8563.github.io/2018/07/25/%E5%9C%88%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%A1%A1%E9%87%8F/"/>
-    <id>https://dreambo8563.github.io/2018/07/25/圈复杂度衡量/</id>
-    <published>2018-07-25T12:44:15.000Z</published>
-    <updated>2018-09-30T06:33:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p><a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity#Definition" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Cyclomatic_complexity#Definition</a></p><p>简单的理解就是这段代码流程的复杂度, 假设需要单元测试覆盖,需要的 case 数量.<br>主要体现在</p><ul><li>if … else … 分支</li><li>loop</li><li>&amp;&amp; / || 分支</li><li>switch 分支</li><li>嵌套层数</li><li>内嵌函数 等</li></ul><h2 id="检测工具"><a href="#检测工具" class="headerlink" title="检测工具"></a>检测工具</h2><p>vs code 插件 :<br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/code_metrics.png" alt=""></p><p> 检测方法级别的圈复杂度,并给出增加复杂度的相关代码</p><h2 id="使用截图"><a href="#使用截图" class="headerlink" title="使用截图"></a>使用截图</h2><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/code_metrics_using.png" alt=""></p><h2 id="SonarQube"><a href="#SonarQube" class="headerlink" title="SonarQube"></a>SonarQube</h2><p>Sonar 只能检测到文件级别,而且不能标示具体增加的具体行.<br>所以推荐使用  vsc 的插件</p><h2 id="基本优化方案"><a href="#基本优化方案" class="headerlink" title="基本优化方案"></a>基本优化方案</h2><ul><li> 抽象重用方法</li><li>组件拆分</li><li>算法优化</li><li>其他请 google</li><li>拆分方法,尽力做到一个方法只负责一件事</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;定义&quot;&gt;&lt;a href=&quot;#定义&quot; class=&quot;headerlink&quot; title=&quot;定义&quot;&gt;&lt;/a&gt;定义&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclomatic_complexity#Definitio
-      
-    
-    </summary>
-    
-      <category term="Tools" scheme="https://dreambo8563.github.io/categories/Tools/"/>
-    
-    
-      <category term="Tools" scheme="https://dreambo8563.github.io/tags/Tools/"/>
     
   </entry>
   
