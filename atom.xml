@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2018-12-12T05:52:18.532Z</updated>
+  <updated>2018-12-18T10:29:31.694Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Makefile简单脚本应用</title>
+    <link href="https://dreambo8563.github.io/2018/12/18/Makefile%E7%AE%80%E5%8D%95%E8%84%9A%E6%9C%AC%E5%BA%94%E7%94%A8/"/>
+    <id>https://dreambo8563.github.io/2018/12/18/Makefile简单脚本应用/</id>
+    <published>2018-12-18T10:23:14.000Z</published>
+    <updated>2018-12-18T10:29:31.694Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="老看人家用-我也试一试"><a href="#老看人家用-我也试一试" class="headerlink" title="老看人家用,我也试一试"></a>老看人家用,我也试一试</h4><p>主要想避免路径的问题:</p><p>例如:<br>我在 scripts/start.sh</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl apply -f deployments/k8s/conf.yaml</span><br></pre></td></tr></table></figure><p>希望是以当前目标为路径,来执行这个 shell. 避免别人进入 scripts 目录后执行(那样会报错, 目录不对了)</p><h4 id="所以-Makefile-吧"><a href="#所以-Makefile-吧" class="headerlink" title="所以 - Makefile 吧"></a>所以 - Makefile 吧</h4><figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">v?=latest</span><br><span class="line"></span><br><span class="line"><span class="section">local:</span></span><br><span class="line">go run cmd/app/main.go</span><br><span class="line"><span class="section">start:</span></span><br><span class="line">bash scripts/start.sh</span><br><span class="line"><span class="section">stop:</span></span><br><span class="line">bash scripts/stop.sh</span><br><span class="line"><span class="section">docker:</span></span><br><span class="line">docker build -f build/Dockerfile -t todo/backend:<span class="variable">$(v)</span> .</span><br><span class="line">docker tag todo/backend:<span class="variable">$(v)</span> dreambo8563docker/todo-backend:<span class="variable">$(v)</span></span><br><span class="line">docker push dreambo8563docker/todo-backend:<span class="variable">$(v)</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">rm -f cmd/app/*log app</span><br></pre></td></tr></table></figure><p>这里我用了一个变量 v,用于 docker 打包镜像设置 version 用. 默认 latest</p><h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">make local =&gt; 本地启动项目</span><br><span class="line">make <span class="built_in">start</span> =&gt; 执行k8s脚本</span><br><span class="line">make stop =&gt; 执行k8s脚本</span><br><span class="line">make docker v=v22 打包镜像, tag / push</span><br><span class="line">make clean =&gt; 删除临时文件 (日志啥的)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;老看人家用-我也试一试&quot;&gt;&lt;a href=&quot;#老看人家用-我也试一试&quot; class=&quot;headerlink&quot; title=&quot;老看人家用,我也试一试&quot;&gt;&lt;/a&gt;老看人家用,我也试一试&lt;/h4&gt;&lt;p&gt;主要想避免路径的问题:&lt;/p&gt;
+&lt;p&gt;例如:&lt;br&gt;我在 scrip
+      
+    
+    </summary>
+    
+      <category term="Shell" scheme="https://dreambo8563.github.io/categories/Shell/"/>
+    
+    
+      <category term="Makefile" scheme="https://dreambo8563.github.io/tags/Makefile/"/>
+    
+      <category term="Shell" scheme="https://dreambo8563.github.io/tags/Shell/"/>
+    
+  </entry>
   
   <entry>
     <title>golang-grpc Client BL</title>
@@ -518,11 +546,11 @@
       <category term="Docker" scheme="https://dreambo8563.github.io/categories/Docker/"/>
     
     
+      <category term="Vue" scheme="https://dreambo8563.github.io/tags/Vue/"/>
+    
       <category term="Docker" scheme="https://dreambo8563.github.io/tags/Docker/"/>
     
       <category term="Sentry" scheme="https://dreambo8563.github.io/tags/Sentry/"/>
-    
-      <category term="Vue" scheme="https://dreambo8563.github.io/tags/Vue/"/>
     
   </entry>
   
@@ -552,32 +580,6 @@
     
     
       <category term="Golang" scheme="https://dreambo8563.github.io/tags/Golang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Newton&#39;s method</title>
-    <link href="https://dreambo8563.github.io/2018/08/07/Newton-s-method/"/>
-    <id>https://dreambo8563.github.io/2018/08/07/Newton-s-method/</id>
-    <published>2018-08-07T01:37:16.000Z</published>
-    <updated>2018-08-07T01:38:26.291Z</updated>
-    
-    <content type="html"><![CDATA[<p>简易入门了解:</p><p><a href="https://jingyan.baidu.com/article/f79b7cb31082079144023ebb.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/f79b7cb31082079144023ebb.html</a></p><p>wiki:</p><p><a href="https://baike.baidu.com/item/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/10887580?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95/10887580?fr=aladdin</a></p><p><a href="https://en.wikipedia.org/wiki/Newton%27s_method" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Newton%27s_method</a></p><p>简单的说, 是一个不断替换中间变量 -&gt; 判断是落入收敛区间 -&gt; 继续判断不断趋近结果 的过程</p><p>牛顿迭代法 求开方:</p><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"sqrt(int x): %d"</span>, mySqrt(<span class="number">8</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mySqrt</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> x == <span class="number">0</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">    xF := <span class="keyword">float64</span>(x)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> bingo(xF/<span class="number">2</span>, xF)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">bingo</span><span class="params">(m <span class="keyword">float64</span>, init <span class="keyword">float64</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    result := (m + init/m) / <span class="keyword">float64</span>(<span class="number">2.0</span>)</span><br><span class="line">    fmt.Printf(<span class="string">"m: %f , result: %f \n"</span>, m, result)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">int</span>(m) == <span class="keyword">int</span>(result) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">int</span>(m)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bingo(result, init)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>注: 在搜索过程中 发现了更神奇的 卡马克传奇:</p><p><a href="https://en.wikipedia.org/wiki/Fast_inverse_square_root" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Fast_inverse_square_root</a></p><p>故事源于 雷神之锤 3 中的一段神奇的代码. 有兴趣可以去了解下</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;简易入门了解:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://jingyan.baidu.com/article/f79b7cb31082079144023ebb.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://jingyan.b
-      
-    
-    </summary>
-    
-      <category term="Algorithm" scheme="https://dreambo8563.github.io/categories/Algorithm/"/>
-    
-    
-      <category term="Algorithm" scheme="https://dreambo8563.github.io/tags/Algorithm/"/>
     
   </entry>
   
