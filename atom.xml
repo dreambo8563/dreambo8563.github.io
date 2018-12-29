@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2018-12-18T10:29:31.694Z</updated>
+  <updated>2018-12-29T14:45:24.569Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2018年度总结</title>
+    <link href="https://dreambo8563.github.io/2018/12/29/2018%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    <id>https://dreambo8563.github.io/2018/12/29/2018年度总结/</id>
+    <published>2018-12-29T14:05:50.000Z</published>
+    <updated>2018-12-29T14:45:24.569Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="纪念即将过去的-2018"><a href="#纪念即将过去的-2018" class="headerlink" title="纪念即将过去的 2018"></a>纪念即将过去的 2018</h3><h4 id="奔波"><a href="#奔波" class="headerlink" title="奔波"></a>奔波</h4><p>这一年我又经历了两份工作, 一份短暂的全栈开发. 一份前端架构.<br>这两个 title 都是第一次拿, 也算不同的小经历吧. 总结下来就是给了自己一个确定性的答案, 后端的事我也可以做,而且是有能力做好的, 但还是需要时间的积累, 全栈的经历只是证明了这个门槛我可以跨,但还没有证明,我已经完全进入状态.</p><p>架构的 title, 比较虚. 但工作环境让我可以抛开单纯的前端开发,更多的思考团队相关, 工程相关的事情.</p><h4 id="技术内容"><a href="#技术内容" class="headerlink" title="技术内容"></a>技术内容</h4><h5 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h5><p>这一年我彻底投入到 golang 中, 不像之前用 scala 的时候, 那时候的学习和应用太浅了, 虽然是在生产上用,但不是自己一点点学习积累上来的,所以很快就会忘记. 或者说那个语言不适合自己的知识能力.<br>golang 相对更容易入门, 而且比较接近 ts, 所以接受度会比较高. 加上也有明星产品,所以选择了他.<br>今年的很多 demo 都是基于 golang 的. 也读了一些库的源码. 用了一些 golang 生态的工具. prometheus, docker, k8s, jaeger, nats ,gin, echo,grpc,etcd 等等, 还用 golang 刷了些 leecode 的算法题</p><h5 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h5><p>到现在接触 Vue 有 1 年多一些了, 慢慢熟悉 vue 的生态和基本的使用, 建立完善基于 vue-cli 的脚手架,是个不错的开始. 写了一个简单的开源组件库 @bpit/vue, 工作中也仍然在不断摸索和实践相关 api 和一些用法. 还写了 vue 的单元测试. vue 3.0 将用 ts 编写,到时候会是个很好的学习机会. 哦对了今年还帮以前的同事开发了一个微信小程序, 也算 vue 相关的经历吧.</p><h4 id="团队工具"><a href="#团队工具" class="headerlink" title="团队工具"></a>团队工具</h4><p>今年调研了很多工具, 比如 sentry, easy mock. sonar qube, jenkins 找到了 检查代码圈复杂度, 重复率的 vsc 插件. 也写了两个提供开发效率的工具插件. 还有些非技术的努力, 比如知识习惯的熏陶, mentor 制度的订立等. 脾气什么的, 我只能 哎!!! 继续努力吧</p><h4 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h4><ul><li>github 截止到现在 贡献数 591(新高), 新建 repo 大约 30 个,基本都是自己的学习 demo</li><li>blog 42 篇(算上这篇)</li><li>书籍 这个不好统计,大致数了下微信读书和阅读器里的书本, 不少于 25 本技术相关书籍, 在线文档数量无法统计</li></ul><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2018_blogs.png" alt=""><br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2018_github.png" alt=""></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>2018 从数据上看,比 2017 年有进步, 17 年工作上实在太忙了, 总结和积累都不太够. 18 年算是迈了一大步.<br>同时也确定了方向, 打开了后端运维的大门.<br>Good!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;纪念即将过去的-2018&quot;&gt;&lt;a href=&quot;#纪念即将过去的-2018&quot; class=&quot;headerlink&quot; title=&quot;纪念即将过去的 2018&quot;&gt;&lt;/a&gt;纪念即将过去的 2018&lt;/h3&gt;&lt;h4 id=&quot;奔波&quot;&gt;&lt;a href=&quot;#奔波&quot; class=&quot;
+      
+    
+    </summary>
+    
+      <category term="Thinking" scheme="https://dreambo8563.github.io/categories/Thinking/"/>
+    
+    
+      <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
+    
+  </entry>
   
   <entry>
     <title>Makefile简单脚本应用</title>
@@ -546,40 +571,11 @@
       <category term="Docker" scheme="https://dreambo8563.github.io/categories/Docker/"/>
     
     
-      <category term="Vue" scheme="https://dreambo8563.github.io/tags/Vue/"/>
-    
       <category term="Docker" scheme="https://dreambo8563.github.io/tags/Docker/"/>
     
       <category term="Sentry" scheme="https://dreambo8563.github.io/tags/Sentry/"/>
     
-  </entry>
-  
-  <entry>
-    <title>golang - compare struct/slice/map</title>
-    <link href="https://dreambo8563.github.io/2018/08/08/golang-compare-struct-slice-map/"/>
-    <id>https://dreambo8563.github.io/2018/08/08/golang-compare-struct-slice-map/</id>
-    <published>2018-08-08T02:04:00.000Z</published>
-    <updated>2018-08-08T02:06:24.966Z</updated>
-    
-    <content type="html"><![CDATA[<p>遇到一道 leecode 的 对比 tree 的题, 一层层对比下去当然可以, 但是我想怎么才能对 struct 进行比较呢? 确实貌似没想到什么 api.</p><p>搜到结果如下</p><p>reflect 包</p><blockquote><p>func DeepEqual(x, y interface{}) bool<br>DeepEqual reports whether x and y are “deeply equal,” defined as follows. Two values of identical type are deeply equal if one of the following cases applies. Values of distinct types are never deeply equal.</p></blockquote><p>Array values are deeply equal when their corresponding elements are deeply equal.</p><p>Struct values are deeply equal if their corresponding fields, both exported and unexported, are deeply equal.</p><p>Func values are deeply equal if both are nil; otherwise they are not deeply equal.</p><p>Interface values are deeply equal if they hold deeply equal concrete values.</p><p>Map values are deeply equal when all of the following are true: they are both nil or both non-nil, they have the same length, and either they are the same map object or their corresponding keys (matched using Go equality) map to deeply equal values.</p><p>Pointer values are deeply equal if they are equal using Go’s == operator or if they point to deeply equal values.</p><p>Slice values are deeply equal when all of the following are true: they are both nil or both non-nil, they have the same length, and either they point to the same initial entry of the same underlying array (that is, &amp;x[0] == &amp;y[0]) or their corresponding elements (up to length) are deeply equal. Note that a non-nil empty slice and a nil slice (for example, []byte{} and []byte(nil)) are not deeply equal.</p><p>Other values - numbers, bools, strings, and channels - are deeply equal if they are equal using Go’s == operator.</p><p>In general DeepEqual is a recursive relaxation of Go’s == operator. However, this idea is impossible to implement without some inconsistency. Specifically, it is possible for a value to be unequal to itself, either because it is of func type (uncomparable in general) or because it is a floating-point NaN value (not equal to itself in floating-point comparison), or because it is an array, struct, or interface containing such a value. On the other hand, pointer values are always equal to themselves, even if they point at or contain such problematic values, because they compare equal using Go’s == operator, and that is a sufficient condition to be deeply equal, regardless of content. DeepEqual has been defined so that the same short-cut applies to slices and maps: if x and y are the same slice or the same map, they are deeply equal regardless of content.</p><p>As DeepEqual traverses the data values it may find a cycle. The second and subsequent times that DeepEqual compares two pointer values that have been compared before, it treats the values as equal rather than examining the values to which they point. This ensures that DeepEqual terminates.</p><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">isSameTree</span><span class="params">(p *TreeNode, q *TreeNode)</span> <span class="title">bool</span></span> &#123;</span><br><span class="line"><span class="keyword">return</span> reflect.DeepEqual(p, q)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;遇到一道 leecode 的 对比 tree 的题, 一层层对比下去当然可以, 但是我想怎么才能对 struct 进行比较呢? 确实貌似没想到什么 api.&lt;/p&gt;
-&lt;p&gt;搜到结果如下&lt;/p&gt;
-&lt;p&gt;reflect 包&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;func De
-      
-    
-    </summary>
-    
-      <category term="Golang" scheme="https://dreambo8563.github.io/categories/Golang/"/>
-    
-    
-      <category term="Golang" scheme="https://dreambo8563.github.io/tags/Golang/"/>
+      <category term="Vue" scheme="https://dreambo8563.github.io/tags/Vue/"/>
     
   </entry>
   
