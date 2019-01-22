@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2019-01-18T03:00:32.265Z</updated>
+  <updated>2019-01-22T06:17:59.336Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>玩耍github</title>
+    <link href="https://dreambo8563.github.io/2019/01/22/%E7%8E%A9%E8%80%8Dgithub/"/>
+    <id>https://dreambo8563.github.io/2019/01/22/玩耍github/</id>
+    <published>2019-01-22T06:10:13.000Z</published>
+    <updated>2019-01-22T06:17:59.336Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="badge"><a href="#badge" class="headerlink" title="badge"></a>badge</h3><p>最近给自己的一个 repo 加了一些 badge, 效果如下:</p><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/github_badge.png" alt=""></p><h3 id="PR-flow"><a href="#PR-flow" class="headerlink" title="PR flow"></a>PR flow</h3><p>对应这些 badge 的是一些 github 的插件, 他们有在整个代码流程中起到不同的作用</p><p>先预览下一个 RP 过程:</p><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/github_pr.png" alt=""></p><ul><li>测试覆盖率检查</li><li>代码 lint 和常见错误检查</li><li>CI 自动化测试</li><li>自动代码 review</li></ul><p>如果过程中有问题,他会给你的 RP 打 x 表示有东西需要 fix, 符合规范.<br>这个体验如果能够在日常工作开发中使用就是极好, 不知道 jenkins 的那些插件能不能达到这样的效果</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;badge&quot;&gt;&lt;a href=&quot;#badge&quot; class=&quot;headerlink&quot; title=&quot;badge&quot;&gt;&lt;/a&gt;badge&lt;/h3&gt;&lt;p&gt;最近给自己的一个 repo 加了一些 badge, 效果如下:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://r
+      
+    
+    </summary>
+    
+      <category term="github" scheme="https://dreambo8563.github.io/categories/github/"/>
+    
+    
+      <category term="github" scheme="https://dreambo8563.github.io/tags/github/"/>
+    
+  </entry>
   
   <entry>
     <title>Element - 偷偷引用内部方法</title>
@@ -544,36 +570,6 @@
     
     
       <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sentry - node-express</title>
-    <link href="https://dreambo8563.github.io/2018/08/17/Sentry-node-express/"/>
-    <id>https://dreambo8563.github.io/2018/08/17/Sentry-node-express/</id>
-    <published>2018-08-17T07:08:19.000Z</published>
-    <updated>2018-08-17T07:09:45.226Z</updated>
-    
-    <content type="html"><![CDATA[<p>直接上代码吧:</p><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> express <span class="keyword">from</span> <span class="string">"express"</span></span><br><span class="line"><span class="keyword">import</span> &#123; NextFunction, Request, Response &#125; <span class="keyword">from</span> <span class="string">"express"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> path <span class="keyword">from</span> <span class="string">"path"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> favicon <span class="keyword">from</span> <span class="string">"serve-favicon"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> logger <span class="keyword">from</span> <span class="string">"morgan"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> cookieParser <span class="keyword">from</span> <span class="string">"cookie-parser"</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> bodyParser <span class="keyword">from</span> <span class="string">"body-parser"</span></span><br><span class="line"><span class="keyword">import</span> &#123; rootDir &#125; <span class="keyword">from</span> <span class="string">"../config/"</span></span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">"../routes"</span></span><br><span class="line"><span class="keyword">import</span> &#123; Config &#125; <span class="keyword">from</span> <span class="string">"../config"</span></span><br><span class="line"><span class="keyword">const</span> Raven = <span class="built_in">require</span>(<span class="string">"raven"</span>)</span><br><span class="line">Raven.config(<span class="string">"http://b902881811664cc8bcbb34f2585f09be@localhost:9000/3"</span>, &#123;</span><br><span class="line">  autoBreadcrumbs: <span class="literal">true</span>,</span><br><span class="line">  captureUnhandledRejections: <span class="literal">true</span></span><br><span class="line">&#125;).install()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="comment">// view engine setup</span></span><br><span class="line">app.set(<span class="string">"views"</span>, path.join(rootDir(), <span class="string">"views"</span>))</span><br><span class="line">app.set(<span class="string">"view engine"</span>, <span class="string">"jade"</span>)</span><br><span class="line"><span class="comment">// The request handler must be the first middleware on the app</span></span><br><span class="line">app.use(Raven.requestHandler())</span><br><span class="line"></span><br><span class="line"><span class="comment">// uncomment after placing your favicon in /public</span></span><br><span class="line">app.use(favicon(path.join(rootDir(), <span class="string">"public"</span>, <span class="string">"favicon.png"</span>)))</span><br><span class="line">app.use(logger(<span class="string">"dev"</span>))</span><br><span class="line">app.use(bodyParser.json())</span><br><span class="line">app.use(bodyParser.urlencoded(&#123; extended: <span class="literal">false</span> &#125;))</span><br><span class="line">app.use(cookieParser(Config().session.secret))</span><br><span class="line"></span><br><span class="line">app.use(express.static(path.join(rootDir(), <span class="string">"public"</span>)))</span><br><span class="line"><span class="comment">// Raven.context(function() &#123;&#125;)</span></span><br><span class="line"><span class="comment">// all your stuff goes here</span></span><br><span class="line">app.use(<span class="string">"/api/project"</span>, routes.project)</span><br><span class="line">app.use(<span class="string">"/api"</span>, routes.api)</span><br><span class="line"></span><br><span class="line"><span class="comment">// The error handler must be before any other error middleware</span></span><br><span class="line">app.use(Raven.errorHandler())</span><br><span class="line"><span class="comment">// catch 404 and forward to error handler</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Not Found"</span>)</span><br><span class="line">  <span class="comment">// @ts-ignore</span></span><br><span class="line">  err.status = <span class="number">404</span></span><br><span class="line">  next(err)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// error handler</span></span><br><span class="line">app.use(<span class="function">(<span class="params">err: <span class="built_in">Error</span>, req: Request, res: Response, next: NextFunction</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// set locals, only providing error in development</span></span><br><span class="line">  res.locals.message = err.message</span><br><span class="line">  res.locals.error = req.app.get(<span class="string">"env"</span>) === <span class="string">"development"</span> ? err : &#123;&#125;</span><br><span class="line">  res.locals.sentryID = (res <span class="keyword">as</span> <span class="built_in">any</span>).sentry</span><br><span class="line">  <span class="comment">// render the error page</span></span><br><span class="line">  <span class="comment">// @ts-ignore</span></span><br><span class="line">  res.status(err.status || <span class="number">500</span>)</span><br><span class="line"></span><br><span class="line">  res.render(<span class="string">"error"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;直接上代码吧:&lt;/p&gt;
-&lt;figure class=&quot;highlight ts&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; * &lt;span 
-      
-    
-    </summary>
-    
-      <category term="Docker" scheme="https://dreambo8563.github.io/categories/Docker/"/>
-    
-    
-      <category term="Docker" scheme="https://dreambo8563.github.io/tags/Docker/"/>
-    
-      <category term="Sentry" scheme="https://dreambo8563.github.io/tags/Sentry/"/>
-    
-      <category term="Node" scheme="https://dreambo8563.github.io/tags/Node/"/>
     
   </entry>
   
