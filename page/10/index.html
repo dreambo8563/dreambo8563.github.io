@@ -252,8 +252,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/akka_stream_Mat/" itemprop="url">
-                  AKKA中的mat
+                <a class="post-title-link" href="/2017/02/19/scala/" itemprop="url">
+                  Scala - 基本语法
                 </a>
               
             
@@ -282,18 +282,6 @@
                 <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/Scala/" itemprop="url" rel="index">
                     <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-
-              
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
-                    <span itemprop="name">Akka</span>
                   </a>
                 </span>
 
@@ -329,12 +317,12 @@
       
         
           
-          
-Remember those mysterious Mat type parameters on Source[+Out, +Mat], Flow[-In, +Out, +Mat]and Sink[-In, +Mat]? They represent the type of values thes
+          block of code as a param— ex:if we have a function likedef example(name:string)&#123;    var char = name[0]    char+'good' &#125;=&#123;&#125;
+the fun
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/akka_stream_Mat/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/scala/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -640,8 +628,8 @@ foreachval seq =S
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/scala_pattern_match_@/" itemprop="url">
-                  Scala - Pattern Match - @
+                <a class="post-title-link" href="/2017/02/19/scala_curry/" itemprop="url">
+                  Scala - Currying
                 </a>
               
             
@@ -705,13 +693,145 @@ foreachval seq =S
       
         
           
-          that match&#123;  case p @ Person(_, age) if p != bill =&gt; age  case Person(_, age) =&gt; age - 15  case _ =&gt; println("Not a person")&#125;
-
-如果直接
+          Currying多个参数,可以分步调用每次调用会返回一个func,直到你传入最后一个参数
+import scala.collection.immutable.&#123;Map =&gt; Map_, _&#125; object Currying &#123;    val messages = 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/scala_pattern_match_@/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/scala_curry/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/19/akka_stream_Mat/" itemprop="url">
+                  AKKA中的mat
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-19T18:28:04+08:00" content="2017-02-19">
+              2017-02-19
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+Remember those mysterious Mat type parameters on Source[+Out, +Mat], Flow[-In, +Out, +Mat]and Sink[-In, +Mat]? They represent the type of values thes
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/19/akka_stream_Mat/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1363,131 +1483,6 @@ ls -al ~/.ssh
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/26/Cmder_Git/" itemprop="url">
-                  Cmder - Git
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-26T15:19:36+08:00" content="2016-08-26">
-              2016-08-26
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tools/" itemprop="url" rel="index">
-                    <span itemprop="name">Tools</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          原文:https://www.awmoore.com/2015/01/14/setting-up-git-and-cmder/
-
-单独安装git
-Use Git and optional Unix tools from the Windows Command Prompt 
-EndLine选第一项
-
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/26/Cmder_Git/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1531,7 +1526,7 @@ EndLine选第一项
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">255</span>
+              <span class="site-state-item-count">256</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

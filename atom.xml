@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2019-01-22T06:17:59.336Z</updated>
+  <updated>2019-03-12T13:55:01.212Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue - vue-storage-watcher</title>
+    <link href="https://dreambo8563.github.io/2019/03/12/Vue-vue-storage-watcher/"/>
+    <id>https://dreambo8563.github.io/2019/03/12/Vue-vue-storage-watcher/</id>
+    <published>2019-03-12T13:52:27.000Z</published>
+    <updated>2019-03-12T13:55:01.212Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vue-storage-watcher"><a href="#vue-storage-watcher" class="headerlink" title="vue-storage-watcher"></a>vue-storage-watcher</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/watcher1.png" alt=""></p><p>the real reactive watcher for localStorge.<br>I search a few days for a lib to watch the ls, but failed.</p><p>you can use this tiny ls wrapper which works well with vue.js.</p><p>you can use this as persistent data layer even instead of vuex.</p><ul><li>familiar usage just like <strong>bus</strong>.</li><li>reactive</li><li>type supported</li><li>small size</li></ul><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><blockquote><p>npm install vue-storage-watcher –save</p></blockquote><h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lsWatcher <span class="keyword">from</span> <span class="string">"vue-storage-watcher"</span></span><br><span class="line"></span><br><span class="line">Vue.use(lsWatcher, &#123; <span class="attr">prefix</span>: <span class="string">"myproject_"</span> &#125;)</span><br></pre></td></tr></table></figure><blockquote><p>storage type</p></blockquote><ul><li>localStorage</li><li>sessionStorage</li></ul><h3 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h3><ul><li>prefix =&gt; default is “”</li><li>storage =&gt; default is “local” which means window.localStorage will be used as Storage Object. Another alternative is “session”</li></ul><h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><p>this.\$ls or this.\$ss in Component context for localStorage/sessionStorage<br>Vue.\$ls or Vue.\$ss in global.</p><blockquote><p>I will list basic api just with ls.</p></blockquote><h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.set(<span class="string">"token"</span>, <span class="string">"abccc"</span>)</span><br></pre></td></tr></table></figure><p>the value will be saved in storage with the <strong>prefix</strong> + key<br>and emit the changes to all the subscribers.</p><blockquote><p>you also can give the key an expire duration with the unit of ms</p></blockquote><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.set(<span class="string">"token"</span>, <span class="string">"abccc"</span>, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure><p>the key will be expried in 3s, you will get null after that.</p><h4 id="ttl"><a href="#ttl" class="headerlink" title="ttl"></a>ttl</h4><p>ttl will return <strong>-1</strong> if one of the following scenarios happen:</p><ul><li>the key is non-exist</li><li>the key is already expired</li><li>the key has no expire time</li></ul><p>else return the remaining lifetime with ms as the unit</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.ttl(<span class="string">"token"</span>)</span><br></pre></td></tr></table></figure><h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.get(<span class="string">"token"</span>, <span class="string">"default"</span>)</span><br></pre></td></tr></table></figure><p>get the value with a default return value if it’s not existed</p><h4 id="subscribe-the-key"><a href="#subscribe-the-key" class="headerlink" title="subscribe the key"></a>subscribe the key</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.on(<span class="string">"token"</span>, callback)</span><br></pre></td></tr></table></figure><p>subscribe the key in the storage, will trigger the callback function if any changes happen.</p><p>the return value is the handler need to be used to unsubscribe</p><blockquote><p>tricky<br>there is an immediate options as a third args which will trigger cb immediate if set <strong>true</strong></p></blockquote><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.on(<span class="string">"token"</span>, callback, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure><h4 id="unsubscribe-the-key"><a href="#unsubscribe-the-key" class="headerlink" title="unsubscribe the key"></a>unsubscribe the key</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = <span class="keyword">this</span>.$ls.on(<span class="string">"token"</span>, cb)</span><br><span class="line"><span class="keyword">this</span>.$ls.off(<span class="string">"token"</span>, handler)</span><br></pre></td></tr></table></figure><blockquote><p>please make sure you unsubscribe beforeDestroy the component</p></blockquote><h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.remove(<span class="string">"token"</span>)</span><br></pre></td></tr></table></figure><p>remove will delete the key in storage and emit all the subscribers with <strong>null</strong> value</p><h4 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.clear()</span><br></pre></td></tr></table></figure><p>delete all the keys with your <strong>prefix</strong>. and all the subscribers will <strong>not</strong> receive changes any more</p><h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.init()</span><br></pre></td></tr></table></figure><p>init will set all your current localStorge keys into the plugins</p><ul><li>add prefix for all the keys</li></ul><p>and then you can use <strong>get</strong> and <strong>on</strong> mehtod to make them reactive</p><h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul><li>if you want to using localStorage and sessionStorage at same page, pls use the plugin as following</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lsWatcher <span class="keyword">from</span> <span class="string">"vue-storage-watcher"</span></span><br><span class="line"></span><br><span class="line">Vue.use(&#123; ...lsWatcher &#125;, &#123; <span class="attr">prefix</span>: <span class="string">"myproject_"</span> &#125;)</span><br><span class="line"></span><br><span class="line">Vue.use(&#123; ...lsWatcher &#125;, &#123; <span class="attr">prefix</span>: <span class="string">"myproject_ss_"</span>, <span class="attr">storage</span>: <span class="string">"session"</span> &#125;)</span><br></pre></td></tr></table></figure><ul><li>possibly polyfill</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// wather polyfill for IE 11</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"core-js/fn/symbol"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"core-js/fn/map"</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;vue-storage-watcher&quot;&gt;&lt;a href=&quot;#vue-storage-watcher&quot; class=&quot;headerlink&quot; title=&quot;vue-storage-watcher&quot;&gt;&lt;/a&gt;vue-storage-watcher&lt;/h1&gt;&lt;p&gt;&lt;i
+      
+    
+    </summary>
+    
+      <category term="Vue" scheme="https://dreambo8563.github.io/categories/Vue/"/>
+    
+    
+      <category term="Vue" scheme="https://dreambo8563.github.io/tags/Vue/"/>
+    
+  </entry>
   
   <entry>
     <title>玩耍github</title>
@@ -545,31 +570,6 @@
     
     
       <category term="Tools" scheme="https://dreambo8563.github.io/tags/Tools/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端质量思考</title>
-    <link href="https://dreambo8563.github.io/2018/08/28/%E5%89%8D%E7%AB%AF%E8%B4%A8%E9%87%8F%E6%80%9D%E8%80%83/"/>
-    <id>https://dreambo8563.github.io/2018/08/28/前端质量思考/</id>
-    <published>2018-08-28T05:12:58.000Z</published>
-    <updated>2018-09-30T06:33:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>上周参加了来自百度同行的代码扫描平台的分享.<br>总结如下:<br>百度的代码扫描平台主要方式是对源代码的静态扫码, 做的比较突出的是 java 和 C++.<br>对于我们这种绝大部分技术栈是 php 的现状还不太适用.<br>通过对分享者的提问,了解到他们对其他语言 php, golang, js,py 等扫码基本上都是对开源或者商业方案的组合. 例如 sonar</p><p>本周在社区内碰巧看到几篇代码扫码的文章. 所以促进我思考了下如果咱们想用,能怎么用.<br>调研结果:</p><h3 id="靠近工程的维度"><a href="#靠近工程的维度" class="headerlink" title="靠近工程的维度:"></a>靠近工程的维度:</h3><ul><li>遵循前端规范模板</li><li>提交前需要 lint ( npm run lint)</li><li>根据插件统计,降低重复度 (&lt;3%)</li><li>圈复杂度 - IDE 插件(codeMetric) - 单个函数需要不能为红色. (复杂度超过 10)</li><li>重复率以 IDE 插件(JSCPD)为准, sonar 统计的不是很准</li><li>Sonar 扫描指标参考<ol><li>Bug - 需要为 A - must-fix</li><li>Vulnerability - 需要为 A must-fix</li><li>Code Smells - 可选-酌情清理 might-fix</li><li>可维护性 - A - must-fix</li><li>注释覆盖率(不能作为绝对依据, 命名的好很多时候不需要注释)</li></ol></li></ul><h3 id="靠近业务的维度"><a href="#靠近业务的维度" class="headerlink" title="靠近业务的维度:"></a>靠近业务的维度:</h3><ul><li>单元测试覆盖率</li><li>QA 自动化部分</li></ul><p>目前只做到 jenkins 里的 freestyle 的任务可以和 sonar 整合, pipeline 类型的还没找到好办法.</p><p>相关截图:<br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/lALPBY0V47KDmq7NAUrNBCA_1056_330.png" alt=""><br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/lALPBY0V47KCyeDNAhXNBZs_1435_533.png" alt=""><br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/lALPBY0V47KEtG_NA9nNA_g_1016_985.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;上周参加了来自百度同行的代码扫描平台的分享.&lt;br&gt;总结如下:&lt;br&gt;百度的代码扫描平台主要方式是对源代码的静态扫码, 做的比较突出的是 java 和 C++.&lt;br&gt;对于我们这种绝大部分技术栈是 php 的现状还不太适用.&lt;br&gt;通过对分享者的提问,了解到他们对其他语言 
-      
-    
-    </summary>
-    
-      <category term="Thinking" scheme="https://dreambo8563.github.io/categories/Thinking/"/>
-    
-    
-      <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
     
   </entry>
   
