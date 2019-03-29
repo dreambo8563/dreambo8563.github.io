@@ -1,1 +1,1 @@
-{"name":"Vincent's Blog","short_name":"Vincent","theme_color":"#2c6fa4","background_color":"#343b41","display":"browser","scope":"/","start_url":"/","icons":[{"src":"images/avatar.png","sizes":"72x72","type":"image/png"},{"src":"images/avatar.png","sizes":"144x144","type":"image/png"}]}
+{"name":"Vincent's Blog","short_name":"Vincent","theme_color":"#2c6fa4","background_color":"#343b41","display":"fullscreen","scope":"/","start_url":"/","icons":[{"src":"images/avatar.png","sizes":"72x72","type":"image/png"},{"src":"images/avatar.png","sizes":"144x144","type":"image/png"}]}
