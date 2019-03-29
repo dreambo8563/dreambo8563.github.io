@@ -65,7 +65,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Vue,element,">
+  <meta name="keywords" content="vue,element,">
 
 
 
@@ -84,14 +84,14 @@
 
 
 <meta name="description" content="源码&amp;lt;template&amp;gt;// 根据type不同引入不同的class  &amp;lt;button    class=&quot;el-button&quot;    @click=&quot;handleClick&quot;    :disabled=&quot;buttonDisabled || loading&quot;    :autofocus=&quot;autofocus&quot;    :type=&quot;nativeType&quot;    :class=&quot;[">
-<meta name="keywords" content="Vue,element">
+<meta name="keywords" content="vue,element">
 <meta property="og:type" content="article">
 <meta property="og:title" content="elementUI 组件解读 button">
 <meta property="og:url" content="https://dreambo8563.github.io/2018/04/24/elementUI-组件解读/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="源码&amp;lt;template&amp;gt;// 根据type不同引入不同的class  &amp;lt;button    class=&quot;el-button&quot;    @click=&quot;handleClick&quot;    :disabled=&quot;buttonDisabled || loading&quot;    :autofocus=&quot;autofocus&quot;    :type=&quot;nativeType&quot;    :class=&quot;[">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-07-19T05:11:10.896Z">
+<meta property="og:updated_time" content="2019-03-29T07:53:11.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elementUI 组件解读 button">
 <meta name="twitter:description" content="源码&amp;lt;template&amp;gt;// 根据type不同引入不同的class  &amp;lt;button    class=&quot;el-button&quot;    @click=&quot;handleClick&quot;    :disabled=&quot;buttonDisabled || loading&quot;    :autofocus=&quot;autofocus&quot;    :type=&quot;nativeType&quot;    :class=&quot;[">
@@ -278,8 +278,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Vue/" itemprop="url" rel="index">
-                    <span itemprop="name">Vue</span>
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
                   </a>
                 </span>
 
@@ -314,6 +314,7 @@
 
       
         <h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据type不同引入不同的class</span></span><br><span class="line">  &lt;button</span><br><span class="line">    <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-button"</span></span><br><span class="line">    @click=<span class="string">"handleClick"</span></span><br><span class="line">    :disabled=<span class="string">"buttonDisabled || loading"</span></span><br><span class="line">    :autofocus=<span class="string">"autofocus"</span></span><br><span class="line">    :type=<span class="string">"nativeType"</span></span><br><span class="line">    :<span class="class"><span class="keyword">class</span></span>=<span class="string">"[</span></span><br><span class="line"><span class="string">      type ? 'el-button--' + type : '',</span></span><br><span class="line"><span class="string">      buttonSize ? 'el-button--' + buttonSize : '',</span></span><br><span class="line"><span class="string">      &#123;</span></span><br><span class="line"><span class="string">        'is-disabled': buttonDisabled,</span></span><br><span class="line"><span class="string">        'is-loading': loading,</span></span><br><span class="line"><span class="string">        'is-plain': plain,</span></span><br><span class="line"><span class="string">        'is-round': round,</span></span><br><span class="line"><span class="string">        'is-circle': circle</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    ]"</span></span><br><span class="line">  &gt;</span><br><span class="line">  <span class="comment">// loading属性显示</span></span><br><span class="line">    &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"el-icon-loading"</span> v-<span class="keyword">if</span>=<span class="string">"loading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    <span class="comment">// 提供了icon属性并且非loading的时候显示 icon</span></span><br><span class="line">    &lt;i :<span class="class"><span class="keyword">class</span></span>=<span class="string">"icon"</span> v-<span class="keyword">if</span>=<span class="string">"icon &amp;&amp; !loading"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span></span><br><span class="line">    <span class="comment">// 如果有slot就嵌入显示</span></span><br><span class="line">    &lt;span v-<span class="keyword">if</span>=<span class="string">"$slots.default"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line">  &lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'ElButton'</span>,</span><br><span class="line">    <span class="comment">// 这个注入是他的父级以上的组件传递进来的, inject和provide是一对,类似react的context的传递能力</span></span><br><span class="line">    <span class="comment">// 这里应该是当button组件被Form组件或者FormItem组件包裹的时候会传特定的值进来</span></span><br><span class="line">    inject: &#123;</span><br><span class="line">      elForm: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      elFormItem: &#123;</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 属性类型验证,很好的最佳时间</span></span><br><span class="line">    props: &#123;</span><br><span class="line">      type: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'default'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      size: <span class="built_in">String</span>,</span><br><span class="line">      icon: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">''</span></span><br><span class="line">      &#125;,</span><br><span class="line">      nativeType: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'button'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      loading: <span class="built_in">Boolean</span>,</span><br><span class="line">      disabled: <span class="built_in">Boolean</span>,</span><br><span class="line">      plain: <span class="built_in">Boolean</span>,</span><br><span class="line">      autofocus: <span class="built_in">Boolean</span>,</span><br><span class="line">      round: <span class="built_in">Boolean</span>,</span><br><span class="line">      circle: <span class="built_in">Boolean</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        <span class="comment">// _xxx一般是内部使用,这里看不出干什么用,估计要看到FormItem/Form的时候才能理解</span></span><br><span class="line">      _elFormItemSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">this</span>.elFormItem || &#123;&#125;).elFormItemSize;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// 尺寸 来自不同的地方的属性传递,依次作为fallback</span></span><br><span class="line">      buttonSize() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.size || <span class="keyword">this</span>._elFormItemSize || (<span class="keyword">this</span>.$ELEMENT || &#123;&#125;).size;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// form disable的时候button也会跟着disable</span></span><br><span class="line">      buttonDisabled() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.disabled || (<span class="keyword">this</span>.elForm || &#123;&#125;).disabled;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      handleClick(evt) &#123;</span><br><span class="line">          <span class="comment">// 点击事件直接向外传递</span></span><br><span class="line">        <span class="keyword">this</span>.$emit(<span class="string">'click'</span>, evt);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -333,7 +334,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Vue/" rel="tag">#Vue</a>
+            <a href="/tags/vue/" rel="tag">#vue</a>
           
             <a href="/tags/element/" rel="tag">#element</a>
           
@@ -428,7 +429,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -437,7 +438,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

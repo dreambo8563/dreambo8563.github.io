@@ -122,7 +122,7 @@
     <link href="https://dreambo8563.github.io/2019/01/18/Element-%E5%81%B7%E5%81%B7%E5%BC%95%E7%94%A8%E5%86%85%E9%83%A8%E6%96%B9%E6%B3%95/"/>
     <id>https://dreambo8563.github.io/2019/01/18/Element-偷偷引用内部方法/</id>
     <published>2019-01-18T02:55:07.000Z</published>
-    <updated>2019-01-18T03:00:32.265Z</updated>
+    <updated>2019-03-29T07:53:07.162Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Element-ui-源码的财富"><a href="#Element-ui-源码的财富" class="headerlink" title="Element-ui 源码的财富"></a>Element-ui 源码的财富</h3><p>源码里面自带了很多小函数, 甚至是指令等东西. 很多都值得我们去阅读和学习.</p><h3 id="懒"><a href="#懒" class="headerlink" title="懒"></a>懒</h3><ul><li>不想自己造轮子</li><li>不想再引入更多的包</li><li>源码里有能不能用?</li></ul><h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  getFirstDayOfMonth,</span><br><span class="line">  nextDate</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"element-ui/packages/date-picker/src/util"</span></span><br></pre></td></tr></table></figure><p>这样 <strong>import</strong> 就会引入 <a href="https://github.com/ElemeFE/element/blob/dev/packages/date-picker/src/util/index.js" target="_blank" rel="noopener">https://github.com/ElemeFE/element/blob/dev/packages/date-picker/src/util/index.js</a> 这个文件里面 export 的方法. 其他类似</p><p><strong>element-ui</strong> 空间默认走的 src 目录</p>]]></content>
     
@@ -135,10 +135,10 @@
     
     </summary>
     
-      <category term="Vue" scheme="https://dreambo8563.github.io/categories/Vue/"/>
+      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
     
     
-      <category term="Vue" scheme="https://dreambo8563.github.io/tags/Vue/"/>
+      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
     
       <category term="element" scheme="https://dreambo8563.github.io/tags/element/"/>
     

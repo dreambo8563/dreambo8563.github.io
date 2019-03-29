@@ -1415,8 +1415,8 @@ $ brew install postgres
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/scala_Option_collect/" itemprop="url">
-                  Scala - Option - collect
+                <a class="post-title-link" href="/2017/02/19/scala_curry/" itemprop="url">
+                  Scala - Currying
                 </a>
               
             
@@ -1480,11 +1480,12 @@ $ brew install postgres
       
         
           
-          Option 操作中的collectdef onlyHttps[A](action: Action[A]) = Action.async(action.parser) &#123; request =&gt;  request.headers.get("X-Forwarded-Proto").col
+          Currying多个参数,可以分步调用每次调用会返回一个func,直到你传入最后一个参数
+import scala.collection.immutable.&#123;Map =&gt; Map_, _&#125; object Currying &#123;    val messages = 
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/scala_Option_collect/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/scala_curry/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1565,7 +1566,7 @@ $ brew install postgres
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1574,7 +1575,7 @@ $ brew install postgres
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">87</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
