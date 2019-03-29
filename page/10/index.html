@@ -253,8 +253,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/scala_Option_collect/" itemprop="url">
-                  Scala - Option - collect
+                <a class="post-title-link" href="/2017/02/19/scala/" itemprop="url">
+                  Scala - 基本语法
                 </a>
               
             
@@ -318,11 +318,12 @@
       
         
           
-          Option 操作中的collectdef onlyHttps[A](action: Action[A]) = Action.async(action.parser) &#123; request =&gt;  request.headers.get("X-Forwarded-Proto").col
+          block of code as a param— ex:if we have a function likedef example(name:string)&#123;    var char = name[0]    char+'good' &#125;=&#123;&#125;
+the fun
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/scala_Option_collect/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/scala/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -510,139 +511,6 @@ import play.api.mvc._cl
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/akka_stream_Mat/" itemprop="url">
-                  AKKA中的mat
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-02-19T18:28:04+08:00" content="2017-02-19">
-              2017-02-19
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-
-              
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
-                    <span itemprop="name">Akka</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-Remember those mysterious Mat type parameters on Source[+Out, +Mat], Flow[-In, +Out, +Mat]and Sink[-In, +Mat]? They represent the type of values thes
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/akka_stream_Mat/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2017/02/19/akka_stream_basic/" itemprop="url">
                   Defining and running streams基础
                 </a>
@@ -777,8 +645,8 @@ Source A proces
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/scala_pattern_match_@/" itemprop="url">
-                  Scala - Pattern Match - @
+                <a class="post-title-link" href="/2017/02/19/akka_stream_Mat/" itemprop="url">
+                  AKKA中的mat
                 </a>
               
             
@@ -807,6 +675,18 @@ Source A proces
                 <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/Scala/" itemprop="url" rel="index">
                     <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
                   </a>
                 </span>
 
@@ -842,13 +722,12 @@ Source A proces
       
         
           
-          that match&#123;  case p @ Person(_, age) if p != bill =&gt; age  case Person(_, age) =&gt; age - 15  case _ =&gt; println("Not a person")&#125;
-
-如果直接
+          
+Remember those mysterious Mat type parameters on Source[+Out, +Mat], Flow[-In, +Out, +Mat]and Sink[-In, +Mat]? They represent the type of values thes
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/scala_pattern_match_@/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/akka_stream_Mat/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -970,6 +849,128 @@ foreachval seq =S
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/02/19/scala_seq/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/19/scala_pattern_match_@/" itemprop="url">
+                  Scala - Pattern Match - @
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-19T18:28:04+08:00" content="2017-02-19">
+              2017-02-19
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          that match&#123;  case p @ Person(_, age) if p != bill =&gt; age  case Person(_, age) =&gt; age - 15  case _ =&gt; println("Not a person")&#125;
+
+如果直接
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/19/scala_pattern_match_@/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
