@@ -1235,7 +1235,7 @@ var _wpcf7 = {"loaderUrl":"http:\/\/wp1.themexlab.com\/wp\/cards\/wp-content\/pl
         try { (function () { for (var lastpass_iter = 0; lastpass_iter < document.forms.length; lastpass_iter++) { var lastpass_f = document.forms[lastpass_iter]; if (typeof (lastpass_f.lpsubmitorig2) == "undefined") { lastpass_f.lpsubmitorig2 = lastpass_f.submit; if (typeof (lastpass_f.lpsubmitorig2) == 'object') { continue; } lastpass_f.submit = function () { var form = this; var customEvent = document.createEvent("Event"); customEvent.initEvent("lpCustomEvent", true, true); var d = document.getElementById("hiddenlpsubmitdiv"); if (d) { for (var i = 0; i < document.forms.length; i++) { if (document.forms[i] == form) { if (typeof (d.innerText) != 'undefined') { d.innerText = i.toString(); } else { d.textContent = i.toString(); } } } d.dispatchEvent(customEvent); } form.lpsubmitorig2(); } } } })() } catch (e) { }
     </script>
 <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1554479019256')
+  navigator.serviceWorker.register('/sw.js?t=1554479353503')
     .then(function () {console.log('ServiceWorker Register Successfully.')})
     .catch(function (e) {console.error(e)});
 }
