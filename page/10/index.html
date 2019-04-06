@@ -203,16 +203,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br>
-            
-            About
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -493,8 +483,8 @@ the fun
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/play_http_ ActionFunction/" itemprop="url">
-                  Play - ActionFunction
+                <a class="post-title-link" href="/2017/02/19/akka_stream_Mat/" itemprop="url">
+                  AKKA中的mat
                 </a>
               
             
@@ -533,8 +523,8 @@ the fun
 
               
                 <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/Play/" itemprop="url" rel="index">
-                    <span itemprop="name">Play</span>
+                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
+                    <span itemprop="name">Akka</span>
                   </a>
                 </span>
 
@@ -570,16 +560,133 @@ the fun
       
         
           
-          ActionFunction 其实是对request的处理
-自定义请求类型
-提取或者处理请求的各种参数
-
-https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition
-import play.api.mvc._cl
+          
+Remember those mysterious Mat type parameters on Source[+Out, +Mat], Flow[-In, +Out, +Mat]and Sink[-In, +Mat]? They represent the type of values thes
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/play_http_ ActionFunction/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/akka_stream_Mat/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/02/19/scala_curry/" itemprop="url">
+                  Scala - Currying
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2017-02-19T18:28:04+08:00" content="2017-02-19">
+              2017-02-19
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="/categories/Scala/" itemprop="url" rel="index">
+                    <span itemprop="name">Scala</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Currying多个参数,可以分步调用每次调用会返回一个func,直到你传入最后一个参数
+import scala.collection.immutable.&#123;Map =&gt; Map_, _&#125; object Currying &#123;    val messages = 
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/19/scala_curry/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -764,8 +871,8 @@ Source A proces
             
               
                 
-                <a class="post-title-link" href="/2017/02/19/akka_stream_Mat/" itemprop="url">
-                  AKKA中的mat
+                <a class="post-title-link" href="/2017/02/19/play_http_ ActionFunction/" itemprop="url">
+                  Play - ActionFunction
                 </a>
               
             
@@ -804,8 +911,8 @@ Source A proces
 
               
                 <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/Akka/" itemprop="url" rel="index">
-                    <span itemprop="name">Akka</span>
+                  <a href="/categories/Scala/Play/" itemprop="url" rel="index">
+                    <span itemprop="name">Play</span>
                   </a>
                 </span>
 
@@ -841,12 +948,16 @@ Source A proces
       
         
           
-          
-Remember those mysterious Mat type parameters on Source[+Out, +Mat], Flow[-In, +Out, +Mat]and Sink[-In, +Mat]? They represent the type of values thes
+          ActionFunction 其实是对request的处理
+自定义请求类型
+提取或者处理请求的各种参数
+
+https://www.playframework.com/documentation/2.5.x/ScalaActionsComposition
+import play.api.mvc._cl
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/akka_stream_Mat/#more" rel="contents">
+            <a class="btn" href="/2017/02/19/play_http_ ActionFunction/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1090,127 +1201,6 @@ foreachval seq =S
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/02/19/scala_pattern_match_@/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/19/scala_curry/" itemprop="url">
-                  Scala - Currying
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2017-02-19T18:28:04+08:00" content="2017-02-19">
-              2017-02-19
-            </time>
-          </span>
-
-          
-            <span class="post-category">
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
-                  <a href="/categories/Scala/" itemprop="url" rel="index">
-                    <span itemprop="name">Scala</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Currying多个参数,可以分步调用每次调用会返回一个func,直到你传入最后一个参数
-import scala.collection.immutable.&#123;Map =&gt; Map_, _&#125; object Currying &#123;    val messages = 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/19/scala_curry/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1769,7 +1759,7 @@ var rabbit = amqp.createConnection();// rabbit ready 后创建了ex 和 charge �
   
 
 <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1554481968454')
+  navigator.serviceWorker.register('/sw.js?t=1554552677923')
     .then(function () {console.log('ServiceWorker Register Successfully.')})
     .catch(function (e) {console.error(e)});
 }
