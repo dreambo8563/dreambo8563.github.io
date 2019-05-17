@@ -1,0 +1,698 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="electronjs,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="最近看到很多 electronjs 的文章, 而且想做点小工具. 所以就有 Pt 很久没看 angular 了(之前看的时候是 2, 现在 8 都 RC 了), 所以放弃了日常使用的 Vue, 复习下 angular s 性能相关的自己所学不多, 所以想依靠 chrome, 所以看上了 Puppeteer  先看个动图吧: 好了理由说完了, 说下基本的过程吧. 当然重要的是这个学习的过程. 脚">
+<meta name="keywords" content="electronjs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron - Pt">
+<meta property="og:url" content="https://dreambo8563.github.io/2019/05/17/Electron-Pt/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="最近看到很多 electronjs 的文章, 而且想做点小工具. 所以就有 Pt 很久没看 angular 了(之前看的时候是 2, 现在 8 都 RC 了), 所以放弃了日常使用的 Vue, 复习下 angular s 性能相关的自己所学不多, 所以想依靠 chrome, 所以看上了 Puppeteer  先看个动图吧: 好了理由说完了, 说下基本的过程吧. 当然重要的是这个学习的过程. 脚">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/Pt/master/src/favicon.256x256.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/pt.gif">
+<meta property="og:updated_time" content="2019-05-17T07:39:47.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Electron - Pt">
+<meta name="twitter:description" content="最近看到很多 electronjs 的文章, 而且想做点小工具. 所以就有 Pt 很久没看 angular 了(之前看的时候是 2, 现在 8 都 RC 了), 所以放弃了日常使用的 Vue, 复习下 angular s 性能相关的自己所学不多, 所以想依靠 chrome, 所以看上了 Puppeteer  先看个动图吧: 好了理由说完了, 说下基本的过程吧. 当然重要的是这个学习的过程. 脚">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/Pt/master/src/favicon.256x256.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Electron - Pt | Vincent's Blog </title>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Electron - Pt
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-05-17T15:30:05+08:00" content="2019-05-17">
+              2019-05-17
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                  <a href="/categories/electronjs/" itemprop="url" rel="index">
+                    <span itemprop="name">electronjs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://raw.githubusercontent.com/dreambo8563/Pt/master/src/favicon.256x256.png" alt=""></p>
+<ul>
+<li>最近看到很多 electronjs 的文章, 而且想做点小工具. 所以就有 Pt</li>
+<li>很久没看 angular 了(之前看的时候是 2, 现在 8 都 RC 了), 所以放弃了日常使用的 Vue, 复习下 angular</li>
+<li>s 性能相关的自己所学不多, 所以想依靠 chrome, 所以看上了 Puppeteer</li>
+</ul>
+<p>先看个动图吧:<br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/pt.gif" alt=""></p>
+<p>好了理由说完了, 说下基本的过程吧. 当然重要的是这个学习的过程.</p>
+<p>脚手架: <a href="https://github.com/maximegris/angular-electron" target="_blank" rel="noopener">https://github.com/maximegris/angular-electron</a></p>
+<p>然后做了几个步骤:</p>
+<ul>
+<li>整合 pupeteer, 我这里使用了 pupeteer-core, 所以需要机器上自带 chrome</li>
+<li>整合下 material (angular 生态里 UI 库确实还不太行, material 还是那么拖后腿)</li>
+<li>看了 2 天 angular 官网走了一遍 hero</li>
+<li>electronjs 部分基本都是官网和参考例子(<a href="https://github.com/hokein/electron-sample-apps" target="_blank" rel="noopener">https://github.com/hokein/electron-sample-apps</a>)</li>
+</ul>
+<p>##基本想法:</p>
+<p>需要一些现成的数据:<br>资源使用率 - 这个貌似很多人都不太重视.<br>lighthouse 报告- 这个比较全面<br>其实,我们组里的很多前端都没用过上面两个东西.</p>
+<p>##获取数据:</p>
+<p>puppeteer 整合完了, 参考例子 <a href="https://github.com/GoogleChromeLabs/puppeteer-examples" target="_blank" rel="noopener">https://github.com/GoogleChromeLabs/puppeteer-examples</a><br>使用率方面我是改了例子的代码, 生成一个数组出来, 例子里是输出到终端了.<br>lighthouse 基本就是直接拿来用的, 改的地方不多.</p>
+<p>##展示:<br>Material 的 Table 来做列表,这里也自己写了个 pipe. 而且觉得 angular 的组件真的不太强大…<br>search button 加个缩放小动画<br>lighthouse button 来个透明度小动画<br>使用率进度条来个 width 的动画<br>别看就一个页面, animation 还用上了.</p>
+<hr>
+<p>lighthouse 报告展示的问题,因为拿到的是一个整页面. 所以开始考虑的方向就是 iframe 这种. 官方不推荐 webview. 最终选择了新开一个子 window. 这个报告相对独立. 自带亮暗两种主题, 默认是亮的, 为了配合我列表页的颜色, 我用代码改成了暗主题.</p>
+<h2 id="打包"><a href="#打包" class="headerlink" title="打包:"></a>打包:</h2><p>我打包搜了好久, 最后的方法是 Travis 上打 linux 的包, 本地 MBP 打 mac 的 dmg. windows 还没弄, 看其他人文章是需要另一个 CI.</p>
+<h2 id="Logo"><a href="#Logo" class="headerlink" title="Logo:"></a>Logo:</h2><p>我们的设计师同学不爱帮忙, 所以我找了对面可爱的前端小伙伴设计了. 鄙视下不会 PS 的自己. 设计方面自己还真的挺想学下的.</p>
+<h2 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题:"></a>一些问题:</h2><p>有些网站经常会报错, 超时什么的. 这个还得继续看看是什么情况, 难道 SPA 的 都不行?</p>
+<p>有经验的大佬请留言, 给小弟点思路.</p>
+<p>仓库地址:</p>
+<p><a href="https://github.com/dreambo8563/Pt" target="_blank" rel="noopener">https://github.com/dreambo8563/Pt</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/electronjs/" rel="tag">#electronjs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/12/Vue-provide-inject应用/" rel="next" title="Vue - provide/inject应用">
+                <i class="fa fa-chevron-left"></i> Vue - provide/inject应用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">262</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#打包"><span class="nav-number">1.</span> <span class="nav-text">打包:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logo"><span class="nav-number">2.</span> <span class="nav-text">Logo:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些问题"><span class="nav-number">3.</span> <span class="nav-text">一些问题:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+<script>if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js?t=1558078795831')
+    .then(function () {console.log('ServiceWorker Register Successfully.')})
+    .catch(function (e) {console.error(e)});
+}
+</script></body>
+</html>
