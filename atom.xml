@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2019-05-17T07:39:47.733Z</updated>
+  <updated>2019-05-23T07:34:22.437Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue - Load chunk xxxx failed</title>
+    <link href="https://dreambo8563.github.io/2019/05/23/Vue-Load-chunk-xxxx-failed/"/>
+    <id>https://dreambo8563.github.io/2019/05/23/Vue-Load-chunk-xxxx-failed/</id>
+    <published>2019-05-23T07:26:29.000Z</published>
+    <updated>2019-05-23T07:34:22.437Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h3><p>code split 是 SPA 中常用的优化方式, 一般基于路由分割. 每个路由会拆分为不同的独立 js.</p><p>但不管是 react /vue 有时都会遇到切换路由的时候发生 <em>Load chunk xxxx failed</em> 的错误. 几率不大, 但是目前我还未找到一个大家公认的原因.</p><p>所有我们需要 catch 这个错误.</p><h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">router.onError(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> pattern = <span class="regexp">/Loading chunk ([a-z]|[0-9]|-)+ failed/g</span>;</span><br><span class="line">  <span class="keyword">const</span> isChunkLoadFailed = error.message.match(pattern);</span><br><span class="line">  <span class="comment">// const targetPath = router.fullPath;</span></span><br><span class="line">  <span class="keyword">if</span> (isChunkLoadFailed) &#123;</span><br><span class="line">    Vue.prototype.$alert(<span class="string">'网页资源加载失败,请刷新页面'</span>, <span class="string">'提示'</span>, &#123;</span><br><span class="line">      confirmButtonText: <span class="string">'确定'</span>,</span><br><span class="line">      callback: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        location.replace(location.href);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>catch 到给用户一个提示, 让他刷新页面</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;错误描述&quot;&gt;&lt;a href=&quot;#错误描述&quot; class=&quot;headerlink&quot; title=&quot;错误描述&quot;&gt;&lt;/a&gt;错误描述&lt;/h3&gt;&lt;p&gt;code split 是 SPA 中常用的优化方式, 一般基于路由分割. 每个路由会拆分为不同的独立 js.&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>Electron - Pt</title>
@@ -533,35 +559,6 @@
       <category term="Buttons" scheme="https://dreambo8563.github.io/tags/Buttons/"/>
     
       <category term="Gradient" scheme="https://dreambo8563.github.io/tags/Gradient/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Etcd - 分布式配置中心2 - runtime切换配置</title>
-    <link href="https://dreambo8563.github.io/2018/09/18/Etcd-%E5%88%86%E5%B8%83%E5%BC%8F%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%832-runtime%E5%88%87%E6%8D%A2%E9%85%8D%E7%BD%AE/"/>
-    <id>https://dreambo8563.github.io/2018/09/18/Etcd-分布式配置中心2-runtime切换配置/</id>
-    <published>2018-09-18T08:42:32.000Z</published>
-    <updated>2018-09-18T09:07:56.886Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>背景接上一篇 <strong>Etcd - 分布式配置中心</strong><br>这里是使用 etcd 获取配置信息,后在程序中热切换配置的例子</p><h3 id="代码调用流程"><a href="#代码调用流程" class="headerlink" title="代码调用流程"></a>代码调用流程</h3><ul><li>controllers</li></ul><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> controllers</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"github.com/jinzhu/gorm"</span></span><br><span class="line"><span class="string">"vincent.com/iris-demo/config"</span></span><br><span class="line"><span class="string">"vincent.com/iris-demo/services"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//Todo - model</span></span><br><span class="line"><span class="keyword">type</span> Todo <span class="keyword">struct</span> &#123;</span><br><span class="line">gorm.Model</span><br><span class="line">Desc <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">services.DB.AutoMigrate(&amp;Todo&#123;&#125;)</span><br><span class="line"><span class="keyword">go</span> config.StartWatch()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// AddTodo - insert todo item</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">AddTodo</span><span class="params">(desc <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"><span class="comment">// fmt.Println(services.DB)</span></span><br><span class="line">services.DB.Create(&amp;Todo&#123;Desc: desc&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>services</li></ul><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> services</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"github.com/jinzhu/gorm"</span></span><br><span class="line">_ <span class="string">"github.com/jinzhu/gorm/dialects/mysql"</span> <span class="comment">//import driver</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// DB instantce</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">DB    *gorm.DB</span><br><span class="line">preDB *gorm.DB</span><br><span class="line">err   error</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="comment">// initDb("root:my-secret-pw@(localhost:4306)/test2?charset=utf8&amp;parseTime=True&amp;loc=Local")</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//InitDb -</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">InitDb</span><span class="params">(dialects <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line"><span class="keyword">if</span> DB != <span class="literal">nil</span> &#123;</span><br><span class="line">preDB = DB</span><br><span class="line"><span class="keyword">defer</span> preDB.Close()</span><br><span class="line">&#125;</span><br><span class="line">DB, err = gorm.Open(<span class="string">"mysql"</span>, dialects)</span><br><span class="line"><span class="comment">// defer</span></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">DB.Close()</span><br><span class="line"><span class="built_in">panic</span>(<span class="string">"failed to connect database"</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>config</li></ul><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> config</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"context"</span></span><br><span class="line"><span class="string">"log"</span></span><br><span class="line"><span class="string">"time"</span></span><br><span class="line"></span><br><span class="line"><span class="string">"go.etcd.io/etcd/clientv3"</span></span><br><span class="line"><span class="string">"vincent.com/iris-demo/services"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// constants</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">cli *clientv3.Client</span><br><span class="line">err error</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">init</span><span class="params">()</span></span> &#123;</span><br><span class="line">cli, err = clientv3.New(clientv3.Config&#123;</span><br><span class="line">Endpoints:   []<span class="keyword">string</span>&#123;<span class="string">"http://127.0.0.1:23790"</span>, <span class="string">"http://127.0.0.1:23791"</span>&#125;,</span><br><span class="line">DialTimeout: <span class="number">5</span> * time.Second,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="comment">// handle error!</span></span><br><span class="line">cli.Close()</span><br><span class="line">log.Fatalln(err.Error())</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// fmt.Printf("cli init finished")</span></span><br><span class="line">getDBString()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetDBString -</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getDBString</span><span class="params">()</span></span> &#123;</span><br><span class="line">resp, err := cli.Get(context.Background(), <span class="string">"sample_key"</span>)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">log.Fatal(<span class="string">"get key error"</span>, err)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// fmt.Printf("get the sample_key: %v\n", string(resp.Kvs[0].Value))</span></span><br><span class="line"><span class="comment">// log.Fatal("break now")</span></span><br><span class="line"><span class="comment">// DBch &lt;- string(resp.Kvs[0].Value)</span></span><br><span class="line">services.InitDb(<span class="keyword">string</span>(resp.Kvs[<span class="number">0</span>].Value))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//StartWatch -</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">StartWatch</span><span class="params">()</span></span> &#123;</span><br><span class="line">rch := cli.Watch(context.Background(), <span class="string">"sample_key"</span>)</span><br><span class="line"><span class="keyword">for</span> wresp := <span class="keyword">range</span> rch &#123;</span><br><span class="line"><span class="keyword">for</span> _, ev := <span class="keyword">range</span> wresp.Events &#123;</span><br><span class="line">services.InitDb(<span class="keyword">string</span>(ev.Kv.Value))</span><br><span class="line"><span class="comment">// fmt.Printf("%s %q : %q\n", ev.Type, ev.Kv.Key, ev.Kv.Value)</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="解读"><a href="#解读" class="headerlink" title="解读"></a>解读</h4><p>controllers 初试化会先初始化 import 的几个包.<br>services 的 init 是空的,config 的 init,<br>先获取 etcd 的特定节点的配置 -&gt; 调用 InitDb 初始化数据库实例 -&gt; controllers 会  启动一个 goroutine watch 节点信息的变化 -&gt; 信息变化会从新触发 InitDb 产生新的数据库实例,并且关闭旧的实例连接</p><h3 id="简单测试"><a href="#简单测试" class="headerlink" title="简单测试"></a>简单测试</h3><p>用 jmeter 100 个现成访问 /hello 接口, 手动切换节点信息</p><blockquote><p>ETCDCTL_API=3 ./etcdctl put sample_key ‘root:my-secret-pw@(localhost:3306)/dbname’</p></blockquote><p>整个程序过程中没有中断和报错, 但会时不时有错误信息 Mysql resource temporarily unavailable, 搜了下一般是链接数满了,或者内存不够用等造成的,应该是太大负载造成的, 确实也造成了数据的丢失.这个其实有个问题, 为什么资源不可用的情况下,gorm 没有  抛 error.  但是这个测试大概率和切换是没有关系, 说明切换的过程其实是成功的, 两个数据库里都是有大量数据的,  并且没有因为切换生成新实例的过程而报错. watch 的过程也是起作用的.<br>问题 2: 如果 etcd 集群和客户端中间失联了,  客户端应该有个 fallback 的方案,比如启动的时候走本地配置文件.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h3&gt;&lt;p&gt;背景接上一篇 &lt;strong&gt;Etcd - 分布式配置中心&lt;/strong&gt;&lt;br&gt;这里是使用 etcd 获取配置信息,后在程序中热切换配置
-      
-    
-    </summary>
-    
-      <category term="Golang" scheme="https://dreambo8563.github.io/categories/Golang/"/>
-    
-      <category term="分布式" scheme="https://dreambo8563.github.io/categories/Golang/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    
-      <category term="Golang" scheme="https://dreambo8563.github.io/tags/Golang/"/>
-    
-      <category term="Etcd" scheme="https://dreambo8563.github.io/tags/Etcd/"/>
     
   </entry>
   
