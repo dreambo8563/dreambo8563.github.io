@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2019-05-23T07:34:22.437Z</updated>
+  <updated>2019-06-16T13:34:47.307Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue 搭配 Typescript 体验总结</title>
+    <link href="https://dreambo8563.github.io/2019/06/16/Vue-%E6%90%AD%E9%85%8D-Typescript-%E4%BD%93%E9%AA%8C%E6%80%BB%E7%BB%93/"/>
+    <id>https://dreambo8563.github.io/2019/06/16/Vue-搭配-Typescript-体验总结/</id>
+    <published>2019-06-16T13:33:22.000Z</published>
+    <updated>2019-06-16T13:34:47.307Z</updated>
+    
+    <content type="html"><![CDATA[<p align="center"><br>    <a href="https://www.iviewui.com" target="_blank" rel="noopener"><br>        <img width="200" src="https://user-gold-cdn.xitu.io/2019/6/5/16b25edae09075a2?w=128&h=128&f=svg&s=1837"><br>    </a><br></p><p>工作中我们使用的部分 typescript + Vue + Element-ui.</p><p>最近想尝试下用 Class 的风格写组件, 更多的引入类型来约束开发, 提高体验. 所以本周开了一个仓库.</p><ol><li><p>选定目标为 iview-admin (iview 之前没用过,所以顺便搞下)</p></li><li><p>引入 vue-class-component/vue-property-decorator/vuex-class</p></li><li><p>逐个组件/页面转为 typescript 和 class 风格</p></li></ol><p>地址:</p><p><a href="https://github.com/dreambo8563/typescript-iview-admin" target="_blank" rel="noopener">https://github.com/dreambo8563/typescript-iview-admin</a></p><p><img src="https://user-gold-cdn.xitu.io/2019/6/5/16b25e98eacdd571?w=2850&amp;h=1414&amp;f=png&amp;s=338122" alt="image"></p><p>总结:</p><p>体验还不太行. 类型提示甚至会错误显示(不知道是不是 vscode 的问题 )</p><p>jsx 的使用没有找到办法, 部分代码我只能转换为 render 函数来搞</p><p>有些第三方没有 typings, 不得不用 any.</p><p>当然在 ts 的加持下,发现了原仓库代码的一些问题, 比如很多 undefined 的情况没有判断处理, 还有未使用的函数.<br>使用未声明的变量等等</p><p>所以这次花了几天时间做这个实践还是有意义的. 3.0 稳定之前<strong>不宜</strong>全面使用 Class 风格来搞组件.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p align=&quot;center&quot;&gt;&lt;br&gt;    &lt;a href=&quot;https://www.iviewui.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;br&gt;        &lt;img width=&quot;200&quot; src=&quot;https://user-go
+      
+    
+    </summary>
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue - Load chunk xxxx failed</title>
@@ -527,38 +552,6 @@
       <category term="Buttons" scheme="https://dreambo8563.github.io/tags/Buttons/"/>
     
       <category term="Transition" scheme="https://dreambo8563.github.io/tags/Transition/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS-Collections-Buttons-1</title>
-    <link href="https://dreambo8563.github.io/2018/09/25/CSS-Collections-Buttons-1/"/>
-    <id>https://dreambo8563.github.io/2018/09/25/CSS-Collections-Buttons-1/</id>
-    <published>2018-09-25T07:46:41.000Z</published>
-    <updated>2018-09-26T00:59:49.777Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Preview"><a href="#Preview" class="headerlink" title="Preview"></a>Preview</h3><style>* {    -webkit-box-sizing: border-box;    -moz-box-sizing: border-box;    box-sizing: border-box;}.buttons {    margin: 10%;    text-align: center;}.btn-hover {    width: 200px;    font-size: 16px;    font-weight: 600;    color: #fff;    cursor: pointer;    margin: 20px;    height: 55px;    text-align:center;    border: none;    background-size: 300% 100%;    border-radius: 50px;    moz-transition: all .4s ease-in-out;    -o-transition: all .4s ease-in-out;    -webkit-transition: all .4s ease-in-out;    transition: all .4s ease-in-out;}.btn-hover:hover {    background-position: 100% 0;    moz-transition: all .4s ease-in-out;    -o-transition: all .4s ease-in-out;    -webkit-transition: all .4s ease-in-out;    transition: all .4s ease-in-out;}.btn-hover:focus {    outline: none;}.btn-hover.color-1 {    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);}.btn-hover.color-2 {    background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);}.btn-hover.color-3 {    background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);}.btn-hover.color-4 {    background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);}.btn-hover.color-5 {    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);}.btn-hover.color-6 {    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);    box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);}.btn-hover.color-7 {    background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);}.btn-hover.color-8 {    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);}.btn-hover.color-9 {    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);}.btn-hover.color-10 {        background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);    box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);}.btn-hover.color-11 {       background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);}</style><div class="buttons"><br>    <button class="btn-hover color-1">BUTTON</button><br>    <button class="btn-hover color-2">BUTTON</button><br>    <button class="btn-hover color-3">BUTTON</button><br>    <button class="btn-hover color-4">BUTTON</button><br>    <button class="btn-hover color-5">BUTTON</button><br>    <button class="btn-hover color-6">BUTTON</button><br>    <button class="btn-hover color-7">BUTTON</button><br>    <button class="btn-hover color-8">BUTTON</button><br>    <button class="btn-hover color-9">BUTTON</button><br>    <button class="btn-hover color-10">BUTTON</button><br>    <button class="btn-hover color-11">BUTTON</button><br></div><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p></p><p data-height="257" data-theme-id="0" data-slug-hash="oPrjRg" data-default-tab="css,result" data-user="dreambo8563" data-pen-title=" Gradient Button Hover" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/dreambo8563/pen/oPrjRg/" target="_blank" rel="noopener"> Gradient Button Hover</a> by dreambo8563 (<a href="https://codepen.io/dreambo8563" target="_blank" rel="noopener">@dreambo8563</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p><script async src="https://static.codepen.io/assets/embed/ei.js"></script>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Preview&quot;&gt;&lt;a href=&quot;#Preview&quot; class=&quot;headerlink&quot; title=&quot;Preview&quot;&gt;&lt;/a&gt;Preview&lt;/h3&gt;&lt;style&gt;
-* {
-    -webkit-box-sizing: border-box;
-    -
-      
-    
-    </summary>
-    
-      <category term="CSS" scheme="https://dreambo8563.github.io/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="https://dreambo8563.github.io/tags/CSS/"/>
-    
-      <category term="Buttons" scheme="https://dreambo8563.github.io/tags/Buttons/"/>
-    
-      <category term="Gradient" scheme="https://dreambo8563.github.io/tags/Gradient/"/>
     
   </entry>
   

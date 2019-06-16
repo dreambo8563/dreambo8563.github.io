@@ -24,15 +24,15 @@ var precacheUrls = [];
 
   precacheUrls.push('/');
 
-  precacheUrls.push('/2016/05/04/React-Router-Index-Routes-and-Index-Links/');
+  precacheUrls.push('/2016/05/03/React-Router-Introduction/');
 
-  precacheUrls.push('/2018/12/29/2018年度总结/');
+  precacheUrls.push('/2017/05/03/Fault-Tolerance/');
 
-  precacheUrls.push('/2019/01/22/玩耍github/');
+  precacheUrls.push('/2017/05/11/Actor-FSM/');
 
-  precacheUrls.push('/2019/03/29/redis-resp/');
+  precacheUrls.push('/2018/07/10/Three-3D文字/');
 
-  precacheUrls.push('/2019/04/23/easy-circular-progress/');
+  precacheUrls.push('/2018/09/14/Etcd-分布式配置中心/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
