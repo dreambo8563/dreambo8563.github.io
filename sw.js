@@ -26,13 +26,13 @@ var precacheUrls = [];
 
   precacheUrls.push('/2016/05/04/React-Router-Index-Routes-and-Index-Links/');
 
-  precacheUrls.push('/2018/12/29/2018年度总结/');
-
   precacheUrls.push('/2020/01/21/2019总结/');
 
-  precacheUrls.push('/2019/01/22/玩耍github/');
+  precacheUrls.push('/2016/05/03/React-Router-Introduction/');
 
-  precacheUrls.push('/2019/03/29/redis-resp/');
+  precacheUrls.push('/2018/12/29/2018年度总结/');
+
+  precacheUrls.push('/2019/01/22/玩耍github/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
