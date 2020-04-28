@@ -91,7 +91,7 @@
 <meta property="og:description" content="今天想分享一个日常后台管理系统中常用的一个工具. 背景我们写后台管理系统, 有非常多的列表页,一般都带分页操作, 这其实就会出现大量模板代码,重复代码 -&amp;gt; 体力劳动. Mixinmixin 是 Vue 里面的一个特性, 我们一般会把通用的操作放在这里, 但一般会放和组件内容没有紧密关联的动作. 梳理抽离前的情况data()&amp;#123;    return&amp;#123;        xxx">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/MixinTable.png">
-<meta property="og:updated_time" content="2020-04-28T13:12:41.164Z">
+<meta property="og:updated_time" content="2020-04-28T14:13:30.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue-Mixin-Table">
 <meta name="twitter:description" content="今天想分享一个日常后台管理系统中常用的一个工具. 背景我们写后台管理系统, 有非常多的列表页,一般都带分页操作, 这其实就会出现大量模板代码,重复代码 -&amp;gt; 体力劳动. Mixinmixin 是 Vue 里面的一个特性, 我们一般会把通用的操作放在这里, 但一般会放和组件内容没有紧密关联的动作. 梳理抽离前的情况data()&amp;#123;    return&amp;#123;        xxx">
@@ -315,13 +315,13 @@
 <li>请求结果处理方式不完全一样</li>
 </ol>
 <blockquote>
-<p>所有的动态部分都需要使用 mixin 的组件给与对应的配合, 这似乎是违背的 mixin 的使用初衷, 让 mixin降低了独立性, 但从另一个方面想, mixin 就想 interface. 对于不同的场景增加不同的能力, 似乎也说的通. </p>
+<p>所有的动态部分都需要使用 mixin 的组件给与之对应的配合, 这似乎是违背的 mixin 的使用初衷, 让 mixin降低了独立性; 但从另一个方面想, mixin 就像 interface. 对于不同的场景增加不同的能力, 似乎也说的通. </p>
 </blockquote>
 <h2 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; PAGINATION_SIZE_ENUM &#125; <span class="keyword">from</span> <span class="string">"@/constants/TEXT"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      pageSize: <span class="number">20</span>,</span><br><span class="line">      currentPage: <span class="number">1</span>,</span><br><span class="line">      total: <span class="number">0</span>,</span><br><span class="line">      tableData: [],</span><br><span class="line">      constants: &#123;</span><br><span class="line">        PAGINATION_SIZE_ENUM</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleCurrentChange(val) &#123;</span><br><span class="line">      <span class="keyword">this</span>.getTableList(&#123; ...this.getBaseParams(), <span class="attr">page</span>: val &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleSizeChange(val) &#123;</span><br><span class="line">      <span class="keyword">this</span>.pageSize = val;</span><br><span class="line">      <span class="keyword">this</span>.currentPage = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">this</span>.getTableList(&#123; ...this.getBaseParams(), <span class="attr">per_page</span>: val, <span class="attr">page</span>: <span class="number">1</span> &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    getTableList(args = <span class="keyword">this</span>.getBaseParams(), callback?: <span class="built_in">Function</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.startLoading();</span><br><span class="line">      <span class="keyword">const</span> params = <span class="built_in">Array</span>.isArray(args) ? args : [args];</span><br><span class="line">      <span class="keyword">this</span>.tableListAPI(...params).then(<span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.stopLoading();</span><br><span class="line">        <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">          <span class="keyword">return</span> callback(res);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> &#123; data, total &#125; = res;</span><br><span class="line">        <span class="keyword">this</span>.tableData = data;</span><br><span class="line">        <span class="keyword">this</span>.total = total;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.tableListAPI)</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">"please provide `tableListAPI` for formMixin"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.getBaseParams)</span><br><span class="line">      <span class="built_in">console</span>.error(</span><br><span class="line">        <span class="string">"please provide `getBaseParams` function for formMixin to get params for request"</span></span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>data 是 mixin 本身应用到的数据,相对是固定的<br><code>handleCurrentChange</code>/<code>handleSizeChange</code> 是处理分页相关操作<br><code>getTableList</code> 是或者列表数据操作</p>
+<p>data 是 mixin 本身应用到的数据,相对是固定的<br><code>handleCurrentChange</code>/<code>handleSizeChange</code> 是处理分页相关操作<br><code>getTableList</code> 是获取列表数据操作</p>
 </blockquote>
-<p><strong>需要配合:</strong><br><code>tableListAPI</code>, 并赋值请求的 api<br><code>getBaseParams</code> 需要返回基本的列表参数,当有多个的时候需要以 array 类型传入<br><code>getTableList</code> 可以接受 callback 作为可选第二参数,来处理返回结果</p>
+<p><strong>需要配合:</strong><br><code>tableListAPI</code>, 赋值请求的 api<br><code>getBaseParams</code> 需要返回基本的列表参数<br><code>getTableList</code> 接受请求参数-当有多个的时候需要以 Array 类型传入, 接受 callback 作为可选第二参数,来处理返回结果</p>
 <p><code>created</code> 里面的验证是为了让使用者知道这个 mixin 和组件间是有耦合的, 需要组件配合才能使用</p>
 <h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul>
 <li>懒,真的特别懒</li>
@@ -686,7 +686,7 @@
   
 
 <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1588079608860')
+  navigator.serviceWorker.register('/sw.js?t=1588083225995')
     .then(function () {console.log('ServiceWorker Register Successfully.')})
     .catch(function (e) {console.error(e)});
 }
