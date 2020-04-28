@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2020-01-21T02:53:24.648Z</updated>
+  <updated>2020-04-28T13:12:41.164Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue-Mixin-Table</title>
+    <link href="https://dreambo8563.github.io/2020/04/28/Vue-Mixin-Table/"/>
+    <id>https://dreambo8563.github.io/2020/04/28/Vue-Mixin-Table/</id>
+    <published>2020-04-28T12:48:07.000Z</published>
+    <updated>2020-04-28T13:12:41.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天想分享一个日常后台管理系统中常用的一个工具.</p><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>我们写后台管理系统, 有非常多的列表页,一般都带分页操作, 这其实就会出现大量模板代码,重复代码 -&gt; 体力劳动.</p><h2 id="Mixin"><a href="#Mixin" class="headerlink" title="Mixin"></a>Mixin</h2><p>mixin 是 Vue 里面的一个特性, 我们一般会把通用的操作放在这里, 但一般会放和组件内容没有紧密关联的动作.</p><h2 id="梳理抽离前的情况"><a href="#梳理抽离前的情况" class="headerlink" title="梳理抽离前的情况"></a>梳理抽离前的情况</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">data()&#123;</span><br><span class="line">    <span class="keyword">return</span>&#123;</span><br><span class="line">        xxx 分页相关参数,</span><br><span class="line">        其他业务参数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods:&#123;</span><br><span class="line"> 获取列表方法...</span><br><span class="line"> 改变页数方法...</span><br><span class="line"> 改变单页个数方法...</span><br><span class="line"> 改变过滤条件方法...</span><br><span class="line"> xxx 其他交互方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/MixinTable.png" alt=""></p><h2 id="分解动态部分"><a href="#分解动态部分" class="headerlink" title="分解动态部分"></a>分解动态部分</h2><ol><li>请求参数是可变的, 数量不定</li><li>请求的 API,是不同的</li><li>请求结果处理方式不完全一样</li></ol><blockquote><p>所有的动态部分都需要使用 mixin 的组件给与对应的配合, 这似乎是违背的 mixin 的使用初衷, 让 mixin降低了独立性, 但从另一个方面想, mixin 就想 interface. 对于不同的场景增加不同的能力, 似乎也说的通. </p></blockquote><h2 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; PAGINATION_SIZE_ENUM &#125; <span class="keyword">from</span> <span class="string">"@/constants/TEXT"</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      pageSize: <span class="number">20</span>,</span><br><span class="line">      currentPage: <span class="number">1</span>,</span><br><span class="line">      total: <span class="number">0</span>,</span><br><span class="line">      tableData: [],</span><br><span class="line">      constants: &#123;</span><br><span class="line">        PAGINATION_SIZE_ENUM</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleCurrentChange(val) &#123;</span><br><span class="line">      <span class="keyword">this</span>.getTableList(&#123; ...this.getBaseParams(), <span class="attr">page</span>: val &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    handleSizeChange(val) &#123;</span><br><span class="line">      <span class="keyword">this</span>.pageSize = val;</span><br><span class="line">      <span class="keyword">this</span>.currentPage = <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">this</span>.getTableList(&#123; ...this.getBaseParams(), <span class="attr">per_page</span>: val, <span class="attr">page</span>: <span class="number">1</span> &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    getTableList(args = <span class="keyword">this</span>.getBaseParams(), callback?: <span class="built_in">Function</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.startLoading();</span><br><span class="line">      <span class="keyword">const</span> params = <span class="built_in">Array</span>.isArray(args) ? args : [args];</span><br><span class="line">      <span class="keyword">this</span>.tableListAPI(...params).then(<span class="function">(<span class="params">res: any</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.stopLoading();</span><br><span class="line">        <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">          <span class="keyword">return</span> callback(res);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> &#123; data, total &#125; = res;</span><br><span class="line">        <span class="keyword">this</span>.tableData = data;</span><br><span class="line">        <span class="keyword">this</span>.total = total;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created() &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.tableListAPI)</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">"please provide `tableListAPI` for formMixin"</span>);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.getBaseParams)</span><br><span class="line">      <span class="built_in">console</span>.error(</span><br><span class="line">        <span class="string">"please provide `getBaseParams` function for formMixin to get params for request"</span></span><br><span class="line">      );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><blockquote><p>data 是 mixin 本身应用到的数据,相对是固定的<br><code>handleCurrentChange</code>/<code>handleSizeChange</code> 是处理分页相关操作<br><code>getTableList</code> 是或者列表数据操作</p></blockquote><p><strong>需要配合:</strong><br><code>tableListAPI</code>, 并赋值请求的 api<br><code>getBaseParams</code> 需要返回基本的列表参数,当有多个的时候需要以 array 类型传入<br><code>getTableList</code> 可以接受 callback 作为可选第二参数,来处理返回结果</p><p><code>created</code> 里面的验证是为了让使用者知道这个 mixin 和组件间是有耦合的, 需要组件配合才能使用</p><h2 id="好处"><a href="#好处" class="headerlink" title="好处"></a>好处</h2><ul><li>懒,真的特别懒</li><li>尽量大家能统一</li><li>提高效率</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天想分享一个日常后台管理系统中常用的一个工具.&lt;/p&gt;
+&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;我们写后台管理系统, 有非常多的列表页,一般都带分页操作, 这其实就会出现大
+      
+    
+    </summary>
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
+    
+      <category term="mixin" scheme="https://dreambo8563.github.io/tags/mixin/"/>
+    
+  </entry>
   
   <entry>
     <title>2019总结</title>
@@ -511,37 +539,6 @@
       <category term="JS" scheme="https://dreambo8563.github.io/tags/JS/"/>
     
       <category term="Security" scheme="https://dreambo8563.github.io/tags/Security/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS-Collections-Buttons-4</title>
-    <link href="https://dreambo8563.github.io/2018/09/26/CSS-Collections-Buttons-4/"/>
-    <id>https://dreambo8563.github.io/2018/09/26/CSS-Collections-Buttons-4/</id>
-    <published>2018-09-26T01:24:06.000Z</published>
-    <updated>2018-09-26T01:25:09.598Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Preview"><a href="#Preview" class="headerlink" title="Preview"></a>Preview</h3><p><style><br>.underline–magical {<br>  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);<br>  background-repeat: no-repeat;<br>  background-size: 100% 0.2em;<br>  background-position: 0 88%;<br>  transition: background-size 0.25s ease-in;<br>}<br>.underline–magical:hover {<br>  background-size: 100% 88%;<br>}<br></style></p><p></p><h1>Look At This <span class="underline--magical">Pretty</span> Underline</h1><p></p><h2>Wow this one  is super incredibly cool, and this <span class="underline--magical">one is on Multiple Lines!</span> I wish I had found this like thirty projects ago when I was representing the lollipop guild.</h2><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p></p><p data-height="265" data-theme-id="0" data-slug-hash="LJwEZY" data-default-tab="css,result" data-user="dreambo8563" data-pen-title="How do I get a custom colored underline that will span multiple lines?" class="codepen">See the Pen <a href="https://codepen.io/dreambo8563/pen/LJwEZY/" target="_blank" rel="noopener">How do I get a custom colored underline that will span multiple lines?</a> by dreambo8563 (<a href="https://codepen.io/dreambo8563" target="_blank" rel="noopener">@dreambo8563</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p><script async src="https://static.codepen.io/assets/embed/ei.js"></script>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Preview&quot;&gt;&lt;a href=&quot;#Preview&quot; class=&quot;headerlink&quot; title=&quot;Preview&quot;&gt;&lt;/a&gt;Preview&lt;/h3&gt;&lt;p&gt;&lt;style&gt;&lt;br&gt;.underline–magical {&lt;br&gt;  background-im
-      
-    
-    </summary>
-    
-      <category term="CSS" scheme="https://dreambo8563.github.io/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="https://dreambo8563.github.io/tags/CSS/"/>
-    
-      <category term="Buttons" scheme="https://dreambo8563.github.io/tags/Buttons/"/>
-    
-      <category term="Hover" scheme="https://dreambo8563.github.io/tags/Hover/"/>
-    
-      <category term="Underline" scheme="https://dreambo8563.github.io/tags/Underline/"/>
     
   </entry>
   
