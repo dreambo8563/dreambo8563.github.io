@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2020-07-03T15:08:15.198Z</updated>
+  <updated>2021-05-21T10:20:36.562Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FE-CDN</title>
+    <link href="https://dreambo8563.github.io/2021/05/21/FE-CDN/"/>
+    <id>https://dreambo8563.github.io/2021/05/21/FE-CDN/</id>
+    <published>2021-05-21T08:59:37.000Z</published>
+    <updated>2021-05-21T10:20:36.562Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣"><a href="#最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣" class="headerlink" title="最近把项目的前端部署策略优化了下,顺手对比了几种方式的优劣"></a>最近把项目的前端部署策略优化了下,顺手对比了几种方式的优劣</h1><h3 id="策略-1"><a href="#策略-1" class="headerlink" title="策略 1"></a>策略 1</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/cdn1.png" alt=""></p><ul><li>打包产物全量推送 OSS</li><li>CDN 域名回源 OSS (阿里业务)</li><li>前端跨域访问后端 api 服务</li></ul><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>依托阿里云</li><li>不需要前端用的 web 服务</li></ul><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul><li>CDN 缓存问题需要处理</li><li>需要通过 CDN 上正则模拟 history 模式, 返回 index.html</li><li>跨域 Option 请求</li></ul><hr><hr><h3 id="策略-2"><a href="#策略-2" class="headerlink" title="策略 2"></a>策略 2</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/cdn2.png" alt=""></p><ul><li>打包产物(非 index.htm)推送 OSS</li><li>公用CDN 域名回源 OSS (阿里业务)</li><li>用户访问自己的 nginx 服务(index.html)</li><li>index.html 上利用 script 标签调用 cdn 上的 js/css等静态资源</li><li>nginx 反向代理访问 api</li></ul><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul><li>绝大部分静态利用 CDN 资源</li><li>自己控制缓存,增强可编程能力</li><li>不跨域</li></ul><h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ul><li>打包配置需要独立处理</li><li>需要自己的 web 服务</li></ul><hr><hr><h3 id="策略-3"><a href="#策略-3" class="headerlink" title="策略 3"></a>策略 3</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/cdn3.png" alt=""></p><ul><li>打包产物放自己 nginx</li><li>公用CDN域名回源自己的 web服务</li><li>用户访问CDN</li><li>nginx 反向代理访问 api</li></ul><h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><ul><li>利用 CDN 能力</li><li>自己控制缓存,增强可编程能力</li><li>不跨域</li></ul><h4 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h4><ul><li>CDN 缓存问题</li><li>回源还是会占用自己的流量带宽</li><li>需要自己的 web 服务</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣&quot;&gt;&lt;a href=&quot;#最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣&quot; class=&quot;headerlink&quot; title=&quot;最近把项目的前端部署策略优化了下,顺手对比了几种方式的优劣&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="FE" scheme="https://dreambo8563.github.io/categories/FE/"/>
+    
+    
+      <category term="CDN" scheme="https://dreambo8563.github.io/tags/CDN/"/>
+    
+  </entry>
   
   <entry>
     <title>JS波浪符巧用</title>
@@ -511,31 +536,6 @@
       <category term="Golang" scheme="https://dreambo8563.github.io/tags/Golang/"/>
     
       <category term="分布式" scheme="https://dreambo8563.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端独立部署,最小docker化实践</title>
-    <link href="https://dreambo8563.github.io/2018/10/30/%E5%89%8D%E7%AB%AF%E7%8B%AC%E7%AB%8B%E9%83%A8%E7%BD%B2-%E6%9C%80%E5%B0%8Fdocker%E5%8C%96%E5%AE%9E%E8%B7%B5/"/>
-    <id>https://dreambo8563.github.io/2018/10/30/前端独立部署-最小docker化实践/</id>
-    <published>2018-10-30T04:21:47.000Z</published>
-    <updated>2018-10-30T04:36:30.900Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前端容器化-为了能够独立进行部署-配备-nginx"><a href="#前端容器化-为了能够独立进行部署-配备-nginx" class="headerlink" title="前端容器化, 为了能够独立进行部署, 配备 nginx"></a>前端容器化, 为了能够独立进行部署, 配备 nginx</h3><h4 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h4><p>这里利用 docker 的 MultiStage 特性,区分打包和生产镜像的 build.<br>注意顺序,为了利用潜在的 cache 提高打包速度<br>只把生成的 dist 内容放到 nginx 里面, 并且放入自己的 nginx 配置, 毕竟默认配置不能满足 SPA 项目</p><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">9.11</span>.<span class="number">1</span>-alpine as build-stage</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /usr/src/app</span></span><br><span class="line"><span class="bash">WORKDIR /usr/src/app</span></span><br><span class="line"><span class="bash">COPY package*.json /usr/src/app/</span></span><br><span class="line"><span class="bash">RUN npm install</span></span><br><span class="line"><span class="bash">COPY . .</span></span><br><span class="line"><span class="bash">RUN npm run build</span></span><br><span class="line"><span class="bash"><span class="comment"># production stage</span></span></span><br><span class="line"><span class="bash">FROM nginx:1.13.12-alpine as production-stage</span></span><br><span class="line"><span class="bash">COPY --from=build-stage /usr/src/app/dist /usr/share/nginx/html</span></span><br><span class="line"><span class="bash">COPY ./nginx/nginx.conf /etc/nginx/nginx.conf</span></span><br><span class="line"><span class="bash">COPY ./nginx/sites-enabled /etc/nginx/sites-enabled</span></span><br><span class="line"><span class="bash">COPY ./nginx/general.conf /etc/nginx/general.conf</span></span><br><span class="line"><span class="bash">EXPOSE 80</span></span><br><span class="line"><span class="bash">CMD [<span class="string">"nginx"</span>, <span class="string">"-g"</span>, <span class="string">"daemon off;"</span>]</span></span><br></pre></td></tr></table></figure><h4 id="nginx-相关配置目录"><a href="#nginx-相关配置目录" class="headerlink" title="nginx 相关配置目录"></a>nginx 相关配置目录</h4><p>在项目根目录下放置 nginx 目录<br>是一些常规配置.<br>特意开放了 gzip_static, 以备后续前端优化使用.</p><p>-nginx<br>|——sites_enabled<br>|——–example.com.conf<br>|–general.conf<br>|–nginx.conf</p><p><strong>nginx.conf</strong></p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#user www-data;</span><br><span class="line">pid /run/nginx.pid;</span><br><span class="line">worker_processes auto;</span><br><span class="line">worker_rlimit_nofile 65535;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">multi_accept on;</span><br><span class="line">worker_connections 65535;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">charset utf-8;</span><br><span class="line">sendfile on;</span><br><span class="line">tcp_nopush on;</span><br><span class="line">tcp_nodelay on;</span><br><span class="line">server_tokens off;</span><br><span class="line">log_not_found off;</span><br><span class="line">types_hash_max_size 2048;</span><br><span class="line">client_max_body_size 16M;</span><br><span class="line"></span><br><span class="line"># MIME</span><br><span class="line">include mime.types;</span><br><span class="line">default_type application/octet-stream;</span><br><span class="line"></span><br><span class="line"># logging</span><br><span class="line">access_log /var/log/nginx/access.log;</span><br><span class="line">error_log /var/log/nginx/error.log warn;</span><br><span class="line"></span><br><span class="line"># load configs</span><br><span class="line"># include /etc/nginx/conf.d/*.conf;</span><br><span class="line">include /etc/nginx/sites-enabled/*;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>general.conf</strong></p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># security headers</span><br><span class="line">add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;</span><br><span class="line">add_header X-XSS-Protection &quot;1; mode=block&quot; always;</span><br><span class="line">add_header X-Content-Type-Options &quot;nosniff&quot; always;</span><br><span class="line">add_header Referrer-Policy &quot;no-referrer-when-downgrade&quot; always;</span><br><span class="line">add_header Content-Security-Policy &quot;default-src * data: &apos;unsafe-eval&apos; &apos;unsafe-inline&apos;&quot; always;</span><br><span class="line"></span><br><span class="line"># . files</span><br><span class="line">location ~ /\. &#123;</span><br><span class="line">deny all;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># assets, media</span><br><span class="line">location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ &#123;</span><br><span class="line">expires 30d;</span><br><span class="line">access_log off;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># svg, fonts</span><br><span class="line">location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ &#123;</span><br><span class="line">add_header Access-Control-Allow-Origin &quot;*&quot;;</span><br><span class="line">expires 30d;</span><br><span class="line">access_log off;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># gzip</span><br><span class="line">gzip on;</span><br><span class="line">gzip_vary on;</span><br><span class="line">gzip_staticon;</span><br><span class="line">gzip_proxied any;</span><br><span class="line">gzip_comp_level 6;</span><br><span class="line">gzip_types text/plain text/css text/xml application/json application/javascript application/xml+rss application/atom+xml image/svg+xml;</span><br></pre></td></tr></table></figure><p><strong>example.com.conf</strong></p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">listen 80;</span><br><span class="line">root /usr/share/nginx/html;</span><br><span class="line">index index.html index.htm;</span><br><span class="line"></span><br><span class="line">location / &#123;</span><br><span class="line">try_files $uri $uri/ /index.html;</span><br><span class="line">  &#125;</span><br><span class="line">include /etc/nginx/general.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="以防不需要的-或者隐秘的文件被打入镜像-需要-dockerignore"><a href="#以防不需要的-或者隐秘的文件被打入镜像-需要-dockerignore" class="headerlink" title="以防不需要的,或者隐秘的文件被打入镜像. 需要 .dockerignore"></a>以防不需要的,或者隐秘的文件被打入镜像. 需要 .dockerignore</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">node_modules</span><br><span class="line">npm-debug.log</span><br><span class="line">Dockerfile*</span><br><span class="line">docker-compose*</span><br><span class="line">.dockerignore</span><br><span class="line">.git</span><br><span class="line">.gitignore</span><br><span class="line">.env</span><br><span class="line">*/bin</span><br><span class="line">*/obj</span><br><span class="line">README.md</span><br><span class="line">LICENSE</span><br><span class="line">.vscode</span><br></pre></td></tr></table></figure><h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>如果你的项目用了 sass, 注意你打包的网络, 因为我们都是使用的最小基础 alpine 镜像,没有 py 环境.如果不能下载 sass 包会打包失败.</p><blockquote><p>docker build -t vue-docker:v1 .</p></blockquote><h3 id="启动镜像"><a href="#启动镜像" class="headerlink" title="启动镜像"></a>启动镜像</h3><blockquote><p>docker run -p 8080:80 -d vue-docker:v1</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;前端容器化-为了能够独立进行部署-配备-nginx&quot;&gt;&lt;a href=&quot;#前端容器化-为了能够独立进行部署-配备-nginx&quot; class=&quot;headerlink&quot; title=&quot;前端容器化, 为了能够独立进行部署, 配备 nginx&quot;&gt;&lt;/a&gt;前端容器化, 为了
-      
-    
-    </summary>
-    
-      <category term="Docker" scheme="https://dreambo8563.github.io/categories/Docker/"/>
-    
-    
-      <category term="Docker" scheme="https://dreambo8563.github.io/tags/Docker/"/>
     
   </entry>
   
