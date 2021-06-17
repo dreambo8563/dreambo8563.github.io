@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-05-30T15:47:13.873Z</updated>
+  <updated>2021-06-17T17:14:54.134Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sentry-trace</title>
+    <link href="https://dreambo8563.github.io/2021/06/18/sentry-trace/"/>
+    <id>https://dreambo8563.github.io/2021/06/18/sentry-trace/</id>
+    <published>2021-06-17T16:48:43.000Z</published>
+    <updated>2021-06-17T17:14:54.134Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="链路跟踪"><a href="#链路跟踪" class="headerlink" title="链路跟踪"></a>链路跟踪</h3><p>之前研究用jaeger 对程序进行侵入式的链路跟踪. 包括 http. grpc 协议的情况</p><h4 id="sentry"><a href="#sentry" class="headerlink" title="sentry"></a>sentry</h4><p>最近我们新搭建了新版本的sentry, 发现了之前没有的 feature -&gt; <strong>Performance</strong><br>从前端 Vue 到 PHP 的 Lavaral 到 内部的 GO 服务, 尝试了一下链路. 效果基本满足我们的需求.</p><h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/tracing1.png" alt=""></p><p>这里只是一个例子, 对 Vue 和 Lavaral 的支持比较好, 整合的时候基本没有入侵代码. 能够自动进行跟踪. 包括:</p><ul><li>前端静态资源</li><li>http 请求自动分拆</li><li>后端能够跟踪到具体 sql (Lavaral)</li></ul><p>缺点也有一些:</p><ul><li>SDK 不够完善. 后端继续向内部服务链路的时候可能需要改造中间件, 没有自动传送sentry-trace 头</li><li>接受上游的 trace 的时候可能需要看看源码, 文档不是很完善</li><li>很多语言框架无法自动采集链路, 需要自己在业务里写强侵入式的代码</li></ul><p>采集上来的数据能够阶段性比较:</p><blockquote><p>优化前性能指标</p></blockquote><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/tracing2.png" alt=""></p><blockquote><p>优化后</p></blockquote><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/tracing3.png" alt=""></p><p>这样能够很明显的看出近期的改动是否有作用.<br>同时能够协助发现能够优化的地方</p><ul><li>比如接口过多</li><li>静态资源过多, 或者过早引入</li><li>接口没有并行触发</li><li>慢 sql 等</li></ul><h4 id="给-Sentry-点赞"><a href="#给-Sentry-点赞" class="headerlink" title="给 Sentry 点赞"></a>给 Sentry 点赞</h4><ul><li>保持了错误捕获相关的能力</li><li>增强了 Tracing 和 Logging 的能力<br>对一般的可观测性都能满足需求了, 而且覆盖了前后端, 不同语言和框架. 反正大不了就是自己看源码, 或者自己实现点逻辑, 已经很不错了</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;链路跟踪&quot;&gt;&lt;a href=&quot;#链路跟踪&quot; class=&quot;headerlink&quot; title=&quot;链路跟踪&quot;&gt;&lt;/a&gt;链路跟踪&lt;/h3&gt;&lt;p&gt;之前研究用jaeger 对程序进行侵入式的链路跟踪. 包括 http. grpc 协议的情况&lt;/p&gt;
+&lt;h4 id=&quot;sen
+      
+    
+    </summary>
+    
+      <category term="Architecture" scheme="https://dreambo8563.github.io/categories/Architecture/"/>
+    
+    
+      <category term="Sentry" scheme="https://dreambo8563.github.io/tags/Sentry/"/>
+    
+      <category term="Tracing" scheme="https://dreambo8563.github.io/tags/Tracing/"/>
+    
+  </entry>
   
   <entry>
     <title>最近两年的架构演进</title>
@@ -502,34 +530,6 @@
     
     
       <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Makefile简单脚本应用</title>
-    <link href="https://dreambo8563.github.io/2018/12/18/Makefile%E7%AE%80%E5%8D%95%E8%84%9A%E6%9C%AC%E5%BA%94%E7%94%A8/"/>
-    <id>https://dreambo8563.github.io/2018/12/18/Makefile简单脚本应用/</id>
-    <published>2018-12-18T10:23:14.000Z</published>
-    <updated>2018-12-18T10:29:31.694Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="老看人家用-我也试一试"><a href="#老看人家用-我也试一试" class="headerlink" title="老看人家用,我也试一试"></a>老看人家用,我也试一试</h4><p>主要想避免路径的问题:</p><p>例如:<br>我在 scripts/start.sh</p><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl apply -f deployments/k8s/conf.yaml</span><br></pre></td></tr></table></figure><p>希望是以当前目标为路径,来执行这个 shell. 避免别人进入 scripts 目录后执行(那样会报错, 目录不对了)</p><h4 id="所以-Makefile-吧"><a href="#所以-Makefile-吧" class="headerlink" title="所以 - Makefile 吧"></a>所以 - Makefile 吧</h4><figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">v?=latest</span><br><span class="line"></span><br><span class="line"><span class="section">local:</span></span><br><span class="line">go run cmd/app/main.go</span><br><span class="line"><span class="section">start:</span></span><br><span class="line">bash scripts/start.sh</span><br><span class="line"><span class="section">stop:</span></span><br><span class="line">bash scripts/stop.sh</span><br><span class="line"><span class="section">docker:</span></span><br><span class="line">docker build -f build/Dockerfile -t todo/backend:<span class="variable">$(v)</span> .</span><br><span class="line">docker tag todo/backend:<span class="variable">$(v)</span> dreambo8563docker/todo-backend:<span class="variable">$(v)</span></span><br><span class="line">docker push dreambo8563docker/todo-backend:<span class="variable">$(v)</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">rm -f cmd/app/*log app</span><br></pre></td></tr></table></figure><p>这里我用了一个变量 v,用于 docker 打包镜像设置 version 用. 默认 latest</p><h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">make local =&gt; 本地启动项目</span><br><span class="line">make <span class="built_in">start</span> =&gt; 执行k8s脚本</span><br><span class="line">make stop =&gt; 执行k8s脚本</span><br><span class="line">make docker v=v22 打包镜像, tag / push</span><br><span class="line">make clean =&gt; 删除临时文件 (日志啥的)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;老看人家用-我也试一试&quot;&gt;&lt;a href=&quot;#老看人家用-我也试一试&quot; class=&quot;headerlink&quot; title=&quot;老看人家用,我也试一试&quot;&gt;&lt;/a&gt;老看人家用,我也试一试&lt;/h4&gt;&lt;p&gt;主要想避免路径的问题:&lt;/p&gt;
-&lt;p&gt;例如:&lt;br&gt;我在 scrip
-      
-    
-    </summary>
-    
-      <category term="Shell" scheme="https://dreambo8563.github.io/categories/Shell/"/>
-    
-    
-      <category term="Makefile" scheme="https://dreambo8563.github.io/tags/Makefile/"/>
-    
-      <category term="Shell" scheme="https://dreambo8563.github.io/tags/Shell/"/>
     
   </entry>
   
