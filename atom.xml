@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-06-17T17:14:54.134Z</updated>
+  <updated>2021-09-14T07:59:18.520Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Design-Patterns-Factory-Method</title>
+    <link href="https://dreambo8563.github.io/2021/09/14/Design-Patterns-Factory-Method/"/>
+    <id>https://dreambo8563.github.io/2021/09/14/Design-Patterns-Factory-Method/</id>
+    <published>2021-09-14T07:34:38.000Z</published>
+    <updated>2021-09-14T07:59:18.520Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Factory-Mehtod"><a href="#Factory-Mehtod" class="headerlink" title="Factory Mehtod"></a>Factory Mehtod</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/design-factory-method.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>根据不同情况, 需要让后续逻辑使用到某个 Interface 下的不同变种(子类)</li><li>当前应用类, 对具体是哪个变种没有兴趣, 只要满足 Interface 即可</li><li>有少量的这种变种类,多的话可以演化为抽象工程模式</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>将应用类中获取变种实例的地方变为抽象方法, 应用类本身变为抽象类<blockquote><p>+createBtn() IBtn</p></blockquote></li><li>生成对应的 应用实现类, 实现createBtn, 返回对应的变种实例</li><li>在使用应用类实例的地方, 根据实际参数, 选择实例化具体的 某个应用实现类</li></ul><blockquote><p>简单使用的时候, 偷懒对应用类不做变化, 单纯当返回不同变种实例的逻辑封装在 createBtn(). 降低一些复杂度, 减少继承关系</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Factory-Mehtod&quot;&gt;&lt;a href=&quot;#Factory-Mehtod&quot; class=&quot;headerlink&quot; title=&quot;Factory Mehtod&quot;&gt;&lt;/a&gt;Factory Mehtod&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://raw.
+      
+    
+    </summary>
+    
+      <category term="Creational" scheme="https://dreambo8563.github.io/categories/Creational/"/>
+    
+    
+      <category term="Design" scheme="https://dreambo8563.github.io/tags/Design/"/>
+    
+      <category term="Factory" scheme="https://dreambo8563.github.io/tags/Factory/"/>
+    
+  </entry>
   
   <entry>
     <title>sentry-trace</title>
@@ -505,31 +532,6 @@
       <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
     
       <category term="element" scheme="https://dreambo8563.github.io/tags/element/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2018年度总结</title>
-    <link href="https://dreambo8563.github.io/2018/12/29/2018%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
-    <id>https://dreambo8563.github.io/2018/12/29/2018年度总结/</id>
-    <published>2018-12-29T14:05:50.000Z</published>
-    <updated>2019-03-22T06:16:29.699Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="纪念即将过去的-2018"><a href="#纪念即将过去的-2018" class="headerlink" title="纪念即将过去的 2018"></a>纪念即将过去的 2018</h3><h4 id="奔波"><a href="#奔波" class="headerlink" title="奔波"></a>奔波</h4><p>这一年我又经历了两份工作, 一份短暂的全栈开发. 一份前端架构.<br>这两个 title 都是第一次拿, 也算不同的小经历吧. 总结下来就是给了自己一个确定性的答案, 后端的事我也可以做,而且是有能力做好的, 但还是需要时间的积累, 全栈的经历只是证明了这个门槛我可以跨,但还没有证明,我已经完全进入状态.</p><p>架构的 title, 比较虚. 但工作环境让我可以抛开单纯的前端开发,更多的思考团队相关, 工程相关的事情.</p><h4 id="技术内容"><a href="#技术内容" class="headerlink" title="技术内容"></a>技术内容</h4><h5 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h5><p>这一年我彻底投入到 golang 中, 不像之前用 scala 的时候, 那时候的学习和应用太浅了, 虽然是在生产上用,但不是自己一点点学习积累上来的,所以很快就会忘记. 或者说那个语言不适合自己的知识能力.<br>golang 相对更容易入门, 而且比较接近 ts, 所以接受度会比较高. 加上也有明星产品,所以选择了他.<br>今年的很多 demo 都是基于 golang 的. 也读了一些库的源码. 用了一些 golang 生态的工具. prometheus, docker, k8s, jaeger, nats ,gin, echo,grpc,etcd 等等, 还用 golang 刷了些 leecode 的算法题</p><h5 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h5><p>到现在接触 Vue 有 1 年多一些了, 慢慢熟悉 vue 的生态和基本的使用, 建立完善基于 vue-cli 的脚手架,是个不错的开始. 写了一个简单的开源组件库 @bpit/vue, 工作中也仍然在不断摸索和实践相关 api 和一些用法. 还写了 vue 的单元测试. vue 3.0 将用 ts 编写,到时候会是个很好的学习机会. 哦对了今年还帮以前的同事开发了一个微信小程序, 也算 vue 相关的经历吧.</p><h4 id="团队工具"><a href="#团队工具" class="headerlink" title="团队工具"></a>团队工具</h4><p>今年调研了很多工具, 比如 sentry, easy mock. sonar qube, jenkins 找到了 检查代码圈复杂度, 重复率的 vsc 插件. 也写了两个提供开发效率的工具插件. 还有些非技术的努力, 比如知识习惯的熏陶, mentor 制度的订立等. 脾气什么的, 我只能 哎!!! 继续努力吧</p><h4 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h4><ul><li>github 截止到现在 贡献数 591(新高), 新建 repo 大约 30 个,基本都是自己的学习 demo</li><li>blog 42 篇(算上这篇)</li><li>书籍 这个不好统计,大致数了下微信读书和阅读器里的书本, 不少于 25 本技术相关书籍, 在线文档数量无法统计</li></ul><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2018_blogs.png" alt=""><br><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2018_github.png" alt=""></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>2018 从数据上看,比 2017 年有进步, 17 年工作上实在太忙了, 总结和积累都不太够. 18 年算是迈了一大步.<br>同时也确定了方向, 打开了后端运维的大门.<br>Good!</p><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/2018_2019_FE_Working_Summary.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;纪念即将过去的-2018&quot;&gt;&lt;a href=&quot;#纪念即将过去的-2018&quot; class=&quot;headerlink&quot; title=&quot;纪念即将过去的 2018&quot;&gt;&lt;/a&gt;纪念即将过去的 2018&lt;/h3&gt;&lt;h4 id=&quot;奔波&quot;&gt;&lt;a href=&quot;#奔波&quot; class=&quot;
-      
-    
-    </summary>
-    
-      <category term="Thinking" scheme="https://dreambo8563.github.io/categories/Thinking/"/>
-    
-    
-      <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
     
   </entry>
   
