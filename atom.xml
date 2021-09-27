@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-09-14T07:59:18.520Z</updated>
+  <updated>2021-09-27T14:35:20.704Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Design-Patterns-Abstract-Factory</title>
+    <link href="https://dreambo8563.github.io/2021/09/27/Design-Patterns-Abstract-Factory/"/>
+    <id>https://dreambo8563.github.io/2021/09/27/Design-Patterns-Abstract-Factory/</id>
+    <published>2021-09-27T14:20:05.000Z</published>
+    <updated>2021-09-27T14:35:20.704Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Abstract-Factory"><a href="#Abstract-Factory" class="headerlink" title="Abstract  Factory"></a>Abstract  Factory</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Abstract%20Factory.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>当你需要<strong>包含多种模型的变种组</strong>, 而且这些模型见是有关联性的, 所以产生的组</li><li>你不希望知道具体的模型是哪种类型, 只要用就是对应的那一组</li><li>当你有多个工厂方法在某个实体里的时候,考虑抽象工厂</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>将多个模型的 interface 抽象出来, 并实现对应的变种</li><li>抽象出 factory 的 interface, 包含不同模型的创建方法</li><li>对 factory interface 进行多组的实现, 产生 factory 接口的实现类, 实现类工厂中对应产生不同的变种</li><li>客户端代码 实例化 具体的工厂类, 并用哪个工厂类产生这一组的变种模型</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Abstract-Factory&quot;&gt;&lt;a href=&quot;#Abstract-Factory&quot; class=&quot;headerlink&quot; title=&quot;Abstract  Factory&quot;&gt;&lt;/a&gt;Abstract  Factory&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;ht
+      
+    
+    </summary>
+    
+      <category term="Creational" scheme="https://dreambo8563.github.io/categories/Creational/"/>
+    
+    
+      <category term="Design" scheme="https://dreambo8563.github.io/tags/Design/"/>
+    
+      <category term="Factory" scheme="https://dreambo8563.github.io/tags/Factory/"/>
+    
+  </entry>
   
   <entry>
     <title>Design-Patterns-Factory-Method</title>
@@ -505,33 +532,6 @@
     
     
       <category term="github" scheme="https://dreambo8563.github.io/tags/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Element - 偷偷引用内部方法</title>
-    <link href="https://dreambo8563.github.io/2019/01/18/Element-%E5%81%B7%E5%81%B7%E5%BC%95%E7%94%A8%E5%86%85%E9%83%A8%E6%96%B9%E6%B3%95/"/>
-    <id>https://dreambo8563.github.io/2019/01/18/Element-偷偷引用内部方法/</id>
-    <published>2019-01-18T02:55:07.000Z</published>
-    <updated>2019-03-29T07:53:07.162Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Element-ui-源码的财富"><a href="#Element-ui-源码的财富" class="headerlink" title="Element-ui 源码的财富"></a>Element-ui 源码的财富</h3><p>源码里面自带了很多小函数, 甚至是指令等东西. 很多都值得我们去阅读和学习.</p><h3 id="懒"><a href="#懒" class="headerlink" title="懒"></a>懒</h3><ul><li>不想自己造轮子</li><li>不想再引入更多的包</li><li>源码里有能不能用?</li></ul><h3 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  getFirstDayOfMonth,</span><br><span class="line">  nextDate</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"element-ui/packages/date-picker/src/util"</span></span><br></pre></td></tr></table></figure><p>这样 <strong>import</strong> 就会引入 <a href="https://github.com/ElemeFE/element/blob/dev/packages/date-picker/src/util/index.js" target="_blank" rel="noopener">https://github.com/ElemeFE/element/blob/dev/packages/date-picker/src/util/index.js</a> 这个文件里面 export 的方法. 其他类似</p><p><strong>element-ui</strong> 空间默认走的 src 目录</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;Element-ui-源码的财富&quot;&gt;&lt;a href=&quot;#Element-ui-源码的财富&quot; class=&quot;headerlink&quot; title=&quot;Element-ui 源码的财富&quot;&gt;&lt;/a&gt;Element-ui 源码的财富&lt;/h3&gt;&lt;p&gt;源码里面自带了很多小函数, 
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
-    
-      <category term="element" scheme="https://dreambo8563.github.io/tags/element/"/>
     
   </entry>
   
