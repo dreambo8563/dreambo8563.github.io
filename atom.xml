@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-09-27T14:35:20.704Z</updated>
+  <updated>2021-10-14T09:47:03.223Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Design-Patterns-Builder</title>
+    <link href="https://dreambo8563.github.io/2021/10/14/Design-Patterns-Builder/"/>
+    <id>https://dreambo8563.github.io/2021/10/14/Design-Patterns-Builder/</id>
+    <published>2021-10-14T09:37:49.000Z</published>
+    <updated>2021-10-14T09:47:03.223Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Builder-Director"><a href="#Builder-Director" class="headerlink" title="Builder/Director"></a>Builder/Director</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/builder.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>当你需要<strong>构建一个比较复杂的对象</strong></li><li>这个对象的各种参数,在不同情况下都不相同, 并且都是可选参数</li><li>当有一套步骤是相同,但是具体实现不同的时候, 可以引入 director</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>定义 builder interface, 具体包含能配置的东西</li><li>创建 builder 实现类, 并且需要实现一个额外的 获取结果的方法, 因为不同 builder 实现类可以输出不同类型的结果, 所以不能定义在 interface 上</li><li>创建 director 类, 封装不同的 创建步骤套装</li><li>调用方 实例化 builder 和 director. 把 builder 实例传给 director. director 选择构造那种产物. 从 build 实例获取最终结果对象</li><li>如果大家创建产物的类型一致, 则可以直接在 director 里返回结果</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Builder-Director&quot;&gt;&lt;a href=&quot;#Builder-Director&quot; class=&quot;headerlink&quot; title=&quot;Builder/Director&quot;&gt;&lt;/a&gt;Builder/Director&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http
+      
+    
+    </summary>
+    
+      <category term="Creational" scheme="https://dreambo8563.github.io/categories/Creational/"/>
+    
+    
+      <category term="Design" scheme="https://dreambo8563.github.io/tags/Design/"/>
+    
+      <category term="Builder" scheme="https://dreambo8563.github.io/tags/Builder/"/>
+    
+  </entry>
   
   <entry>
     <title>Design-Patterns-Abstract-Factory</title>
@@ -506,32 +533,6 @@
     
     
       <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>玩耍github</title>
-    <link href="https://dreambo8563.github.io/2019/01/22/%E7%8E%A9%E8%80%8Dgithub/"/>
-    <id>https://dreambo8563.github.io/2019/01/22/玩耍github/</id>
-    <published>2019-01-22T06:10:13.000Z</published>
-    <updated>2019-01-22T06:17:59.336Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="badge"><a href="#badge" class="headerlink" title="badge"></a>badge</h3><p>最近给自己的一个 repo 加了一些 badge, 效果如下:</p><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/github_badge.png" alt=""></p><h3 id="PR-flow"><a href="#PR-flow" class="headerlink" title="PR flow"></a>PR flow</h3><p>对应这些 badge 的是一些 github 的插件, 他们有在整个代码流程中起到不同的作用</p><p>先预览下一个 RP 过程:</p><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/github_pr.png" alt=""></p><ul><li>测试覆盖率检查</li><li>代码 lint 和常见错误检查</li><li>CI 自动化测试</li><li>自动代码 review</li></ul><p>如果过程中有问题,他会给你的 RP 打 x 表示有东西需要 fix, 符合规范.<br>这个体验如果能够在日常工作开发中使用就是极好, 不知道 jenkins 的那些插件能不能达到这样的效果</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;badge&quot;&gt;&lt;a href=&quot;#badge&quot; class=&quot;headerlink&quot; title=&quot;badge&quot;&gt;&lt;/a&gt;badge&lt;/h3&gt;&lt;p&gt;最近给自己的一个 repo 加了一些 badge, 效果如下:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://r
-      
-    
-    </summary>
-    
-      <category term="github" scheme="https://dreambo8563.github.io/categories/github/"/>
-    
-    
-      <category term="github" scheme="https://dreambo8563.github.io/tags/github/"/>
     
   </entry>
   
