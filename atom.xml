@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-10-14T09:47:03.223Z</updated>
+  <updated>2021-10-15T03:00:39.310Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Design-Patterns-Singleton</title>
+    <link href="https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/"/>
+    <id>https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/</id>
+    <published>2021-10-15T02:53:34.000Z</published>
+    <updated>2021-10-15T03:00:39.310Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/singleton.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>需要全局同享对象,并加以控制</li><li>保证特定类只有一个实例</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>有一个私有字段老保存 单例实例</li><li>声明一个对外的方法获取实例</li><li>获取方法,需要 lazy, 并注意多线程的时候的加锁处理</li><li>隐藏构造函数或者其他创建行方法</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Singleton&quot;&gt;&lt;a href=&quot;#Singleton&quot; class=&quot;headerlink&quot; title=&quot;Singleton&quot;&gt;&lt;/a&gt;Singleton&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.co
+      
+    
+    </summary>
+    
+      <category term="Creational" scheme="https://dreambo8563.github.io/categories/Creational/"/>
+    
+    
+      <category term="Design" scheme="https://dreambo8563.github.io/tags/Design/"/>
+    
+      <category term="Singleton" scheme="https://dreambo8563.github.io/tags/Singleton/"/>
+    
+  </entry>
   
   <entry>
     <title>Design-Patterns-Builder</title>
@@ -500,31 +527,6 @@
       
       
         &lt;h1 id=&quot;vue-device-detector&quot;&gt;&lt;a href=&quot;#vue-device-detector&quot; class=&quot;headerlink&quot; title=&quot;vue-device-detector&quot;&gt;&lt;/a&gt;vue-device-detector&lt;/h1&gt;&lt;p&gt;&lt;i
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue - vue-storage-watcher</title>
-    <link href="https://dreambo8563.github.io/2019/03/12/Vue-vue-storage-watcher/"/>
-    <id>https://dreambo8563.github.io/2019/03/12/Vue-vue-storage-watcher/</id>
-    <published>2019-03-12T13:52:27.000Z</published>
-    <updated>2020-05-20T11:11:46.623Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="vue-storage-watcher"><a href="#vue-storage-watcher" class="headerlink" title="vue-storage-watcher"></a>vue-storage-watcher</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/watcher1.png" alt=""></p><p>the real reactive watcher for localStorage.<br>I search a few days for a lib to watch the ls, but failed.</p><p>you can use this tiny ls wrapper which works well with vue.js.</p><p>you can use this as persistent data layer even instead of vuex.</p><ul><li>familiar usage just like <strong>bus</strong>.</li><li>reactive</li><li>type supported</li><li>small size</li></ul><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><blockquote><p>npm install vue-storage-watcher –save</p></blockquote><h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lsWatcher <span class="keyword">from</span> <span class="string">"vue-storage-watcher"</span></span><br><span class="line"></span><br><span class="line">Vue.use(lsWatcher, &#123; <span class="attr">prefix</span>: <span class="string">"myproject_"</span> &#125;)</span><br></pre></td></tr></table></figure><blockquote><p>storage type</p></blockquote><ul><li>localStorage</li><li>sessionStorage</li></ul><h3 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h3><ul><li>prefix =&gt; default is “”</li><li>storage =&gt; default is “local” which means window.localStorage will be used as Storage Object. Another alternative is “session”</li></ul><h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><p>this.\$ls or this.\$ss in Component context for localStorage/sessionStorage<br>Vue.\$ls or Vue.\$ss in global.</p><blockquote><p>I will list basic api just with ls.</p></blockquote><h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.set(<span class="string">"token"</span>, <span class="string">"abccc"</span>)</span><br></pre></td></tr></table></figure><p>the value will be saved in storage with the <strong>prefix</strong> + key<br>and emit the changes to all the subscribers.</p><blockquote><p>you also can give the key an expire duration with the unit of ms</p></blockquote><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.set(<span class="string">"token"</span>, <span class="string">"abccc"</span>, <span class="number">3000</span>)</span><br></pre></td></tr></table></figure><p>the key will be expried in 3s, you will get null after that.</p><h4 id="ttl"><a href="#ttl" class="headerlink" title="ttl"></a>ttl</h4><p>ttl will return <strong>-1</strong> if one of the following scenarios happen:</p><ul><li>the key is non-exist</li><li>the key is already expired</li><li>the key has no expire time</li></ul><p>else return the remaining lifetime with ms as the unit</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.ttl(<span class="string">"token"</span>)</span><br></pre></td></tr></table></figure><h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.get(<span class="string">"token"</span>, <span class="string">"default"</span>)</span><br></pre></td></tr></table></figure><p>get the value with a default return value if it’s not existed</p><h4 id="subscribe-the-key"><a href="#subscribe-the-key" class="headerlink" title="subscribe the key"></a>subscribe the key</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.on(<span class="string">"token"</span>, callback)</span><br></pre></td></tr></table></figure><p>subscribe the key in the storage, will trigger the callback function if any changes happen.</p><p>the return value is the handler need to be used to unsubscribe</p><blockquote><p>tricky<br>there is an immediate options as a third args which will trigger cb immediate if set <strong>true</strong></p></blockquote><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.on(<span class="string">"token"</span>, callback, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure><h4 id="unsubscribe-the-key"><a href="#unsubscribe-the-key" class="headerlink" title="unsubscribe the key"></a>unsubscribe the key</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = <span class="keyword">this</span>.$ls.on(<span class="string">"token"</span>, cb)</span><br><span class="line"><span class="keyword">this</span>.$ls.off(<span class="string">"token"</span>, handler)</span><br></pre></td></tr></table></figure><blockquote><p>please make sure you unsubscribe beforeDestroy the component</p></blockquote><h4 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.remove(<span class="string">"token"</span>)</span><br></pre></td></tr></table></figure><p>remove will delete the key in storage and emit all the subscribers with <strong>null</strong> value</p><h4 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.clear()</span><br></pre></td></tr></table></figure><p>delete all the keys with your <strong>prefix</strong>. and all the subscribers will <strong>not</strong> receive changes any more</p><h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.$ls.init()</span><br></pre></td></tr></table></figure><p>init will set all your current localStorge keys into the plugins</p><ul><li>add prefix for all the keys</li></ul><p>and then you can use <strong>get</strong> and <strong>on</strong> mehtod to make them reactive</p><h3 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h3><ul><li>if you want to using localStorage and sessionStorage at same page, pls use the plugin as following</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lsWatcher <span class="keyword">from</span> <span class="string">"vue-storage-watcher"</span></span><br><span class="line"></span><br><span class="line">Vue.use(&#123; ...lsWatcher &#125;, &#123; <span class="attr">prefix</span>: <span class="string">"myproject_"</span> &#125;)</span><br><span class="line"></span><br><span class="line">Vue.use(&#123; ...lsWatcher &#125;, &#123; <span class="attr">prefix</span>: <span class="string">"myproject_ss_"</span>, <span class="attr">storage</span>: <span class="string">"session"</span> &#125;)</span><br></pre></td></tr></table></figure><ul><li>possibly polyfill</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// wather polyfill for IE 11</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"core-js/fn/symbol"</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"core-js/fn/map"</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;vue-storage-watcher&quot;&gt;&lt;a href=&quot;#vue-storage-watcher&quot; class=&quot;headerlink&quot; title=&quot;vue-storage-watcher&quot;&gt;&lt;/a&gt;vue-storage-watcher&lt;/h1&gt;&lt;p&gt;&lt;i
       
     
     </summary>
