@@ -82,19 +82,19 @@
 
 
 
-<meta name="description" content="Singleton 应用场景解释 需要全局同享对象,并加以控制 保证特定类只有一个实例  应用步骤重点 有一个私有字段老保存 单例实例 声明一个对外的方法获取实例 获取方法,需要 lazy, 并注意多线程的时候的加锁处理 隐藏构造函数或者其他创建行方法">
+<meta name="description" content="Singleton 应用场景解释 需要全局同享对象,并加以控制 保证特定类只有一个实例  应用步骤重点 有一个私有字段来保存 单例实例 声明一个对外的方法获取实例 获取方法,需要 lazy, 并注意多线程的时候的加锁处理 隐藏构造函数或者其他创建行方法">
 <meta name="keywords" content="Design,Singleton">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design-Patterns-Singleton">
 <meta property="og:url" content="https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="Singleton 应用场景解释 需要全局同享对象,并加以控制 保证特定类只有一个实例  应用步骤重点 有一个私有字段老保存 单例实例 声明一个对外的方法获取实例 获取方法,需要 lazy, 并注意多线程的时候的加锁处理 隐藏构造函数或者其他创建行方法">
+<meta property="og:description" content="Singleton 应用场景解释 需要全局同享对象,并加以控制 保证特定类只有一个实例  应用步骤重点 有一个私有字段来保存 单例实例 声明一个对外的方法获取实例 获取方法,需要 lazy, 并注意多线程的时候的加锁处理 隐藏构造函数或者其他创建行方法">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/singleton.png">
-<meta property="og:updated_time" content="2021-10-15T03:00:39.310Z">
+<meta property="og:updated_time" content="2021-10-15T03:36:37.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Design-Patterns-Singleton">
-<meta name="twitter:description" content="Singleton 应用场景解释 需要全局同享对象,并加以控制 保证特定类只有一个实例  应用步骤重点 有一个私有字段老保存 单例实例 声明一个对外的方法获取实例 获取方法,需要 lazy, 并注意多线程的时候的加锁处理 隐藏构造函数或者其他创建行方法">
+<meta name="twitter:description" content="Singleton 应用场景解释 需要全局同享对象,并加以控制 保证特定类只有一个实例  应用步骤重点 有一个私有字段来保存 单例实例 声明一个对外的方法获取实例 获取方法,需要 lazy, 并注意多线程的时候的加锁处理 隐藏构造函数或者其他创建行方法">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/singleton.png">
 
 
@@ -310,7 +310,7 @@
 <li>保证特定类只有一个实例</li>
 </ul>
 <h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul>
-<li>有一个私有字段老保存 单例实例</li>
+<li>有一个私有字段来保存 单例实例</li>
 <li>声明一个对外的方法获取实例</li>
 <li>获取方法,需要 lazy, 并注意多线程的时候的加锁处理</li>
 <li>隐藏构造函数或者其他创建行方法</li>
@@ -673,7 +673,7 @@
   
 
 <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1634266866682')
+  navigator.serviceWorker.register('/sw.js?t=1634269003987')
     .then(function () {console.log('ServiceWorker Register Successfully.')})
     .catch(function (e) {console.error(e)});
 }

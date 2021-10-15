@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-10-15T03:00:39.310Z</updated>
+  <updated>2021-10-15T03:36:37.830Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/"/>
     <id>https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/</id>
     <published>2021-10-15T02:53:34.000Z</published>
-    <updated>2021-10-15T03:00:39.310Z</updated>
+    <updated>2021-10-15T03:36:37.830Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/singleton.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>需要全局同享对象,并加以控制</li><li>保证特定类只有一个实例</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>有一个私有字段老保存 单例实例</li><li>声明一个对外的方法获取实例</li><li>获取方法,需要 lazy, 并注意多线程的时候的加锁处理</li><li>隐藏构造函数或者其他创建行方法</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/singleton.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>需要全局同享对象,并加以控制</li><li>保证特定类只有一个实例</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>有一个私有字段来保存 单例实例</li><li>声明一个对外的方法获取实例</li><li>获取方法,需要 lazy, 并注意多线程的时候的加锁处理</li><li>隐藏构造函数或者其他创建行方法</li></ul>]]></content>
     
     <summary type="html">
     

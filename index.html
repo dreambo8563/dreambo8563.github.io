@@ -313,7 +313,7 @@
 保证特定类只有一个实例
 
 应用步骤重点
-有一个私有字段老保存 单例实例
+有一个私有字段来保存 单例实例
 声明一个对外的方法获取实例
 获取方法,需要 lazy, 并注意多线程的时候的加锁处理
 隐藏构造函数或者其他创建行方法
@@ -1779,7 +1779,7 @@ Mixinmixin 是 Vue 里面的一个特性, 我们一般会把通用的操作放�
   
 
 <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1634266866682')
+  navigator.serviceWorker.register('/sw.js?t=1634269003987')
     .then(function () {console.log('ServiceWorker Register Successfully.')})
     .catch(function (e) {console.error(e)});
 }
