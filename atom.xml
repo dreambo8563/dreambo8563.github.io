@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-10-15T03:36:37.830Z</updated>
+  <updated>2021-10-20T07:20:35.612Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Design-Patterns-Adapter</title>
+    <link href="https://dreambo8563.github.io/2021/10/20/Design-Patterns-Adapter/"/>
+    <id>https://dreambo8563.github.io/2021/10/20/Design-Patterns-Adapter/</id>
+    <published>2021-10-20T07:08:13.000Z</published>
+    <updated>2021-10-20T07:20:35.612Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Adapter-wrapper"><a href="#Adapter-wrapper" class="headerlink" title="Adapter (wrapper)"></a>Adapter (wrapper)</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/adapter.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>适合支持多继承的语言实现</li><li>当前逻辑需要调用一个遗留系统,或者不可变的第三方服务. 且第三方服务签名不能直接被当前逻辑使用. 类型不匹配</li><li>可以用 adapter 将不可变服务包裹起来, 并符合目标的 interface</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>找到至少 2 个接口不兼容的类,  1 个是不可变的服务类, 一个是调用方需要的参数类</li><li>抽象一个调用方需要的 interface , 行为包含所有使用到第三方服务的行为</li><li>创建 adapter 类</li><li>adapter 类加一个字段来保存第三方服务的实例</li><li>adapter 类 实现 interface 所有方法, 并在实现过程中,调用第三方服务, 对其兼容</li><li>调用方使用 adapter 实例, 在需要调用第三方的地方</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Adapter-wrapper&quot;&gt;&lt;a href=&quot;#Adapter-wrapper&quot; class=&quot;headerlink&quot; title=&quot;Adapter (wrapper)&quot;&gt;&lt;/a&gt;Adapter (wrapper)&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http
+      
+    
+    </summary>
+    
+      <category term="Structural" scheme="https://dreambo8563.github.io/categories/Structural/"/>
+    
+    
+      <category term="Design" scheme="https://dreambo8563.github.io/tags/Design/"/>
+    
+      <category term="Adapter" scheme="https://dreambo8563.github.io/tags/Adapter/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Design-Patterns-Singleton</title>
     <link href="https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/"/>
     <id>https://dreambo8563.github.io/2021/10/15/Design-Patterns-Singleton/</id>
     <published>2021-10-15T02:53:34.000Z</published>
-    <updated>2021-10-15T03:36:37.830Z</updated>
+    <updated>2021-10-20T07:14:59.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Singleton"><a href="#Singleton" class="headerlink" title="Singleton"></a>Singleton</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/singleton.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>需要全局同享对象,并加以控制</li><li>保证特定类只有一个实例</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>有一个私有字段来保存 单例实例</li><li>声明一个对外的方法获取实例</li><li>获取方法,需要 lazy, 并注意多线程的时候的加锁处理</li><li>隐藏构造函数或者其他创建行方法</li></ul>]]></content>
     
@@ -502,31 +529,6 @@
       
       
         &lt;h1 id=&quot;vue-lazy-calc&quot;&gt;&lt;a href=&quot;#vue-lazy-calc&quot; class=&quot;headerlink&quot; title=&quot;vue-lazy-calc&quot;&gt;&lt;/a&gt;vue-lazy-calc&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://raw.gith
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue - vue-device-detector</title>
-    <link href="https://dreambo8563.github.io/2019/03/12/Vue-vue-device-detector/"/>
-    <id>https://dreambo8563.github.io/2019/03/12/Vue-vue-device-detector/</id>
-    <published>2019-03-12T14:14:31.000Z</published>
-    <updated>2019-03-29T07:54:08.273Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="vue-device-detector"><a href="#vue-device-detector" class="headerlink" title="vue-device-detector"></a>vue-device-detector</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/watcher2.png" alt=""></p><p><strong>vue-device-detector</strong> is a simple vue plugin to inspect the device type.</p><ul><li>focus on mobile</li><li>vue friendly</li><li>strong typed</li></ul><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm install vue-device-detector --save</span><br></pre></td></tr></table></figure><h3 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> device <span class="keyword">from</span> <span class="string">"vue-device-detector"</span></span><br><span class="line">Vue.use(device)</span><br></pre></td></tr></table></figure><h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ul><li>this.\$device in Component context.</li><li>Vue.\$device in global.</li></ul><h3 id="API-list"><a href="#API-list" class="headerlink" title="API list"></a>API list</h3><p>you can get the following properties under this.\$device</p><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> IDeviceDetector &#123;</span><br><span class="line">  ios: <span class="built_in">Boolean</span></span><br><span class="line">  iphone: <span class="built_in">Boolean</span></span><br><span class="line">  iphoneX: <span class="built_in">Boolean</span></span><br><span class="line">  iPhoneXR: <span class="built_in">Boolean</span></span><br><span class="line">  iPhoneXSMax: <span class="built_in">Boolean</span></span><br><span class="line">  ipod: <span class="built_in">Boolean</span></span><br><span class="line">  ipad: <span class="built_in">Boolean</span></span><br><span class="line">  android: <span class="built_in">Boolean</span></span><br><span class="line">  androidPhone: <span class="built_in">Boolean</span></span><br><span class="line">  windows: <span class="built_in">Boolean</span></span><br><span class="line">  mobile: <span class="built_in">Boolean</span></span><br><span class="line">  dingding: <span class="built_in">Boolean</span> <span class="comment">//钉钉</span></span><br><span class="line">  wechat: <span class="built_in">Boolean</span> <span class="comment">// 微信</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>eg.<br>on iphoneX</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$device.iphoneX) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$device.ios) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span>.$device.android) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;vue-device-detector&quot;&gt;&lt;a href=&quot;#vue-device-detector&quot; class=&quot;headerlink&quot; title=&quot;vue-device-detector&quot;&gt;&lt;/a&gt;vue-device-detector&lt;/h1&gt;&lt;p&gt;&lt;i
       
     
     </summary>

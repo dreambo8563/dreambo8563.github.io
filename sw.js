@@ -24,15 +24,15 @@ var precacheUrls = [];
 
   precacheUrls.push('/');
 
+  precacheUrls.push('/2018/12/29/2018年度总结/');
+
+  precacheUrls.push('/2017/05/02/Actor-Become-Unbecome/');
+
   precacheUrls.push('/2020/01/21/2019总结/');
 
   precacheUrls.push('/2017/04/27/Actor-Actor-API/');
 
-  precacheUrls.push('/2018/12/29/2018年度总结/');
-
   precacheUrls.push('/2017/04/27/Actor-Creating-Actors/');
-
-  precacheUrls.push('/2017/05/02/Actor-Become-Unbecome/');
 
 toolbox.precache(precacheUrls);
 toolbox.options = {"networkTimeoutSeconds":5};
