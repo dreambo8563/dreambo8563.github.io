@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-10-20T07:20:35.612Z</updated>
+  <updated>2021-10-21T07:43:42.650Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Design-Patterns-Bridge</title>
+    <link href="https://dreambo8563.github.io/2021/10/21/Design-Patterns-Bridge/"/>
+    <id>https://dreambo8563.github.io/2021/10/21/Design-Patterns-Bridge/</id>
+    <published>2021-10-21T07:30:49.000Z</published>
+    <updated>2021-10-21T07:43:42.650Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Bridge"><a href="#Bridge" class="headerlink" title="Bridge"></a>Bridge</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/bridge.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>当有巨型的单个类有很多变种. 或者需要被重构拆分</li><li>当这个类有多个维度,方面,或者组件 会经常行的发生变化或者替换</li><li>如果你想在运行时切换不同的实现</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>先识别出类中的可以拆分的多个维度,方面或者组件</li><li>抽象出这些组件的 interface</li><li>根据不同的变种实现组件的interface</li><li>在被拆分类分配一个字段给某个抽象的组件实例, 在类型调用组件相关方法</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Bridge&quot;&gt;&lt;a href=&quot;#Bridge&quot; class=&quot;headerlink&quot; title=&quot;Bridge&quot;&gt;&lt;/a&gt;Bridge&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/dreambo856
+      
+    
+    </summary>
+    
+      <category term="Structural" scheme="https://dreambo8563.github.io/categories/Structural/"/>
+    
+    
+      <category term="Design" scheme="https://dreambo8563.github.io/tags/Design/"/>
+    
+      <category term="Bridge" scheme="https://dreambo8563.github.io/tags/Bridge/"/>
+    
+  </entry>
   
   <entry>
     <title>Design-Patterns-Adapter</title>
@@ -512,31 +539,6 @@
     
     
       <category term="redis" scheme="https://dreambo8563.github.io/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue - vue-lazy-calc</title>
-    <link href="https://dreambo8563.github.io/2019/03/19/Vue-vue-lazy-calc/"/>
-    <id>https://dreambo8563.github.io/2019/03/19/Vue-vue-lazy-calc/</id>
-    <published>2019-03-19T05:23:36.000Z</published>
-    <updated>2019-03-29T07:54:08.273Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="vue-lazy-calc"><a href="#vue-lazy-calc" class="headerlink" title="vue-lazy-calc"></a>vue-lazy-calc</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/calculator.jpg" alt=""></p><p>this is a just support simple calculation in lazy way.<br>(inspired by lodash)</p><p><strong>features</strong></p><ul><li>vue friendly</li><li>strong typed</li><li>lazy evaluation</li><li>chaining methods</li></ul><h3 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">npm install vue-lazy-calc --save</span><br></pre></td></tr></table></figure><h3 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lzCalc <span class="keyword">from</span> <span class="string">"vue-lazy-calc"</span></span><br><span class="line">Vue.use(lzCalc)</span><br></pre></td></tr></table></figure><h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><ul><li>this.\$lzCalc in Component context.</li><li>Vue.\$lzCalc in global.</li></ul><h3 id="API-list"><a href="#API-list" class="headerlink" title="API list"></a>API list</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">interface</span> ILazyCalc &#123;</span><br><span class="line">  lazy(init?: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  add(<span class="built_in">number</span>: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  subtract(<span class="built_in">number</span>: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  divide(y: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  multiply(y: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  round(precision?: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  floor(precision?: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  ceil(precision?: <span class="built_in">number</span>): ILazyCalc</span><br><span class="line">  <span class="keyword">do</span>(fn: operatorFunc): ILazyCalc</span><br><span class="line">  value(fallback?: <span class="built_in">any</span>): <span class="built_in">any</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>lazy =&gt; init a new instance with optional initValue</li><li>add/subtract/divide/multiple =&gt; + - * / (simple calculation)</li><li>round/floor/ceil =&gt; deal with precision of the float number</li><li>value =&gt; excute the declared method chain with optional fallBack value(if the result is NaN)</li><li>do =&gt; accept a custormized function for the number</li></ul><h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><p>(1+3)*2/3 with precision 2</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> result = <span class="keyword">this</span>.$lzCalc</span><br><span class="line">  .lazy(<span class="number">1</span>)</span><br><span class="line">  .add(<span class="number">3</span>)</span><br><span class="line">  .multiply(<span class="number">2</span>)</span><br><span class="line">  .divide(<span class="number">3</span>)</span><br><span class="line">  .round(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result.value()) <span class="comment">// 2.67</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> addThree = result.add(<span class="number">3</span>)</span><br><span class="line"><span class="built_in">console</span>.log(addThree.value()) <span class="comment">// 2.67+ 3 =&gt;5.67</span></span><br></pre></td></tr></table></figure><ol><li>when declare the result variable, no calculation excuted until value()</li><li>you can reuse the declare variable</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;vue-lazy-calc&quot;&gt;&lt;a href=&quot;#vue-lazy-calc&quot; class=&quot;headerlink&quot; title=&quot;vue-lazy-calc&quot;&gt;&lt;/a&gt;vue-lazy-calc&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://raw.gith
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
     
   </entry>
   
