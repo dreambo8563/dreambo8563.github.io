@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,41 +59,43 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="NativeScript,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="NativeScript," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="本来想玩下React Native的…结果win上各种郁闷.但还是想看看移动端. 试下NativeScript:单纯的TS模板: viewModel import observable = require(&quot;data/observable&quot;);export class HelloWorldModel extends observable.Observable &amp;#123;    private _">
-<meta name="keywords" content="NativeScript">
+<meta name="description" content="本来想玩下React Native的…结果win上各种郁闷.但还是想看看移动端. 试下NativeScript:单纯的TS模板: viewModel import observable &#x3D; require(&quot;data&#x2F;observable&quot;);export class HelloWorldModel extends observable.Observable &amp;#123;    private _">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NativeScript - 经典view-model解析">
-<meta property="og:url" content="https://dreambo8563.github.io/2016/03/31/NativeScript-经典view-model解析/index.html">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/03/31/NativeScript-%E7%BB%8F%E5%85%B8view-model%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="本来想玩下React Native的…结果win上各种郁闷.但还是想看看移动端. 试下NativeScript:单纯的TS模板: viewModel import observable = require(&quot;data/observable&quot;);export class HelloWorldModel extends observable.Observable &amp;#123;    private _">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-04-28T07:41:11.000Z">
+<meta property="og:description" content="本来想玩下React Native的…结果win上各种郁闷.但还是想看看移动端. 试下NativeScript:单纯的TS模板: viewModel import observable &#x3D; require(&quot;data&#x2F;observable&quot;);export class HelloWorldModel extends observable.Observable &amp;#123;    private _">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-03-31T04:33:40.000Z">
+<meta property="article:modified_time" content="2016-04-28T07:41:11.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="NativeScript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NativeScript - 经典view-model解析">
-<meta name="twitter:description" content="本来想玩下React Native的…结果win上各种郁闷.但还是想看看移动端. 试下NativeScript:单纯的TS模板: viewModel import observable = require(&quot;data/observable&quot;);export class HelloWorldModel extends observable.Observable &amp;#123;    private _">
 
 
 
@@ -112,9 +114,9 @@
 </script>
 
   <title> NativeScript - 经典view-model解析 | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +137,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +169,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +179,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +189,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +199,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +232,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +261,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/NativeScript/" itemprop="url" rel="index">
                     <span itemprop="name">NativeScript</span>
                   </a>
@@ -305,9 +307,9 @@
         <p>本来想玩下React Native的…结果win上各种郁闷.<br>但还是想看看移动端.</p>
 <p>试下NativeScript:<br>单纯的TS模板:</p>
 <p>viewModel</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> observable = <span class="built_in">require</span>(<span class="string">"data/observable"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldModel</span> <span class="keyword">extends</span> <span class="title">observable</span>.<span class="title">Observable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    private _counter: number;</span><br><span class="line">    private _message: string;</span><br><span class="line"></span><br><span class="line">    get message(): string &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._message;</span><br><span class="line">    &#125;</span><br><span class="line">    set message(value: string) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._message !== value) &#123;</span><br><span class="line">            <span class="keyword">this</span>._message = value;</span><br><span class="line">            <span class="keyword">this</span>.notifyPropertyChange(<span class="string">"message"</span>, value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Initialize default values.</span></span><br><span class="line">        <span class="keyword">this</span>._counter = <span class="number">42</span>;</span><br><span class="line">        <span class="keyword">this</span>.updateMessage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private updateMessage() &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._counter &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.message = <span class="string">"Hoorraaay! You unlocked the NativeScript clicker achievement!"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.message = <span class="keyword">this</span>._counter + <span class="string">" test for sync taps left2"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public onTap() &#123;</span><br><span class="line">        <span class="keyword">this</span>._counter--;</span><br><span class="line">        <span class="keyword">this</span>.updateMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> observable = <span class="built_in">require</span>(<span class="string">"data/observable"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldModel</span> <span class="keyword">extends</span> <span class="title">observable</span>.<span class="title">Observable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    private _counter: number;</span><br><span class="line">    private _message: string;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> message(): string &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._message;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">set</span> message(value: string) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._message !== value) &#123;</span><br><span class="line">            <span class="keyword">this</span>._message = value;</span><br><span class="line">            <span class="keyword">this</span>.notifyPropertyChange(<span class="string">"message"</span>, value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Initialize default values.</span></span><br><span class="line">        <span class="keyword">this</span>._counter = <span class="number">42</span>;</span><br><span class="line">        <span class="keyword">this</span>.updateMessage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private updateMessage() &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._counter &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.message = <span class="string">"Hoorraaay! You unlocked the NativeScript clicker achievement!"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.message = <span class="keyword">this</span>._counter + <span class="string">" test for sync taps left2"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public onTap() &#123;</span><br><span class="line">        <span class="keyword">this</span>._counter--;</span><br><span class="line">        <span class="keyword">this</span>.updateMessage();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>既然让Model继承了一个Observable.我们不得不看下了.这个Model感觉就是个组件.等看NG2的版本再感受吧</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * String value used when hooking to propertyChange event.</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      public <span class="keyword">static</span> propertyChangeEvent: string;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * Creates an Observable instance and sets its properties according to the supplied JSON object.</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="keyword">constructor</span>(json?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Gets the name of the <span class="keyword">constructor</span> function for this instance. E.g. for a Button class this will return "Button".</span><br><span class="line">       */</span><br><span class="line">      typeName: string;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * A basic method signature to hook an event listener (shortcut alias to the addEventListener method).</span><br><span class="line">       * @param eventNames - String corresponding to events (e.g. "propertyChange"). Optionally could be used more events separated by `,` (e.g. "propertyChange", "change"). </span><br><span class="line">       * @param callback - Callback function which will be executed when event is raised.</span><br><span class="line">       * @param thisArg - An optional parameter which will be used as `this` context for callback execution.</span><br><span class="line">       */</span><br><span class="line">      on(eventNames: string, callback: (data: EventData) =&gt; void, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Raised when a propertyChange occurs.</span><br><span class="line">       */</span><br><span class="line">      on(event: "propertyChange", callback: (data: EventData) =&gt; void, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Shortcut alias to the removeEventListener method.</span><br><span class="line">       */</span><br><span class="line">      off(eventNames: string, callback?: any, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Adds a listener for the specified event name.</span><br><span class="line">       * @param eventNames Comma delimited names of the events to attach the listener to.</span><br><span class="line">       * @param callback A function to be called when some of the specified event(s) is raised.</span><br><span class="line">       * @param thisArg An optional parameter which when set will be used as "this" in callback method call.</span><br><span class="line">       */</span><br><span class="line">      addEventListener(eventNames: string, callback: (data: EventData) =&gt; void, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Removes listener(s) for the specified event name.</span><br><span class="line">       * @param eventNames Comma delimited names of the events the specified listener is associated with.</span><br><span class="line">       * @param callback An optional parameter pointing to a specific listener. If not defined, all listeners for the event names will be removed.</span><br><span class="line">       * @param thisArg An optional parameter which when set will be used to refine search of the correct callback which will be removed as event listener.</span><br><span class="line">       */</span><br><span class="line">      removeEventListener(eventNames: string, callback?: any, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Updates the specified property with the provided value.</span><br><span class="line">       */</span><br><span class="line">      set(name: string, value: any): void;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Gets the value of the specified property.</span><br><span class="line">       */</span><br><span class="line">      get(name: string): any;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Notifies all the registered listeners for the event provided in the data.eventName.</span><br><span class="line">       * @param data The data associated with the event.</span><br><span class="line">       */</span><br><span class="line">      notify&lt;T extends EventData&gt;(data: T): void;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Notifies all the registered listeners for the property change event.</span><br><span class="line">       */</span><br><span class="line">      notifyPropertyChange(propertyName: string, newValue: any): void;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Checks whether a listener is registered for the specified event name.</span><br><span class="line">       * @param eventName The name of the event to check for.</span><br><span class="line">       */</span><br><span class="line">      hasListeners(eventName: string): boolean;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observable</span> </span>&#123;</span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * String value used when hooking to propertyChange event.</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      public <span class="keyword">static</span> propertyChangeEvent: string;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/**</span></span><br><span class="line"><span class="comment">       * Creates an Observable instance and sets its properties according to the supplied JSON object.</span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line">      <span class="keyword">constructor</span>(json?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Gets the name of the <span class="keyword">constructor</span> function for this instance. E.g. for a Button class this will return "Button".</span><br><span class="line">       */</span><br><span class="line">      typeName: string;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * A basic method signature to hook an event listener (shortcut alias to the addEventListener method).</span><br><span class="line">       * @param eventNames - String corresponding to events (e.g. "propertyChange"). Optionally could be used more events separated by `,` (e.g. "propertyChange", "change"). </span><br><span class="line">       * @param callback - Callback function which will be executed when event is raised.</span><br><span class="line">       * @param thisArg - An optional parameter which will be used as `this` context for callback execution.</span><br><span class="line">       */</span><br><span class="line">      on(eventNames: string, callback: (data: EventData) =&gt; void, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Raised when a propertyChange occurs.</span><br><span class="line">       */</span><br><span class="line">      on(event: "propertyChange", callback: (data: EventData) =&gt; void, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Shortcut alias to the removeEventListener method.</span><br><span class="line">       */</span><br><span class="line">      off(eventNames: string, callback?: any, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Adds a listener for the specified event name.</span><br><span class="line">       * @param eventNames Comma delimited names of the events to attach the listener to.</span><br><span class="line">       * @param callback A function to be called when some of the specified event(s) is raised.</span><br><span class="line">       * @param thisArg An optional parameter which when <span class="keyword">set</span> will be used as "this" in callback method call.</span><br><span class="line">       */</span><br><span class="line">      addEventListener(eventNames: string, callback: (data: EventData) =&gt; void, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Removes listener(s) for the specified event name.</span><br><span class="line">       * @param eventNames Comma delimited names of the events the specified listener is associated with.</span><br><span class="line">       * @param callback An optional parameter pointing to a specific listener. If not defined, all listeners for the event names will be removed.</span><br><span class="line">       * @param thisArg An optional parameter which when <span class="keyword">set</span> will be used to refine search of the correct callback which will be removed as event listener.</span><br><span class="line">       */</span><br><span class="line">      removeEventListener(eventNames: string, callback?: any, thisArg?: any);</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Updates the specified property with the provided value.</span><br><span class="line">       */</span><br><span class="line">      <span class="keyword">set</span>(name: string, value: any): void;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Gets the value of the specified property.</span><br><span class="line">       */</span><br><span class="line">      <span class="keyword">get</span>(name: string): any;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Notifies all the registered listeners for the event provided in the data.eventName.</span><br><span class="line">       * @param data The data associated with the event.</span><br><span class="line">       */</span><br><span class="line">      notify&lt;T extends EventData&gt;(data: T): void;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Notifies all the registered listeners for the property change event.</span><br><span class="line">       */</span><br><span class="line">      notifyPropertyChange(propertyName: string, newValue: any): void;</span><br><span class="line"></span><br><span class="line">      /**</span><br><span class="line">       * Checks whether a listener is registered for the specified event name.</span><br><span class="line">       * @param eventName The name of the event to check for.</span><br><span class="line">       */</span><br><span class="line">      hasListeners(eventName: string): boolean;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <p>看了定义,更感觉像组件了…各种属性.时间.可以通知.注释里用button来举例,好一个组件</p>
 <p>上面是私有属性,一般就是xml会用到的变量,数据binding来用<br>构造里弄默认值 ,onTap是事件处理函数</p>
 <p><code>this.notifyPropertyChange(&quot;message&quot;, value)</code> 这句肯定是重点.看后面怎么解释吧.关乎数据binding和通知机制</p>
@@ -398,7 +400,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -408,15 +410,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -558,7 +562,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -569,12 +573,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -670,10 +674,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

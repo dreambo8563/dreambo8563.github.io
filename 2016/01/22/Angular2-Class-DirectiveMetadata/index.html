@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,41 +59,44 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Angular2,Class,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="Angular2,Class," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="本来想看的是Directive里的NgControlGroup  由于开头的exportAs 参数直接引导到了DirectiveMetadata 源码里大段的sample和解释，写的很细  首先看下指令的注入Assume this HTML template:   &amp;lt;div dependency=&amp;quot;1&amp;quot;&amp;gt;  &amp;lt;div dependency=&amp;quot;2&amp;qu">
-<meta name="keywords" content="Angular2,Class">
+<meta name="description" content="本来想看的是Directive里的NgControlGroup  由于开头的exportAs 参数直接引导到了DirectiveMetadata 源码里大段的sample和解释，写的很细  首先看下指令的注入Assume this HTML template:   &lt;div dependency&#x3D;&quot;1&quot;&gt;  &lt;div dependency&#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular2 - Class - DirectiveMetadata">
 <meta property="og:url" content="https://dreambo8563.github.io/2016/01/22/Angular2-Class-DirectiveMetadata/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="本来想看的是Directive里的NgControlGroup  由于开头的exportAs 参数直接引导到了DirectiveMetadata 源码里大段的sample和解释，写的很细  首先看下指令的注入Assume this HTML template:   &amp;lt;div dependency=&amp;quot;1&amp;quot;&amp;gt;  &amp;lt;div dependency=&amp;quot;2&amp;qu">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-01-22T10:10:29.000Z">
+<meta property="og:description" content="本来想看的是Directive里的NgControlGroup  由于开头的exportAs 参数直接引导到了DirectiveMetadata 源码里大段的sample和解释，写的很细  首先看下指令的注入Assume this HTML template:   &lt;div dependency&#x3D;&quot;1&quot;&gt;  &lt;div dependency&#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-22T02:22:33.000Z">
+<meta property="article:modified_time" content="2016-01-22T10:10:29.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="Angular2">
+<meta property="article:tag" content="Class">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular2 - Class - DirectiveMetadata">
-<meta name="twitter:description" content="本来想看的是Directive里的NgControlGroup  由于开头的exportAs 参数直接引导到了DirectiveMetadata 源码里大段的sample和解释，写的很细  首先看下指令的注入Assume this HTML template:   &amp;lt;div dependency=&amp;quot;1&amp;quot;&amp;gt;  &amp;lt;div dependency=&amp;quot;2&amp;qu">
 
 
 
@@ -112,9 +115,9 @@
 </script>
 
   <title> Angular2 - Class - DirectiveMetadata | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +138,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +170,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +180,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +200,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +233,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +262,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Angular2/" itemprop="url" rel="index">
                     <span itemprop="name">Angular2</span>
                   </a>
@@ -307,32 +310,32 @@
 <p>源码里大段的sample和解释，写的很细</p>
 <hr>
 <h1 id="首先看下指令的注入"><a href="#首先看下指令的注入" class="headerlink" title="首先看下指令的注入"></a>首先看下指令的注入</h1><p>Assume this HTML template:</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div dependency=&quot;1&quot;&gt;</span><br><span class="line">  &lt;div dependency=&quot;2&quot;&gt;</span><br><span class="line">    &lt;div dependency=&quot;3&quot; my-directive&gt;</span><br><span class="line">      &lt;div dependency=&quot;4&quot;&gt;</span><br><span class="line">        &lt;div dependency=&quot;5&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div dependency=&quot;6&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div dependency&#x3D;&quot;1&quot;&gt;</span><br><span class="line">  &lt;div dependency&#x3D;&quot;2&quot;&gt;</span><br><span class="line">    &lt;div dependency&#x3D;&quot;3&quot; my-directive&gt;</span><br><span class="line">      &lt;div dependency&#x3D;&quot;4&quot;&gt;</span><br><span class="line">        &lt;div dependency&#x3D;&quot;5&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;div dependency&#x3D;&quot;6&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
 <p>  With the following <code>dependency</code> decorator and <code>SomeService</code> injectable class.</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Injectable()</span><br><span class="line">class SomeService &#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Directive(&#123;</span><br><span class="line">  selector: &apos;[dependency]&apos;,</span><br><span class="line">  inputs: [</span><br><span class="line">    &apos;id: dependency&apos;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line">class Dependency &#123;</span><br><span class="line">  id:string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Injectable()</span><br><span class="line">class SomeService &#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Directive(&#123;</span><br><span class="line">  selector: &#39;[dependency]&#39;,</span><br><span class="line">  inputs: [</span><br><span class="line">    &#39;id: dependency&#39;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line">class Dependency &#123;</span><br><span class="line">  id:string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  Let’s step through the different ways in which <code>MyDirective</code> could be declared…</p>
 <h3 id="No-injection"><a href="#No-injection" class="headerlink" title="No injection"></a>No injection</h3><p>  Here the constructor is declared with no arguments, therefore nothing is injected into<br>  <code>MyDirective</code>.</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  This directive would be instantiated with no dependencies.</p>
 <h3 id="Component-level-injection"><a href="#Component-level-injection" class="headerlink" title="Component-level injection"></a>Component-level injection</h3><p>  Directives can inject any injectable instance from the closest component injector or any of its<br>  parents.</p>
-<p>  Here, the constructor declares a parameter, <code>someService</code>, and injects the <code>SomeService</code> type<br>  from the parent<br>  component’s injector. —注入普通的service<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(someService: SomeService) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>  Here, the constructor declares a parameter, <code>someService</code>, and injects the <code>SomeService</code> type<br>  from the parent<br>  component’s injector. —注入普通的service<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(someService: SomeService) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>  This directive would be instantiated with a dependency on <code>SomeService</code>.</p>
 <h3 id="Injecting-a-directive-from-the-current-element-–注入当前元素中的其他指令"><a href="#Injecting-a-directive-from-the-current-element-–注入当前元素中的其他指令" class="headerlink" title="Injecting a directive from the current element –注入当前元素中的其他指令"></a>Injecting a directive from the current element –注入当前元素中的其他指令</h3><p>  Directives can inject other directives declared on the current element.</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(dependency: Dependency) &#123;</span><br><span class="line">    expect(dependency.id).toEqual(3);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(dependency: Dependency) &#123;</span><br><span class="line">    expect(dependency.id).toEqual(3);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  This directive would be instantiated with <code>Dependency</code> declared at the same element, in this case<br>  <code>dependency=&quot;3&quot;</code>.</p>
-<h3 id="Injecting-a-directive-from-any-ancestor-elements-–在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）"><a href="#Injecting-a-directive-from-any-ancestor-elements-–在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）" class="headerlink" title="Injecting a directive from any ancestor elements –在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）"></a>Injecting a directive from any ancestor elements –在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）</h3><p>  Directives can inject other directives declared on any ancestor element (in the current Shadow<br>  DOM), i.e. on the current element, the<br>  parent element, or its parents.<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Host() dependency: Dependency) &#123;</span><br><span class="line">    expect(dependency.id).toEqual(2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Injecting-a-directive-from-any-ancestor-elements-–在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）"><a href="#Injecting-a-directive-from-any-ancestor-elements-–在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）" class="headerlink" title="Injecting a directive from any ancestor elements –在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）"></a>Injecting a directive from any ancestor elements –在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）</h3><p>  Directives can inject other directives declared on any ancestor element (in the current Shadow<br>  DOM), i.e. on the current element, the<br>  parent element, or its parents.<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Host() dependency: Dependency) &#123;</span><br><span class="line">    expect(dependency.id).toEqual(2);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>  <code>@Host</code> checks the current element, the parent, as well as its parents recursively. If<br>  <code>dependency=&quot;2&quot;</code> didn’t<br>  exist on the direct parent, this injection would<br>  have returned<br>  <code>dependency=&quot;1&quot;</code>.</p>
 <h3 id="Injecting-a-live-collection-of-direct-child-directives-–找子元素中的指令"><a href="#Injecting-a-live-collection-of-direct-child-directives-–找子元素中的指令" class="headerlink" title="Injecting a live collection of direct child directives –找子元素中的指令"></a>Injecting a live collection of direct child directives –找子元素中的指令</h3><p>  A directive can also query for other child directives. Since parent directives are instantiated<br>  before child directives, a directive can’t simply inject the list of child directives. Instead,<br>  the directive injects a {@link QueryList}, which updates its contents as children are added,<br>  removed, or moved by a directive that uses a {@link ViewContainerRef} such as a <code>ngFor</code>, an<br>  <code>ngIf</code>, or an <code>ngSwitch</code>.</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Query(Dependency) dependencies:QueryList&lt;Dependency&gt;) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Query(Dependency) dependencies:QueryList&lt;Dependency&gt;) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  This directive would be instantiated with a {@link QueryList} which contains <code>Dependency</code> 4 and<br>  <code>Dependency</code> 6. Here, <code>Dependency</code> 5 would not be included, because it is not a direct child.</p>
 <h3 id="Injecting-a-live-collection-of-descendant-directives-—子元素嵌套"><a href="#Injecting-a-live-collection-of-descendant-directives-—子元素嵌套" class="headerlink" title="Injecting a live collection of descendant directives —子元素嵌套"></a>Injecting a live collection of descendant directives —子元素嵌套</h3><p>  By passing the descendant flag to <code>@Query</code> above, we can include the children of the child<br>  elements.</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Query(Dependency, &#123;descendants: true&#125;) dependencies:QueryList&lt;Dependency&gt;) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Query(Dependency, &#123;descendants: true&#125;) dependencies:QueryList&lt;Dependency&gt;) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  This directive would be instantiated with a Query which would contain <code>Dependency</code> 4, 5 and 6.</p>
 <h3 id="Optional-injection-–可能找不到，就给null"><a href="#Optional-injection-–可能找不到，就给null" class="headerlink" title="Optional injection –可能找不到，就给null"></a>Optional injection –可能找不到，就给null</h3><p>  The normal behavior of directives is to return an error when a specified dependency cannot be<br>  resolved. If you<br>  would like to inject <code>null</code> on unresolved dependency instead, you can annotate that dependency<br>  with <code>@Optional()</code>.<br>  This explicitly permits the author of a template to treat some of the surrounding directives as<br>  optional.</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &apos;[my-directive]&apos; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Optional() dependency:Dependency) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Directive(&#123; selector: &#39;[my-directive]&#39; &#125;)</span><br><span class="line">class MyDirective &#123;</span><br><span class="line">  constructor(@Optional() dependency:Dependency) &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  This directive would be instantiated with a <code>Dependency</code> directive found on the current element.<br>  If none can be<br>  found, the injector supplies <code>null</code> instead of throwing an error.</p>
 <hr>
-<h1 id="开始参数解读"><a href="#开始参数解读" class="headerlink" title="开始参数解读"></a>开始参数解读</h1><h2 id="先来总体的构造"><a href="#先来总体的构造" class="headerlink" title="先来总体的构造"></a>先来总体的构造</h2>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(&#123;selector, inputs, outputs, properties, events, host, bindings, providers, exportAs,</span><br><span class="line">             queries&#125;?: &#123;</span><br><span class="line">  selector?: string,</span><br><span class="line">  inputs?: string[],</span><br><span class="line">  outputs?: string[],</span><br><span class="line">  properties?: string[],</span><br><span class="line">  events?: string[],</span><br><span class="line">  host?: &#123;[key: string]: string&#125;,</span><br><span class="line">  providers?: any[],</span><br><span class="line">  <span class="comment">/** @deprecated */</span> bindings?: any[],</span><br><span class="line">  exportAs?: string,</span><br><span class="line">  queries?: &#123;[key: string]: any&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h1 id="开始参数解读"><a href="#开始参数解读" class="headerlink" title="开始参数解读"></a>开始参数解读</h1><h2 id="先来总体的构造"><a href="#先来总体的构造" class="headerlink" title="先来总体的构造"></a>先来总体的构造</h2>  <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">constructor</span>(&#123;selector, inputs, outputs, properties, events, host, bindings, providers, exportAs,</span><br><span class="line">             queries&#125;?: &#123;</span><br><span class="line">  selector?: string,</span><br><span class="line">  inputs?: string[],</span><br><span class="line">  outputs?: string[],</span><br><span class="line">  properties?: string[],</span><br><span class="line">  events?: string[],</span><br><span class="line">  host?: &#123;[key: string]: string&#125;,</span><br><span class="line">  providers?: any[],</span><br><span class="line">  <span class="comment">/** <span class="doctag">@deprecated </span>*/</span> bindings?: any[],</span><br><span class="line">  exportAs?: string,</span><br><span class="line">  queries?: &#123;[key: string]: any&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>selector: string;  – 就是个css选择器，定位指令的<blockquote>
@@ -357,7 +360,7 @@
 </li>
 </ul>
 <p>直接举例 <code>inputs: [&#39;bankName&#39;, &#39;id: account-id&#39;]</code><br>id 就是directiveProperty ， account-id 是bindingProperty<br>就是从host里的 bindingProperty 给 当前class里的 就是directiveProperty<br>如果像bankName一样没有bindingProperty，那默认bindingProperty和directiveProperty一样</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">get inputs(): string[] &#123;</span><br><span class="line">    <span class="keyword">return</span> isPresent(<span class="keyword">this</span>._properties) &amp;&amp; <span class="keyword">this</span>._properties.length &gt; <span class="number">0</span> ? <span class="keyword">this</span>._properties :</span><br><span class="line">                                                                        <span class="keyword">this</span>._inputs;</span><br><span class="line">  &#125;</span><br><span class="line">  get properties(): string[] &#123; <span class="keyword">return</span> <span class="keyword">this</span>.inputs; &#125;</span><br><span class="line">  private _inputs: string[];</span><br><span class="line">  private _properties: string[];</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">get</span> inputs(): string[] &#123;</span><br><span class="line">    <span class="keyword">return</span> isPresent(<span class="keyword">this</span>._properties) &amp;&amp; <span class="keyword">this</span>._properties.length &gt; <span class="number">0</span> ? <span class="keyword">this</span>._properties :</span><br><span class="line">                                                                        <span class="keyword">this</span>._inputs;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> properties(): string[] &#123; <span class="keyword">return</span> <span class="keyword">this</span>.inputs; &#125;</span><br><span class="line">  private _inputs: string[];</span><br><span class="line">  private _properties: string[];</span><br></pre></td></tr></table></figure>
 <h3 id="从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值"><a href="#从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值" class="headerlink" title="从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值"></a>从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值</h3><blockquote>
 <p>properties 已废弃 被inputs替换</p>
 </blockquote>
@@ -369,7 +372,7 @@
 <li><code>bindingProperty</code> specifies the DOM property the event handler is attached to.</li>
 </ul>
 <p>同inputs 只有 get</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">get outputs(): string[] &#123;</span><br><span class="line">  <span class="keyword">return</span> isPresent(<span class="keyword">this</span>._events) &amp;&amp; <span class="keyword">this</span>._events.length &gt; <span class="number">0</span> ? <span class="keyword">this</span>._events : <span class="keyword">this</span>._outputs;</span><br><span class="line">&#125;</span><br><span class="line">get events(): string[] &#123; <span class="keyword">return</span> <span class="keyword">this</span>.outputs; &#125;</span><br><span class="line">private _outputs: string[];</span><br><span class="line">private _events: string[];</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">get</span> outputs(): string[] &#123;</span><br><span class="line">  <span class="keyword">return</span> isPresent(<span class="keyword">this</span>._events) &amp;&amp; <span class="keyword">this</span>._events.length &gt; <span class="number">0</span> ? <span class="keyword">this</span>._events : <span class="keyword">this</span>._outputs;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">get</span> events(): string[] &#123; <span class="keyword">return</span> <span class="keyword">this</span>.outputs; &#125;</span><br><span class="line">private _outputs: string[];</span><br><span class="line">private _events: string[];</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -380,17 +383,17 @@
 </ul>
 <p>直接来例子吧</p>
   <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"> <span class="meta">@Directive</span>(&#123;</span><br><span class="line">   selector: <span class="string">'button[counting]'</span>,</span><br><span class="line">   host: &#123;</span><br><span class="line">     <span class="string">'(click)'</span>: <span class="string">'onClick($event.target)'</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;)</span><br><span class="line"> <span class="keyword">class</span> CountClicks &#123;</span><br><span class="line">   numberOfClicks = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">   onClick(btn) &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"button"</span>, btn, <span class="string">"number of clicks:"</span>, <span class="keyword">this</span>.numberOfClicks++);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="meta">@Component</span>(&#123;</span><br><span class="line">   selector: <span class="string">'app'</span>,</span><br><span class="line">   template: <span class="string">`&lt;button counting&gt;Increment&lt;/button&gt;`</span>,</span><br><span class="line">   directives: [CountClicks]</span><br><span class="line"> &#125;)</span><br><span class="line"> <span class="keyword">class</span> App &#123;&#125;</span><br><span class="line"></span><br><span class="line">bootstrap(App);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>  这是指令的host也就是指令所在的那个元素<br>  给他的click 绑定了一个方法onClick。 利用$event参数来进一步操作</p>
+<p>这是指令的host也就是指令所在的那个元素<br>给他的click 绑定了一个方法onClick。 利用$event参数来进一步操作</p>
 <ul>
 <li><p>Property Bindings<br>来例子</p>
-  <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[ngModel]'</span>,</span><br><span class="line">  host: &#123;</span><br><span class="line">    <span class="string">'[class.valid]'</span>: <span class="string">'valid'</span>,</span><br><span class="line">    <span class="string">'[class.invalid]'</span>: <span class="string">'invalid'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> NgModelStatus &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> control:NgModel</span>) &#123;&#125;</span><br><span class="line">  <span class="keyword">get</span> valid &#123; <span class="keyword">return</span> <span class="keyword">this</span>.control.valid; &#125;</span><br><span class="line">  <span class="keyword">get</span> invalid &#123; <span class="keyword">return</span> <span class="keyword">this</span>.control.invalid; &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'app'</span>,</span><br><span class="line">  template: <span class="string">`&lt;input [(ngModel)]="prop"&gt;`</span>,</span><br><span class="line">  directives: [FORM_DIRECTIVES, NgModelStatus]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> App &#123;</span><br><span class="line">  prop;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line">bootstrap(App);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[ngModel]'</span>,</span><br><span class="line">  host: &#123;</span><br><span class="line">    <span class="string">'[class.valid]'</span>: <span class="string">'valid'</span>,</span><br><span class="line">    <span class="string">'[class.invalid]'</span>: <span class="string">'invalid'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> NgModelStatus &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"><span class="keyword">public</span> control:NgModel</span>) &#123;&#125;</span><br><span class="line">  <span class="keyword">get</span> valid &#123; <span class="keyword">return</span> <span class="keyword">this</span>.control.valid; &#125;</span><br><span class="line">  <span class="keyword">get</span> invalid &#123; <span class="keyword">return</span> <span class="keyword">this</span>.control.invalid; &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="meta">@Component</span>(&#123;</span><br><span class="line">  selector: <span class="string">'app'</span>,</span><br><span class="line">  template: <span class="string">`&lt;input [(ngModel)]="prop"&gt;`</span>,</span><br><span class="line">  directives: [FORM_DIRECTIVES, NgModelStatus]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> App &#123;</span><br><span class="line">  prop;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line">bootstrap(App);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>   给指令所在的元素的class 中的 valid/invalid 赋值。</p>
+<p>给指令所在的元素的class 中的 valid/invalid 赋值。</p>
 <ul>
 <li>Attributes 赋值<br>这个能力只能针对一些特殊的 Attributes</li>
+</ul>
+</li>
 </ul>
 <pre><code><figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Directive</span>(&#123;</span><br><span class="line">  selector: <span class="string">'[my-button]'</span>,</span><br><span class="line">  host: &#123;</span><br><span class="line">    <span class="string">'role'</span>: <span class="string">'button'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">class</span> MyButton &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </code></pre><p> 给role 赋值 button</p>
@@ -402,14 +405,12 @@
 <blockquote>
 <p>bindings 废弃，改用providers</p>
 </blockquote>
-   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">   get providers(): any[] &#123;</span><br><span class="line">  <span class="keyword">return</span> isPresent(<span class="keyword">this</span>._bindings) &amp;&amp; <span class="keyword">this</span>._bindings.length &gt; <span class="number">0</span> ? <span class="keyword">this</span>._bindings :</span><br><span class="line">                                                                  <span class="keyword">this</span>._providers;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** @deprecated */</span></span><br><span class="line">get bindings(): any[] &#123; <span class="keyword">return</span> <span class="keyword">this</span>.providers; &#125;</span><br><span class="line">private _providers: any[];</span><br><span class="line">private _bindings: any[];</span><br></pre></td></tr></table></figure>
+   <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">   <span class="keyword">get</span> providers(): any[] &#123;</span><br><span class="line">  <span class="keyword">return</span> isPresent(<span class="keyword">this</span>._bindings) &amp;&amp; <span class="keyword">this</span>._bindings.length &gt; <span class="number">0</span> ? <span class="keyword">this</span>._bindings :</span><br><span class="line">                                                                  <span class="keyword">this</span>._providers;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/** <span class="doctag">@deprecated </span>*/</span></span><br><span class="line"><span class="keyword">get</span> bindings(): any[] &#123; <span class="keyword">return</span> <span class="keyword">this</span>.providers; &#125;</span><br><span class="line">private _providers: any[];</span><br><span class="line">private _bindings: any[];</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>exportAs: string;<br>可以在模板中应用指令里的变量</p>
 <p>Defines the name that can be used in the template to assign this directive to a variable. </p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">@Directive(&#123;</span><br><span class="line">  selector: <span class="string">'child-dir'</span>,</span><br><span class="line">  exportAs: <span class="string">'child'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChildDir</span> </span>&#123;</span><br><span class="line">     exprotAsVar = <span class="string">"exportAs Text"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'main'</span>,</span><br><span class="line">  template: <span class="string">`&lt;child-dir #c="child"&gt;&lt;/child-dir&gt; &#123;&#123;c.exprotAsVar&#125;&#125;`</span>,</span><br><span class="line">  directives: [ChildDir]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainComponent</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-<ul>
 <li><p>queries: {[key: string]: any};<br>源码中说了两种query</p>
 <ul>
 <li>Content queries are set before the <code>ngAfterContentInit</code> callback is called.</li>
@@ -518,7 +519,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -528,15 +529,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -662,7 +665,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#首先看下指令的注入"><span class="nav-number">1.</span> <span class="nav-text">首先看下指令的注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#No-injection"><span class="nav-number">1.0.1.</span> <span class="nav-text">No injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component-level-injection"><span class="nav-number">1.0.2.</span> <span class="nav-text">Component-level injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-directive-from-the-current-element-–注入当前元素中的其他指令"><span class="nav-number">1.0.3.</span> <span class="nav-text">Injecting a directive from the current element –注入当前元素中的其他指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-directive-from-any-ancestor-elements-–在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）"><span class="nav-number">1.0.4.</span> <span class="nav-text">Injecting a directive from any ancestor elements –在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-live-collection-of-direct-child-directives-–找子元素中的指令"><span class="nav-number">1.0.5.</span> <span class="nav-text">Injecting a live collection of direct child directives –找子元素中的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-live-collection-of-descendant-directives-—子元素嵌套"><span class="nav-number">1.0.6.</span> <span class="nav-text">Injecting a live collection of descendant directives —子元素嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optional-injection-–可能找不到，就给null"><span class="nav-number">1.0.7.</span> <span class="nav-text">Optional injection –可能找不到，就给null</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#开始参数解读"><span class="nav-number">2.</span> <span class="nav-text">开始参数解读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#先来总体的构造"><span class="nav-number">2.1.</span> <span class="nav-text">先来总体的构造</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值"><span class="nav-number">2.1.1.</span> <span class="nav-text">从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#首先看下指令的注入"><span class="nav-number">1.</span> <span class="nav-text">首先看下指令的注入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#No-injection"><span class="nav-number">1.0.1.</span> <span class="nav-text">No injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Component-level-injection"><span class="nav-number">1.0.2.</span> <span class="nav-text">Component-level injection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-directive-from-the-current-element-–注入当前元素中的其他指令"><span class="nav-number">1.0.3.</span> <span class="nav-text">Injecting a directive from the current element –注入当前元素中的其他指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-directive-from-any-ancestor-elements-–在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）"><span class="nav-number">1.0.4.</span> <span class="nav-text">Injecting a directive from any ancestor elements –在当前元素及其父元素中的指令注入（嵌套的，并且返回第一个找到的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-live-collection-of-direct-child-directives-–找子元素中的指令"><span class="nav-number">1.0.5.</span> <span class="nav-text">Injecting a live collection of direct child directives –找子元素中的指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Injecting-a-live-collection-of-descendant-directives-—子元素嵌套"><span class="nav-number">1.0.6.</span> <span class="nav-text">Injecting a live collection of descendant directives —子元素嵌套</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optional-injection-–可能找不到，就给null"><span class="nav-number">1.0.7.</span> <span class="nav-text">Optional injection –可能找不到，就给null</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始参数解读"><span class="nav-number">2.</span> <span class="nav-text">开始参数解读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#先来总体的构造"><span class="nav-number">2.1.</span> <span class="nav-text">先来总体的构造</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值"><span class="nav-number">2.1.1.</span> <span class="nav-text">从代码看，inputs无法直接赋值，只能get，也就是只能从构造中赋值</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
@@ -678,7 +681,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -689,12 +692,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -790,10 +793,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,23 +59,25 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Docker,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="Docker," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -83,17 +85,17 @@
 
 
 <meta name="description" content="这次准备用docker-compose来搭建基本的node 前端开发环境 基本目录结构λ lltotal 8-rwxr-xr-x   1 vincent  staff   410B Jul 28 13:47 docker-compose.ymldrwxr-xr-x  21 vincent  staff   714B Jul 28 13:47 projectdrwxr-xr-x  16 vincen">
-<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker-compose-nodejs个人开发环境">
-<meta property="og:url" content="https://dreambo8563.github.io/2017/07/28/docker-compose-nodejs个人开发环境/index.html">
+<meta property="og:url" content="https://dreambo8563.github.io/2017/07/28/docker-compose-nodejs%E4%B8%AA%E4%BA%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="这次准备用docker-compose来搭建基本的node 前端开发环境 基本目录结构λ lltotal 8-rwxr-xr-x   1 vincent  staff   410B Jul 28 13:47 docker-compose.ymldrwxr-xr-x  21 vincent  staff   714B Jul 28 13:47 projectdrwxr-xr-x  16 vincen">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-07-28T07:26:48.000Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-07-28T07:01:29.000Z">
+<meta property="article:modified_time" content="2017-07-28T07:26:48.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker-compose-nodejs个人开发环境">
-<meta name="twitter:description" content="这次准备用docker-compose来搭建基本的node 前端开发环境 基本目录结构λ lltotal 8-rwxr-xr-x   1 vincent  staff   410B Jul 28 13:47 docker-compose.ymldrwxr-xr-x  21 vincent  staff   714B Jul 28 13:47 projectdrwxr-xr-x  16 vincen">
 
 
 
@@ -112,9 +114,9 @@
 </script>
 
   <title> docker-compose-nodejs个人开发环境 | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +137,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +169,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +179,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +189,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +199,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +232,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +261,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Docker/" itemprop="url" rel="index">
                     <span itemprop="name">Docker</span>
                   </a>
@@ -304,12 +306,11 @@
       
         <p>这次准备用docker-compose来搭建基本的node 前端开发环境</p>
 <h3 id="基本目录结构"><a href="#基本目录结构" class="headerlink" title="基本目录结构"></a>基本目录结构</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">λ ll</span><br><span class="line">total <span class="number">8</span></span><br><span class="line">-rwxr-xr-x   <span class="number">1</span> vincent  staff   <span class="number">410</span>B Jul <span class="number">28</span> <span class="number">13</span>:<span class="number">47</span> docker-compose.yml</span><br><span class="line">drwxr-xr-x  <span class="number">21</span> vincent  staff   <span class="number">714</span>B Jul <span class="number">28</span> <span class="number">13</span>:<span class="number">47</span> project</span><br><span class="line">drwxr-xr-x  <span class="number">16</span> vincent  staff   <span class="number">544</span>B Jul <span class="number">28</span> <span class="number">13</span>:<span class="number">47</span> test</span><br></pre></td></tr></table></figure>
-<h3 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  web-dev:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">      context:</span> <span class="string">./project</span></span><br><span class="line"><span class="attr">      dockerfile:</span> <span class="string">Dockerfile.development</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="number">8000</span><span class="string">:8000</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./project:/code</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">/code/node_modules</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">web-test</span></span><br><span class="line"><span class="attr">  web-test:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">      context:</span> <span class="string">./test</span></span><br><span class="line"><span class="attr">      dockerfile:</span> <span class="string">Dockerfile.development</span></span><br><span class="line"><span class="attr">    expose:</span> </span><br><span class="line"><span class="bullet">      -</span> <span class="number">3000</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">./test:/code</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">/code/node_modules</span></span><br></pre></td></tr></table></figure>
+<h3 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web-dev:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./project</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile.development</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">8000</span><span class="string">:8000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./project:/code</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/code/node_modules</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">web-test</span></span><br><span class="line">  <span class="attr">web-test:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./test</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile.development</span></span><br><span class="line">    <span class="attr">expose:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="number">3000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./test:/code</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/code/node_modules</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>基础nodejs服务<code>web-dev</code>,源码放在project下<br>web-dev 的dockerfile<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">FROM</span> <span class="attr">node:6</span></span><br><span class="line"></span><br><span class="line"><span class="string">ENV</span> <span class="string">HOME=/code</span></span><br><span class="line"><span class="string">ENV</span> <span class="string">NPM_CONFIG_LOGLEVEL</span> <span class="string">warn</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">package.json</span> <span class="string">$HOME/</span></span><br><span class="line"></span><br><span class="line"><span class="string">WORKDIR</span> <span class="string">$HOME</span></span><br><span class="line"></span><br><span class="line"><span class="string">RUN</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">.</span> <span class="string">$HOME/</span></span><br><span class="line"></span><br><span class="line"><span class="string">EXPOSE</span> <span class="number">8000</span></span><br><span class="line"></span><br><span class="line"><span class="string">CMD</span> <span class="string">["npm",</span> <span class="string">"start"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>基础nodejs服务<code>web-dev</code>,源码放在project下<br>web-dev 的dockerfile<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">FROM</span> <span class="string">node:6</span></span><br><span class="line"></span><br><span class="line"><span class="string">ENV</span> <span class="string">HOME=/code</span></span><br><span class="line"><span class="string">ENV</span> <span class="string">NPM_CONFIG_LOGLEVEL</span> <span class="string">warn</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">package.json</span> <span class="string">$HOME/</span></span><br><span class="line"></span><br><span class="line"><span class="string">WORKDIR</span> <span class="string">$HOME</span></span><br><span class="line"></span><br><span class="line"><span class="string">RUN</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"></span><br><span class="line"><span class="string">COPY</span> <span class="string">.</span> <span class="string">$HOME/</span></span><br><span class="line"></span><br><span class="line"><span class="string">EXPOSE</span> <span class="number">8000</span></span><br><span class="line"></span><br><span class="line"><span class="string">CMD</span> <span class="string">["npm",</span> <span class="string">"start"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+这次直接用了node:6这个版本几百MB,对容器内暴露为8000端口<br>上面的compose里有把这个8000端口暴露给了本地</li>
 </ul>
-<p>这次直接用了node:6这个版本几百MB,对容器内暴露为8000端口<br>上面的compose里有把这个8000端口暴露给了本地</p>
 <blockquote>
 <p>volumes:</p>
 <pre><code>- ./project:/code
@@ -420,7 +421,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -430,15 +431,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -580,7 +583,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -591,12 +594,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -692,10 +695,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

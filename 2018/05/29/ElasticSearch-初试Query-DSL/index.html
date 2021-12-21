@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,41 +59,43 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="ElasticSearch,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="ElasticSearch," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="例子解析GET /bank/_search&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123; &amp;quot;match_all&amp;quot;: &amp;#123;&amp;#125; &amp;#125;,  &amp;quot;sort&amp;quot;: &amp;#123; &amp;quot;balance&amp;quot;: &amp;#123; &amp;quot;order&amp;quot;: &amp;quot;desc&amp;quot; &amp;#125; &amp;#12">
-<meta name="keywords" content="ElasticSearch">
+<meta name="description" content="例子解析GET &#x2F;bank&#x2F;_search&amp;#123;  &quot;query&quot;: &amp;#123; &quot;match_all&quot;: &amp;#123;&amp;#125; &amp;#125;,  &quot;sort&quot;: &amp;#123; &quot;balance&quot;: &amp;#123; &quot;order&quot;: &quot;desc&quot; &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ElasticSearch - 初试Query DSL">
-<meta property="og:url" content="https://dreambo8563.github.io/2018/05/29/ElasticSearch-初试Query-DSL/index.html">
+<meta property="og:url" content="https://dreambo8563.github.io/2018/05/29/ElasticSearch-%E5%88%9D%E8%AF%95Query-DSL/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="例子解析GET /bank/_search&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123; &amp;quot;match_all&amp;quot;: &amp;#123;&amp;#125; &amp;#125;,  &amp;quot;sort&amp;quot;: &amp;#123; &amp;quot;balance&amp;quot;: &amp;#123; &amp;quot;order&amp;quot;: &amp;quot;desc&amp;quot; &amp;#125; &amp;#12">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-05-29T01:53:38.000Z">
+<meta property="og:description" content="例子解析GET &#x2F;bank&#x2F;_search&amp;#123;  &quot;query&quot;: &amp;#123; &quot;match_all&quot;: &amp;#123;&amp;#125; &amp;#125;,  &quot;sort&quot;: &amp;#123; &quot;balance&quot;: &amp;#123; &quot;order&quot;: &quot;desc&quot; &amp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-05-29T00:59:13.000Z">
+<meta property="article:modified_time" content="2018-05-29T01:53:38.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="ElasticSearch">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ElasticSearch - 初试Query DSL">
-<meta name="twitter:description" content="例子解析GET /bank/_search&amp;#123;  &amp;quot;query&amp;quot;: &amp;#123; &amp;quot;match_all&amp;quot;: &amp;#123;&amp;#125; &amp;#125;,  &amp;quot;sort&amp;quot;: &amp;#123; &amp;quot;balance&amp;quot;: &amp;#123; &amp;quot;order&amp;quot;: &amp;quot;desc&amp;quot; &amp;#125; &amp;#12">
 
 
 
@@ -112,9 +114,9 @@
 </script>
 
   <title> ElasticSearch - 初试Query DSL | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +137,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +169,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +179,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +189,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +199,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +232,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +261,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/ElasticSearch/" itemprop="url" rel="index">
                     <span itemprop="name">ElasticSearch</span>
                   </a>
@@ -302,7 +304,7 @@
       
 
       
-        <h2 id="例子解析"><a href="#例子解析" class="headerlink" title="例子解析"></a>例子解析</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123; &quot;match_all&quot;: &#123;&#125; &#125;,</span><br><span class="line">  &quot;sort&quot;: &#123; &quot;balance&quot;: &#123; &quot;order&quot;: &quot;desc&quot; &#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="例子解析"><a href="#例子解析" class="headerlink" title="例子解析"></a>例子解析</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123; &quot;match_all&quot;: &#123;&#125; &#125;,</span><br><span class="line">  &quot;sort&quot;: &#123; &quot;balance&quot;: &#123; &quot;order&quot;: &quot;desc&quot; &#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>搜索索引为 bank</li>
 <li>match_all 是简单的所有 document 进行匹配</li>
@@ -311,45 +313,45 @@
 <li>默认 size 是 10</li>
 <li>默认 from 是 0</li>
 </ul>
-<h2 id="例子-2"><a href="#例子-2" class="headerlink" title=" 例子 2"></a> 例子 2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;_source&quot;: [</span><br><span class="line">    &quot;account_number&quot;,</span><br><span class="line">    &quot;balance&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例子-2"><a href="#例子-2" class="headerlink" title=" 例子 2"></a> 例子 2</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_all&quot;: &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;_source&quot;: [</span><br><span class="line">    &quot;account_number&quot;,</span><br><span class="line">    &quot;balance&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>_source 字段可以只取出想要的字段,如果字段没有则也不会返回</li>
 </ul>
-<h2 id="搜索条件"><a href="#搜索条件" class="headerlink" title=" 搜索条件"></a> 搜索条件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123; &quot;match&quot;: &#123; &quot;account_number&quot;: 20 &#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="搜索条件"><a href="#搜索条件" class="headerlink" title=" 搜索条件"></a> 搜索条件</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123; &quot;match&quot;: &#123; &quot;account_number&quot;: 20 &#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>match 后面跟具体的条件, 20 是数字所以对应 sql 里 = 20</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;mill&quot; &#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;mill&quot; &#125; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>{ “address”: “mill” } 对应 sql 里 like %mill%, 只有包含就可以,大小写不敏感</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;address&quot;: &quot;mill lane&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;address&quot;: &quot;mill lane&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>like %mill% or like %lane% , 大小写不敏感.把这个  搜索条件进行了分词且是 || 的关系</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_phrase&quot;: &#123;</span><br><span class="line">      &quot;address&quot;: &quot;mill lane&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match_phrase&quot;: &#123;</span><br><span class="line">      &quot;address&quot;: &quot;mill lane&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>match_phrase 这个条件是局部的精确匹配. address 这个字段必须 _包含_ ‘mill lane’,大小写不敏感</li>
 </ul>
-<h2 id="bool-query"><a href="#bool-query" class="headerlink" title="bool query"></a>bool query</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;mill&quot; &#125; &#125;,</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;lane&quot; &#125; &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="bool-query"><a href="#bool-query" class="headerlink" title="bool query"></a>bool query</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;mill&quot; &#125; &#125;,</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;lane&quot; &#125; &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>In the above example, the bool must clause specifies all the queries that must be true for a document to be considered a match.<br>这个例子和上面 <em>match_phrase</em>的例子的区别是,上面的还要求顺序,这个不要求</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;should&quot;: [</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;mill&quot; &#125; &#125;,</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;lane&quot; &#125; &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;should&quot;: [</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;mill&quot; &#125; &#125;,</span><br><span class="line">        &#123; &quot;match&quot;: &#123; &quot;address&quot;: &quot;lane&quot; &#125; &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>the bool should clause specifies a list of queries either of which must be true for a document to be considered a match.<br>有一个满足就好了.<br>结果和下面这个一样</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;address&quot;: &quot;mill lane&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must_not&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;address&quot;: &quot;mill&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;address&quot;: &quot;lane&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;match&quot;: &#123;</span><br><span class="line">      &quot;address&quot;: &quot;mill lane&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must_not&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;address&quot;: &quot;mill&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;address&quot;: &quot;lane&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>the bool must_not clause specifies a list of queries none of which must be true for a document to be considered a match.<br>都不能匹配</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;age&quot;: &quot;40&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;must_not&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;state&quot;: &quot;ID&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;age&quot;: &quot;40&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;must_not&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;match&quot;: &#123;</span><br><span class="line">            &quot;state&quot;: &quot;ID&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>可以复合使用</li>
 <li>This example returns all accounts of anybody who is 40 years old but doesn’t live in ID(aho):</li>
 </ul>
-<h2 id="bool-query中使用filter"><a href="#bool-query中使用filter" class="headerlink" title="bool query中使用filter"></a>bool query中使用filter</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET /bank/_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: &#123;</span><br><span class="line">        &quot;match&quot;: &#123;</span><br><span class="line">          &quot;firstname&quot;:&quot;melissa&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;range&quot;: &#123;</span><br><span class="line">          &quot;balance&quot;: &#123;</span><br><span class="line">            &quot;gte&quot;: 20000,</span><br><span class="line">            &quot;lte&quot;: 30000</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="bool-query中使用filter"><a href="#bool-query中使用filter" class="headerlink" title="bool query中使用filter"></a>bool query中使用filter</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;bank&#x2F;_search</span><br><span class="line">&#123;</span><br><span class="line">  &quot;query&quot;: &#123;</span><br><span class="line">    &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;must&quot;: &#123;</span><br><span class="line">        &quot;match&quot;: &#123;</span><br><span class="line">          &quot;firstname&quot;:&quot;melissa&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">        &quot;range&quot;: &#123;</span><br><span class="line">          &quot;balance&quot;: &#123;</span><br><span class="line">            &quot;gte&quot;: 20000,</span><br><span class="line">            &quot;lte&quot;: 30000</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>range 一般用于数字或者日期</li>
 </ul>
@@ -382,7 +384,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/25/golang-websocket-AcceptKey计算/" rel="next" title="golang - websocket - AcceptKey计算">
+              <a href="/2018/05/25/golang-websocket-AcceptKey%E8%AE%A1%E7%AE%97/" rel="next" title="golang - websocket - AcceptKey计算">
                 <i class="fa fa-chevron-left"></i> golang - websocket - AcceptKey计算
               </a>
             
@@ -390,7 +392,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/15/WebRTC视频聊天/" rel="prev" title="WebRTC视频聊天">
+              <a href="/2018/06/15/WebRTC%E8%A7%86%E9%A2%91%E8%81%8A%E5%A4%A9/" rel="prev" title="WebRTC视频聊天">
                 WebRTC视频聊天 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -440,7 +442,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -450,15 +452,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -600,7 +604,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -611,12 +615,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -712,10 +716,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

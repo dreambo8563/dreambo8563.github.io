@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,41 +59,44 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="React,Redux,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="React,Redux," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="分部解释源码: ActionTypesexport var ActionTypes = &amp;#123;  INIT: &apos;@@redux/INIT&apos;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
-<meta name="keywords" content="React,Redux">
+<meta name="description" content="分部解释源码: ActionTypesexport var ActionTypes &#x3D; &amp;#123;  INIT: &#39;@@redux&#x2F;INIT&#39;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux - createStore源码解析">
-<meta property="og:url" content="https://dreambo8563.github.io/2016/04/28/Redux-createStore源码解析/index.html">
+<meta property="og:url" content="https://dreambo8563.github.io/2016/04/28/Redux-createStore%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="分部解释源码: ActionTypesexport var ActionTypes = &amp;#123;  INIT: &apos;@@redux/INIT&apos;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-05-03T10:10:41.000Z">
+<meta property="og:description" content="分部解释源码: ActionTypesexport var ActionTypes &#x3D; &amp;#123;  INIT: &#39;@@redux&#x2F;INIT&#39;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-04-28T07:44:53.000Z">
+<meta property="article:modified_time" content="2016-05-03T10:10:41.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Redux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redux - createStore源码解析">
-<meta name="twitter:description" content="分部解释源码: ActionTypesexport var ActionTypes = &amp;#123;  INIT: &apos;@@redux/INIT&apos;&amp;#125;; 这个ActionTypes的作用,INIT作为内部私有的type,也就是说我们程序不要把type命名和这个一样.当这个type传到reducer里的时候.他的目的就是要让reducer找不到对应的type,以便返回默认的state回来.">
 
 
 
@@ -112,9 +115,9 @@
 </script>
 
   <title> Redux - createStore源码解析 | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +138,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +170,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +180,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +200,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +233,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +262,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/React/" itemprop="url" rel="index">
                     <span itemprop="name">React</span>
                   </a>
@@ -278,7 +281,7 @@
                 
 
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/React/Redux/" itemprop="url" rel="index">
                     <span itemprop="name">Redux</span>
                   </a>
@@ -324,7 +327,7 @@
 <li>enhancer 有没有,这个东西后面middleware的时候会说</li>
 <li>reducer的类型</li>
 </ul>
-<h2 id="内部变量初始化"><a href="#内部变量初始化" class="headerlink" title="内部变量初始化"></a>内部变量初始化</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> currentReducer = reducer;</span><br><span class="line"><span class="keyword">var</span> currentState = initialState;</span><br><span class="line"><span class="keyword">var</span> currentListeners = [];</span><br><span class="line"><span class="keyword">var</span> nextListeners = currentListeners;</span><br><span class="line"><span class="keyword">var</span> isDispatching = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ensureCanMutateNextListeners</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (nextListeners === currentListeners) &#123;</span><br><span class="line">    nextListeners = currentListeners.slice();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Reads the state tree managed by the store.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @returns &#123;any&#125; The current state tree of your application.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> currentState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="内部变量初始化"><a href="#内部变量初始化" class="headerlink" title="内部变量初始化"></a>内部变量初始化</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> currentReducer = reducer;</span><br><span class="line"><span class="keyword">var</span> currentState = initialState;</span><br><span class="line"><span class="keyword">var</span> currentListeners = [];</span><br><span class="line"><span class="keyword">var</span> nextListeners = currentListeners;</span><br><span class="line"><span class="keyword">var</span> isDispatching = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ensureCanMutateNextListeners</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (nextListeners === currentListeners) &#123;</span><br><span class="line">    nextListeners = currentListeners.slice();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Reads the state tree managed by the store.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;any&#125;</span> </span>The current state tree of your application.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> currentState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里的listener 其实就subscribe的那些function, 后面会dispatch的时候把这个array里的所有listener都执行,以实现通知</p>
 <p><code>ensureCanMutateNextListeners</code> 方法是为了把引用断开,两个数组可以分别操作,以便比较</p>
 <p><code>getState</code> 就是返回当前最新的state了</p>
@@ -350,7 +353,7 @@
 <h2 id="replaceReducer"><a href="#replaceReducer" class="headerlink" title="replaceReducer"></a>replaceReducer</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replaceReducer</span>(<span class="params">nextReducer</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> nextReducer !== <span class="string">'function'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Expected the nextReducer to be a function.'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  currentReducer = nextReducer;</span><br><span class="line">  dispatch(&#123; <span class="attr">type</span>: ActionTypes.INIT &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>replaceReducer</code> 这个方法貌似运用的几率不是很高,他目的就是动态的替换掉原先createStore时传入的reducer</p>
 <hr>
-<h2 id="observable"><a href="#observable" class="headerlink" title="observable"></a>observable</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observable</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _ref;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> outerSubscribe = subscribe;</span><br><span class="line">  <span class="keyword">return</span> _ref = &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The minimal observable subscription method.</span></span><br><span class="line"><span class="comment">     * @param &#123;Object&#125; observer Any object that can be used as an observer.</span></span><br><span class="line"><span class="comment">     * The observer object should have a `next` method.</span></span><br><span class="line"><span class="comment">     * @returns &#123;subscription&#125; An object with an `unsubscribe` method that can</span></span><br><span class="line"><span class="comment">     * be used to unsubscribe the observable from the store, and prevent further</span></span><br><span class="line"><span class="comment">     * emission of values from the observable.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    subscribe: <span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> observer !== <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Expected the observer to be an object.'</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">observeState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observer.next) &#123;</span><br><span class="line">          observer.next(getState());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      observeState();</span><br><span class="line">      <span class="keyword">var</span> unsubscribe = outerSubscribe(observeState);</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">unsubscribe</span>: unsubscribe &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, _ref[$$observable] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;, _ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="observable"><a href="#observable" class="headerlink" title="observable"></a>observable</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observable</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _ref;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> outerSubscribe = subscribe;</span><br><span class="line">  <span class="keyword">return</span> _ref = &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The minimal observable subscription method.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>observer Any object that can be used as an observer.</span></span><br><span class="line"><span class="comment">     * The observer object should have a `next` method.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@returns <span class="type">&#123;subscription&#125;</span> </span>An object with an `unsubscribe` method that can</span></span><br><span class="line"><span class="comment">     * be used to unsubscribe the observable from the store, and prevent further</span></span><br><span class="line"><span class="comment">     * emission of values from the observable.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    subscribe: <span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> observer !== <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'Expected the observer to be an object.'</span>);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">observeState</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (observer.next) &#123;</span><br><span class="line">          observer.next(getState());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      observeState();</span><br><span class="line">      <span class="keyword">var</span> unsubscribe = outerSubscribe(observeState);</span><br><span class="line">      <span class="keyword">return</span> &#123; <span class="attr">unsubscribe</span>: unsubscribe &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, _ref[$$observable] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;, _ref;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这个方法很特别,因为我在源码里,没有找到任何地方调用它</p>
 <p>首先这个方法的调用是个问题,后面解释这个句话<br>先看看他做了什么:</p>
 <ul>
@@ -366,7 +369,7 @@
 <li>给返回的obj加个 $$observable的字段</li>
 </ul>
 <p>伪代码</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var unsubscribe = store.observable().subscribe(observer)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var unsubscribe &#x3D; store.observable().subscribe(observer)</span><br></pre></td></tr></table></figure>
 <p>好看到这里我们基本可以认为,这是redux 给这个观察者模式封装了一层,搞得像rxjs似的</p>
 <hr>
 <h2 id="收尾"><a href="#收尾" class="headerlink" title="收尾"></a>收尾</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">dispatch(&#123; <span class="attr">type</span>: ActionTypes.INIT &#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> _ref2 = &#123;</span><br><span class="line">  dispatch: dispatch,</span><br><span class="line">  subscribe: subscribe,</span><br><span class="line">  getState: getState,</span><br><span class="line">  replaceReducer: replaceReducer</span><br><span class="line">&#125;, _ref2[$$observable] = observable, _ref2;</span><br></pre></td></tr></table></figure>
@@ -420,7 +423,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/28/Redux-compose源码解析/" rel="prev" title="Redux - compose源码解析">
+              <a href="/2016/04/28/Redux-compose%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="prev" title="Redux - compose源码解析">
                 Redux - compose源码解析 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -470,7 +473,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -480,15 +483,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -630,7 +635,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -641,12 +646,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -742,10 +747,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

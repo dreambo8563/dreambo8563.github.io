@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,23 +59,25 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Angular2,Directives,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="Angular2,Directives," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -83,17 +85,18 @@
 
 
 <meta name="description" content="先来看基本用法 The result of an expression evaluation is interpreted differently depending on type of the expression evaluation result:  string - all the CSS classes listed in a string (space delimited) are">
-<meta name="keywords" content="Angular2,Directives">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular2 - Directive - NgClass">
 <meta property="og:url" content="https://dreambo8563.github.io/2016/01/19/Angular2-Directive-NgClass/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="先来看基本用法 The result of an expression evaluation is interpreted differently depending on type of the expression evaluation result:  string - all the CSS classes listed in a string (space delimited) are">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-01-19T10:33:14.000Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-19T07:50:31.000Z">
+<meta property="article:modified_time" content="2016-01-19T10:33:14.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="Angular2">
+<meta property="article:tag" content="Directives">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular2 - Directive - NgClass">
-<meta name="twitter:description" content="先来看基本用法 The result of an expression evaluation is interpreted differently depending on type of the expression evaluation result:  string - all the CSS classes listed in a string (space delimited) are">
 
 
 
@@ -112,9 +115,9 @@
 </script>
 
   <title> Angular2 - Directive - NgClass | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +138,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +170,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +180,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +200,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +233,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +262,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Angular2/" itemprop="url" rel="index">
                     <span itemprop="name">Angular2</span>
                   </a>
@@ -311,12 +314,12 @@
 </ul>
 <hr>
 <h2 id="再源码"><a href="#再源码" class="headerlink" title="再源码"></a>再源码</h2><p>没想到这么长。。。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">@Directive(&#123;<span class="attr">selector</span>: <span class="string">'[ngClass]'</span>, <span class="attr">inputs</span>: [<span class="string">'rawClass: ngClass'</span>, <span class="string">'initialClasses: class'</span>]&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">NgClass</span> <span class="title">implements</span> <span class="title">DoCheck</span>, <span class="title">OnDestroy</span> </span>&#123;</span><br><span class="line">  private _differ: any;</span><br><span class="line">  private _mode: string;</span><br><span class="line">  private _initialClasses = [];</span><br><span class="line">  private _rawClass;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(private _iterableDiffers: IterableDiffers, private _keyValueDiffers: KeyValueDiffers,</span><br><span class="line">              private _ngEl: ElementRef, private _renderer: Renderer) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  set initialClasses(v) &#123;</span><br><span class="line">    <span class="keyword">this</span>._applyInitialClasses(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">this</span>._initialClasses = isPresent(v) &amp;&amp; isString(v) ? v.split(<span class="string">' '</span>) : [];</span><br><span class="line">    <span class="keyword">this</span>._applyInitialClasses(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">this</span>._applyClasses(<span class="keyword">this</span>._rawClass, <span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  set rawClass(v) &#123;</span><br><span class="line">    <span class="keyword">this</span>._cleanupClasses(<span class="keyword">this</span>._rawClass);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isString(v)) &#123;</span><br><span class="line">      v = v.split(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>._rawClass = v;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(v)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isListLikeIterable(v)) &#123;</span><br><span class="line">        <span class="keyword">this</span>._differ = <span class="keyword">this</span>._iterableDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">this</span>._mode = <span class="string">'iterable'</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>._differ = <span class="keyword">this</span>._keyValueDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">this</span>._mode = <span class="string">'keyValue'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>._differ = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngDoCheck(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(<span class="keyword">this</span>._differ)) &#123;</span><br><span class="line">      <span class="keyword">var</span> changes = <span class="keyword">this</span>._differ.diff(<span class="keyword">this</span>._rawClass);</span><br><span class="line">      <span class="keyword">if</span> (isPresent(changes)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._mode == <span class="string">'iterable'</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>._applyIterableChanges(changes);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>._applyKeyValueChanges(changes);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnDestroy(): <span class="keyword">void</span> &#123; <span class="keyword">this</span>._cleanupClasses(<span class="keyword">this</span>._rawClass); &#125;</span><br><span class="line"></span><br><span class="line">  private _cleanupClasses(rawClassVal): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>._applyClasses(rawClassVal, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">this</span>._applyInitialClasses(<span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyKeyValueChanges(changes: any): <span class="keyword">void</span> &#123;</span><br><span class="line">    changes.forEachAddedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.key, record.currentValue); &#125;);</span><br><span class="line">    changes.forEachChangedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.key, record.currentValue); &#125;);</span><br><span class="line">    changes.forEachRemovedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (record.previousValue) &#123;</span><br><span class="line">        <span class="keyword">this</span>._toggleClass(record.key, <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyIterableChanges(changes: any): <span class="keyword">void</span> &#123;</span><br><span class="line">    changes.forEachAddedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.item, <span class="literal">true</span>); &#125;);</span><br><span class="line">    changes.forEachRemovedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.item, <span class="literal">false</span>); &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyInitialClasses(isCleanup: boolean) &#123;</span><br><span class="line">    <span class="keyword">this</span>._initialClasses.forEach(<span class="function"><span class="params">className</span> =&gt;</span> <span class="keyword">this</span>._toggleClass(className, !isCleanup));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyClasses(rawClassVal: string[] | <span class="built_in">Set</span>&lt;string&gt;| &#123;[key: string]: string&#125;,</span><br><span class="line">                        isCleanup: boolean) &#123;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(rawClassVal)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isArray(rawClassVal)) &#123;</span><br><span class="line">        (<span class="xml"><span class="tag">&lt;<span class="name">string[]</span>&gt;</span>rawClassVal).forEach(className =&gt; this._toggleClass(className, !isCleanup));</span></span><br><span class="line"><span class="xml">      &#125; else if (rawClassVal instanceof Set) &#123;</span></span><br><span class="line">        (&lt;Set&lt;string&gt;&gt;rawClassVal).forEach(className =&gt; this._toggleClass(className, !isCleanup));</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        StringMapWrapper.forEach(&lt;&#123;[k: string]: string&#125;&gt;rawClassVal, (expVal, className) =&gt; &#123;</span><br><span class="line">          if (expVal) this._toggleClass(className, !isCleanup);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _toggleClass(className: string, enabled): void &#123;</span><br><span class="line">    className = className.trim();</span><br><span class="line">    if (className.length &gt; 0) &#123;</span><br><span class="line">      if (className.indexOf(' ') &gt; -1) &#123;</span><br><span class="line">        var classes = className.split(/\s+/g);</span><br><span class="line">        for (var i = 0, len = classes.length; i &lt; len; i++) &#123;</span><br><span class="line">          this._renderer.setElementClass(this._ngEl.nativeElement, classes[i], enabled);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        this._renderer.setElementClass(this._ngEl.nativeElement, className, enabled);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">@Directive(&#123;<span class="attr">selector</span>: <span class="string">'[ngClass]'</span>, <span class="attr">inputs</span>: [<span class="string">'rawClass: ngClass'</span>, <span class="string">'initialClasses: class'</span>]&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">NgClass</span> <span class="title">implements</span> <span class="title">DoCheck</span>, <span class="title">OnDestroy</span> </span>&#123;</span><br><span class="line">  private _differ: any;</span><br><span class="line">  private _mode: string;</span><br><span class="line">  private _initialClasses = [];</span><br><span class="line">  private _rawClass;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(private _iterableDiffers: IterableDiffers, private _keyValueDiffers: KeyValueDiffers,</span><br><span class="line">              private _ngEl: ElementRef, private _renderer: Renderer) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> initialClasses(v) &#123;</span><br><span class="line">    <span class="keyword">this</span>._applyInitialClasses(<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">this</span>._initialClasses = isPresent(v) &amp;&amp; isString(v) ? v.split(<span class="string">' '</span>) : [];</span><br><span class="line">    <span class="keyword">this</span>._applyInitialClasses(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">this</span>._applyClasses(<span class="keyword">this</span>._rawClass, <span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> rawClass(v) &#123;</span><br><span class="line">    <span class="keyword">this</span>._cleanupClasses(<span class="keyword">this</span>._rawClass);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isString(v)) &#123;</span><br><span class="line">      v = v.split(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">this</span>._rawClass = v;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(v)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isListLikeIterable(v)) &#123;</span><br><span class="line">        <span class="keyword">this</span>._differ = <span class="keyword">this</span>._iterableDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">this</span>._mode = <span class="string">'iterable'</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>._differ = <span class="keyword">this</span>._keyValueDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">        <span class="keyword">this</span>._mode = <span class="string">'keyValue'</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>._differ = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngDoCheck(): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(<span class="keyword">this</span>._differ)) &#123;</span><br><span class="line">      <span class="keyword">var</span> changes = <span class="keyword">this</span>._differ.diff(<span class="keyword">this</span>._rawClass);</span><br><span class="line">      <span class="keyword">if</span> (isPresent(changes)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._mode == <span class="string">'iterable'</span>) &#123;</span><br><span class="line">          <span class="keyword">this</span>._applyIterableChanges(changes);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">this</span>._applyKeyValueChanges(changes);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnDestroy(): <span class="keyword">void</span> &#123; <span class="keyword">this</span>._cleanupClasses(<span class="keyword">this</span>._rawClass); &#125;</span><br><span class="line"></span><br><span class="line">  private _cleanupClasses(rawClassVal): <span class="keyword">void</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>._applyClasses(rawClassVal, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">this</span>._applyInitialClasses(<span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyKeyValueChanges(changes: any): <span class="keyword">void</span> &#123;</span><br><span class="line">    changes.forEachAddedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.key, record.currentValue); &#125;);</span><br><span class="line">    changes.forEachChangedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.key, record.currentValue); &#125;);</span><br><span class="line">    changes.forEachRemovedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (record.previousValue) &#123;</span><br><span class="line">        <span class="keyword">this</span>._toggleClass(record.key, <span class="literal">false</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyIterableChanges(changes: any): <span class="keyword">void</span> &#123;</span><br><span class="line">    changes.forEachAddedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.item, <span class="literal">true</span>); &#125;);</span><br><span class="line">    changes.forEachRemovedItem(<span class="function">(<span class="params">record</span>) =&gt;</span> &#123; <span class="keyword">this</span>._toggleClass(record.item, <span class="literal">false</span>); &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyInitialClasses(isCleanup: boolean) &#123;</span><br><span class="line">    <span class="keyword">this</span>._initialClasses.forEach(<span class="function"><span class="params">className</span> =&gt;</span> <span class="keyword">this</span>._toggleClass(className, !isCleanup));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _applyClasses(rawClassVal: string[] | <span class="built_in">Set</span>&lt;string&gt;| &#123;[key: string]: string&#125;,</span><br><span class="line">                        isCleanup: boolean) &#123;</span><br><span class="line">    <span class="keyword">if</span> (isPresent(rawClassVal)) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isArray(rawClassVal)) &#123;</span><br><span class="line">        (<span class="xml"><span class="tag">&lt;<span class="name">string[]</span>&gt;</span>rawClassVal).forEach(className =&gt; this._toggleClass(className, !isCleanup));</span></span><br><span class="line"><span class="xml">      &#125; else if (rawClassVal instanceof Set) &#123;</span></span><br><span class="line">        (&lt;Set&lt;string&gt;&gt;rawClassVal).forEach(className =&gt; this._toggleClass(className, !isCleanup));</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        StringMapWrapper.forEach(&lt;&#123;[k: string]: string&#125;&gt;rawClassVal, (expVal, className) =&gt; &#123;</span><br><span class="line">          if (expVal) this._toggleClass(className, !isCleanup);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private _toggleClass(className: string, enabled): void &#123;</span><br><span class="line">    className = className.trim();</span><br><span class="line">    if (className.length &gt; 0) &#123;</span><br><span class="line">      if (className.indexOf(' ') &gt; -1) &#123;</span><br><span class="line">        var classes = className.split(/\s+/g);</span><br><span class="line">        for (var i = 0, len = classes.length; i &lt; len; i++) &#123;</span><br><span class="line">          this._renderer.setElementClass(this._ngEl.nativeElement, classes[i], enabled);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        this._renderer.setElementClass(this._ngEl.nativeElement, className, enabled);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <ul>
 <li>inputs - ng-class bound to NgClass.rawClass / class bound to NgClass.initialClasses考虑到ng给的还有原来html上的</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">set initialClasses(v) &#123;</span><br><span class="line">  <span class="keyword">this</span>._applyInitialClasses(<span class="literal">true</span>);</span><br><span class="line">  <span class="keyword">this</span>._initialClasses = isPresent(v) &amp;&amp; isString(v) ? v.split(<span class="string">' '</span>) : [];</span><br><span class="line">  <span class="keyword">this</span>._applyInitialClasses(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">this</span>._applyClasses(<span class="keyword">this</span>._rawClass, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> initialClasses(v) &#123;</span><br><span class="line">  <span class="keyword">this</span>._applyInitialClasses(<span class="literal">true</span>);</span><br><span class="line">  <span class="keyword">this</span>._initialClasses = isPresent(v) &amp;&amp; isString(v) ? v.split(<span class="string">' '</span>) : [];</span><br><span class="line">  <span class="keyword">this</span>._applyInitialClasses(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">this</span>._applyClasses(<span class="keyword">this</span>._rawClass, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>   this._applyInitialClasses(true);</p>
 </blockquote>
@@ -334,7 +337,7 @@
 <p>this._applyClasses(this._rawClass, false);<br>如果有ngclass 就渲染上，没有就算了</p>
 </blockquote>
 <hr>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">set rawClass(v) &#123;</span><br><span class="line">   <span class="keyword">this</span>._cleanupClasses(<span class="keyword">this</span>._rawClass);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (isString(v)) &#123;</span><br><span class="line">     v = v.split(<span class="string">' '</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span>._rawClass = v;</span><br><span class="line">   <span class="keyword">if</span> (isPresent(v)) &#123;</span><br><span class="line">     <span class="keyword">if</span> (isListLikeIterable(v)) &#123;</span><br><span class="line">       <span class="keyword">this</span>._differ = <span class="keyword">this</span>._iterableDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">       <span class="keyword">this</span>._mode = <span class="string">'iterable'</span>;</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">this</span>._differ = <span class="keyword">this</span>._keyValueDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">       <span class="keyword">this</span>._mode = <span class="string">'keyValue'</span>;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">this</span>._differ = <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> rawClass(v) &#123;</span><br><span class="line">   <span class="keyword">this</span>._cleanupClasses(<span class="keyword">this</span>._rawClass);</span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> (isString(v)) &#123;</span><br><span class="line">     v = v.split(<span class="string">' '</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">this</span>._rawClass = v;</span><br><span class="line">   <span class="keyword">if</span> (isPresent(v)) &#123;</span><br><span class="line">     <span class="keyword">if</span> (isListLikeIterable(v)) &#123;</span><br><span class="line">       <span class="keyword">this</span>._differ = <span class="keyword">this</span>._iterableDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">       <span class="keyword">this</span>._mode = <span class="string">'iterable'</span>;</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">this</span>._differ = <span class="keyword">this</span>._keyValueDiffers.find(v).create(<span class="literal">null</span>);</span><br><span class="line">       <span class="keyword">this</span>._mode = <span class="string">'keyValue'</span>;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">this</span>._differ = <span class="literal">null</span>;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>_cleanupClasses 就是不管哪里进来的class 都从DOM干掉了</p>
 <p>判断类型 如果是string 就赋值数组<br>如果是迭代或者obj 就 也返回一套数组但类型是 IterableDifferFactory[]并且设置mode.<br>string和obj mode是 keyValue， 数组就是iterable</p>
 <hr>
@@ -436,7 +439,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -446,15 +449,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -596,7 +601,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -607,12 +612,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -708,10 +713,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,41 +59,44 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Angular2,Directives,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="Angular2,Directives," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="回归下进度NgControlGroup 摘自源码的描述  Creates and binds a control group to a DOM element. This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.    @Directive(&amp;#123;  selector: &apos;[">
-<meta name="keywords" content="Angular2,Directives">
+<meta name="description" content="回归下进度NgControlGroup 摘自源码的描述  Creates and binds a control group to a DOM element. This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.    @Directive(&amp;#123;  selector: &#39;[">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular2 - Directive - NgControlGroup">
 <meta property="og:url" content="https://dreambo8563.github.io/2016/01/22/Angular2-Directive-NgControlGroup/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="回归下进度NgControlGroup 摘自源码的描述  Creates and binds a control group to a DOM element. This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.    @Directive(&amp;#123;  selector: &apos;[">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-05-18T11:19:08.000Z">
+<meta property="og:description" content="回归下进度NgControlGroup 摘自源码的描述  Creates and binds a control group to a DOM element. This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.    @Directive(&amp;#123;  selector: &#39;[">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-22T07:56:21.000Z">
+<meta property="article:modified_time" content="2016-05-18T11:19:08.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="Angular2">
+<meta property="article:tag" content="Directives">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular2 - Directive - NgControlGroup">
-<meta name="twitter:description" content="回归下进度NgControlGroup 摘自源码的描述  Creates and binds a control group to a DOM element. This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.    @Directive(&amp;#123;  selector: &apos;[">
 
 
 
@@ -112,9 +115,9 @@
 </script>
 
   <title> Angular2 - Directive - NgControlGroup | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +138,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +170,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +180,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +200,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +233,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +262,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Angular2/" itemprop="url" rel="index">
                     <span itemprop="name">Angular2</span>
                   </a>
@@ -307,7 +310,7 @@
 <blockquote>
 <p>Creates and binds a control group to a DOM element.<br> This directive can only be used as a child of {@link NgForm} or {@link NgFormModel}.</p>
 </blockquote>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> @Directive(&#123;</span><br><span class="line">  selector: <span class="string">'[ngControlGroup]'</span>,</span><br><span class="line">  providers: [controlGroupProvider],</span><br><span class="line">  inputs: [<span class="string">'name: ngControlGroup'</span>],</span><br><span class="line">  exportAs: <span class="string">'ngForm'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">NgControlGroup</span> <span class="keyword">extends</span> <span class="title">ControlContainer</span> <span class="title">implements</span> <span class="title">OnInit</span>,</span></span><br><span class="line"><span class="class">    <span class="title">OnDestroy</span> </span>&#123;</span><br><span class="line">  <span class="comment">/** @internal */</span></span><br><span class="line">  _parent: ControlContainer;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(@Host() @SkipSelf() parent: ControlContainer,</span><br><span class="line">              @Optional() @Self() @Inject(NG_VALIDATORS) private _validators: any[],</span><br><span class="line">              @Optional() @Self() @Inject(NG_ASYNC_VALIDATORS) private _asyncValidators: any[]) &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>._parent = parent;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123; <span class="keyword">this</span>.formDirective.addControlGroup(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  ngOnDestroy(): <span class="keyword">void</span> &#123; <span class="keyword">this</span>.formDirective.removeControlGroup(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Get the &#123;@link ControlGroup&#125; backing this binding.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  get control(): ControlGroup &#123; <span class="keyword">return</span> <span class="keyword">this</span>.formDirective.getControlGroup(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Get the path to this control group.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  get path(): string[] &#123; <span class="keyword">return</span> controlPath(<span class="keyword">this</span>.name, <span class="keyword">this</span>._parent); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Get the &#123;@link Form&#125; to which this group belongs.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  get formDirective(): Form &#123; <span class="keyword">return</span> <span class="keyword">this</span>._parent.formDirective; &#125;</span><br><span class="line"></span><br><span class="line">  get validator(): <span class="built_in">Function</span> &#123; <span class="keyword">return</span> composeValidators(<span class="keyword">this</span>._validators); &#125;</span><br><span class="line"></span><br><span class="line">  get asyncValidator(): <span class="built_in">Function</span> &#123; <span class="keyword">return</span> composeAsyncValidators(<span class="keyword">this</span>._asyncValidators); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> @Directive(&#123;</span><br><span class="line">  selector: <span class="string">'[ngControlGroup]'</span>,</span><br><span class="line">  providers: [controlGroupProvider],</span><br><span class="line">  inputs: [<span class="string">'name: ngControlGroup'</span>],</span><br><span class="line">  exportAs: <span class="string">'ngForm'</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">NgControlGroup</span> <span class="keyword">extends</span> <span class="title">ControlContainer</span> <span class="title">implements</span> <span class="title">OnInit</span>,</span></span><br><span class="line"><span class="class">    <span class="title">OnDestroy</span> </span>&#123;</span><br><span class="line">  <span class="comment">/** <span class="doctag">@internal </span>*/</span></span><br><span class="line">  _parent: ControlContainer;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>(@Host() @SkipSelf() parent: ControlContainer,</span><br><span class="line">              @Optional() @Self() @Inject(NG_VALIDATORS) private _validators: any[],</span><br><span class="line">              @Optional() @Self() @Inject(NG_ASYNC_VALIDATORS) private _asyncValidators: any[]) &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>._parent = parent;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ngOnInit(): <span class="keyword">void</span> &#123; <span class="keyword">this</span>.formDirective.addControlGroup(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  ngOnDestroy(): <span class="keyword">void</span> &#123; <span class="keyword">this</span>.formDirective.removeControlGroup(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Get the &#123;<span class="doctag">@link </span>ControlGroup&#125; backing this binding.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">get</span> control(): ControlGroup &#123; <span class="keyword">return</span> <span class="keyword">this</span>.formDirective.getControlGroup(<span class="keyword">this</span>); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Get the path to this control group.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">get</span> path(): string[] &#123; <span class="keyword">return</span> controlPath(<span class="keyword">this</span>.name, <span class="keyword">this</span>._parent); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Get the &#123;<span class="doctag">@link </span>Form&#125; to which this group belongs.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">get</span> formDirective(): Form &#123; <span class="keyword">return</span> <span class="keyword">this</span>._parent.formDirective; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> validator(): Function &#123; <span class="keyword">return</span> composeValidators(<span class="keyword">this</span>._validators); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> asyncValidator(): Function &#123; <span class="keyword">return</span> composeAsyncValidators(<span class="keyword">this</span>._asyncValidators); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>inputs: 从此指令所在元素上拿ngControlGroup的值为name</li>
 <li>在此指令所在的template view中可以ngForm 为变量调用指令内变量</li>
@@ -412,7 +415,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -422,15 +425,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -572,7 +577,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -583,12 +588,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -684,10 +689,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

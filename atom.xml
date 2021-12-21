@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-10-25T09:28:56.612Z</updated>
+  <updated>2021-12-21T05:21:18.847Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2020-2021年度总结</title>
+    <link href="https://dreambo8563.github.io/2021/12/21/2020-2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/"/>
+    <id>https://dreambo8563.github.io/2021/12/21/2020-2021年度总结/</id>
+    <published>2021-12-21T04:39:43.000Z</published>
+    <updated>2021-12-21T05:21:18.847Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="寒冬-2020-2021"><a href="#寒冬-2020-2021" class="headerlink" title="寒冬 2020-2021"></a>寒冬 2020-2021</h2><blockquote><p>由于疫情,2020 的年度总结失约了,这次一并补齐</p></blockquote><h3 id="2020-年"><a href="#2020-年" class="headerlink" title="2020 年"></a>2020 年</h3><blockquote><p>之前 2019 重点比较偏向业务侧的参与和发展, 2020 多业务爆发</p></blockquote><ul><li>团队加入 code review, 形式上简化, 在 gitlab 上提 comments</li><li>团队进度全面上 Teambition, 任务进度可视化,颗粒细化. 推动产品侧内审</li><li>服务端容器化,全面上 k8s</li><li>团队看书,直播读书和vue3 文档讲解, 尝试直播撸代码</li><li>艰苦招聘的一年, 大力投入招聘工作</li><li>业务全面爆发,资源调动</li><li>前端优化 eslint 规则,应用于项目, 提高研发要求</li><li>对公共服务拆分剥离(共享数据,公用逻辑接口), 业务应用全面接入</li></ul><h3 id="2021-年"><a href="#2021-年" class="headerlink" title="2021 年"></a>2021 年</h3><blockquote><p>技术侧全面优化,架构演进 and “双减”</p></blockquote><ul><li><a href="https://dreambo8563.github.io/2021/05/21/FE-CDN/">前端 CDN 部署策略更新</a></li><li><a href="https://dreambo8563.github.io/2021/05/23/DDD%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE1/">DDD 实践</a></li><li>引入 golang 服务(预警服务/鉴权服务/原有公共逻辑迭代为 golang 语言)</li><li>引入 kafka(golang 的消息服务使用)</li><li>抽离独立服务(评语服务)</li><li>抽离公共数据读取服务 pizza(golang语言),尝试 clean code 代码结构</li><li>引入elasticsearch</li><li>创建 graphql 中间query 层服务(nodejs)</li><li><a href="https://dreambo8563.github.io/2021/06/18/sentry-trace/">traceing 能力增强</a></li><li><a href="https://dreambo8563.github.io/2021/05/30/%E6%9C%80%E8%BF%91%E4%B8%A4%E5%B9%B4%E7%9A%84%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/">2020-2021架构演进</a></li><li>优化团队流程,设计文档UML图/ER图,技术评审,加入设计走查,提高项目体验</li><li>前端引入vuex, 部分项目使用 vue3</li><li>更新 watcher 包支持 vue3 (<a href="https://github.com/dreambo8563/next-vue-storage-watcher" target="_blank" rel="noopener">https://github.com/dreambo8563/next-vue-storage-watcher</a>)</li><li>更新 device 包支持 vue3 (<a href="https://github.com/dreambo8563/next-vue-storage-watcher" target="_blank" rel="noopener">https://github.com/dreambo8563/next-vue-storage-watcher</a>)</li><li>阅读一些设计模式</li><li>学习理财, 开始定投基金 :)</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;寒冬-2020-2021&quot;&gt;&lt;a href=&quot;#寒冬-2020-2021&quot; class=&quot;headerlink&quot; title=&quot;寒冬 2020-2021&quot;&gt;&lt;/a&gt;寒冬 2020-2021&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;由于疫情,2020 的年度总结失约
+      
+    
+    </summary>
+    
+      <category term="Thinking" scheme="https://dreambo8563.github.io/categories/Thinking/"/>
+    
+    
+      <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
+    
+  </entry>
   
   <entry>
     <title>Design-Patterns-Composite</title>
@@ -75,9 +101,9 @@
     <link href="https://dreambo8563.github.io/2021/10/20/Design-Patterns-Adapter/"/>
     <id>https://dreambo8563.github.io/2021/10/20/Design-Patterns-Adapter/</id>
     <published>2021-10-20T07:08:13.000Z</published>
-    <updated>2021-10-20T07:20:35.612Z</updated>
+    <updated>2021-10-27T03:50:22.807Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Adapter-wrapper"><a href="#Adapter-wrapper" class="headerlink" title="Adapter (wrapper)"></a>Adapter (wrapper)</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/adapter.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>适合支持多继承的语言实现</li><li>当前逻辑需要调用一个遗留系统,或者不可变的第三方服务. 且第三方服务签名不能直接被当前逻辑使用. 类型不匹配</li><li>可以用 adapter 将不可变服务包裹起来, 并符合目标的 interface</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>找到至少 2 个接口不兼容的类,  1 个是不可变的服务类, 一个是调用方需要的参数类</li><li>抽象一个调用方需要的 interface , 行为包含所有使用到第三方服务的行为</li><li>创建 adapter 类</li><li>adapter 类加一个字段来保存第三方服务的实例</li><li>adapter 类 实现 interface 所有方法, 并在实现过程中,调用第三方服务, 对其兼容</li><li>调用方使用 adapter 实例, 在需要调用第三方的地方</li></ul>]]></content>
+    <content type="html"><![CDATA[<h1 id="Adapter-wrapper"><a href="#Adapter-wrapper" class="headerlink" title="Adapter (wrapper)"></a>Adapter (wrapper)</h1><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/adapter.png" alt=""></p><h2 id="应用场景解释"><a href="#应用场景解释" class="headerlink" title="应用场景解释"></a>应用场景解释</h2><ul><li>适合支持多继承的语言实现</li><li>当前逻辑需要调用一个遗留系统,或者不可变的第三方服务. 且第三方服务签名不能直接被当前逻辑使用. 类型不匹配</li><li>可以用 adapter 将不可变服务包裹起来, 并符合目标的 interface</li></ul><h2 id="应用步骤重点"><a href="#应用步骤重点" class="headerlink" title="应用步骤重点"></a>应用步骤重点</h2><ul><li>找到至少 2 个接口不兼容的类,  1 个是不可变的服务类, 一个是调用方需要的参数类</li><li>抽象一个调用方需要的 interface , 行为包含所有使用到第三方服务的行为, 隐含的是 compsite 模式</li><li>创建 adapter 类</li><li>adapter 类加一个字段来保存第三方服务的实例</li><li>adapter 类 实现 interface 所有方法, 并在实现过程中,调用第三方服务, 对其兼容</li><li>调用方使用 adapter 实例, 在需要调用第三方的地方</li></ul>]]></content>
     
     <summary type="html">
     
@@ -508,31 +534,6 @@
       
       
         &lt;h3 id=&quot;官方文档&quot;&gt;&lt;a href=&quot;#官方文档&quot; class=&quot;headerlink&quot; title=&quot;官方文档&quot;&gt;&lt;/a&gt;官方文档&lt;/h3&gt;&lt;p&gt;provide 选项应该是一个对象或返回一个对象的函数。该对象包含可注入其子孙的属性。在该对象中你可以使用 ES2015 S
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>easy-circular-progress</title>
-    <link href="https://dreambo8563.github.io/2019/04/23/easy-circular-progress/"/>
-    <id>https://dreambo8563.github.io/2019/04/23/easy-circular-progress/</id>
-    <published>2019-04-23T13:07:21.000Z</published>
-    <updated>2019-04-23T13:08:44.408Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="easy-circular-progress"><a href="#easy-circular-progress" class="headerlink" title="easy-circular-progress"></a>easy-circular-progress</h1><h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install easy-circular-progress --save</span><br></pre></td></tr></table></figure><h3 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;Progress value=<span class="string">"16.88"</span>&gt;</span><br><span class="line">      &lt;!-- <span class="xml"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-slot:footer</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">b</span>&gt;</span>goood<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span>--&gt;</span><br><span class="line">    &lt;<span class="regexp">/Progress&gt;</span></span><br><span class="line"><span class="regexp">    &lt;Progress strokeColor="#FF00AA" value="16.88"&gt;</span></span><br><span class="line"><span class="regexp">      &lt;template v-slot:footer&gt;</span></span><br><span class="line"><span class="regexp">        &lt;b&gt;More Color&lt;/</span>b&gt;</span><br><span class="line">      &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Progress&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Progress :radius=<span class="string">"50"</span> :strokeWidth=<span class="string">"10"</span> value=<span class="string">"86.12"</span>&gt;</span><br><span class="line">      &lt;template v-slot:footer&gt;</span><br><span class="line">        &lt;b&gt;Bolder &amp; Bigger One&lt;<span class="regexp">/b&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>template&gt;</span><br><span class="line">    &lt;<span class="regexp">/Progress&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">    &lt;Progress</span></span><br><span class="line"><span class="regexp">      :transitionDuration="5000"</span></span><br><span class="line"><span class="regexp">      :radius="50"</span></span><br><span class="line"><span class="regexp">      :strokeWidth="10"</span></span><br><span class="line"><span class="regexp">      value="86.12"</span></span><br><span class="line"><span class="regexp">    &gt;</span></span><br><span class="line"><span class="regexp">      &lt;template v-slot:footer&gt;</span></span><br><span class="line"><span class="regexp">        &lt;b&gt;Slow One&lt;/</span>b&gt;</span><br><span class="line">      &lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Progress&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Progress</span><br><span class="line">      :transitionDuration=<span class="string">"5000"</span></span><br><span class="line">      :radius=<span class="string">"55"</span></span><br><span class="line">      :strokeWidth=<span class="string">"10"</span></span><br><span class="line">      value=<span class="string">"86.12567"</span></span><br><span class="line">    &gt;</span><br><span class="line">      &lt;template v-slot:footer&gt;</span><br><span class="line">        &lt;b&gt;More Precise&lt;<span class="regexp">/b&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>template&gt;</span><br><span class="line">    &lt;<span class="regexp">/Progress&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import Progress from "./i</span>ndex.vue<span class="string">";</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">export default &#123;</span></span><br><span class="line"><span class="string">  name: "</span>app<span class="string">",</span></span><br><span class="line"><span class="string">  components: &#123;</span></span><br><span class="line"><span class="string">    Progress</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;style lang="</span>scss<span class="string">"&gt;</span></span><br><span class="line"><span class="string">#app &#123;</span></span><br><span class="line"><span class="string">  font-family: "</span>Avenir<span class="string">", Helvetica, Arial, sans-serif;</span></span><br><span class="line"><span class="string">  -webkit-font-smoothing: antialiased;</span></span><br><span class="line"><span class="string">  -moz-osx-font-smoothing: grayscale;</span></span><br><span class="line"><span class="string">  text-align: center;</span></span><br><span class="line"><span class="string">  height: 100vh;</span></span><br><span class="line"><span class="string">  color: #fff;</span></span><br><span class="line"><span class="string">  background: #3e423a;</span></span><br><span class="line"><span class="string">  display: flex;</span></span><br><span class="line"><span class="string">  justify-content: center;</span></span><br><span class="line"><span class="string">  align-items: center;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">body &#123;</span></span><br><span class="line"><span class="string">  margin: 0;</span></span><br><span class="line"><span class="string">  padding: 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br></pre></td></tr></table></figure><h3 id="Prop-Types"><a href="#Prop-Types" class="headerlink" title="Prop Types"></a>Prop Types</h3><table><thead><tr><th style="text-align:left">Property</th><th style="text-align:left">Type</th><th style="text-align:left">Required?</th><th style="text-align:left">Description</th></tr></thead><tbody><tr><td style="text-align:left">strokeWidth</td><td style="text-align:left">Number</td><td style="text-align:left"></td><td style="text-align:left">default is 4, the width of the progress circle, the bigger the bolder</td></tr><tr><td style="text-align:left">radius</td><td style="text-align:left">Number</td><td style="text-align:left"></td><td style="text-align:left">the inner circle radius, default is 38</td></tr><tr><td style="text-align:left">transitionDuration</td><td style="text-align:left">Number</td><td style="text-align:left"></td><td style="text-align:left">default is 1000, transitionDuration for the animation</td></tr><tr><td style="text-align:left">strokeColors</td><td style="text-align:left">String</td><td style="text-align:left"></td><td style="text-align:left">default is “#aaff00”</td></tr><tr><td style="text-align:left">value</td><td style="text-align:left">Number \</td><td style="text-align:left">String</td><td style="text-align:left"></td><td>default is 0.0, should be less or equal then 100</td></tr></tbody></table><h3 id="Slot"><a href="#Slot" class="headerlink" title="Slot"></a>Slot</h3><table><thead><tr><th style="text-align:left">Slot Name</th><th>Description</th></tr></thead><tbody><tr><td style="text-align:left">footer</td><td>we can add a footer for the circle</td></tr></tbody></table><h3 id="Advance-Guide"><a href="#Advance-Guide" class="headerlink" title="Advance Guide"></a>Advance Guide</h3><h4 id="Customized-Theme"><a href="#Customized-Theme" class="headerlink" title="Customized Theme"></a>Customized Theme</h4><ul><li>In your customized scss file (demo.scss)</li></ul><figure class="highlight scss"><table><tr><td class="code"><pre><span class="line"><span class="variable">$--circular-progress-int-fz</span>: <span class="number">28px</span>;</span><br><span class="line"><span class="variable">$--circular-progress-dec-fz</span>: <span class="number">12px</span>;</span><br><span class="line">@<span class="keyword">import</span> <span class="string">"~easy-circular-progress/src/index"</span>;</span><br></pre></td></tr></table></figure><ul><li>import the scss to override the default theme in main.js (entry file) before you import the Draw component</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">"./demo.scss"</span></span><br></pre></td></tr></table></figure><blockquote><p>variables</p></blockquote><p>We split the number into two parts (int, dec)<br>We can define the font-size for each part</p><ul><li>\$–circular-progress-int-fz: 28px;</li><li>\$–circular-progress-dec-fz: 12px;</li></ul><h4 id="Possibly-Polyfill"><a href="#Possibly-Polyfill" class="headerlink" title="Possibly Polyfill"></a>Possibly Polyfill</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isNaN =</span><br><span class="line">  <span class="built_in">Number</span>.isNaN ||</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value !== value</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;easy-circular-progress&quot;&gt;&lt;a href=&quot;#easy-circular-progress&quot; class=&quot;headerlink&quot; title=&quot;easy-circular-progress&quot;&gt;&lt;/a&gt;easy-circular-progre
       
     
     </summary>

@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,23 +59,25 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="React,React-Native,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="React,React-Native," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -83,18 +85,19 @@
 
 
 <meta name="description" content="入门感受 用 react-native init 创建项目很方便 (关键是 mac) 基本 react 知识可以直接应用 组件库缺乏 inline style  第一个小难题 Navigator基本组件直接写 react 组件就好了,但都是单独个体,抛去组件样式类型的不完善外,就是没有 react-router 那么方便的路由工具可能是因为更新了最新的 0.43 原因,部分 navigator 组">
-<meta name="keywords" content="React,React-Native">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RN - Navigator">
 <meta property="og:url" content="https://dreambo8563.github.io/2017/04/12/RN-Navigator/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="入门感受 用 react-native init 创建项目很方便 (关键是 mac) 基本 react 知识可以直接应用 组件库缺乏 inline style  第一个小难题 Navigator基本组件直接写 react 组件就好了,但都是单独个体,抛去组件样式类型的不完善外,就是没有 react-router 那么方便的路由工具可能是因为更新了最新的 0.43 原因,部分 navigator 组">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Apr-15-2017%2022-19-18.gif">
-<meta property="og:updated_time" content="2018-09-30T06:33:09.000Z">
+<meta property="article:published_time" content="2017-04-12T06:50:10.000Z">
+<meta property="article:modified_time" content="2018-09-30T06:33:09.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="React-Native">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RN - Navigator">
-<meta name="twitter:description" content="入门感受 用 react-native init 创建项目很方便 (关键是 mac) 基本 react 知识可以直接应用 组件库缺乏 inline style  第一个小难题 Navigator基本组件直接写 react 组件就好了,但都是单独个体,抛去组件样式类型的不完善外,就是没有 react-router 那么方便的路由工具可能是因为更新了最新的 0.43 原因,部分 navigator 组">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/master/Apr-15-2017%2022-19-18.gif">
 
 
@@ -114,9 +117,9 @@
 </script>
 
   <title> RN - Navigator | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -137,12 +140,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -169,7 +172,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -179,7 +182,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -189,7 +192,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -199,7 +202,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -232,7 +235,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -261,14 +264,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/React/" itemprop="url" rel="index">
                     <span itemprop="name">React</span>
                   </a>
@@ -280,7 +283,7 @@
                 
 
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/React/React-Native/" itemprop="url" rel="index">
                     <span itemprop="name">React-Native</span>
                   </a>
@@ -333,11 +336,11 @@
 </ul>
 <h3 id="Tab"><a href="#Tab" class="headerlink" title="Tab"></a>Tab</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> HomeTabs = TabNavigator(</span><br><span class="line">  &#123;</span><br><span class="line">    Services: &#123;</span><br><span class="line">      screen: Services</span><br><span class="line">    &#125;,</span><br><span class="line">    Approval: &#123;</span><br><span class="line">      screen: Approval</span><br><span class="line">    &#125;,</span><br><span class="line">    Orders: &#123;</span><br><span class="line">      screen: Orders</span><br><span class="line">    &#125;,</span><br><span class="line">    My: &#123;</span><br><span class="line">      screen: My</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    tabBarOptions: &#123;</span><br><span class="line">      activeTintColor: <span class="string">"#f4a442"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <p>也可以在组件里配置 navigationOptions<br>特别是对 tab 的 icon</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> navigationOptions = &#123;</span><br><span class="line">    tabBar: &#123;</span><br><span class="line">        label: <span class="string">'服务'</span>,</span><br><span class="line">        icon: <span class="function">(<span class="params">&#123;tintColor&#125;</span>) =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">Image</span></span></span></span><br><span class="line"><span class="xml">            source=&#123;require('../../img/tab_ic_service_nor.png')&#125;</span></span><br><span class="line"><span class="xml">            style=&#123;[</span></span><br><span class="line"><span class="xml">            myStyles.icon, &#123;</span></span><br><span class="line"><span class="xml">                tintColor: tintColor</span></span><br><span class="line"><span class="xml">            &#125;</span></span><br><span class="line"><span class="xml">        ]&#125;/&gt;)</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> navigationOptions = &#123;</span><br><span class="line">    tabBar: &#123;</span><br><span class="line">        label: <span class="string">'服务'</span>,</span><br><span class="line">        icon: <span class="function">(<span class="params">&#123;tintColor&#125;</span>) =&gt;</span> (<span class="xml"><span class="tag">&lt;<span class="name">Image</span></span></span></span><br><span class="line"><span class="xml">            source=&#123;require('../../img/tab_ic_service_nor.png')&#125;</span></span><br><span class="line"><span class="xml">            style=&#123;[</span></span><br><span class="line"><span class="xml">            myStyles.icon, &#123;</span></span><br><span class="line"><span class="xml">                tintColor: tintColor</span></span><br><span class="line"><span class="xml">            &#125;</span></span><br><span class="line"><span class="xml">        ]&#125;/&gt;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="navigate"><a href="#navigate" class="headerlink" title="navigate"></a>navigate</h3><p>screen 对应的组件里可以从 props 里拿到一个 navigation,用来触发相关跳转</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">goWebView(url) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;navigate&#125; = <span class="keyword">this</span>.props.navigation;</span><br><span class="line">        navigate(<span class="string">'WebView'</span>, &#123;url&#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>这里是跳转到 ‘WebView’ 组件,并传递 url 参数</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state&#125; = <span class="keyword">this</span>.props.navigation;</span><br><span class="line">        <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">WebView</span> <span class="attr">source</span>=<span class="string">&#123;&#123;</span></span></span></span><br><span class="line"><span class="xml">            uri: state.params.url</span></span><br><span class="line"><span class="xml">        &#125;&#125;/&gt;);</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123;state&#125; = <span class="keyword">this</span>.props.navigation;</span><br><span class="line">        <span class="keyword">return</span> (<span class="xml"><span class="tag">&lt;<span class="name">WebView</span> <span class="attr">source</span>=<span class="string">&#123;&#123;</span></span></span></span><br><span class="line"><span class="xml">            uri: state.params.url</span></span><br><span class="line"><span class="xml">        &#125;&#125;/&gt;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>获取 navigator 带入的参数</p>
 <h3 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">this</span>.resetAction = NavigationActions.reset(&#123;</span><br><span class="line">  index: <span class="number">0</span>,</span><br><span class="line">  actions: [NavigationActions.navigate(&#123; <span class="attr">routeName</span>: <span class="string">"Home"</span> &#125;)]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">xxxxxxxx</span><br><span class="line"></span><br><span class="line">navigation.dispatch(<span class="keyword">this</span>.resetAction)</span><br></pre></td></tr></table></figure>
 <p>跳转并清空历史</p>
@@ -373,7 +376,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/01/重新思考react-返璞归真/" rel="next" title="重新思考react - 返璞归真">
+              <a href="/2017/04/01/%E9%87%8D%E6%96%B0%E6%80%9D%E8%80%83react-%E8%BF%94%E7%92%9E%E5%BD%92%E7%9C%9F/" rel="next" title="重新思考react - 返璞归真">
                 <i class="fa fa-chevron-left"></i> 重新思考react - 返璞归真
               </a>
             
@@ -431,7 +434,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -441,15 +444,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -591,7 +596,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -602,12 +607,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -703,10 +708,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

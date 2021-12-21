@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,23 +59,25 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Docker,Sentry,vue,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="Docker,Sentry,vue," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -83,17 +85,19 @@
 
 
 <meta name="description" content="Docker  搭建 Sentry 监控 vue 前端报错基本镜像 redis postgres sentry  生成 sentry 的 secret key docker run –rm sentry config generate-secret-key  这个 key 要保存好 启动 redis docker run -d –name sentry-redis redis  启动 post">
-<meta name="keywords" content="Docker,Sentry,vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker-Sentry">
 <meta property="og:url" content="https://dreambo8563.github.io/2018/08/15/Docker-Sentry/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="Docker  搭建 Sentry 监控 vue 前端报错基本镜像 redis postgres sentry  生成 sentry 的 secret key docker run –rm sentry config generate-secret-key  这个 key 要保存好 启动 redis docker run -d –name sentry-redis redis  启动 post">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-29T07:54:08.273Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-08-15T09:44:53.000Z">
+<meta property="article:modified_time" content="2019-03-29T07:54:08.273Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Sentry">
+<meta property="article:tag" content="vue">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker-Sentry">
-<meta name="twitter:description" content="Docker  搭建 Sentry 监控 vue 前端报错基本镜像 redis postgres sentry  生成 sentry 的 secret key docker run –rm sentry config generate-secret-key  这个 key 要保存好 启动 redis docker run -d –name sentry-redis redis  启动 post">
 
 
 
@@ -112,9 +116,9 @@
 </script>
 
   <title> Docker-Sentry | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +139,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +171,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +181,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +191,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +201,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +234,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +263,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Docker/" itemprop="url" rel="index">
                     <span itemprop="name">Docker</span>
                   </a>
@@ -318,11 +322,11 @@
 <p>docker run -d –name sentry-postgres -e POSTGRES_PASSWORD=secret -e POSTGRES_USER=sentry postgres</p>
 </blockquote>
 <h4 id="创建-sentry-用户"><a href="#创建-sentry-用户" class="headerlink" title="创建 sentry 用户"></a>创建 sentry 用户</h4><blockquote>
-<p>docker run -it –rm -e SENTRY_SECRET_KEY=’<secret-key>‘ –link sentry-postgres:postgres –link sentry-redis:redis sentry upgrade</secret-key></p>
+<p>docker run -it –rm -e SENTRY_SECRET_KEY=’<secret-key>‘ –link sentry-postgres:postgres –link sentry-redis:redis sentry upgrade</p>
 </blockquote>
-<h4 id="启动-sentry-实例"><a href="#启动-sentry-实例" class="headerlink" title="启动 sentry 实例"></a>启动 sentry 实例</h4><figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span> -d --name my-sentry \</span><br><span class="line">    -p 9000:9000 \</span><br><span class="line">    -e SENTRY_SERVER_EMAIL=xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_HOST=smtp.qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PORT=587 \</span><br><span class="line">    -e SENTRY_EMAIL_USER=xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PASSWORD=xxx \</span><br><span class="line">    -e SENTRY_EMAIL_USE_TLS=true \</span><br><span class="line">    -e SENTRY_SECRET_KEY='xxxxx' \</span><br><span class="line">    --link sentry-redis:redis \</span><br><span class="line">    --link sentry-postgres:postgres sentry</span><br></pre></td></tr></table></figure>
-<h4 id="启动-cron"><a href="#启动-cron" class="headerlink" title="启动 cron"></a>启动 cron</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --name sentry-cron \</span><br><span class="line">    -e SENTRY_SERVER_EMAIL=xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_HOST=smtp.qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PORT=587 \</span><br><span class="line">    -e SENTRY_EMAIL_USER=xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PASSWORD=xxx \</span><br><span class="line">    -e SENTRY_EMAIL_USE_TLS=true \</span><br><span class="line">    -e SENTRY_SECRET_KEY=&apos;xxx&apos; \</span><br><span class="line">    --link sentry-postgres:postgres \</span><br><span class="line">    --link sentry-redis:redis sentry run cron</span><br></pre></td></tr></table></figure>
-<h4 id="启动-worker"><a href="#启动-worker" class="headerlink" title="启动 worker"></a>启动 worker</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --name sentry-worker-1 \</span><br><span class="line">    -e SENTRY_SERVER_EMAIL=xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_HOST=smtp.qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PORT=587 \</span><br><span class="line">    -e SENTRY_EMAIL_USER=xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PASSWORD=xxx \</span><br><span class="line">    -e SENTRY_EMAIL_USE_TLS=true \</span><br><span class="line">    -e SENTRY_SECRET_KEY=&apos;xxxm&apos; \</span><br><span class="line">    --link sentry-postgres:postgres --link sentry-redis:redis sentry run worker</span><br></pre></td></tr></table></figure>
+<h4 id="启动-sentry-实例"><a href="#启动-sentry-实例" class="headerlink" title="启动 sentry 实例"></a>启动 sentry 实例</h4><figure class="highlight docker"><table><tr><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> -d --name my-sentry \</span></span><br><span class="line"><span class="bash">    -p 9000:9000 \</span></span><br><span class="line"><span class="bash">    -e SENTRY_SERVER_EMAIL=xxx@qq.com \</span></span><br><span class="line"><span class="bash">    -e SENTRY_EMAIL_HOST=smtp.qq.com \</span></span><br><span class="line"><span class="bash">    -e SENTRY_EMAIL_PORT=587 \</span></span><br><span class="line"><span class="bash">    -e SENTRY_EMAIL_USER=xxx@qq.com \</span></span><br><span class="line"><span class="bash">    -e SENTRY_EMAIL_PASSWORD=xxx \</span></span><br><span class="line"><span class="bash">    -e SENTRY_EMAIL_USE_TLS=<span class="literal">true</span> \</span></span><br><span class="line"><span class="bash">    -e SENTRY_SECRET_KEY=<span class="string">'xxxxx'</span> \</span></span><br><span class="line"><span class="bash">    --link sentry-redis:redis \</span></span><br><span class="line"><span class="bash">    --link sentry-postgres:postgres sentry</span></span><br></pre></td></tr></table></figure>
+<h4 id="启动-cron"><a href="#启动-cron" class="headerlink" title="启动 cron"></a>启动 cron</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --name sentry-cron \</span><br><span class="line">    -e SENTRY_SERVER_EMAIL&#x3D;xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_HOST&#x3D;smtp.qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PORT&#x3D;587 \</span><br><span class="line">    -e SENTRY_EMAIL_USER&#x3D;xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PASSWORD&#x3D;xxx \</span><br><span class="line">    -e SENTRY_EMAIL_USE_TLS&#x3D;true \</span><br><span class="line">    -e SENTRY_SECRET_KEY&#x3D;&#39;xxx&#39; \</span><br><span class="line">    --link sentry-postgres:postgres \</span><br><span class="line">    --link sentry-redis:redis sentry run cron</span><br></pre></td></tr></table></figure>
+<h4 id="启动-worker"><a href="#启动-worker" class="headerlink" title="启动 worker"></a>启动 worker</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">docker run -d --name sentry-worker-1 \</span><br><span class="line">    -e SENTRY_SERVER_EMAIL&#x3D;xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_HOST&#x3D;smtp.qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PORT&#x3D;587 \</span><br><span class="line">    -e SENTRY_EMAIL_USER&#x3D;xxx@qq.com \</span><br><span class="line">    -e SENTRY_EMAIL_PASSWORD&#x3D;xxx \</span><br><span class="line">    -e SENTRY_EMAIL_USE_TLS&#x3D;true \</span><br><span class="line">    -e SENTRY_SECRET_KEY&#x3D;&#39;xxxm&#39; \</span><br><span class="line">    --link sentry-postgres:postgres --link sentry-redis:redis sentry run worker</span><br></pre></td></tr></table></figure>
 <h4 id="进入系统"><a href="#进入系统" class="headerlink" title="进入系统"></a>进入系统</h4><p>localhost:9000 进入 sentry, 创建 js 项目 获取到 sdk 要注册的地址</p>
 <h3 id="Vue-配置"><a href="#Vue-配置" class="headerlink" title="Vue 配置"></a>Vue 配置</h3><h4 id="安装-raven-js"><a href="#安装-raven-js" class="headerlink" title="安装 raven-js"></a>安装 raven-js</h4><blockquote>
 <p>npm install raven-js –save</p>
@@ -333,7 +337,7 @@
 <p>在相应拦截出也可以,进行捕获:</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">http.interceptors.response.use(</span><br><span class="line">  config =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> config.data || &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  (error: any) =&gt; &#123;</span><br><span class="line">    <span class="comment">// loadingInstance.close();</span></span><br><span class="line">    <span class="comment">// 登录失败|禁用|token失效等相关问题返回401，此处做跳转登录页动作</span></span><br><span class="line">    <span class="keyword">if</span> (error.response.status === <span class="number">401</span>) &#123;</span><br><span class="line">      Notification(&#123;</span><br><span class="line">        type: <span class="string">"error"</span>,</span><br><span class="line">        title: HTTP_STATUS_TITLE_ERROR,</span><br><span class="line">        message: error.response.data.message || HTTP_STATUS_MSG_401,</span><br><span class="line">        duration: <span class="number">3000</span></span><br><span class="line">      &#125;)</span><br><span class="line">      router.push(&#123; <span class="attr">path</span>: PATH_LOGIN &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (error.response.status &gt;= <span class="number">400</span> &amp;&amp; error.response.status &lt; <span class="number">500</span>) &#123;</span><br><span class="line">      Notification(&#123;</span><br><span class="line">        type: <span class="string">"error"</span>,</span><br><span class="line">        title: HTTP_STATUS_TITLE_ERROR,</span><br><span class="line">        message: error.response.data.message || HTTP_STATUS_TITLE_ERROR,</span><br><span class="line">        duration: <span class="number">3000</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      Notification(&#123;</span><br><span class="line">        <span class="comment">// 基于axiosCreate中validateStatus配置的区间判断此时状态码&gt;=500 或者 浏览器直接报错(比如跨域) 走此弹框。</span></span><br><span class="line">        type: <span class="string">"error"</span>,</span><br><span class="line">        title: HTTP_STATUS_TITLE_5XX,</span><br><span class="line">        message: HTTP_STATUS_MSG_5XX,</span><br><span class="line">        duration: <span class="number">3000</span></span><br><span class="line">      &#125;)</span><br><span class="line">      Raven.captureException(error)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error.response)</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 <h3 id="配置邮箱通知"><a href="#配置邮箱通知" class="headerlink" title="配置邮箱通知"></a>配置邮箱通知</h3><p>上面 启动 sentry 相关容器的时候有几个环境变量</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-e SENTRY_SERVER_EMAIL=xxx@qq.com \</span><br><span class="line">-e SENTRY_EMAIL_HOST=smtp.qq.com \</span><br><span class="line">-e SENTRY_EMAIL_PORT=587 \</span><br><span class="line">-e SENTRY_EMAIL_USER=xxx@qq.com \</span><br><span class="line">-e SENTRY_EMAIL_PASSWORD=xxx \</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-e SENTRY_SERVER_EMAIL&#x3D;xxx@qq.com \</span><br><span class="line">-e SENTRY_EMAIL_HOST&#x3D;smtp.qq.com \</span><br><span class="line">-e SENTRY_EMAIL_PORT&#x3D;587 \</span><br><span class="line">-e SENTRY_EMAIL_USER&#x3D;xxx@qq.com \</span><br><span class="line">-e SENTRY_EMAIL_PASSWORD&#x3D;xxx \</span><br></pre></td></tr></table></figure>
 <p>SENTRY_SERVER_EMAIL 要和 SENTRY_EMAIL_USER 地址一样<br>我这里用的 qq 邮箱</p>
 <p>注意:<br>SENTRY_EMAIL_PASSWORD 是开启设置里面的 smtp 控制的时候,通过短信获得的授权码,不是你的登录密码</p>
 <p>到此配置完成,当遇到报错的时候,会直接推送给 sentry. sentry 会通过邮件通知</p>
@@ -428,7 +432,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -438,15 +442,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -588,7 +594,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -599,12 +605,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -700,10 +706,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

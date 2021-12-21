@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,41 +59,43 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="RxJS,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="RxJS," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable = Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&apos;">
-<meta name="keywords" content="RxJS">
+<meta name="description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable &#x3D; Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&#39;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RxJS - Creating Observables">
 <meta property="og:url" content="https://dreambo8563.github.io/2016/03/16/RxJS-Creating-Observables/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
-<meta property="og:description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable = Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&apos;">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-03-16T07:38:02.000Z">
+<meta property="og:description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable &#x3D; Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&#39;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-03-16T06:16:18.000Z">
+<meta property="article:modified_time" content="2016-03-16T07:38:02.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="RxJS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RxJS - Creating Observables">
-<meta name="twitter:description" content="create Rx.Observable.create  function (subscribe, parent) {  return new AnonymousObservable(subscribe, parent);}    var observable = Rx.Observable.create(function(observer) &amp;#123;    observer.onNext(&apos;">
 
 
 
@@ -112,9 +114,9 @@
 </script>
 
   <title> RxJS - Creating Observables | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +137,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +169,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +179,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +189,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +199,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +232,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +261,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/RxJS/" itemprop="url" rel="index">
                     <span itemprop="name">RxJS</span>
                   </a>
@@ -308,9 +310,9 @@
 <p>function (subscribe, parent) {<br>  return new AnonymousObservable(subscribe, parent);<br>}</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">var</span> observable = Rx.Observable.create(<span class="function"><span class="keyword">function</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">    observer.onNext(<span class="string">'Simon'</span>);</span><br><span class="line">    observer.onNext(<span class="string">'Jen'</span>);</span><br><span class="line">    observer.onNext(<span class="string">'Sergi'</span>);</span><br><span class="line">    observer.onCompleted(); <span class="comment">// We are done</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>create 里参数是个 Observer<br>Observer 定义了如果发出参数. 当subscribe的时候他会发出3个string后结束</p>
 </li>
 </ul>
-<p>  create 里参数是个 Observer<br>  Observer 定义了如果发出参数. 当subscribe的时候他会发出3个string后结束</p>
 <p>  Observer listen Observable, 当Observable 触发的时候回执行所有Observers相应的方法</p>
 <p>  相当于create 里的observer参数代表的是所有subscribe这个Observable的Observer,<br>  类似于指针template<br>  当触发的时候先走每个Observer的 3次onNext,然后触发每个Observer的onCompleted</p>
 <h2 id="Observers-have-three-methods-onNext-onCompleted-and-onError"><a href="#Observers-have-three-methods-onNext-onCompleted-and-onError" class="headerlink" title="Observers have three methods: onNext, onCompleted, and onError"></a>Observers have three methods: onNext, onCompleted, and onError</h2><p>  单独创建observer,就是实现它的3个方法</p>
@@ -363,7 +365,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/16/RxJS-基本概念/" rel="next" title="RxJS - 基本概念">
+              <a href="/2016/03/16/RxJS-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="next" title="RxJS - 基本概念">
                 <i class="fa fa-chevron-left"></i> RxJS - 基本概念
               </a>
             
@@ -371,7 +373,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/21/RxJS-请求数据更新流实例/" rel="prev" title="RxJS - 请求数据更新流实例">
+              <a href="/2016/03/21/RxJS-%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE%E6%9B%B4%E6%96%B0%E6%B5%81%E5%AE%9E%E4%BE%8B/" rel="prev" title="RxJS - 请求数据更新流实例">
                 RxJS - 请求数据更新流实例 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -421,7 +423,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -431,15 +433,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -565,7 +569,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Observers-have-three-methods-onNext-onCompleted-and-onError"><span class="nav-number">2.</span> <span class="nav-text">Observers have three methods: onNext, onCompleted, and onError</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#arrays"><span class="nav-number"></span> <span class="nav-text">arrays</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#events"><span class="nav-number"></span> <span class="nav-text">events</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#and"><span class="nav-number"></span> <span class="nav-text">and</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#callbacks"><span class="nav-number"></span> <span class="nav-text">callbacks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#from"><span class="nav-number">1.</span> <span class="nav-text">from</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromEvent"><span class="nav-number">2.</span> <span class="nav-text">fromEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromCallback-fromNodeCallback"><span class="nav-number">3.</span> <span class="nav-text">fromCallback  fromNodeCallback</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#create"><span class="nav-number">1.</span> <span class="nav-text">create</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Observers-have-three-methods-onNext-onCompleted-and-onError"><span class="nav-number">2.</span> <span class="nav-text">Observers have three methods: onNext, onCompleted, and onError</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#arrays"><span class="nav-number"></span> <span class="nav-text">arrays</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#events"><span class="nav-number"></span> <span class="nav-text">events</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#and"><span class="nav-number"></span> <span class="nav-text">and</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#callbacks"><span class="nav-number"></span> <span class="nav-text">callbacks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#from"><span class="nav-number">1.</span> <span class="nav-text">from</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromEvent"><span class="nav-number">2.</span> <span class="nav-text">fromEvent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fromCallback-fromNodeCallback"><span class="nav-number">3.</span> <span class="nav-text">fromCallback  fromNodeCallback</span></a></li></ol></div>
             
           </div>
         </section>
@@ -581,7 +585,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -592,12 +596,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -693,10 +697,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>

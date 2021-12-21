@@ -6,19 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head><meta name="generator" content="Hexo 3.8.0"><link rel="manifest" href="/manifest.json">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -27,7 +23,11 @@
 
 
 
-  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
 
 
 
@@ -59,23 +59,25 @@
 
 
 
-<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Angular2,Class,">
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml">
+  <meta name="keywords" content="Angular2,Class," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1">
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
 
 
 
@@ -83,17 +85,18 @@
 
 
 <meta name="description" content="官网文档说的足够用了  An injectable service for executing work inside or outside of the Angular zone.   The most common use of this service is to optimize performance when starting a work consisting of one or m">
-<meta name="keywords" content="Angular2,Class">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Angular2 - Class - NgZone">
 <meta property="og:url" content="https://dreambo8563.github.io/2016/01/29/Angular2-Class-NgZone/index.html">
 <meta property="og:site_name" content="Vincent&#39;s Blog">
 <meta property="og:description" content="官网文档说的足够用了  An injectable service for executing work inside or outside of the Angular zone.   The most common use of this service is to optimize performance when starting a work consisting of one or m">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2016-01-29T02:50:58.000Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-29T02:42:42.000Z">
+<meta property="article:modified_time" content="2016-01-29T02:50:58.000Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="Angular2">
+<meta property="article:tag" content="Class">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Angular2 - Class - NgZone">
-<meta name="twitter:description" content="官网文档说的足够用了  An injectable service for executing work inside or outside of the Angular zone.   The most common use of this service is to optimize performance when starting a work consisting of one or m">
 
 
 
@@ -112,9 +115,9 @@
 </script>
 
   <title> Angular2 - Class - NgZone | Vincent's Blog </title>
-</head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -135,12 +138,12 @@
   <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/" class="brand" rel="start">
+    <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vincent's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -167,7 +170,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
             
             Home
           </a>
@@ -177,7 +180,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
             
             Categories
           </a>
@@ -187,7 +190,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
             
             Archives
           </a>
@@ -197,7 +200,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
             
             Tags
           </a>
@@ -230,7 +233,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -259,14 +262,14 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/Angular2/" itemprop="url" rel="index">
                     <span itemprop="name">Angular2</span>
                   </a>
@@ -313,7 +316,7 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;Component, View, NgZone&#125; <span class="keyword">from</span> <span class="string">'angular2/core'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;NgIf&#125; <span class="keyword">from</span> <span class="string">'angular2/common'</span>;</span><br><span class="line">@Component(&#123;</span><br><span class="line">  selector: <span class="string">'ng-zone-demo'</span>.</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;h2&gt;Demo: NgZone&lt;/h2&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;Progress: &#123;&#123;progress&#125;&#125;%&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;p *ngIf="progress &gt;= 100"&gt;Done processing &#123;&#123;label&#125;&#125; of Angular zone!&lt;/p&gt;</span></span><br><span class="line"><span class="string">    &lt;button (click)="processWithinAngularZone()"&gt;Process within Angular zone&lt;/button&gt;</span></span><br><span class="line"><span class="string">    &lt;button (click)="processOutsideOfAngularZone()"&gt;Process outside of Angular zone&lt;/button&gt;</span></span><br><span class="line"><span class="string">  `</span>,</span><br><span class="line">  directives: [NgIf]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">NgZoneDemo</span> </span>&#123;</span><br><span class="line">  progress: number = <span class="number">0</span>;</span><br><span class="line">  label: string;</span><br><span class="line">  <span class="keyword">constructor</span>(private _ngZone: NgZone) &#123;&#125;</span><br><span class="line">  <span class="comment">// Loop inside the Angular zone</span></span><br><span class="line">  <span class="comment">// so the UI DOES refresh after each setTimeout cycle</span></span><br><span class="line">  processWithinAngularZone() &#123;</span><br><span class="line">    <span class="keyword">this</span>.label = <span class="string">'inside'</span>;</span><br><span class="line">    <span class="keyword">this</span>.progress = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">this</span>._increaseProgress(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'Inside Done!'</span>));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// Loop outside of the Angular zone</span></span><br><span class="line">  <span class="comment">// so the UI DOES NOT refresh after each setTimeout cycle</span></span><br><span class="line">  processOutsideOfAngularZone() &#123;</span><br><span class="line">    <span class="keyword">this</span>.label = <span class="string">'outside'</span>;</span><br><span class="line">    <span class="keyword">this</span>.progress = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">this</span>._ngZone.runOutsideAngular(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>._increaseProgress(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// reenter the Angular zone and display done</span></span><br><span class="line">      <span class="keyword">this</span>._ngZone.run(<span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">'Outside Done!'</span>) &#125;);</span><br><span class="line">    &#125;&#125;));</span><br><span class="line">  &#125;</span><br><span class="line">  _increaseProgress(doneCallback: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">void</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.progress += <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Current progress: <span class="subst">$&#123;<span class="keyword">this</span>.progress&#125;</span>%`</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.progress &lt; <span class="number">100</span>) &#123;</span><br><span class="line">      <span class="built_in">window</span>.setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>._increaseProgress(doneCallback)), <span class="number">10</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      doneCallback();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><a href="http://plnkr.co/edit/lY9m8HLy7z06vDoUaSN2?p=preview" target="_blank" rel="noopener">http://plnkr.co/edit/lY9m8HLy7z06vDoUaSN2?p=preview</a></p>
 <p>这个runOutsideAngular </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Executes the `fn` function synchronously in Angular's parent zone and returns value returned by</span></span><br><span class="line"><span class="comment">  * the function.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * Running functions via `runOutsideAngular` allows you to escape Angular's zone and do work that</span></span><br><span class="line"><span class="comment">  * doesn't trigger Angular change-detection or is subject to Angular's error handling.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * Any future tasks or microtasks scheduled from within this function will continue executing from</span></span><br><span class="line"><span class="comment">  * outside of the Angular zone.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * Use &#123;@link #run&#125; to reenter the Angular zone and do work that updates the application model.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> runOutsideAngular(fn: <span class="function"><span class="params">()</span> =&gt;</span> any): any &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>._disabled) &#123;</span><br><span class="line">     <span class="keyword">return</span> fn();</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">this</span>._mountZone.run(fn);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Executes the `fn` function synchronously in Angular's parent zone and returns value returned by</span></span><br><span class="line"><span class="comment">  * the function.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * Running functions via `runOutsideAngular` allows you to escape Angular's zone and do work that</span></span><br><span class="line"><span class="comment">  * doesn't trigger Angular change-detection or is subject to Angular's error handling.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * Any future tasks or microtasks scheduled from within this function will continue executing from</span></span><br><span class="line"><span class="comment">  * outside of the Angular zone.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * Use &#123;<span class="doctag">@link </span>#run&#125; to reenter the Angular zone and do work that updates the application model.</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> runOutsideAngular(fn: <span class="function"><span class="params">()</span> =&gt;</span> any): any &#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>._disabled) &#123;</span><br><span class="line">     <span class="keyword">return</span> fn();</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">this</span>._mountZone.run(fn);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>不做 change-detection  和 ChangeDetectionStrategy 里的detached 效果一样，但detached还是在zone里</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * `Detached` means that the change detector sub tree is not a part of the main tree and</span></span><br><span class="line"><span class="comment"> * should be skipped.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Detached</span><br></pre></td></tr></table></figure>
       
@@ -404,7 +407,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -414,15 +417,17 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Vincent Guo">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
           <p class="site-author-name" itemprop="name">Vincent Guo</p>
           <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">279</span>
+              <span class="site-state-item-count">280</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -564,7 +569,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">
+        <div class="copyright" >
   
   &copy; 
   <span itemprop="copyrightYear">2021</span>
@@ -575,12 +580,12 @@
 </div>
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
 </div>
 
 <div class="theme-info">
   Theme -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Mist
   </a>
 </div>
@@ -676,10 +681,5 @@
 
   
 
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js?t=1635154208291')
-    .then(function () {console.log('ServiceWorker Register Successfully.')})
-    .catch(function (e) {console.error(e)});
-}
-</script></body>
+</body>
 </html>
