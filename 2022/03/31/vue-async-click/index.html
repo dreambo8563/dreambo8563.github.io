@@ -92,7 +92,7 @@
 <meta property="og:description" content="解决的问题 我们经常遇到 点击 按钮来触发某个异步请求的情况, 比如 提交&#x2F;确定 等按钮.   但这种情况我们又需要处理一些并发的问题, 防止用户连续频繁的触发异步  其他方案 (只列举几个) 自己设置一个标志位, 来标识是否在请求中, 每次触发后对标志位判断  缺点是需要额外设置标志位字段,重复性代码.降低代码可读性   对点击触发的异步 进行 throttle 处理  throttle设置的时">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-31T07:00:13.000Z">
-<meta property="article:modified_time" content="2022-03-31T07:54:25.804Z">
+<meta property="article:modified_time" content="2022-03-31T08:11:14.515Z">
 <meta property="article:author" content="Vincent Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="directive">
@@ -338,9 +338,6 @@
 <li>针对不同的事件</li>
 <li>可以带入参数 fn(arg)</li>
 </ul>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语:"></a>结语:</h3><blockquote>
-<p>!! 注意需要在对应的 指令钩子中 <strong>取消</strong> 对应监听事件</p>
-</blockquote>
 
       
     </div>
@@ -572,7 +569,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决的问题"><span class="nav-number">1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方案-只列举几个"><span class="nav-number">2.</span> <span class="nav-text">其他方案 (只列举几个)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的方案-async-click-指令"><span class="nav-number">3.</span> <span class="nav-text">我的方案 async-click 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未来可扩展部分"><span class="nav-number">4.</span> <span class="nav-text">未来可扩展部分:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">5.</span> <span class="nav-text">结语:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决的问题"><span class="nav-number">1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方案-只列举几个"><span class="nav-number">2.</span> <span class="nav-text">其他方案 (只列举几个)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的方案-async-click-指令"><span class="nav-number">3.</span> <span class="nav-text">我的方案 async-click 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未来可扩展部分"><span class="nav-number">4.</span> <span class="nav-text">未来可扩展部分:</span></a></li></ol></div>
             
           </div>
         </section>
