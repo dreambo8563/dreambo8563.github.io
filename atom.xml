@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2021-12-22T07:14:18.310Z</updated>
+  <updated>2022-03-31T07:46:14.728Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue-async-click</title>
+    <link href="https://dreambo8563.github.io/2022/03/31/vue-async-click/"/>
+    <id>https://dreambo8563.github.io/2022/03/31/vue-async-click/</id>
+    <published>2022-03-31T07:00:13.000Z</published>
+    <updated>2022-03-31T07:46:14.728Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h3><blockquote><p>我们经常遇到 <code>点击</code> 按钮来触发某个<code>异步</code>请求的情况, 比如 <em>提交</em>/<em>确定</em> 等按钮.</p></blockquote><blockquote><p>但这种情况我们又需要处理一些并发的问题, 防止用户连续频繁的触发异步</p></blockquote><h3 id="其他方案-只列举几个"><a href="#其他方案-只列举几个" class="headerlink" title="其他方案 (只列举几个)"></a>其他方案 (只列举几个)</h3><ul><li><p>自己设置一个标志位, 来标识是否在请求中, 每次触发后对标志位判断</p><blockquote><p>缺点是需要额外设置标志位字段,重复性代码.降低代码可读性</p></blockquote></li><li><p>对点击触发的异步 进行 throttle 处理</p><blockquote><p>throttle设置的时间间隔是固定的, 没法估计请求实际使用的时间, 太短还是会连续触发. 太长体验很差</p></blockquote></li></ul><h3 id="我的方案-async-click-指令"><a href="#我的方案-async-click-指令" class="headerlink" title="我的方案 async-click 指令"></a>我的方案 async-click 指令</h3><ul><li>vue2:</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.directive(<span class="string">"async-click"</span>, &#123;</span><br><span class="line">  <span class="comment">// 当被绑定的元素插入到 DOM 中时……</span></span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding, vnode</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取 bind 的异步方案名称</span></span><br><span class="line">    <span class="keyword">const</span> fnName = binding.expression;</span><br><span class="line">    <span class="comment">// 获取具体方法的引用</span></span><br><span class="line">    <span class="keyword">const</span> fn = vnode.context &amp;&amp; vnode.context[fnName];</span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">"focus 指令需要 binding 一个方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置内部的标志位</span></span><br><span class="line">    <span class="keyword">let</span> start = <span class="literal">false</span>;</span><br><span class="line">    el.addEventListener(</span><br><span class="line">      <span class="string">"click"</span>,</span><br><span class="line">      e =&gt; &#123;</span><br><span class="line">        <span class="comment">// 对其他 click 时间阻止</span></span><br><span class="line">        e &amp;&amp; e.stopImmediatePropagation();</span><br><span class="line">        <span class="keyword">if</span> (!start) &#123;</span><br><span class="line">          <span class="comment">// 第一次点</span></span><br><span class="line">          <span class="built_in">console</span>.debug(<span class="string">"click flag -&gt;"</span>, start);</span><br><span class="line">          start = <span class="literal">true</span>;</span><br><span class="line">          <span class="comment">// 执行,并获得返回值</span></span><br><span class="line">          <span class="keyword">const</span> rt = fn();</span><br><span class="line">          <span class="keyword">if</span> (!(rt <span class="keyword">instanceof</span> <span class="built_in">Promise</span>)) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">"focus 指令绑定值错误:返回类型必须为 Promise"</span>);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.debug(rt);</span><br><span class="line">          <span class="comment">//! 此处需要特别注意, 必须是 Promise 完成, 不能再某种情况下永远处于 pending 状态</span></span><br><span class="line">          rt.finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// promise 结束后重置标志位</span></span><br><span class="line">            <span class="built_in">console</span>.debug(<span class="string">"finally"</span>);</span><br><span class="line">            start = <span class="literal">false</span>;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="literal">true</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><ul><li>vue3<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.directive(<span class="string">"async-click"</span>, &#123;</span><br><span class="line">  <span class="comment">// 当被绑定的元素插入到 DOM 中时……</span></span><br><span class="line">  created(el, binding) &#123;</span><br><span class="line">    <span class="comment">// 获取 bind 的异步方案名称</span></span><br><span class="line">    <span class="built_in">console</span>.debug(binding);</span><br><span class="line">    <span class="comment">// const fnName = binding;</span></span><br><span class="line">    <span class="comment">// 获取具体方法的引用</span></span><br><span class="line">    <span class="keyword">const</span> fn = binding.value</span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">"focus 指令需要 binding 一个方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置内部的标志位</span></span><br><span class="line">    <span class="keyword">let</span> start = <span class="literal">false</span>;</span><br><span class="line">    el.addEventListener(</span><br><span class="line">      <span class="string">"click"</span>,</span><br><span class="line">      (e: MouseEvent) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 对其他 click 时间阻止</span></span><br><span class="line">        e &amp;&amp; e.stopImmediatePropagation();</span><br><span class="line">        <span class="keyword">if</span> (!start) &#123;</span><br><span class="line">          <span class="comment">// 第一次点</span></span><br><span class="line">          <span class="built_in">console</span>.debug(<span class="string">"click flag -&gt;"</span>, start);</span><br><span class="line">          start = <span class="literal">true</span>;</span><br><span class="line">          <span class="comment">// 执行,并获得返回值</span></span><br><span class="line">          <span class="keyword">const</span> rt: <span class="built_in">Promise</span>&lt;unknown&gt; = fn();</span><br><span class="line">          <span class="keyword">if</span> (!(rt <span class="keyword">instanceof</span> <span class="built_in">Promise</span>)) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">"focus 指令绑定值错误:返回类型必须为 Promise"</span>);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.debug(rt);</span><br><span class="line">          <span class="comment">//! 此处需要特别注意, 必须是 Promise 完成, 不能再某种情况下永远处于 pending 状态</span></span><br><span class="line">          rt.finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// promise 结束后重置标志位</span></span><br><span class="line">            <span class="built_in">console</span>.debug(<span class="string">"finally"</span>);</span><br><span class="line">            start = <span class="literal">false</span>;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="literal">true</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li></ul><p>使用侧例子:</p><p>`将原来 @click=xxx 的部分替换为 v-async-click=xxx<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">van-button</span></span></span><br><span class="line"><span class="tag">       <span class="attr">v-async-click</span>=<span class="string">"demo"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">round</span></span></span><br><span class="line"><span class="tag">       <span class="attr">class</span>=<span class="string">"pc-submit"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">type</span>=<span class="string">"primary"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">size</span>=<span class="string">"normal"</span></span></span><br><span class="line"><span class="tag">       &gt;</span>提交<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure></p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">methods:&#123;</span><br><span class="line"> demo() &#123;</span><br><span class="line">      <span class="built_in">console</span>.info(<span class="string">"demo start"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.info(<span class="string">"demo end"</span>);</span><br><span class="line">          resolve();</span><br><span class="line">        &#125;, <span class="number">3000</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="结语"><a href="#结语" class="headerlink" title="结语:"></a>结语:</h3><blockquote><p>!! 注意需要在对应的 指令钩子中 <strong>取消</strong> 对应监听事件</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;解决的问题&quot;&gt;&lt;a href=&quot;#解决的问题&quot; class=&quot;headerlink&quot; title=&quot;解决的问题&quot;&gt;&lt;/a&gt;解决的问题&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;我们经常遇到 &lt;code&gt;点击&lt;/code&gt; 按钮来触发某个&lt;code&gt;异步&lt;/code&gt;
+      
+    
+    </summary>
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
+    
+    
+      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
+    
+      <category term="directive" scheme="https://dreambo8563.github.io/tags/directive/"/>
+    
+  </entry>
   
   <entry>
     <title>2020-2021年度总结</title>
@@ -517,31 +545,6 @@
     
     
       <category term="electronjs" scheme="https://dreambo8563.github.io/tags/electronjs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue - provide/inject应用</title>
-    <link href="https://dreambo8563.github.io/2019/05/12/Vue-provide-inject%E5%BA%94%E7%94%A8/"/>
-    <id>https://dreambo8563.github.io/2019/05/12/Vue-provide-inject应用/</id>
-    <published>2019-05-12T15:07:28.000Z</published>
-    <updated>2019-05-12T15:19:16.595Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>provide 选项应该是一个对象或返回一个对象的函数。该对象包含可注入其子孙的属性。在该对象中你可以使用 ES2015 Symbols 作为 key，但是只在原生支持 Symbol 和 Reflect.ownKeys 的环境下可工作。</p><p>inject 选项应该是：</p><p>一个字符串数组，或<br>一个对象，对象的 key 是本地的绑定名，value 是：<br>在可用的注入内容中搜索用的 key (字符串或 Symbol)，或<br>一个对象，该对象的：<br>from 属性是在可用的注入内容中搜索用的 key (字符串或 Symbol)<br>default 属性是降级情况下使用的 value</p><h3 id="drawer-组件中应用"><a href="#drawer-组件中应用" class="headerlink" title="drawer 组件中应用"></a>drawer 组件中应用</h3><p>repo: <a href="https://github.com/dreambo8563/vue-simple-drawer" target="_blank" rel="noopener">https://github.com/dreambo8563/vue-simple-drawer</a></p><h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>这个组件有个能力就是嵌套, drawer 里面嵌套 drawer. 这个时候需要 z-index 属性能够自动的递增上去<br>这中间包 modal 层的 z-index</p><p>这样的情况下,我想到了 provide/inject</p><ul><li>用户可以通过 zIndex prop 传入自定义的 index</li><li>当前实际的 zIndex 是两部分获得</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"> computedIndex() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.zIndex || <span class="keyword">this</span>.simpleDrawerIndex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><code>simpleDrawerIndex</code> 就是注入进来的 zIndex</p><ul><li>如果用户没设置就用注入的</li></ul><p>注入且设置默认值(最外层不会被任何祖先注入,所以必须有默认值)</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">inject: &#123;</span><br><span class="line">   simpleDrawerIndex: &#123; <span class="attr">default</span>: <span class="number">1000</span> &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure><p>开始注入:</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">provide() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      simpleDrawerIndex: <span class="keyword">this</span>.computedIndex + <span class="number">1</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure><p>这里注入的值要比当前 drawer 的值 +1 也就是 “递增”</p><h3 id="易错点"><a href="#易错点" class="headerlink" title="易错点"></a>易错点</h3><p>当开始用的时候,总是感觉要死循环了, 其实就是注入值的默认值问题.<br>子组件肯定有注入值, 根组件不一定有</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;官方文档&quot;&gt;&lt;a href=&quot;#官方文档&quot; class=&quot;headerlink&quot; title=&quot;官方文档&quot;&gt;&lt;/a&gt;官方文档&lt;/h3&gt;&lt;p&gt;provide 选项应该是一个对象或返回一个对象的函数。该对象包含可注入其子孙的属性。在该对象中你可以使用 ES2015 S
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
     
   </entry>
   

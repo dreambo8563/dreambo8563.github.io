@@ -1,0 +1,700 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vue,directive," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="解决的问题 我们经常遇到 点击 按钮来触发某个异步请求的情况, 比如 提交&#x2F;确定 等按钮.   但这种情况我们又需要处理一些并发的问题, 防止用户连续频繁的触发异步  其他方案 (只列举几个) 自己设置一个标志位, 来标识是否在请求中, 每次触发后对标志位判断  缺点是需要额外设置标志位字段,重复性代码.降低代码可读性   对点击触发的异步 进行 throttle 处理  throttle设置的时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-async-click">
+<meta property="og:url" content="https://dreambo8563.github.io/2022/03/31/vue-async-click/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="解决的问题 我们经常遇到 点击 按钮来触发某个异步请求的情况, 比如 提交&#x2F;确定 等按钮.   但这种情况我们又需要处理一些并发的问题, 防止用户连续频繁的触发异步  其他方案 (只列举几个) 自己设置一个标志位, 来标识是否在请求中, 每次触发后对标志位判断  缺点是需要额外设置标志位字段,重复性代码.降低代码可读性   对点击触发的异步 进行 throttle 处理  throttle设置的时">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-31T07:00:13.000Z">
+<meta property="article:modified_time" content="2022-03-31T07:46:14.728Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="directive">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> vue-async-click | Vincent's Blog </title>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                vue-async-click
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2022-03-31T15:00:13+08:00" content="2022-03-31">
+              2022-03-31
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h3><blockquote>
+<p>我们经常遇到 <code>点击</code> 按钮来触发某个<code>异步</code>请求的情况, 比如 <em>提交</em>/<em>确定</em> 等按钮.</p>
+</blockquote>
+<blockquote>
+<p>但这种情况我们又需要处理一些并发的问题, 防止用户连续频繁的触发异步</p>
+</blockquote>
+<h3 id="其他方案-只列举几个"><a href="#其他方案-只列举几个" class="headerlink" title="其他方案 (只列举几个)"></a>其他方案 (只列举几个)</h3><ul>
+<li><p>自己设置一个标志位, 来标识是否在请求中, 每次触发后对标志位判断</p>
+<blockquote>
+<p>缺点是需要额外设置标志位字段,重复性代码.降低代码可读性</p>
+</blockquote>
+</li>
+<li><p>对点击触发的异步 进行 throttle 处理</p>
+<blockquote>
+<p>throttle设置的时间间隔是固定的, 没法估计请求实际使用的时间, 太短还是会连续触发. 太长体验很差</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="我的方案-async-click-指令"><a href="#我的方案-async-click-指令" class="headerlink" title="我的方案 async-click 指令"></a>我的方案 async-click 指令</h3><ul>
+<li>vue2:</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">Vue.directive(<span class="string">"async-click"</span>, &#123;</span><br><span class="line">  <span class="comment">// 当被绑定的元素插入到 DOM 中时……</span></span><br><span class="line">  bind: <span class="function"><span class="keyword">function</span> (<span class="params">el, binding, vnode</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 获取 bind 的异步方案名称</span></span><br><span class="line">    <span class="keyword">const</span> fnName = binding.expression;</span><br><span class="line">    <span class="comment">// 获取具体方法的引用</span></span><br><span class="line">    <span class="keyword">const</span> fn = vnode.context &amp;&amp; vnode.context[fnName];</span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">"focus 指令需要 binding 一个方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置内部的标志位</span></span><br><span class="line">    <span class="keyword">let</span> start = <span class="literal">false</span>;</span><br><span class="line">    el.addEventListener(</span><br><span class="line">      <span class="string">"click"</span>,</span><br><span class="line">      e =&gt; &#123;</span><br><span class="line">        <span class="comment">// 对其他 click 时间阻止</span></span><br><span class="line">        e &amp;&amp; e.stopImmediatePropagation();</span><br><span class="line">        <span class="keyword">if</span> (!start) &#123;</span><br><span class="line">          <span class="comment">// 第一次点</span></span><br><span class="line">          <span class="built_in">console</span>.debug(<span class="string">"click flag -&gt;"</span>, start);</span><br><span class="line">          start = <span class="literal">true</span>;</span><br><span class="line">          <span class="comment">// 执行,并获得返回值</span></span><br><span class="line">          <span class="keyword">const</span> rt = fn();</span><br><span class="line">          <span class="keyword">if</span> (!(rt <span class="keyword">instanceof</span> <span class="built_in">Promise</span>)) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">"focus 指令绑定值错误:返回类型必须为 Promise"</span>);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.debug(rt);</span><br><span class="line">          <span class="comment">//! 此处需要特别注意, 必须是 Promise 完成, 不能再某种情况下永远处于 pending 状态</span></span><br><span class="line">          rt.finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// promise 结束后重置标志位</span></span><br><span class="line">            <span class="built_in">console</span>.debug(<span class="string">"finally"</span>);</span><br><span class="line">            start = <span class="literal">false</span>;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="literal">true</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>vue3<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">app.directive(<span class="string">"async-click"</span>, &#123;</span><br><span class="line">  <span class="comment">// 当被绑定的元素插入到 DOM 中时……</span></span><br><span class="line">  created(el, binding) &#123;</span><br><span class="line">    <span class="comment">// 获取 bind 的异步方案名称</span></span><br><span class="line">    <span class="built_in">console</span>.debug(binding);</span><br><span class="line">    <span class="comment">// const fnName = binding;</span></span><br><span class="line">    <span class="comment">// 获取具体方法的引用</span></span><br><span class="line">    <span class="keyword">const</span> fn = binding.value</span><br><span class="line">    <span class="keyword">if</span> (!fn) &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(<span class="string">"focus 指令需要 binding 一个方法"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置内部的标志位</span></span><br><span class="line">    <span class="keyword">let</span> start = <span class="literal">false</span>;</span><br><span class="line">    el.addEventListener(</span><br><span class="line">      <span class="string">"click"</span>,</span><br><span class="line">      (e: MouseEvent) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 对其他 click 时间阻止</span></span><br><span class="line">        e &amp;&amp; e.stopImmediatePropagation();</span><br><span class="line">        <span class="keyword">if</span> (!start) &#123;</span><br><span class="line">          <span class="comment">// 第一次点</span></span><br><span class="line">          <span class="built_in">console</span>.debug(<span class="string">"click flag -&gt;"</span>, start);</span><br><span class="line">          start = <span class="literal">true</span>;</span><br><span class="line">          <span class="comment">// 执行,并获得返回值</span></span><br><span class="line">          <span class="keyword">const</span> rt: <span class="built_in">Promise</span>&lt;unknown&gt; = fn();</span><br><span class="line">          <span class="keyword">if</span> (!(rt <span class="keyword">instanceof</span> <span class="built_in">Promise</span>)) &#123;</span><br><span class="line">            <span class="built_in">console</span>.error(<span class="string">"focus 指令绑定值错误:返回类型必须为 Promise"</span>);</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.debug(rt);</span><br><span class="line">          <span class="comment">//! 此处需要特别注意, 必须是 Promise 完成, 不能再某种情况下永远处于 pending 状态</span></span><br><span class="line">          rt.finally(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// promise 结束后重置标志位</span></span><br><span class="line">            <span class="built_in">console</span>.debug(<span class="string">"finally"</span>);</span><br><span class="line">            start = <span class="literal">false</span>;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="literal">true</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>使用侧例子:</p>
+<p>`将原来 @click=xxx 的部分替换为 v-async-click=xxx<br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">van-button</span></span></span><br><span class="line"><span class="tag">       <span class="attr">v-async-click</span>=<span class="string">"demo"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">round</span></span></span><br><span class="line"><span class="tag">       <span class="attr">class</span>=<span class="string">"pc-submit"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">type</span>=<span class="string">"primary"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">size</span>=<span class="string">"normal"</span></span></span><br><span class="line"><span class="tag">       &gt;</span>提交<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">methods:&#123;</span><br><span class="line"> demo() &#123;</span><br><span class="line">      <span class="built_in">console</span>.info(<span class="string">"demo start"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.info(<span class="string">"demo end"</span>);</span><br><span class="line">          resolve();</span><br><span class="line">        &#125;, <span class="number">3000</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语:"></a>结语:</h3><blockquote>
+<p>!! 注意需要在对应的 指令钩子中 <strong>取消</strong> 对应监听事件</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag">#vue</a>
+          
+            <a href="/tags/directive/" rel="tag">#directive</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/12/21/2020-2021%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" rel="next" title="2020-2021年度总结">
+                <i class="fa fa-chevron-left"></i> 2020-2021年度总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">281</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">101</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决的问题"><span class="nav-number">1.</span> <span class="nav-text">解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方案-只列举几个"><span class="nav-number">2.</span> <span class="nav-text">其他方案 (只列举几个)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的方案-async-click-指令"><span class="nav-number">3.</span> <span class="nav-text">我的方案 async-click 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结语"><span class="nav-number">4.</span> <span class="nav-text">结语:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
