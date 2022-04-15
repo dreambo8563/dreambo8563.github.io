@@ -1,0 +1,708 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vue,mixin," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="背景 开始使用 vue 3.x 开发项目, 并使用 pinia 等相关新的生态 并阅读相关文档 希望基于 vue 3 写点代码, 用了 新的 dev_tools, 功能丰富了很多.  最近几个项目里都遇到了不同情况下的性能问题  RenderTracker 的作用vue 3 生命周期 onRenderTriggered 文档  Registers a debug hook to be called">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue-Mixin-RenderTrack">
+<meta property="og:url" content="https://dreambo8563.github.io/2022/04/15/Vue-Mixin-RenderTrack/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="背景 开始使用 vue 3.x 开发项目, 并使用 pinia 等相关新的生态 并阅读相关文档 希望基于 vue 3 写点代码, 用了 新的 dev_tools, 功能丰富了很多.  最近几个项目里都遇到了不同情况下的性能问题  RenderTracker 的作用vue 3 生命周期 onRenderTriggered 文档  Registers a debug hook to be called">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/b83a75ae9a588cf71ebc43605128fdab51579dba/renderTrack.png">
+<meta property="article:published_time" content="2022-04-15T08:04:13.000Z">
+<meta property="article:modified_time" content="2022-04-15T09:36:06.644Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="vue">
+<meta property="article:tag" content="mixin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/b83a75ae9a588cf71ebc43605128fdab51579dba/renderTrack.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> Vue-Mixin-RenderTrack | Vincent's Blog </title>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Vue-Mixin-RenderTrack
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2022-04-15T16:04:13+08:00" content="2022-04-15">
+              2022-04-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><ul>
+<li>开始使用 vue 3.x 开发项目, 并使用 pinia 等相关新的生态 并阅读相关文档</li>
+<li>希望基于 vue 3 写点代码, 用了 新的 dev_tools, 功能丰富了很多. </li>
+<li>最近几个项目里都遇到了不同情况下的性能问题</li>
+</ul>
+<h3 id="RenderTracker-的作用"><a href="#RenderTracker-的作用" class="headerlink" title="RenderTracker 的作用"></a>RenderTracker 的作用</h3><p>vue 3 生命周期 onRenderTriggered 文档</p>
+<blockquote>
+<p>Registers a debug hook to be called when a reactive dependency triggers the component’s render effect to be re-run. 是一个 debug 模式下的 hook, 会因为响应式的依赖触发组件的重新渲染</p>
+</blockquote>
+<p><a href="https://vuejs.org/api/composition-api-lifecycle.html#onrendertriggered" target="_blank" rel="noopener">https://vuejs.org/api/composition-api-lifecycle.html#onrendertriggered</a></p>
+<p>综合文档看, 这个 hook 比较适合查看是否某些组件过多的频繁渲染, 并给出一些简单的信息协助定位问题</p>
+<h3 id="小问题"><a href="#小问题" class="headerlink" title="小问题"></a>小问题</h3><p>因为这个工具的注入是针对所有的组件为目标的</p>
+<p><strong>但是:</strong> vue 3.x 本身似乎没有提供, 也不提倡这种全局的无差别注入, 特别是咱们还行注入到 hook 中让它自动执行</p>
+<blockquote>
+<p>In Vue 2, mixins were the primary mechanism for creating reusable chunks of component logic. While mixins continue to be supported in Vue 3, Composition API is now the preferred approach for code reuse between components.</p>
+</blockquote>
+<p>从某些方面看, vue 3.x 并没有完全覆盖 vue 2.x 的所有能力. 比如 <a href="https://vuejs.org/guide/components/attrs.html#disabling-attribute-inheritance" target="_blank" rel="noopener">https://vuejs.org/guide/components/attrs.html#disabling-attribute-inheritance</a></p>
+<p>所有这个小工具使用 options 的写法来注入还是可以理解的</p>
+<h3 id="工具说明"><a href="#工具说明" class="headerlink" title="工具说明"></a>工具说明</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/b83a75ae9a588cf71ebc43605128fdab51579dba/renderTrack.png" alt=""></p>
+<p>输出信息包含 3 种组件分类:</p>
+<ul>
+<li><p>路由组件</p>
+<blockquote>
+<p>可以输出当时的路由信息</p>
+</blockquote>
+</li>
+<li><p>具名组件 (可以获取名字的,一般来说 组件库的都是有名字的)</p>
+<blockquote>
+<p>图中未包含,只是显示名字,只需要看哪些是否触发非常频繁就足够了</p>
+</blockquote>
+</li>
+<li><p>无名组件 (一般都是业务自己写的)</p>
+<blockquote>
+<p>会输出 操作类型 / key / value , 并可以展开 trace 信息协助定位到具体代码位置</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="工具实现"><a href="#工具实现" class="headerlink" title="工具实现"></a>工具实现</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  defineComponent,</span><br><span class="line">  <span class="keyword">type</span> ComponentPublicInstance,</span><br><span class="line">  <span class="keyword">type</span> DebuggerEvent,</span><br><span class="line">  <span class="keyword">type</span> Ref,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">"vue"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">type</span> &#123; RouteLocationNormalizedLoaded &#125; <span class="keyword">from</span> <span class="string">"vue-router"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置参数</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> RenderTrackOptions &#123;</span><br><span class="line">  exclusive: RenderTrackKind[];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件类型</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">enum</span> RenderTrackKind &#123;</span><br><span class="line">  Router, <span class="comment">// 路由组件</span></span><br><span class="line">  NamedComponent, <span class="comment">// 具名组件</span></span><br><span class="line">  UnnamedComponent, <span class="comment">// 无名组件</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> style = [</span><br><span class="line">  <span class="string">"background: greenyellow"</span>,</span><br><span class="line">  <span class="string">"color: gray"</span>,</span><br><span class="line">  <span class="string">"padding: 3px 5px"</span>,</span><br><span class="line">  <span class="string">"border-radius:10px"</span>,</span><br><span class="line">].join(<span class="string">";"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pageStyle = [</span><br><span class="line">  <span class="string">"background: gold"</span>,</span><br><span class="line">  <span class="string">"color: gray"</span>,</span><br><span class="line">  <span class="string">"padding: 3px 5px"</span>,</span><br><span class="line">  <span class="string">"border-radius:10px"</span>,</span><br><span class="line">].join(<span class="string">";"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> routerStyle = [</span><br><span class="line">  <span class="string">"background: #ef94ff"</span>,</span><br><span class="line">  <span class="string">"color: gray"</span>,</span><br><span class="line">  <span class="string">"padding: 3px 5px"</span>,</span><br><span class="line">  <span class="string">"border-radius:10px"</span>,</span><br><span class="line">].join(<span class="string">";"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (</span><br><span class="line">  options: RenderTrackOptions = &#123;</span><br><span class="line">    exclusive: [],</span><br><span class="line">  &#125;</span><br><span class="line">) =&gt;</span><br><span class="line">  defineComponent(&#123;</span><br><span class="line">    renderTriggered(e: DebuggerEvent) &#123;</span><br><span class="line">      <span class="keyword">if</span> (</span><br><span class="line">        options.exclusive.length ==</span><br><span class="line">        [</span><br><span class="line">          RenderTrackKind.NamedComponent,</span><br><span class="line">          RenderTrackKind.Router,</span><br><span class="line">          RenderTrackKind.UnnamedComponent,</span><br><span class="line">        ].length</span><br><span class="line">      ) &#123;</span><br><span class="line">        <span class="comment">// 如果所有类型都被排除, 则无需执行</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      [runUnnamedComponent, runRoute, runNamedComponent].forEach(<span class="function">(<span class="params">fn</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (fn(options, <span class="keyword">this</span>, e)) &#123;</span><br><span class="line">          <span class="comment">// 有一个匹配的就中断</span></span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据 trace 路径获取到文件名</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; [filePath]</span></span><br><span class="line"><span class="comment"> * @returns &#123;string&#125; 文件名字</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extractFileName</span>(<span class="params">filePath?: <span class="built_in">string</span></span>): <span class="title">string</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> p = filePath || <span class="string">""</span>;</span><br><span class="line">  <span class="keyword">const</span> arr = p.split(<span class="string">"/"</span>);</span><br><span class="line">  <span class="keyword">return</span> arr[arr.length - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runRoute</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  options: RenderTrackOptions,</span></span></span><br><span class="line"><span class="function"><span class="params">  currentComponent: ComponentPublicInstance,</span></span></span><br><span class="line"><span class="function"><span class="params">  e: DebuggerEvent</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): <span class="title">boolean</span> | <span class="title">undefined</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 获取组件名字</span></span><br><span class="line">  <span class="keyword">let</span> name =</span><br><span class="line">    currentComponent.$options.name || currentComponent.$options._componentTag;</span><br><span class="line">  <span class="comment">// 判断是否是路由, 或者用 (e.target as Ref&lt;RouteLocationNormalizedLoaded&gt;)?.value?.fullPath 来判断</span></span><br><span class="line">  <span class="keyword">const</span> isRouter = name == <span class="string">"RouterView"</span>;</span><br><span class="line">  <span class="keyword">const</span> hasPermission = !options.exclusive.includes(RenderTrackKind.Router);</span><br><span class="line">  <span class="keyword">if</span> (isRouter &amp;&amp; hasPermission) &#123;</span><br><span class="line">    <span class="comment">// 输出路由组件信息</span></span><br><span class="line">    <span class="keyword">const</span> route = (e.target <span class="keyword">as</span> Ref&lt;RouteLocationNormalizedLoaded&gt;).value;</span><br><span class="line">    name = <span class="string">`Router: <span class="subst">$&#123;route.fullPath || route.path&#125;</span>`</span>;</span><br><span class="line">    <span class="built_in">console</span>.groupCollapsed(</span><br><span class="line">      <span class="string">`%c <span class="subst">$&#123;<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1f6b4</span>)&#125;</span> <span class="subst">$&#123;name&#125;</span> `</span>,</span><br><span class="line">      routerStyle</span><br><span class="line">    );</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1f308</span>)&#125;</span> Route`</span>, route);</span><br><span class="line">    <span class="built_in">console</span>.groupEnd();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runNamedComponent</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  options: RenderTrackOptions,</span></span></span><br><span class="line"><span class="function"><span class="params">  currentComponent: ComponentPublicInstance,</span></span></span><br><span class="line"><span class="function"><span class="params">  _: DebuggerEvent</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): <span class="title">boolean</span> | <span class="title">undefined</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 获取组件名字</span></span><br><span class="line">  <span class="keyword">const</span> name =</span><br><span class="line">    currentComponent.$options.name || currentComponent.$options._componentTag;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> hasPermission = !options.exclusive.includes(</span><br><span class="line">    RenderTrackKind.NamedComponent</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (name &amp;&amp; hasPermission) &#123;</span><br><span class="line">    <span class="comment">// 输出具名组件信息</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`%c <span class="subst">$&#123;<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1f6b4</span>)&#125;</span> <span class="subst">$&#123;name&#125;</span> `</span>, style);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runUnnamedComponent</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  options: RenderTrackOptions,</span></span></span><br><span class="line"><span class="function"><span class="params">  currentComponent: ComponentPublicInstance,</span></span></span><br><span class="line"><span class="function"><span class="params">  e: DebuggerEvent</span></span></span><br><span class="line"><span class="function"><span class="params"></span>): <span class="title">boolean</span> | <span class="title">undefined</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 获取组件名字</span></span><br><span class="line">  <span class="keyword">const</span> name =</span><br><span class="line">    currentComponent.$options.name || currentComponent.$options._componentTag;</span><br><span class="line">  <span class="keyword">const</span> hasPermission = !options.exclusive.includes(</span><br><span class="line">    RenderTrackKind.UnnamedComponent</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!name &amp;&amp; hasPermission) &#123;</span><br><span class="line">    <span class="comment">// 输出无名组件信息</span></span><br><span class="line">    <span class="built_in">console</span>.groupCollapsed(</span><br><span class="line">      <span class="string">`%c <span class="subst">$&#123;<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1f6b4</span>)&#125;</span> <span class="subst">$&#123;extractFileName(</span></span></span><br><span class="line"><span class="string"><span class="subst">        currentComponent.$options.__file</span></span></span><br><span class="line"><span class="string"><span class="subst">      )&#125;</span>`</span>,</span><br><span class="line">      pageStyle</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(</span><br><span class="line">      <span class="string">`<span class="subst">$&#123;<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1f91c</span>)&#125;</span> <span class="subst">$&#123;e.<span class="keyword">type</span>.toUpperCase()&#125;</span> [<span class="subst">$&#123;e.key&#125;</span>] `</span>,</span><br><span class="line">      e.newValue || (e.target <span class="keyword">as</span> Ref&lt;unknown&gt;).value</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.groupCollapsed(<span class="string">`<span class="subst">$&#123;<span class="built_in">String</span>.fromCodePoint(<span class="number">0x1f308</span>)&#125;</span> Trace`</span>);</span><br><span class="line">    <span class="built_in">console</span>.trace(<span class="string">""</span>);</span><br><span class="line">    <span class="built_in">console</span>.groupEnd();</span><br><span class="line">    <span class="built_in">console</span>.groupEnd();</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注入使用"><a href="#注入使用" class="headerlink" title="注入使用"></a>注入使用</h3><figure class="highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 排除具名(大部分是组件库)组件的信息, 默认是都不排除</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">import</span>.meta.env.DEV) &#123;</span><br><span class="line">  app.mixin(</span><br><span class="line">    renderTrack(&#123;</span><br><span class="line">      exclusive: [RenderTrackKind.NamedComponent],</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 全部输出</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">import</span>.meta.env.DEV) &#123;</span><br><span class="line">  app.mixin(</span><br><span class="line">    renderTrack()</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag">#vue</a>
+          
+            <a href="/tags/mixin/" rel="tag">#mixin</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/03/31/vue-async-click/" rel="next" title="vue-async-click">
+                <i class="fa fa-chevron-left"></i> vue-async-click
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">282</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">101</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RenderTracker-的作用"><span class="nav-number">2.</span> <span class="nav-text">RenderTracker 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小问题"><span class="nav-number">3.</span> <span class="nav-text">小问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具说明"><span class="nav-number">4.</span> <span class="nav-text">工具说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具实现"><span class="nav-number">5.</span> <span class="nav-text">工具实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入使用"><span class="nav-number">6.</span> <span class="nav-text">注入使用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
