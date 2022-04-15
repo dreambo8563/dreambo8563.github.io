@@ -93,7 +93,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/dreambo8563/static-assets/b83a75ae9a588cf71ebc43605128fdab51579dba/renderTrack.png">
 <meta property="article:published_time" content="2022-04-15T08:04:13.000Z">
-<meta property="article:modified_time" content="2022-04-15T09:36:06.644Z">
+<meta property="article:modified_time" content="2022-04-15T09:47:30.253Z">
 <meta property="article:author" content="Vincent Guo">
 <meta property="article:tag" content="vue">
 <meta property="article:tag" content="mixin">
@@ -319,12 +319,12 @@
 <p><a href="https://vuejs.org/api/composition-api-lifecycle.html#onrendertriggered" target="_blank" rel="noopener">https://vuejs.org/api/composition-api-lifecycle.html#onrendertriggered</a></p>
 <p>综合文档看, 这个 hook 比较适合查看是否某些组件过多的频繁渲染, 并给出一些简单的信息协助定位问题</p>
 <h3 id="小问题"><a href="#小问题" class="headerlink" title="小问题"></a>小问题</h3><p>因为这个工具的注入是针对所有的组件为目标的</p>
-<p><strong>但是:</strong> vue 3.x 本身似乎没有提供, 也不提倡这种全局的无差别注入, 特别是咱们还行注入到 hook 中让它自动执行</p>
+<p><strong>但是:</strong> vue 3.x 本身似乎没有提供, 也不提倡这种全局的无差别注入, 特别是咱们还想注入到 hook 中让它自动执行</p>
 <blockquote>
 <p>In Vue 2, mixins were the primary mechanism for creating reusable chunks of component logic. While mixins continue to be supported in Vue 3, Composition API is now the preferred approach for code reuse between components.</p>
 </blockquote>
 <p>从某些方面看, vue 3.x 并没有完全覆盖 vue 2.x 的所有能力. 比如 <a href="https://vuejs.org/guide/components/attrs.html#disabling-attribute-inheritance" target="_blank" rel="noopener">https://vuejs.org/guide/components/attrs.html#disabling-attribute-inheritance</a></p>
-<p>所有这个小工具使用 options 的写法来注入还是可以理解的</p>
+<p>所以这个小工具使用 options 的写法来注入还是可以理解的</p>
 <h3 id="工具说明"><a href="#工具说明" class="headerlink" title="工具说明"></a>工具说明</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/b83a75ae9a588cf71ebc43605128fdab51579dba/renderTrack.png" alt=""></p>
 <p>输出信息包含 3 种组件分类:</p>
 <ul>
