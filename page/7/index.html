@@ -243,6 +243,141 @@
             
               
                 
+                <a class="post-title-link" href="/2018/06/21/axios%E5%92%8Cios9%E9%82%A3%E7%82%B9%E7%A0%B4%E4%BA%8B/" itemprop="url">
+                  axios和ios9那点破事
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-06-21T16:03:00+08:00" content="2018-06-21">
+              2018-06-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/axios/" itemprop="url" rel="index">
+                    <span itemprop="name">axios</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/axios/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          问题描述ios9 上用 axios 无法发出请求,server端没有收到
+尝试promise的polyfill没有作用不想根据ios版本更换请求lib
+解决问题在于我们因为jwt,对请求做了劫持,添加了一个header
+http.interceptors.request.use(  config =
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/06/21/axios%E5%92%8Cios9%E9%82%A3%E7%82%B9%E7%A0%B4%E4%BA%8B/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/06/15/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/" itemprop="url">
                   微信小程序
                 </a>
@@ -1319,126 +1454,6 @@ curl &#39;localhost:9200&#x2F;books&#x2F;&#39; -X PUT
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/23/golang-fileExists/" itemprop="url">
-                  golang-fileExists
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2018-03-23T21:46:53+08:00" content="2018-03-23">
-              2018-03-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Golang/" itemprop="url" rel="index">
-                    <span itemprop="name">Golang</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          检查文件是否存在demo 代码package mainimport (	"fmt"	"os")func fileExists(path string) bool &#123;	fileInfo, err := os.Stat(path)	fmt.Println(fileInfo.IsDir(), f
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/03/23/golang-fileExists/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1484,7 +1499,7 @@ curl &#39;localhost:9200&#x2F;books&#x2F;&#39; -X PUT
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">282</span>
+              <span class="site-state-item-count">283</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -1501,7 +1516,7 @@ curl &#39;localhost:9200&#x2F;books&#x2F;&#39; -X PUT
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">101</span>
+                <span class="site-state-item-count">102</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

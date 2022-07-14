@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TypeScript,parser," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="AndOrPaserhttps:&#x2F;&#x2F;github.com&#x2F;dreambo8563&#x2F;AndOrPaser 解决问题用户需要手写表达式 类似 ((规则3 and 规则1) AND (规则2 or 规则4) or (规则5 and  规则6)), 接口会根据表达式配置的条件提取数据  每一个规则都是在页面里配置的数据维度例如  const data:IContext&#x3D;&amp;#123;  &quot;规则3&quot;:&amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AndOrParser">
+<meta property="og:url" content="https://dreambo8563.github.io/2022/07/14/AndOrParser/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="AndOrPaserhttps:&#x2F;&#x2F;github.com&#x2F;dreambo8563&#x2F;AndOrPaser 解决问题用户需要手写表达式 类似 ((规则3 and 规则1) AND (规则2 or 规则4) or (规则5 and  规则6)), 接口会根据表达式配置的条件提取数据  每一个规则都是在页面里配置的数据维度例如  const data:IContext&#x3D;&amp;#123;  &quot;规则3&quot;:&amp;#12">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-14T08:44:00.000Z">
+<meta property="article:modified_time" content="2022-07-14T08:51:08.734Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="parser">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> AndOrParser | Vincent's Blog </title>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AndOrParser
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2022-07-14T16:44:00+08:00" content="2022-07-14">
+              2022-07-14
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/TypeScript/" itemprop="url" rel="index">
+                    <span itemprop="name">TypeScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="AndOrPaser"><a href="#AndOrPaser" class="headerlink" title="AndOrPaser"></a>AndOrPaser</h1><p><a href="https://github.com/dreambo8563/AndOrPaser" target="_blank" rel="noopener">https://github.com/dreambo8563/AndOrPaser</a></p>
+<h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>用户需要手写表达式 类似 <code>((规则3 and 规则1) AND (规则2 or 规则4) or (规则5 and  规则6))</code>, 接口会根据表达式配置的条件提取数据</p>
+<ul>
+<li>每一个规则都是在页面里配置的数据维度例如</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> data:IContext=&#123;</span><br><span class="line">  <span class="string">"规则3"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"level"</span>,</span><br><span class="line">    operator:<span class="string">"in"</span>,</span><br><span class="line">    value:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则1"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"workcode"</span>,</span><br><span class="line">    operator:<span class="string">"="</span>,</span><br><span class="line">    value:<span class="string">"076533"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则2"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"department_ids"</span>,</span><br><span class="line">    operator:<span class="string">"!="</span>,</span><br><span class="line">    value:<span class="string">"D011111"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则4"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"department_ids"</span>,</span><br><span class="line">    operator:<span class="string">"="</span>,</span><br><span class="line">    value:<span class="string">"D22222"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则5"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"age"</span>,</span><br><span class="line">    operator:<span class="string">"&gt;="</span>,</span><br><span class="line">    value:<span class="number">18</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则6"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"isManager"</span>,</span><br><span class="line">    operator:<span class="string">"="</span>,</span><br><span class="line">    value:<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="parse-的流程"><a href="#parse-的流程" class="headerlink" title="parse 的流程"></a>parse 的流程</h4><ol>
+<li><p>将输入的 string  =&gt; 输入流, 提供了基本的 next(获取下一个字符), peek(当前字符), eof(是否结束),croak(报错) 方法</p>
+</li>
+<li><p>将输入流转化为 token 流, 也 就是<strong>词法分析</strong>. 把字符提取为独立的Token</p>
+</li>
+</ol>
+<ul>
+<li>kw 为关键词 -&gt; 这里支持 <strong>and</strong> 和 <strong>or</strong> 两个操作符 作为关键词</li>
+<li>var 为变量 -&gt; 这里规定用户只能输入 <em>规则+数字</em> 的格式, 类似 <em>规则1</em></li>
+<li>punc 为标点 -&gt; 这里只可以存在 () 作为标点</li>
+</ul>
+<ol start="3">
+<li><p>将token 流转化为 ast 进行解析</p>
+</li>
+<li><p>将 ast和配置的维度数据 解释 为 sql 语句的条件部分</p>
+</li>
+</ol>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ast =parser(<span class="string">"((规则3 and 规则1) AND (规则2 or 规则4) or (规则5 and  规则6))"</span>)</span><br></pre></td></tr></table></figure>
+<p>AST 为:<br><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">  <span class="attr">"left"</span>: &#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">    <span class="attr">"left"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">      <span class="attr">"left"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则3"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"operator"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"and"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"right"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则1"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"operator"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"AND"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"right"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">      <span class="attr">"left"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则2"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"operator"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"or"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"right"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则4"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"operator"</span>: &#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">    <span class="attr">"value"</span>: <span class="string">"or"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"right"</span>: &#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">    <span class="attr">"left"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"规则5"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"operator"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"and"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"right"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"规则6"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>astString(ast)</strong> 会将 ast 解释为原表达式, 只不过会加上没有的(), <strong>and</strong> 和 <strong>or</strong> 是从左到右的优先级.</p>
+<blockquote>
+<p><strong>(</strong>((规则3 and 规则1) AND (规则2 or 规则4)<strong>)</strong> or (规则5 and 规则6))</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">evaluate(ast,data)</span><br></pre></td></tr></table></figure>
+<p><strong>evaluate</strong> 会真正解释为 sql 条件</p>
+<blockquote>
+<p>(((level in (1,2,3) and workcode = “076533”) AND (department_ids != “D011111” or department_ids = “D22222”)) or (age &gt;= 18 and isManager = 1))</p>
+</blockquote>
+<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>用的 ts 编写, 本地需要安装 typescript</p>
+<p><code>tsc main.ts &amp;&amp; node main.js</code></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TypeScript/" rel="tag">#TypeScript</a>
+          
+            <a href="/tags/parser/" rel="tag">#parser</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/15/Vue-Mixin-RenderTrack/" rel="next" title="Vue-Mixin-RenderTrack">
+                <i class="fa fa-chevron-left"></i> Vue-Mixin-RenderTrack
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">283</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">43</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AndOrPaser"><span class="nav-number">1.</span> <span class="nav-text">AndOrPaser</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决问题"><span class="nav-number">1.0.1.</span> <span class="nav-text">解决问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#parse-的流程"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">parse 的流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">1.0.2.</span> <span class="nav-text">举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地运行"><span class="nav-number">1.0.3.</span> <span class="nav-text">本地运行</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

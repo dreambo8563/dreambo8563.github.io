@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2022-04-18T06:54:50.391Z</updated>
+  <updated>2022-07-14T08:51:08.734Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AndOrParser</title>
+    <link href="https://dreambo8563.github.io/2022/07/14/AndOrParser/"/>
+    <id>https://dreambo8563.github.io/2022/07/14/AndOrParser/</id>
+    <published>2022-07-14T08:44:00.000Z</published>
+    <updated>2022-07-14T08:51:08.734Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="AndOrPaser"><a href="#AndOrPaser" class="headerlink" title="AndOrPaser"></a>AndOrPaser</h1><p><a href="https://github.com/dreambo8563/AndOrPaser" target="_blank" rel="noopener">https://github.com/dreambo8563/AndOrPaser</a></p><h3 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h3><p>用户需要手写表达式 类似 <code>((规则3 and 规则1) AND (规则2 or 规则4) or (规则5 and  规则6))</code>, 接口会根据表达式配置的条件提取数据</p><ul><li>每一个规则都是在页面里配置的数据维度例如</li></ul><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> data:IContext=&#123;</span><br><span class="line">  <span class="string">"规则3"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"level"</span>,</span><br><span class="line">    operator:<span class="string">"in"</span>,</span><br><span class="line">    value:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则1"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"workcode"</span>,</span><br><span class="line">    operator:<span class="string">"="</span>,</span><br><span class="line">    value:<span class="string">"076533"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则2"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"department_ids"</span>,</span><br><span class="line">    operator:<span class="string">"!="</span>,</span><br><span class="line">    value:<span class="string">"D011111"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则4"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"department_ids"</span>,</span><br><span class="line">    operator:<span class="string">"="</span>,</span><br><span class="line">    value:<span class="string">"D22222"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则5"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"age"</span>,</span><br><span class="line">    operator:<span class="string">"&gt;="</span>,</span><br><span class="line">    value:<span class="number">18</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"规则6"</span>:&#123;</span><br><span class="line">    prop:<span class="string">"isManager"</span>,</span><br><span class="line">    operator:<span class="string">"="</span>,</span><br><span class="line">    value:<span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="parse-的流程"><a href="#parse-的流程" class="headerlink" title="parse 的流程"></a>parse 的流程</h4><ol><li><p>将输入的 string  =&gt; 输入流, 提供了基本的 next(获取下一个字符), peek(当前字符), eof(是否结束),croak(报错) 方法</p></li><li><p>将输入流转化为 token 流, 也 就是<strong>词法分析</strong>. 把字符提取为独立的Token</p></li></ol><ul><li>kw 为关键词 -&gt; 这里支持 <strong>and</strong> 和 <strong>or</strong> 两个操作符 作为关键词</li><li>var 为变量 -&gt; 这里规定用户只能输入 <em>规则+数字</em> 的格式, 类似 <em>规则1</em></li><li>punc 为标点 -&gt; 这里只可以存在 () 作为标点</li></ul><ol start="3"><li><p>将token 流转化为 ast 进行解析</p></li><li><p>将 ast和配置的维度数据 解释 为 sql 语句的条件部分</p></li></ol><h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ast =parser(<span class="string">"((规则3 and 规则1) AND (规则2 or 规则4) or (规则5 and  规则6))"</span>)</span><br></pre></td></tr></table></figure><p>AST 为:<br><figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">  <span class="attr">"left"</span>: &#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">    <span class="attr">"left"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">      <span class="attr">"left"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则3"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"operator"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"and"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"right"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则1"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"operator"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"AND"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"right"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">      <span class="attr">"left"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则2"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"operator"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"or"</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">"right"</span>: &#123;</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">        <span class="attr">"value"</span>: <span class="string">"规则4"</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"operator"</span>: &#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">    <span class="attr">"value"</span>: <span class="string">"or"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"right"</span>: &#123;</span><br><span class="line">    <span class="attr">"type"</span>: <span class="string">"expression"</span>,</span><br><span class="line">    <span class="attr">"left"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"规则5"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"operator"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"kw"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"and"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"right"</span>: &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"var"</span>,</span><br><span class="line">      <span class="attr">"value"</span>: <span class="string">"规则6"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><strong>astString(ast)</strong> 会将 ast 解释为原表达式, 只不过会加上没有的(), <strong>and</strong> 和 <strong>or</strong> 是从左到右的优先级.</p><blockquote><p><strong>(</strong>((规则3 and 规则1) AND (规则2 or 规则4)<strong>)</strong> or (规则5 and 规则6))</p></blockquote><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">evaluate(ast,data)</span><br></pre></td></tr></table></figure><p><strong>evaluate</strong> 会真正解释为 sql 条件</p><blockquote><p>(((level in (1,2,3) and workcode = “076533”) AND (department_ids != “D011111” or department_ids = “D22222”)) or (age &gt;= 18 and isManager = 1))</p></blockquote><h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>用的 ts 编写, 本地需要安装 typescript</p><p><code>tsc main.ts &amp;&amp; node main.js</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;AndOrPaser&quot;&gt;&lt;a href=&quot;#AndOrPaser&quot; class=&quot;headerlink&quot; title=&quot;AndOrPaser&quot;&gt;&lt;/a&gt;AndOrPaser&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/dreambo856
+      
+    
+    </summary>
+    
+      <category term="TypeScript" scheme="https://dreambo8563.github.io/categories/TypeScript/"/>
+    
+    
+      <category term="TypeScript" scheme="https://dreambo8563.github.io/tags/TypeScript/"/>
+    
+      <category term="parser" scheme="https://dreambo8563.github.io/tags/parser/"/>
+    
+  </entry>
   
   <entry>
     <title>Vue-Mixin-RenderTrack</title>
@@ -513,32 +540,6 @@
       
       
         &lt;p align=&quot;center&quot;&gt;&lt;br&gt;    &lt;a href=&quot;https://www.iviewui.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;br&gt;        &lt;img width=&quot;200&quot; src=&quot;https://user-go
-      
-    
-    </summary>
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/categories/vue/"/>
-    
-    
-      <category term="vue" scheme="https://dreambo8563.github.io/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue - Load chunk xxxx failed</title>
-    <link href="https://dreambo8563.github.io/2019/05/23/Vue-Load-chunk-xxxx-failed/"/>
-    <id>https://dreambo8563.github.io/2019/05/23/Vue-Load-chunk-xxxx-failed/</id>
-    <published>2019-05-23T07:26:29.000Z</published>
-    <updated>2019-05-23T07:34:22.437Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h3><p>code split 是 SPA 中常用的优化方式, 一般基于路由分割. 每个路由会拆分为不同的独立 js.</p><p>但不管是 react /vue 有时都会遇到切换路由的时候发生 <em>Load chunk xxxx failed</em> 的错误. 几率不大, 但是目前我还未找到一个大家公认的原因.</p><p>所有我们需要 catch 这个错误.</p><h3 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">router.onError(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> pattern = <span class="regexp">/Loading chunk ([a-z]|[0-9]|-)+ failed/g</span>;</span><br><span class="line">  <span class="keyword">const</span> isChunkLoadFailed = error.message.match(pattern);</span><br><span class="line">  <span class="comment">// const targetPath = router.fullPath;</span></span><br><span class="line">  <span class="keyword">if</span> (isChunkLoadFailed) &#123;</span><br><span class="line">    Vue.prototype.$alert(<span class="string">'网页资源加载失败,请刷新页面'</span>, <span class="string">'提示'</span>, &#123;</span><br><span class="line">      confirmButtonText: <span class="string">'确定'</span>,</span><br><span class="line">      callback: <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        location.replace(location.href);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>catch 到给用户一个提示, 让他刷新页面</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;错误描述&quot;&gt;&lt;a href=&quot;#错误描述&quot; class=&quot;headerlink&quot; title=&quot;错误描述&quot;&gt;&lt;/a&gt;错误描述&lt;/h3&gt;&lt;p&gt;code split 是 SPA 中常用的优化方式, 一般基于路由分割. 每个路由会拆分为不同的独立 js.&lt;/p&gt;
-&lt;p&gt;
       
     
     </summary>
