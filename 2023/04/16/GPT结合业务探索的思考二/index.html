@@ -1,0 +1,714 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="AI," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="上一篇主要是应用了 数据抽取 这个 openAI 的能力 这篇将主要记录 内容搜索 的能力的探索过程 参考文章https:&#x2F;&#x2F;beebom.com&#x2F;how-train-ai-chatbot-custom-knowledge-base-chatgpt-api&#x2F; langchain我们将借用这个探索的机会学习额外的东西  python langchain  基本流程这个流程很多文章都说的很清楚, 这里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT结合业务探索的思考二">
+<meta property="og:url" content="https://dreambo8563.github.io/2023/04/16/GPT%E7%BB%93%E5%90%88%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E7%9A%84%E6%80%9D%E8%80%83%E4%BA%8C/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="上一篇主要是应用了 数据抽取 这个 openAI 的能力 这篇将主要记录 内容搜索 的能力的探索过程 参考文章https:&#x2F;&#x2F;beebom.com&#x2F;how-train-ai-chatbot-custom-knowledge-base-chatgpt-api&#x2F; langchain我们将借用这个探索的机会学习额外的东西  python langchain  基本流程这个流程很多文章都说的很清楚, 这里">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-16T10:46:16.000Z">
+<meta property="article:modified_time" content="2023-04-16T11:14:55.653Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> GPT结合业务探索的思考二 | Vincent's Blog </title>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GPT结合业务探索的思考二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2023-04-16T18:46:16+08:00" content="2023-04-16">
+              2023-04-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上一篇主要是应用了 <strong>数据抽取</strong> 这个 openAI 的能力</p>
+<p>这篇将主要记录 <strong>内容搜索</strong> 的能力的探索过程</p>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="https://beebom.com/how-train-ai-chatbot-custom-knowledge-base-chatgpt-api/" target="_blank" rel="noopener">https://beebom.com/how-train-ai-chatbot-custom-knowledge-base-chatgpt-api/</a></p>
+<h4 id="langchain"><a href="#langchain" class="headerlink" title="langchain"></a>langchain</h4><p>我们将借用这个探索的机会学习额外的东西</p>
+<ul>
+<li>python</li>
+<li>langchain</li>
+</ul>
+<h4 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h4><p>这个流程很多文章都说的很清楚, 这里没很么太多疑义</p>
+<ol>
+<li>把自有知识库分拆成多个 chunk, 每个 chunk 可以向量化存到数据库</li>
+<li>将输入(带 prompt) 也向量化</li>
+<li>用输入从数据库中搜索相近的多个结果</li>
+<li>将结果和原始问题 拼接, 结果作为参考资料, 让 gpt 回答</li>
+</ol>
+<h4 id="创建基础的能力"><a href="#创建基础的能力" class="headerlink" title="创建基础的能力"></a>创建基础的能力</h4><ol>
+<li>获取用户的输入</li>
+<li>加入 prompt 并想 openAI 获取结果</li>
+</ol>
+<p>这是基本流程的建立, 直接看 langchain 官网即可<br><a href="https://python.langchain.com/en/latest/" target="_blank" rel="noopener">https://python.langchain.com/en/latest/</a></p>
+<p>开始我想试下 js 版本,但遇到了点困难, 和 openAI 打不通, 感觉是源码里打的对应的 api 地址不对造成的. 也可能我哪里没配置对. 后来索性就想顺便学点 python 也好.<br>毕竟在 AI 这个生态里, python 可以说是让不过去的门槛.</p>
+<h4 id="读取自有的知识库-并存储到向量数据库"><a href="#读取自有的知识库-并存储到向量数据库" class="headerlink" title="读取自有的知识库,并存储到向量数据库"></a>读取自有的知识库,并存储到向量数据库</h4><p><a href="https://python.langchain.com/en/latest/modules/indexes.html" target="_blank" rel="noopener">https://python.langchain.com/en/latest/modules/indexes.html</a></p>
+<p>这里的两个步骤是连续的, 因为都和存储的组件相关</p>
+<ul>
+<li>读取文件存到数据库</li>
+<li>根据输入从数据库里搜索到相似的内容</li>
+</ul>
+<h5 id="选择安装存储组件"><a href="#选择安装存储组件" class="headerlink" title="选择安装存储组件"></a>选择安装存储组件</h5><p>这里我花费的时间有点多(大概是半天).</p>
+<ol>
+<li>Chroma 看到时直接放内存的,我估计会比较简单搭建,让程序跑起来, 最后发现我的 MBP 的 cpu 不合适, 安装不上而放弃</li>
+<li>先看到有 redis 支持. 就拿现有的测试环境数据库尝试,发现不支持. 一直失败, 开始以为是 redis 版本不够. 后续发现应该是需要额外模块才行.<br><a href="https://redis.io/docs/stack/search/" target="_blank" rel="noopener">https://redis.io/docs/stack/search/</a> - 应该是要安装这个模块才行,还未尝试</li>
+<li>又看到 ES 可以支持. 也是想直接用项目上现有的测试 ES.发现应该是版本不够. 我们是 7.9. 从提示看起码需要 8. 放弃</li>
+<li>最后一个还算比较熟悉的就是 postgres 了</li>
+</ol>
+<p>很多时间都花在更新 homebrew 了. homebrew 直接安装 postgres@14 这个过程还好,缺啥装啥就行了. 当然 mac 自带的 python 是 2.x. 需要先装 3.x 和对应 pip<br>然后需要安装 向量化插件 <a href="https://python.langchain.com/en/latest/modules/indexes/vectorstores/examples/pgvector.html" target="_blank" rel="noopener">https://python.langchain.com/en/latest/modules/indexes/vectorstores/examples/pgvector.html</a><br>还要在 db 中执行插件命令 <code>CREATE EXTENSION vector</code></p>
+<p>基础设施基本有了, 才能把代码逻辑连上</p>
+<h5 id="下面解决导入的问题"><a href="#下面解决导入的问题" class="headerlink" title="下面解决导入的问题"></a>下面解决导入的问题</h5><p>这个比较顺利. 尝试了比较普遍的格式</p>
+<ul>
+<li>txt</li>
+<li>pdf</li>
+</ul>
+<p>这里没遇到明显的困难, 运行报错基本都是有些依赖包没安装</p>
+<p>中间有些 prompt 的细节最后看代码注释就明白了, 我也尝试看了下向量化的结果,真的看不懂,非常多的维度坐标来表示一段话的核心含义</p>
+<p>这些向量化数据库都具备搜索的 api,所以这步不用说了<br>导入执行成功后, 那段代码就需要注释掉, 否则每次执行都会导入一遍,数据库里有会重复信息</p>
+<p>可以通过如下 sql 查看导入的向量化数据</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.tables <span class="keyword">WHERE</span> table_schema = <span class="string">'public'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">from</span> langchain_pg_embedding</span><br></pre></td></tr></table></figure>
+<h5 id="最后看了开始的参考文章加了-gradio-这个-UI"><a href="#最后看了开始的参考文章加了-gradio-这个-UI" class="headerlink" title="最后看了开始的参考文章加了 gradio 这个 UI."></a>最后看了开始的参考文章加了 gradio 这个 UI.</h5><p>基本上我想探索的搜索能力都具备了</p>
+<p>代码很少</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"><span class="keyword">from</span> langchain.prompts.chat <span class="keyword">import</span> (</span><br><span class="line">    ChatPromptTemplate,</span><br><span class="line">    SystemMessagePromptTemplate,</span><br><span class="line">    HumanMessagePromptTemplate,</span><br><span class="line">)</span><br><span class="line"><span class="keyword">from</span> langchain <span class="keyword">import</span> LLMChain</span><br><span class="line"><span class="keyword">from</span> langchain.chat_models <span class="keyword">import</span> ChatOpenAI</span><br><span class="line"><span class="keyword">from</span> langchain.docstore.document <span class="keyword">import</span> Document</span><br><span class="line"><span class="keyword">from</span> langchain.vectorstores.pgvector <span class="keyword">import</span> PGVector</span><br><span class="line"><span class="keyword">from</span> langchain.text_splitter <span class="keyword">import</span> CharacterTextSplitter</span><br><span class="line"><span class="keyword">from</span> langchain.embeddings.openai <span class="keyword">import</span> OpenAIEmbeddings</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List, Tuple</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv</span><br><span class="line">load_dotenv()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">chatbot</span><span class="params">(input_text)</span>:</span></span><br><span class="line">    <span class="comment"># load txt</span></span><br><span class="line">    <span class="comment"># from langchain.document_loaders import TextLoader</span></span><br><span class="line">    <span class="comment"># loader = TextLoader('./zhiyin.txt')</span></span><br><span class="line">    <span class="comment"># documents = loader.load()</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># load pdf</span></span><br><span class="line">    <span class="comment"># from langchain.document_loaders import PDFMinerLoader</span></span><br><span class="line">    <span class="comment"># loader = PDFMinerLoader("./1.pdf")</span></span><br><span class="line">    <span class="comment"># documents = loader.load()</span></span><br><span class="line"></span><br><span class="line">    documents = []</span><br><span class="line"></span><br><span class="line">    text_splitter = CharacterTextSplitter(</span><br><span class="line">        chunk_size=<span class="number">500</span>, separator=<span class="string">"\n"</span>, chunk_overlap=<span class="number">0</span>)</span><br><span class="line">    docs = text_splitter.split_documents(documents)</span><br><span class="line"></span><br><span class="line">    embeddings = OpenAIEmbeddings()  <span class="comment"># type: ignore</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PGVector needs the connection string to the database.</span></span><br><span class="line"><span class="comment"># We will load it from the environment variables.</span></span><br><span class="line"></span><br><span class="line">    CONNECTION_STRING = PGVector.connection_string_from_db_params(</span><br><span class="line">        driver=os.environ.get(<span class="string">"PGVECTOR_DRIVER"</span>, <span class="string">"psycopg2"</span>),</span><br><span class="line">        host=os.environ.get(<span class="string">"PGVECTOR_HOST"</span>, <span class="string">"localhost"</span>),</span><br><span class="line">        port=int(os.environ.get(<span class="string">"PGVECTOR_PORT"</span>, <span class="string">"5432"</span>)),</span><br><span class="line">        database=os.environ.get(<span class="string">"PGVECTOR_DATABASE"</span>, <span class="string">"postgres"</span>),</span><br><span class="line">        user=os.environ.get(<span class="string">"PGVECTOR_USER"</span>, <span class="string">"vincent"</span>),</span><br><span class="line">        password=os.environ.get(<span class="string">"PGVECTOR_PASSWORD"</span>, <span class="string">""</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># The PGVector Module will try to create a table with the name of the collection. So, make sure that the collection name is unique and the user has the</span></span><br><span class="line"><span class="comment"># permission to create a table.</span></span><br><span class="line"><span class="comment"># load doc into gp and create embedding</span></span><br><span class="line">    db = PGVector.from_documents(</span><br><span class="line">        embedding=embeddings,</span><br><span class="line">        documents=docs,</span><br><span class="line">        collection_name=<span class="string">"kaoqin"</span>,</span><br><span class="line">        connection_string=CONNECTION_STRING,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    query = input_text</span><br><span class="line">    docs_with_score: List[Tuple[Document, float]] = db.similarity_search_with_score(query, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    dict = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    resultStr: str = <span class="string">""</span></span><br><span class="line">    print(<span class="string">"*"</span>*<span class="number">80</span>)</span><br><span class="line">    <span class="keyword">for</span> doc, score <span class="keyword">in</span> docs_with_score:</span><br><span class="line">        <span class="keyword">if</span> dict.get(score) == <span class="literal">None</span>:</span><br><span class="line">            <span class="comment"># remove the same score content</span></span><br><span class="line">            dict[score] = doc.page_content</span><br><span class="line">            print(<span class="string">"score"</span>,score)</span><br><span class="line">            print(<span class="string">"page_content"</span>,doc.page_content)</span><br><span class="line">            resultStr += doc.page_content</span><br><span class="line">            <span class="comment"># compose all text</span></span><br><span class="line">            print(<span class="string">"*"</span>*<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    system_message_prompt = SystemMessagePromptTemplate.from_template(</span><br><span class="line">        <span class="string">"你将作为一个问答知识库,根据提出的问题给出回答和相关参考信息.回答字数不超过 1000 字符"</span>)</span><br><span class="line">    human_template = <span class="string">"""</span></span><br><span class="line"><span class="string">    参考信息:&#123;reference&#125;</span></span><br><span class="line"><span class="string">    问题是:&#123;question&#125;</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    human_message_prompt = HumanMessagePromptTemplate.from_template(</span><br><span class="line">        human_template)</span><br><span class="line"></span><br><span class="line">    chat_prompt = ChatPromptTemplate.from_messages(</span><br><span class="line">        [system_message_prompt, human_message_prompt])</span><br><span class="line"></span><br><span class="line">    chat = ChatOpenAI(</span><br><span class="line">        temperature=<span class="number">0.5</span>, model_name=<span class="string">"gpt-3.5-turbo"</span>)  <span class="comment"># type: ignore</span></span><br><span class="line">    chain = LLMChain(llm=chat, prompt=chat_prompt)</span><br><span class="line">    <span class="comment"># compose question and reference and send to gpt</span></span><br><span class="line">    print(<span class="string">"question:"</span>, query)</span><br><span class="line">    <span class="comment"># print("chatGPT:", chain.run(reference=resultStr[0:2000], question=query))</span></span><br><span class="line"></span><br><span class="line">    answer = chain.run(reference=resultStr[<span class="number">0</span>:<span class="number">2000</span>], question=query)</span><br><span class="line">    print(<span class="string">"answer:"</span> ,answer)</span><br><span class="line">    <span class="keyword">return</span>  answer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iface = gr.Interface(fn=chatbot,</span><br><span class="line">                     inputs=gr.components.Textbox(</span><br><span class="line">                         lines=<span class="number">14</span>, label=<span class="string">"Enter your text"</span>),</span><br><span class="line">                     outputs=gr.components.Textbox(</span><br><span class="line">                         lines=<span class="number">14</span>),</span><br><span class="line">                     title=<span class="string">"Custom-trained AI Chatbot"</span>)</span><br><span class="line"></span><br><span class="line">iface.launch(share=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag">#AI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/04/16/GPT%E7%BB%93%E5%90%88%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%80/" rel="next" title="GPT结合业务探索的思考一">
+                <i class="fa fa-chevron-left"></i> GPT结合业务探索的思考一
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">285</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文章"><span class="nav-number">1.</span> <span class="nav-text">参考文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#langchain"><span class="nav-number">2.</span> <span class="nav-text">langchain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本流程"><span class="nav-number">3.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建基础的能力"><span class="nav-number">4.</span> <span class="nav-text">创建基础的能力</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取自有的知识库-并存储到向量数据库"><span class="nav-number">5.</span> <span class="nav-text">读取自有的知识库,并存储到向量数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#选择安装存储组件"><span class="nav-number">5.1.</span> <span class="nav-text">选择安装存储组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下面解决导入的问题"><span class="nav-number">5.2.</span> <span class="nav-text">下面解决导入的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最后看了开始的参考文章加了-gradio-这个-UI"><span class="nav-number">5.3.</span> <span class="nav-text">最后看了开始的参考文章加了 gradio 这个 UI.</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
