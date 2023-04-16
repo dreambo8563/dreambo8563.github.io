@@ -92,7 +92,7 @@
 <meta property="og:description" content="背景最近 Chatgpt 的推迟和相关应用业务的火爆, 需要让我们也必须跟上脚步, 不管是开发上还是业务上都必须对当期 AI 的能力有所了解, 并且开始探索也应用. 探索应用场景内部成立的 gpt 的实验项目, 恰巧当时我也开始思考了一些, 所以给出了应对 “请假” 这个内部系统场景的方案. 用户的自然语言 -&gt; 通过数据抽取 -&gt; 程序语言(可执行代码&#x2F;数据结构) 因为要和现有业务规">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-04-16T10:21:26.000Z">
-<meta property="article:modified_time" content="2023-04-16T10:41:04.665Z">
+<meta property="article:modified_time" content="2023-04-16T10:42:48.412Z">
 <meta property="article:author" content="Vincent Guo">
 <meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
@@ -316,7 +316,7 @@
 <li>更接近我们的目标, Jarvis</li>
 </ul>
 <h4 id="初次获取数据场景"><a href="#初次获取数据场景" class="headerlink" title="初次获取数据场景"></a>初次获取数据场景</h4><p>将 “我下周一请半天假” 转为 JSON 结构返给业务程序</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"事假"</span>,</span><br><span class="line">  <span class="attr">"startDate"</span>: <span class="string">"yyy-mm-dd"</span>,</span><br><span class="line">  <span class="attr">"startTime"</span>: <span class="string">"上午"</span>,</span><br><span class="line">  <span class="attr">"原因"</span>: <span class="string">"有事要处理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"事假"</span>,</span><br><span class="line">  <span class="attr">"startDate"</span>: <span class="string">"yyy-mm-dd"</span>,</span><br><span class="line">  <span class="attr">"startTime"</span>: <span class="string">"上午"</span>,</span><br><span class="line">  <span class="attr">"days"</span>: <span class="number">0.5</span>,</span><br><span class="line">  <span class="attr">"reason"</span>: <span class="string">"有事要处理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>prompt</p>
 </blockquote>
