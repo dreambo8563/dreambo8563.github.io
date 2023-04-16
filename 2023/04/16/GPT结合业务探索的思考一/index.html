@@ -1,0 +1,700 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="AI," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="背景最近 Chatgpt 的推迟和相关应用业务的火爆, 需要让我们也必须跟上脚步, 不管是开发上还是业务上都必须对当期 AI 的能力有所了解, 并且开始探索也应用. 探索应用场景内部成立的 gpt 的实验项目, 恰巧当时我也开始思考了一些, 所以给出了应对 “请假” 这个内部系统场景的方案. 用户的自然语言 -&gt; 通过数据抽取 -&gt; 程序语言(可执行代码&#x2F;数据结构) 因为要和现有业务规">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT结合业务探索的思考一">
+<meta property="og:url" content="https://dreambo8563.github.io/2023/04/16/GPT%E7%BB%93%E5%90%88%E4%B8%9A%E5%8A%A1%E6%8E%A2%E7%B4%A2%E7%9A%84%E6%80%9D%E8%80%83%E4%B8%80/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="背景最近 Chatgpt 的推迟和相关应用业务的火爆, 需要让我们也必须跟上脚步, 不管是开发上还是业务上都必须对当期 AI 的能力有所了解, 并且开始探索也应用. 探索应用场景内部成立的 gpt 的实验项目, 恰巧当时我也开始思考了一些, 所以给出了应对 “请假” 这个内部系统场景的方案. 用户的自然语言 -&gt; 通过数据抽取 -&gt; 程序语言(可执行代码&#x2F;数据结构) 因为要和现有业务规">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-16T10:21:26.000Z">
+<meta property="article:modified_time" content="2023-04-16T10:41:04.665Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> GPT结合业务探索的思考一 | Vincent's Blog </title>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GPT结合业务探索的思考一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2023-04-16T18:21:26+08:00" content="2023-04-16">
+              2023-04-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近 Chatgpt 的推迟和相关应用业务的火爆, 需要让我们也必须跟上脚步, 不管是开发上还是业务上都必须对当期 AI 的能力有所了解, 并且开始探索也应用.</p>
+<h3 id="探索应用场景"><a href="#探索应用场景" class="headerlink" title="探索应用场景"></a>探索应用场景</h3><p>内部成立的 gpt 的实验项目, 恰巧当时我也开始思考了一些, 所以给出了应对 “请假” 这个内部系统场景的方案.</p>
+<p><strong>用户的自然语言</strong> -&gt; 通过数据抽取 -&gt; 程序语言(可执行代码/数据结构)</p>
+<p>因为要和现有业务规则融合, 我们选择申请一个助理机器人作为 AI 的入口</p>
+<blockquote>
+<p>优势</p>
+</blockquote>
+<ul>
+<li>独立原有的业务项目, 可以独立添加一个入口, 也意味着可以独立下掉(对未来政策的担心)</li>
+<li>更接近我们的目标, Jarvis</li>
+</ul>
+<h4 id="初次获取数据场景"><a href="#初次获取数据场景" class="headerlink" title="初次获取数据场景"></a>初次获取数据场景</h4><p>将 “我下周一请半天假” 转为 JSON 结构返给业务程序</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"事假"</span>,</span><br><span class="line">  <span class="attr">"startDate"</span>: <span class="string">"yyy-mm-dd"</span>,</span><br><span class="line">  <span class="attr">"startTime"</span>: <span class="string">"上午"</span>,</span><br><span class="line">  <span class="attr">"原因"</span>: <span class="string">"有事要处理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>prompt</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">请开启一个新会话,不要和之前内容关联</span><br><span class="line">当前时间是北京时间2023年04月13日 18:48:53 周四，你将作为一个语言转换器,你的任务是从下面给出的文本中提取出以下内容：请假类型、开始日期、开始时间、请假天数、请假原因，请提取出精确的表达。请假类型包括病假、年假、婚假、产检假、产假、丧假、流产假、陪产假、公益日、育儿假、护理假、调休.如果没有明确说明类型,需要根据描述或者请假原因来推断出最可能的类型. 如果无法推断出已知类型中就认为是事假。</span><br><span class="line"></span><br><span class="line">身体不适属于病假;</span><br><span class="line"></span><br><span class="line">如果没有明确说明请假原因，你可以适当发挥你的创造力。如果实在没有原因请返回 null</span><br><span class="line"></span><br><span class="line">开始时间只能为上午或者下午，如果没有明确说明是上午或者下午，那么就是上午。</span><br><span class="line"></span><br><span class="line">请假天数以0.5天为单位，返回一个不包括单位的数字。</span><br><span class="line">如果只说明上午或下午，那么请假天数是0.5;</span><br><span class="line">例如： 下午要请假. 请假天数你应该取到0.5。</span><br><span class="line">如果没有分析出明确的请假天数,但描述中提到多个具体的日期那么请假天数是最大日期减去最小日期的差+1;</span><br><span class="line">例如我请17号18号的年假,请假天数为 2.</span><br><span class="line">如果没有分析出明确的请假天数也没有明确的日期,那么请假天数是1.</span><br><span class="line">例如：我请个事假,请假天数为 1.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">星期一是每周的第一天.</span><br><span class="line">如果请假类型是婚假，那请假天数必须是10。</span><br><span class="line">将结果返回一个JSON对象，type字段是请假类型，startDate字段是开始日期，startTime字段是开始时间，days字段是请假天数，reason字段是请假原因，不需要返回多余的信息。如果提供了当前数据，则在当前数据基础上重新提取后返回新JSON对象。</span><br><span class="line"></span><br><span class="line">下面是你需要处理的文本：我明天要请个假，想回趟家</span><br></pre></td></tr></table></figure>
+<h4 id="对现有数据修改的场景"><a href="#对现有数据修改的场景" class="headerlink" title="对现有数据修改的场景"></a>对现有数据修改的场景</h4><ul>
+<li>获取到上一次解析出的 JSON, 并作为参考,让 gpt 修改. 这样做可以保证我们 prompt 的 token 数量是一定的. 不会持续的增加. 又能让用户和机器人进行多轮的对话</li>
+</ul>
+<p>原有 prompt 里,这句话是重点</p>
+<blockquote>
+<p>如果提供了当前数据，则在当前数据基础上重新提取后返回新 JSON 对象。</p>
+</blockquote>
+<h4 id="针对复杂场景的引导方案"><a href="#针对复杂场景的引导方案" class="headerlink" title="针对复杂场景的引导方案"></a>针对复杂场景的引导方案</h4><p>有些场景 gpt 无法根据 prompt 来返回预期的解析内容<br>有些难点</p>
+<ul>
+<li>prompt 的修改难度比较大</li>
+<li>规则逻辑可能本身就很复杂,即使给出一些示例, gpt 依然无法严格执行</li>
+</ul>
+<p>我么需要借鉴现在很多主流项目的方案:<br>引导 gpt 对输入进行分析, 比如先让 gpt 根据输入思考下依赖什么信息, 带上依赖的信息进行最终的询问. 用程序和 gpt 直接多轮的对话来获取最终比较准确的答案.</p>
+<p>这个是参考 MS 的 Jarvis 项目. 他说将用户的任务先让 gpt 进行任务拆分, 拆分出依赖的子任务. 然后去各自询问子任务的结果, 等依赖任务都得到结果后再按顺序执行任务, 以得到最终的结果</p>
+<h4 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h4><p>当 gpt 对某个 case 的输入理解不正确的时候, 我们可以</p>
+<blockquote>
+<p><strong>请一步一步进行分析,并详细给出解释</strong>. 下面是你需要处理的文本：我明天要请个假，想回趟家<br>看到 gpt 的具体分析过程, 也就能大致判断出我们 prompt 哪里让他误解,或者他没明白,没记住. 也是我们后续可以让他推理的方向</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag">#AI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/07/14/AndOrParser/" rel="next" title="AndOrParser">
+                <i class="fa fa-chevron-left"></i> AndOrParser
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">284</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#探索应用场景"><span class="nav-number">2.</span> <span class="nav-text">探索应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初次获取数据场景"><span class="nav-number">2.1.</span> <span class="nav-text">初次获取数据场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对现有数据修改的场景"><span class="nav-number">2.2.</span> <span class="nav-text">对现有数据修改的场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#针对复杂场景的引导方案"><span class="nav-number">2.3.</span> <span class="nav-text">针对复杂场景的引导方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题分析"><span class="nav-number">2.4.</span> <span class="nav-text">问题分析</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
