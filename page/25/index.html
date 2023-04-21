@@ -243,6 +243,130 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/22/Angular2-Directive-NgControlNames/" itemprop="url">
+                  Angular2 - Directive - NgControlNames
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-01-22T17:57:16+08:00" content="2016-01-22">
+              2016-01-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Angular2/" itemprop="url" rel="index">
+                    <span itemprop="name">Angular2</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          这个指令和NgControlGroup 代码上差不多
+分析不同
+OnChanges事件
+如果之前没加到父级的group里那就加如果有任何的model 属性变化，就调用updateModel
+ngOnChanges(changes: &#123;[key: string]: SimpleChange&
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/22/Angular2-Directive-NgControlNames/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/01/22/Angular2-Directive-NgControlGroup/" itemprop="url">
                   Angular2 - Directive - NgControlGroup
                 </a>
@@ -1327,135 +1451,6 @@ constructor(dcl: DynamicComponentLoader, injector: Injector) &#123;    dcl.loadA
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/07/Angular2-%E5%A4%8D%E6%9D%82%E6%8C%87%E4%BB%A4-ngError/" itemprop="url">
-                  Angular2 - 复杂指令- *ngError
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-01-07T19:54:31+08:00" content="2016-01-07">
-              2016-01-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Angular2/" itemprop="url" rel="index">
-                    <span itemprop="name">Angular2</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          需求：
-想实现一个类似*ngIf 的指令 - 接受参数的模板指令
-下面代码效果  
-*ngError 接受一个正则表达式内部的string （不要 / / 的）
-指令内判断当前所在div（可编辑的）的内容符合正则 则触发向DOM里添加元素。
-之前触发后，当不符合时，去除元素Message
-
-
-
-im
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/07/Angular2-%E5%A4%8D%E6%9D%82%E6%8C%87%E4%BB%A4-ngError/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1501,7 +1496,7 @@ im
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">286</span>
+              <span class="site-state-item-count">287</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
