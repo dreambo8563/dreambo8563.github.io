@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2023-04-21T07:15:15.219Z</updated>
+  <updated>2023-04-24T07:39:11.742Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GPT结合业务基础能力之语音</title>
+    <link href="https://dreambo8563.github.io/2023/04/24/GPT%E7%BB%93%E5%90%88%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E8%83%BD%E5%8A%9B%E4%B9%8B%E8%AF%AD%E9%9F%B3/"/>
+    <id>https://dreambo8563.github.io/2023/04/24/GPT结合业务基础能力之语音/</id>
+    <published>2023-04-24T07:29:11.000Z</published>
+    <updated>2023-04-24T07:39:11.742Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="为了更像心目中的-Jarvis-我们需要语音交流"><a href="#为了更像心目中的-Jarvis-我们需要语音交流" class="headerlink" title="为了更像心目中的 Jarvis, 我们需要语音交流"></a>为了更像心目中的 Jarvis, 我们需要语音交流</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pathlib <span class="keyword">import</span> Path</span><br><span class="line"><span class="keyword">import</span> gradio <span class="keyword">as</span> gr</span><br><span class="line"><span class="keyword">import</span> openai</span><br><span class="line"><span class="keyword">from</span> gtts <span class="keyword">import</span> gTTS</span><br><span class="line"><span class="keyword">from</span> tempfile <span class="keyword">import</span> NamedTemporaryFile</span><br><span class="line"><span class="keyword">from</span> playsound <span class="keyword">import</span> playsound</span><br><span class="line"><span class="keyword">from</span> agent <span class="keyword">import</span> getScheduleAgent <span class="comment"># type: ignore</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transcribe</span><span class="params">(audio)</span>:</span></span><br><span class="line">    <span class="comment"># 通过gradio获取到音频</span></span><br><span class="line">    myfile=Path(audio)</span><br><span class="line">    myfile=myfile.rename(myfile.with_suffix(<span class="string">'.wav'</span>))</span><br><span class="line">    audio_file = open(myfile,<span class="string">"rb"</span>)</span><br><span class="line">    <span class="comment"># 通过 openAI 接口转为 text</span></span><br><span class="line">    transcript = openai.Audio.transcribe(<span class="string">"whisper-1"</span>, audio_file)</span><br><span class="line">    <span class="comment"># 调取业务, 这里调用之前的日程场景</span></span><br><span class="line">    response = getScheduleAgent(transcript[<span class="string">"text"</span>]); <span class="comment"># type: ignore</span></span><br><span class="line"></span><br><span class="line">    print(response)</span><br><span class="line">    <span class="comment"># 把结果通过text转语音, 然后播报出来</span></span><br><span class="line">    gTTS(text=response,lang=<span class="string">"zh"</span>,slow=<span class="literal">False</span>).write_to_fp(voice := NamedTemporaryFile(delete=<span class="literal">True</span>))</span><br><span class="line">    playsound(voice.name)</span><br><span class="line">    voice.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">demo = gr.Interface(</span><br><span class="line">    fn=transcribe,</span><br><span class="line">    inputs=gr.Audio(source=<span class="string">"microphone"</span>, type=<span class="string">"filepath"</span>),</span><br><span class="line">    outputs=<span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">demo.launch()</span><br></pre></td></tr></table></figure><p>这里试了几个 lib, 有一个 pyttsx3, 发现我现有 py3 版本不太匹配,报错.<br>然后就放弃直接调用 openAI 的能力了.</p><p>langchain 官网的例子<a href="https://python.langchain.com/en/latest/use_cases/chatbots/voice_assistant.html" target="_blank" rel="noopener">https://python.langchain.com/en/latest/use_cases/chatbots/voice_assistant.html</a></p><p>用的是 <code>pyttsx3</code> 和 <code>speech_recognition</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;为了更像心目中的-Jarvis-我们需要语音交流&quot;&gt;&lt;a href=&quot;#为了更像心目中的-Jarvis-我们需要语音交流&quot; class=&quot;headerlink&quot; title=&quot;为了更像心目中的 Jarvis, 我们需要语音交流&quot;&gt;&lt;/a&gt;为了更像心目中的 Jarv
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="https://dreambo8563.github.io/categories/AI/"/>
+    
+    
+      <category term="AI" scheme="https://dreambo8563.github.io/tags/AI/"/>
+    
+  </entry>
   
   <entry>
     <title>GPT结合业务探索之多步推理</title>
@@ -519,31 +544,6 @@
     
     
       <category term="CDN" scheme="https://dreambo8563.github.io/tags/CDN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS波浪符巧用</title>
-    <link href="https://dreambo8563.github.io/2020/07/03/JS%E6%B3%A2%E6%B5%AA%E7%AC%A6%E5%B7%A7%E7%94%A8/"/>
-    <id>https://dreambo8563.github.io/2020/07/03/JS波浪符巧用/</id>
-    <published>2020-07-03T15:00:37.000Z</published>
-    <updated>2020-07-03T15:08:15.198Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>原文地址: <a href="https://khalilstemmler.com/articles/tilde-in-javascript/" target="_blank" rel="noopener">https://khalilstemmler.com/articles/tilde-in-javascript/</a></p><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>源于一段代码</p><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(~followers.indexOf(target)) &#123;</span><br><span class="line">  <span class="comment">// do some action</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="深挖"><a href="#深挖" class="headerlink" title="深挖"></a>深挖</h2><p>~A 同等于 -(A + 1)</p><h2 id="和-JS-的联系"><a href="#和-JS-的联系" class="headerlink" title="和 JS 的联系"></a>和 JS 的联系</h2><blockquote><p>The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.</p></blockquote><blockquote><p>The indexOf() method returns the index within the calling String object of the first occurrence of the specified value, starting the search at fromIndex. Returns -1 if the value is not found.</p></blockquote><p>只有当 A=-1 的时候 ~A === 0 </p><h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>不用去和 -1 比了!!!<br><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!!~fruits.indexOf(<span class="string">'apples'</span>)) &#123;</span><br><span class="line">  <span class="comment">// Yay apples</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Found apples!"</span>) <span class="comment">// &lt;= this will print</span></span><br><span class="line">&#125;</span><br><span class="line"> <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="comment">// Still no apples</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"No apples apparently"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;headerlink&quot; title=&quot;引用&quot;&gt;&lt;/a&gt;引用&lt;/h2&gt;&lt;p&gt;原文地址: &lt;a href=&quot;https://khalilstemmler.com/articles/tilde-in-javascript
-      
-    
-    </summary>
-    
-      <category term="JS" scheme="https://dreambo8563.github.io/categories/JS/"/>
-    
-    
-      <category term="JS" scheme="https://dreambo8563.github.io/tags/JS/"/>
     
   </entry>
   
