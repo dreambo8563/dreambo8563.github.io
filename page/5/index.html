@@ -243,6 +243,126 @@
             
               
                 
+                <a class="post-title-link" href="/2018/10/30/%E5%89%8D%E7%AB%AF%E7%8B%AC%E7%AB%8B%E9%83%A8%E7%BD%B2-%E6%9C%80%E5%B0%8Fdocker%E5%8C%96%E5%AE%9E%E8%B7%B5/" itemprop="url">
+                  前端独立部署,最小docker化实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-10-30T12:21:47+08:00" content="2018-10-30">
+              2018-10-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前端容器化, 为了能够独立进行部署, 配备 nginxDockerfile这里利用 docker 的 MultiStage 特性,区分打包和生产镜像的 build.注意顺序,为了利用潜在的 cache 提高打包速度只把生成的 dist 内容放到 nginx 里面, 并且放入自己的 nginx 配置,
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/10/30/%E5%89%8D%E7%AB%AF%E7%8B%AC%E7%AB%8B%E9%83%A8%E7%BD%B2-%E6%9C%80%E5%B0%8Fdocker%E5%8C%96%E5%AE%9E%E8%B7%B5/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/10/10/%E5%85%B3%E4%BA%8Eopener%E7%9A%84%E5%AE%89%E5%85%A8%E5%B0%8F%E6%8A%80%E5%B7%A7/" itemprop="url">
                   关于opener的安全小技巧
                 </a>
@@ -1372,134 +1492,6 @@ u2 := uuid.NewV4()
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/09/04/Docker-SonarQube%E6%90%AD%E5%BB%BA/" itemprop="url">
-                  Docker - SonarQube搭建
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2018-09-04T20:58:32+08:00" content="2018-09-04">
-              2018-09-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前提
-搭建 gitlab
-搭建 jenkins
-
-准备镜像sonarqube
-生成 sonar server token
-docker run -d –name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
-
-使用默认 admin/admin 登录, 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/09/04/Docker-SonarQube%E6%90%AD%E5%BB%BA/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1545,7 +1537,7 @@ docker run -d –name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">288</span>
+              <span class="site-state-item-count">289</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

@@ -1,0 +1,687 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/VEN/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/VEN/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="AI," />
+
+
+
+
+  
+
+
+  <link rel="alternate" href="/atom.xml" title="Vincent's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="HuggingGPT Paper 解读https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2303.17580.pdf 概括下HuggingGPT 是一个框架,主要用来解决复杂任务. 主要包含 4 个阶段  计划阶段: 一个是大模型, 大模型会对用户描述的任务, 先进行 计划分解. 思考出 每个步骤, 步骤之间的依赖关系, 每个步骤的输入和输出产物, 步骤的顺序 模型选择: Huggingface 这种模">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HuggingGPT">
+<meta property="og:url" content="https://dreambo8563.github.io/2023/04/26/HuggingGPT/index.html">
+<meta property="og:site_name" content="Vincent&#39;s Blog">
+<meta property="og:description" content="HuggingGPT Paper 解读https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2303.17580.pdf 概括下HuggingGPT 是一个框架,主要用来解决复杂任务. 主要包含 4 个阶段  计划阶段: 一个是大模型, 大模型会对用户描述的任务, 先进行 计划分解. 思考出 每个步骤, 步骤之间的依赖关系, 每个步骤的输入和输出产物, 步骤的顺序 模型选择: Huggingface 这种模">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-04-26T02:59:53.000Z">
+<meta property="article:modified_time" content="2023-04-26T03:30:32.664Z">
+<meta property="article:author" content="Vincent Guo">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> HuggingGPT | Vincent's Blog </title>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vincent's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                HuggingGPT
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2023-04-26T10:59:53+08:00" content="2023-04-26">
+              2023-04-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/AI/" itemprop="url" rel="index">
+                    <span itemprop="name">AI</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="HuggingGPT-Paper-解读"><a href="#HuggingGPT-Paper-解读" class="headerlink" title="HuggingGPT Paper 解读"></a>HuggingGPT Paper 解读</h3><p><a href="https://arxiv.org/pdf/2303.17580.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/2303.17580.pdf</a></p>
+<h3 id="概括下"><a href="#概括下" class="headerlink" title="概括下"></a>概括下</h3><p>HuggingGPT 是一个框架,主要用来解决复杂任务. 主要包含 4 个阶段</p>
+<ul>
+<li>计划阶段: 一个是大模型, 大模型会对用户描述的任务, 先进行 计划分解. 思考出 每个步骤, 步骤之间的依赖关系, 每个步骤的输入和输出产物, 步骤的顺序</li>
+<li>模型选择: Huggingface 这种模型社区. Huggingface 会拿到具体的任务根据依赖关系确定好顺序, 根据当前要执行的任务描述. 和对应社区现有的专家模型的描述 做模型的选择. 将任务交给他去执行</li>
+<li>任务执行: 各个专家模型会执行任务,把结果返回给 大模型</li>
+<li>产生结果: 大模型会根据每一步的产出和最终的结果来综合得到答案,反馈给用户</li>
+</ul>
+<p>根据目前我的理解, HuggingGPT 可以看做是一个 langchain 框架的复杂版,大规模版本<br>思路很像但又有不同.<br>任务步骤的拆分 -&gt; 分步执行 -&gt; 综合结果 大方向是一致的</p>
+<p>具体的区别上</p>
+<blockquote>
+<p>首先 任务的依赖和优先级相关 HuggingGPT 是内部去分辨处理的, langchain 里其实还是需要在编码中去考虑处理</p>
+</blockquote>
+<blockquote>
+<p>一个 langchain 的 agent 只能明确执行某一类任务,Tool 是固定的. HuggingGPT 会自己(huggingface)动脑子去组装自己需要的工具.</p>
+</blockquote>
+<blockquote>
+<p>模型间的通信应该是内部的协议通信, langchain 因为是自己编码, 所以 tool 里的实现完全自定义.</p>
+</blockquote>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他:"></a>其他:</h3><p>HuggingGPT 这个思路很符合大部分人正常的思考方式, 也是在很多领域里实践的. 1 个主脑, 下面各个专业的 leader. 各自负责, 最终汇总结果<br>也非常符合人类思考问题的方式. HuggingGPT 内部对计划阶段的 Prompt 其实并不复杂, 但他能解析出那么多信息, 我觉得很魔法. 依赖,顺序, 产出这些其实直接用自然语言都不是那么容易理解的逻辑,需要让大模型正确理解.</p>
+<p>HuggingGPT 其实也代表的开源的一股力量, 越来越多的开源模型加入到 Huggingface, 这样可用的工具模型数量和质量上都有大的发展. 对结果的输出质量也会提高.<br>但这对 HuggingGPT 在计划阶段 和 模型选择上的精准度提出了更高的要求, 还有就是需要模型的描述够准确</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">这部分是对要求的指导:</span><br><span class="line"><span class="comment">#1 Task Planning Stage - The AI assistant can parse user input to several tasks: [&#123;"task": task, "id",</span></span><br><span class="line">task_id, <span class="string">"dep"</span>: dependency_task_ids, <span class="string">"args"</span>: &#123;<span class="string">"text"</span>: text, <span class="string">"image"</span>: URL, <span class="string">"audio"</span>: URL, <span class="string">"video"</span>:</span><br><span class="line">URL&#125;&#125;]. The <span class="string">"dep"</span> field denotes the id of the previous task which generates a new resource that the</span><br><span class="line">current task relies on. A special tag <span class="string">"&lt;resource&gt;-task_id"</span> refers to the generated text image,</span><br><span class="line">audio <span class="keyword">and</span> video <span class="keyword">in</span> the dependency task <span class="keyword">with</span> id <span class="keyword">as</span> task_id. The task MUST be selected <span class="keyword">from</span> the</span><br><span class="line">following options: &#123;&#123; Available Task List &#125;&#125;. There <span class="keyword">is</span> a logical relationship between tasks, please</span><br><span class="line">note their order. If the user input can’t be parsed, you need to reply empty JSON. Here are several</span><br><span class="line">cases <span class="keyword">for</span> your reference: &#123;&#123; Demonstrations &#125;&#125;. The chat history <span class="keyword">is</span> recorded <span class="keyword">as</span> &#123;&#123; Chat Logs &#125;&#125;.</span><br><span class="line">From the chat logs, you can find the path of the user-mentioned resources <span class="keyword">for</span> your task planning</span><br><span class="line"></span><br><span class="line">这部分是例子,帮助他理解:</span><br><span class="line">Look at /exp1.jpg, Can you</span><br><span class="line">tell me how many objects <span class="keyword">in</span></span><br><span class="line">the picture?</span><br><span class="line">[&#123;<span class="string">"task"</span>: <span class="string">"image-to-text"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>:</span><br><span class="line"><span class="string">"/exp1.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"object-detection"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>],</span><br><span class="line"><span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/exp1.jpg"</span> &#125;&#125;]</span><br><span class="line">In /exp2.jpg, what’s the animal and what’s it doing?</span><br><span class="line">[&#123;<span class="string">"task"</span>: <span class="string">"image-to-text"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>:[<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>:</span><br><span class="line"><span class="string">"/exp2.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>:<span class="string">"image-classification"</span>, <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>],</span><br><span class="line"><span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/exp2.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>:<span class="string">"object-detection"</span>, <span class="string">"id"</span>:</span><br><span class="line"><span class="number">2</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/exp2.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"visualquestion-answering"</span>, <span class="string">"id"</span>: <span class="number">3</span>, <span class="string">"dep"</span>:[<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"text"</span>: <span class="string">"What’s the</span></span><br><span class="line"><span class="string">animal doing?"</span>, <span class="string">"image"</span>: <span class="string">"/exp2.jpg"</span> &#125;&#125;]</span><br><span class="line">Given an image /exp3.jpg,</span><br><span class="line">first generate a hed image,</span><br><span class="line">then based on the hed image <span class="keyword">and</span> a prompt: a girl <span class="keyword">is</span></span><br><span class="line">reading a book, you need to</span><br><span class="line">reply <span class="keyword">with</span> a new image.</span><br><span class="line">[&#123;<span class="string">"task"</span>: <span class="string">"image-to-text"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/examples/boy.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"openpose-control"</span>, <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>],</span><br><span class="line"><span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/examples/boy.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"openpose-textto-image"</span>, <span class="string">"id"</span>: <span class="number">2</span>, <span class="string">"dep"</span>: [<span class="number">1</span>], <span class="string">"args"</span>: &#123;<span class="string">"text"</span>: <span class="string">"a girl is reading a</span></span><br><span class="line"><span class="string">book"</span>, <span class="string">"image"</span>: <span class="string">"&lt;resource&gt;-1"</span> &#125;&#125;]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AI/" rel="tag">#AI</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/04/24/GPT%E7%BB%93%E5%90%88%E4%B8%9A%E5%8A%A1%E5%9F%BA%E7%A1%80%E8%83%BD%E5%8A%9B%E4%B9%8B%E8%AF%AD%E9%9F%B3/" rel="next" title="GPT结合业务基础能力之语音">
+                <i class="fa fa-chevron-left"></i> GPT结合业务基础能力之语音
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Vincent Guo" />
+          <p class="site-author-name" itemprop="name">Vincent Guo</p>
+          <p class="site-description motion-element" itemprop="description">the blog to remeber all things about code</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">289</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">103</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dreambo8563" target="_blank" title="github">
+                  
+                    <i class="fa fa-github"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/dreambo8563" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-twitter"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vincent.guo.52090" target="_blank" title="facebook">
+                  
+                    <i class="fa fa-facebook"></i>
+                  
+                  facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://google.com/" target="_blank" title="google">
+                  
+                    <i class="fa fa-google"></i>
+                  
+                  google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1788156905" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-weibo"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element">
+            <div class="links-of-blogroll-title">
+              <i class="fa fa-globe fa-fw"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kunl.in/" title="KunLin" target="_blank">KunLin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.introtorx.com/" title="Rx Introduction" target="_blank">Rx Introduction</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.moye.me/" title="三哥" target="_blank">三哥</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.mayuanlong.cn/" title="元龙" target="_blank">元龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#HuggingGPT-Paper-解读"><span class="nav-number">1.</span> <span class="nav-text">HuggingGPT Paper 解读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概括下"><span class="nav-number">2.</span> <span class="nav-text">概括下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">3.</span> <span class="nav-text">其他:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Guo</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/VEN/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/VEN/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/VEN/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

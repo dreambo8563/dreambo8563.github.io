@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2023-04-24T07:39:11.742Z</updated>
+  <updated>2023-04-26T03:30:32.664Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>HuggingGPT</title>
+    <link href="https://dreambo8563.github.io/2023/04/26/HuggingGPT/"/>
+    <id>https://dreambo8563.github.io/2023/04/26/HuggingGPT/</id>
+    <published>2023-04-26T02:59:53.000Z</published>
+    <updated>2023-04-26T03:30:32.664Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="HuggingGPT-Paper-解读"><a href="#HuggingGPT-Paper-解读" class="headerlink" title="HuggingGPT Paper 解读"></a>HuggingGPT Paper 解读</h3><p><a href="https://arxiv.org/pdf/2303.17580.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/2303.17580.pdf</a></p><h3 id="概括下"><a href="#概括下" class="headerlink" title="概括下"></a>概括下</h3><p>HuggingGPT 是一个框架,主要用来解决复杂任务. 主要包含 4 个阶段</p><ul><li>计划阶段: 一个是大模型, 大模型会对用户描述的任务, 先进行 计划分解. 思考出 每个步骤, 步骤之间的依赖关系, 每个步骤的输入和输出产物, 步骤的顺序</li><li>模型选择: Huggingface 这种模型社区. Huggingface 会拿到具体的任务根据依赖关系确定好顺序, 根据当前要执行的任务描述. 和对应社区现有的专家模型的描述 做模型的选择. 将任务交给他去执行</li><li>任务执行: 各个专家模型会执行任务,把结果返回给 大模型</li><li>产生结果: 大模型会根据每一步的产出和最终的结果来综合得到答案,反馈给用户</li></ul><p>根据目前我的理解, HuggingGPT 可以看做是一个 langchain 框架的复杂版,大规模版本<br>思路很像但又有不同.<br>任务步骤的拆分 -&gt; 分步执行 -&gt; 综合结果 大方向是一致的</p><p>具体的区别上</p><blockquote><p>首先 任务的依赖和优先级相关 HuggingGPT 是内部去分辨处理的, langchain 里其实还是需要在编码中去考虑处理</p></blockquote><blockquote><p>一个 langchain 的 agent 只能明确执行某一类任务,Tool 是固定的. HuggingGPT 会自己(huggingface)动脑子去组装自己需要的工具.</p></blockquote><blockquote><p>模型间的通信应该是内部的协议通信, langchain 因为是自己编码, 所以 tool 里的实现完全自定义.</p></blockquote><h3 id="其他"><a href="#其他" class="headerlink" title="其他:"></a>其他:</h3><p>HuggingGPT 这个思路很符合大部分人正常的思考方式, 也是在很多领域里实践的. 1 个主脑, 下面各个专业的 leader. 各自负责, 最终汇总结果<br>也非常符合人类思考问题的方式. HuggingGPT 内部对计划阶段的 Prompt 其实并不复杂, 但他能解析出那么多信息, 我觉得很魔法. 依赖,顺序, 产出这些其实直接用自然语言都不是那么容易理解的逻辑,需要让大模型正确理解.</p><p>HuggingGPT 其实也代表的开源的一股力量, 越来越多的开源模型加入到 Huggingface, 这样可用的工具模型数量和质量上都有大的发展. 对结果的输出质量也会提高.<br>但这对 HuggingGPT 在计划阶段 和 模型选择上的精准度提出了更高的要求, 还有就是需要模型的描述够准确</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">这部分是对要求的指导:</span><br><span class="line"><span class="comment">#1 Task Planning Stage - The AI assistant can parse user input to several tasks: [&#123;"task": task, "id",</span></span><br><span class="line">task_id, <span class="string">"dep"</span>: dependency_task_ids, <span class="string">"args"</span>: &#123;<span class="string">"text"</span>: text, <span class="string">"image"</span>: URL, <span class="string">"audio"</span>: URL, <span class="string">"video"</span>:</span><br><span class="line">URL&#125;&#125;]. The <span class="string">"dep"</span> field denotes the id of the previous task which generates a new resource that the</span><br><span class="line">current task relies on. A special tag <span class="string">"&lt;resource&gt;-task_id"</span> refers to the generated text image,</span><br><span class="line">audio <span class="keyword">and</span> video <span class="keyword">in</span> the dependency task <span class="keyword">with</span> id <span class="keyword">as</span> task_id. The task MUST be selected <span class="keyword">from</span> the</span><br><span class="line">following options: &#123;&#123; Available Task List &#125;&#125;. There <span class="keyword">is</span> a logical relationship between tasks, please</span><br><span class="line">note their order. If the user input can’t be parsed, you need to reply empty JSON. Here are several</span><br><span class="line">cases <span class="keyword">for</span> your reference: &#123;&#123; Demonstrations &#125;&#125;. The chat history <span class="keyword">is</span> recorded <span class="keyword">as</span> &#123;&#123; Chat Logs &#125;&#125;.</span><br><span class="line">From the chat logs, you can find the path of the user-mentioned resources <span class="keyword">for</span> your task planning</span><br><span class="line"></span><br><span class="line">这部分是例子,帮助他理解:</span><br><span class="line">Look at /exp1.jpg, Can you</span><br><span class="line">tell me how many objects <span class="keyword">in</span></span><br><span class="line">the picture?</span><br><span class="line">[&#123;<span class="string">"task"</span>: <span class="string">"image-to-text"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>:</span><br><span class="line"><span class="string">"/exp1.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"object-detection"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>],</span><br><span class="line"><span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/exp1.jpg"</span> &#125;&#125;]</span><br><span class="line">In /exp2.jpg, what’s the animal and what’s it doing?</span><br><span class="line">[&#123;<span class="string">"task"</span>: <span class="string">"image-to-text"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>:[<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>:</span><br><span class="line"><span class="string">"/exp2.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>:<span class="string">"image-classification"</span>, <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>],</span><br><span class="line"><span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/exp2.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>:<span class="string">"object-detection"</span>, <span class="string">"id"</span>:</span><br><span class="line"><span class="number">2</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/exp2.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"visualquestion-answering"</span>, <span class="string">"id"</span>: <span class="number">3</span>, <span class="string">"dep"</span>:[<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"text"</span>: <span class="string">"What’s the</span></span><br><span class="line"><span class="string">animal doing?"</span>, <span class="string">"image"</span>: <span class="string">"/exp2.jpg"</span> &#125;&#125;]</span><br><span class="line">Given an image /exp3.jpg,</span><br><span class="line">first generate a hed image,</span><br><span class="line">then based on the hed image <span class="keyword">and</span> a prompt: a girl <span class="keyword">is</span></span><br><span class="line">reading a book, you need to</span><br><span class="line">reply <span class="keyword">with</span> a new image.</span><br><span class="line">[&#123;<span class="string">"task"</span>: <span class="string">"image-to-text"</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>], <span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/examples/boy.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"openpose-control"</span>, <span class="string">"id"</span>: <span class="number">1</span>, <span class="string">"dep"</span>: [<span class="number">-1</span>],</span><br><span class="line"><span class="string">"args"</span>: &#123;<span class="string">"image"</span>: <span class="string">"/examples/boy.jpg"</span> &#125;&#125;, &#123;<span class="string">"task"</span>: <span class="string">"openpose-textto-image"</span>, <span class="string">"id"</span>: <span class="number">2</span>, <span class="string">"dep"</span>: [<span class="number">1</span>], <span class="string">"args"</span>: &#123;<span class="string">"text"</span>: <span class="string">"a girl is reading a</span></span><br><span class="line"><span class="string">book"</span>, <span class="string">"image"</span>: <span class="string">"&lt;resource&gt;-1"</span> &#125;&#125;]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;HuggingGPT-Paper-解读&quot;&gt;&lt;a href=&quot;#HuggingGPT-Paper-解读&quot; class=&quot;headerlink&quot; title=&quot;HuggingGPT Paper 解读&quot;&gt;&lt;/a&gt;HuggingGPT Paper 解读&lt;/h3&gt;&lt;p&gt;&lt;a
+      
+    
+    </summary>
+    
+      <category term="AI" scheme="https://dreambo8563.github.io/categories/AI/"/>
+    
+    
+      <category term="AI" scheme="https://dreambo8563.github.io/tags/AI/"/>
+    
+  </entry>
   
   <entry>
     <title>GPT结合业务基础能力之语音</title>
@@ -519,31 +544,6 @@
       <category term="DDD" scheme="https://dreambo8563.github.io/tags/DDD/"/>
     
       <category term="Architecture" scheme="https://dreambo8563.github.io/tags/Architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>FE-CDN</title>
-    <link href="https://dreambo8563.github.io/2021/05/21/FE-CDN/"/>
-    <id>https://dreambo8563.github.io/2021/05/21/FE-CDN/</id>
-    <published>2021-05-21T08:59:37.000Z</published>
-    <updated>2021-05-21T10:20:36.562Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣"><a href="#最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣" class="headerlink" title="最近把项目的前端部署策略优化了下,顺手对比了几种方式的优劣"></a>最近把项目的前端部署策略优化了下,顺手对比了几种方式的优劣</h1><h3 id="策略-1"><a href="#策略-1" class="headerlink" title="策略 1"></a>策略 1</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/cdn1.png" alt=""></p><ul><li>打包产物全量推送 OSS</li><li>CDN 域名回源 OSS (阿里业务)</li><li>前端跨域访问后端 api 服务</li></ul><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul><li>依托阿里云</li><li>不需要前端用的 web 服务</li></ul><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul><li>CDN 缓存问题需要处理</li><li>需要通过 CDN 上正则模拟 history 模式, 返回 index.html</li><li>跨域 Option 请求</li></ul><hr><hr><h3 id="策略-2"><a href="#策略-2" class="headerlink" title="策略 2"></a>策略 2</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/cdn2.png" alt=""></p><ul><li>打包产物(非 index.htm)推送 OSS</li><li>公用CDN 域名回源 OSS (阿里业务)</li><li>用户访问自己的 nginx 服务(index.html)</li><li>index.html 上利用 script 标签调用 cdn 上的 js/css等静态资源</li><li>nginx 反向代理访问 api</li></ul><h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><ul><li>绝大部分静态利用 CDN 资源</li><li>自己控制缓存,增强可编程能力</li><li>不跨域</li></ul><h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><ul><li>打包配置需要独立处理</li><li>需要自己的 web 服务</li></ul><hr><hr><h3 id="策略-3"><a href="#策略-3" class="headerlink" title="策略 3"></a>策略 3</h3><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/cdn3.png" alt=""></p><ul><li>打包产物放自己 nginx</li><li>公用CDN域名回源自己的 web服务</li><li>用户访问CDN</li><li>nginx 反向代理访问 api</li></ul><h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><ul><li>利用 CDN 能力</li><li>自己控制缓存,增强可编程能力</li><li>不跨域</li></ul><h4 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h4><ul><li>CDN 缓存问题</li><li>回源还是会占用自己的流量带宽</li><li>需要自己的 web 服务</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣&quot;&gt;&lt;a href=&quot;#最近把项目的前端部署策略优化了下-顺手对比了几种方式的优劣&quot; class=&quot;headerlink&quot; title=&quot;最近把项目的前端部署策略优化了下,顺手对比了几种方式的优劣&quot;&gt;&lt;/a
-      
-    
-    </summary>
-    
-      <category term="FE" scheme="https://dreambo8563.github.io/categories/FE/"/>
-    
-    
-      <category term="CDN" scheme="https://dreambo8563.github.io/tags/CDN/"/>
     
   </entry>
   
