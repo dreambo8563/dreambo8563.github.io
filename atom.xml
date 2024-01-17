@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dreambo8563.github.io/"/>
-  <updated>2023-04-26T03:30:32.664Z</updated>
+  <updated>2024-01-17T09:47:24.526Z</updated>
   <id>https://dreambo8563.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>静态资源容错性处理方案</title>
+    <link href="https://dreambo8563.github.io/2024/01/17/%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%AE%B9%E9%94%99%E6%80%A7%E5%A4%84%E7%90%86%E6%96%B9%E6%A1%88/"/>
+    <id>https://dreambo8563.github.io/2024/01/17/静态资源容错性处理方案/</id>
+    <published>2024-01-17T09:18:13.000Z</published>
+    <updated>2024-01-17T09:47:24.526Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><p>从 sentry 报错中, 会偶然遇到错误</p><ul><li><code>Failed to fetch dynamically imported module: xxx.js</code></li><li><code>Unable to preload CSS for xxxx.css</code></li></ul><p>报错信息是 chrome 的, 不同浏览器报错的具体文案可能不一样. 一般是网络不稳定导致</p><h2 id="Analysis"><a href="#Analysis" class="headerlink" title="Analysis"></a>Analysis</h2><ul><li>报错 1 是动态导入, 一般源于我们工程化过程中的按需加载失败的场景</li><li>报错 2 可能涵盖的场景更普遍, 就是 dom 里<code>inline</code>某些资源,比如<code>src</code> 中的资源下载失败</li></ul><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><h4 id="inline资源-fallback-方案"><a href="#inline资源-fallback-方案" class="headerlink" title="inline资源 fallback 方案"></a><code>inline</code>资源 fallback 方案</h4><p><a href="https://github.com/huajiejin/url-fallback" target="_blank" rel="noopener">Url Fallback</a> 这个包,可以配置备用地址, 当监听到 dom 中加载的 js/css/img 发生加载失败的情况后, 会启用备用地址加载对应资源.<br>我们可以将额外配置出多个备用 cdn, 比如主 img.cdn.com, 备用 img1.cdn.com ,img2.cdn.com.<br>通过重试来降低失败概率</p><h4 id="动态加载失败-无法重试"><a href="#动态加载失败-无法重试" class="headerlink" title="动态加载失败, 无法重试"></a>动态加载失败, 无法重试</h4><p><a href="https://github.com/whatwg/html/issues/6768" target="_blank" rel="noopener">https://github.com/whatwg/html/issues/6768</a> html 的标准中对动态加载有 cache. 也就是当我们第一次动态加载失败后, 第二次及时网络或各方面都恢复了, 但依然会得到 cache 中失败的结果.无法真正去重试获取资源. 这个问题是出在很根本的上不支持. 所以我们在工程化的级别上是无法处理的. 迫使大部分是不得不当监听到错误后,给用户提示,引导用户刷新页面来去除缓存.</p><h4 id="借助-prefetch"><a href="#借助-prefetch" class="headerlink" title="借助 prefetch"></a>借助 prefetch</h4><p>之前在 vue2 的时代, 我们都是用的 vue-cli 来开启新项目. vue-cli 中底层依赖 webpack 来打包,默认开启了 prefetch 能力, 也就是将各种打包出来的资源(包括动态加载的资源),在 index.html 中做 prefetch 处理.</p><blockquote><p>这样我们就能让动态资源也能使用 <code>inline</code>的 fallback 方案</p></blockquote><h4 id="新问题"><a href="#新问题" class="headerlink" title="新问题"></a>新问题</h4><p>vue 3 + vite 的组合. vite 生态中没有 prefetch 插件. 这成了方案实现的卡点.</p><ul><li>方案 1: 写一个 nodejs 脚本, 扫描生成的资源文件, 然后读取 <code>index.html</code> 并插入到<code>head</code>里适当的位置<blockquote><p>比较定制化, 需要读取 env 中的 baseURL 路径. 需要额外的包来处理 html 的解析和修改. 并且不能保留打包过程的原子化, 和打包过程是分离的</p></blockquote></li><li>方案 2: 开发 prefetch 插件.<blockquote><p>配置比较方便,代码统一. 和打包流程无缝整合. 可能需要兼容多个 vite 版本. 需要学习 vite 插件相关知识</p></blockquote></li></ul><h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p>起初, 我对方案 2 有点没信心, 以前也没有接触过 webpack 的插件. 而且觉得大概率需要处理<code>ast</code>, 相对来说复杂度可能比较高,担心自己搞不定.<br>当想通方案 1 后, 就有了托底方案. 经过 1 天看插件文档后, 实现了插件. 幸运的是这个插件的过程不需要操作<code>ast</code>.<br><a href="https://github.com/dreambo8563/vite-plugin-bundle-prefetch" target="_blank" rel="noopener">https://github.com/dreambo8563/vite-plugin-bundle-prefetch</a> , 效果符合预期</p><p>这样我们就对 静态, 动态资源都有重试方案了. <code>prefetch</code> 也能提高后续页面的加载速度.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why&quot;&gt;&lt;/a&gt;Why&lt;/h2&gt;&lt;p&gt;从 sentry 报错中, 会偶然遇到错误&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Failed to fetch dynamical
+      
+    
+    </summary>
+    
+      <category term="Thinking" scheme="https://dreambo8563.github.io/categories/Thinking/"/>
+    
+    
+      <category term="Thinking" scheme="https://dreambo8563.github.io/tags/Thinking/"/>
+    
+  </entry>
   
   <entry>
     <title>HuggingGPT</title>
@@ -515,33 +542,6 @@
     
       <category term="Architecture" scheme="https://dreambo8563.github.io/categories/Architecture/"/>
     
-    
-      <category term="Architecture" scheme="https://dreambo8563.github.io/tags/Architecture/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DDD实践项目1</title>
-    <link href="https://dreambo8563.github.io/2021/05/23/DDD%E5%AE%9E%E8%B7%B5%E9%A1%B9%E7%9B%AE1/"/>
-    <id>https://dreambo8563.github.io/2021/05/23/DDD实践项目1/</id>
-    <published>2021-05-23T15:34:14.000Z</published>
-    <updated>2021-05-23T15:43:52.374Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="之前读了一些DDD相关的数据-也在一个项目上实践了一下"><a href="#之前读了一些DDD相关的数据-也在一个项目上实践了一下" class="headerlink" title="之前读了一些DDD相关的数据, 也在一个项目上实践了一下"></a>之前读了一些DDD相关的数据, 也在一个项目上实践了一下</h3><h4 id="理由"><a href="#理由" class="headerlink" title="理由"></a>理由</h4><ul><li>后台项目大部分不具有技术上的挑战</li><li>基于 k8s, 云等技术的普及. 横向扩展伸缩, 稳定性等基础架构变得普及和容易解决</li><li>难点聚焦于业务复杂度, 业务架构的设计上</li></ul><h4 id="demo1"><a href="#demo1" class="headerlink" title="demo1"></a>demo1</h4><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/ddd1.png" alt=""></p><ul><li>内层是核心业务模型(粉色+绿色)</li><li>领域服务/独立模块(黄色)</li><li>外层是基础设施(可替换)<blockquote><p>外部服务 可以 用 DI 方式 注入到 核心逻辑中(做个抽象 - 门面模式), 核心业务逻辑无需关心服务的具体实现</p></blockquote></li></ul><p><img src="https://raw.githubusercontent.com/dreambo8563/static-assets/master/ddd1-1.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;之前读了一些DDD相关的数据-也在一个项目上实践了一下&quot;&gt;&lt;a href=&quot;#之前读了一些DDD相关的数据-也在一个项目上实践了一下&quot; class=&quot;headerlink&quot; title=&quot;之前读了一些DDD相关的数据, 也在一个项目上实践了一下&quot;&gt;&lt;/a&gt;之前读了
-      
-    
-    </summary>
-    
-      <category term="Architecture" scheme="https://dreambo8563.github.io/categories/Architecture/"/>
-    
-    
-      <category term="DDD" scheme="https://dreambo8563.github.io/tags/DDD/"/>
     
       <category term="Architecture" scheme="https://dreambo8563.github.io/tags/Architecture/"/>
     
